@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FBF6EC;
+  --color-peach: #F4D8B8;
+  --color-peach-light: #F8E7CE;
+  --color-forest: #2E3A2C;
+  --color-forest-light: #4A5B45;
+  --color-sage: #B9C49E;
+  --color-sage-light: #D3DCC0;
+  --color-pink: #F4CFC8;
+  --color-pink-light: #F8E1DC;
+  --color-ink: #241F1A;
+  --color-ink-soft: #55504A;
+  --color-gold: #C9963D;
+
+  --font-display: "Poppins", sans-serif;
+  /*--font-accent: "Fraunces", Georgia, serif;*/
+  --font-body: "Inter", ui-sans-serif, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+}
+
+/* Révélation douce au scroll */
+/*.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}*/
+
+/* Zone "photo" en attente des vrais visuels du client */
+.photo-placeholder {
+  background: linear-gradient(135deg, var(--color-peach-light), var(--color-sage-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

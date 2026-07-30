@@ -1,0 +1,45 @@
+---
+const etapes = [
+  {
+    numero: "1",
+    titre: "On échange sur vos habitudes",
+    texte: "Vos goûts, votre rythme et vos besoins guident chaque intervention.",
+  },
+  {
+    numero: "2",
+    titre: "Le Cuistologue cuisine chez vous.",
+    texte: "Des repas faits maison, préparés dans votre cuisine avec soin.",
+  },
+  {
+    numero: "3",
+    titre: "Profitez d'un quotidien simplifié",
+    texte: "Des plats prêts, un réfrigérateur organisé et une cuisine impeccable.",
+  },
+];
+---
+
+<section id="comment-ca-marche" class="scroll-mt-24 bg-cream">
+  <div class="mx-auto max-w-7xl px-6 py-20 text-center md:py-28">
+    <h2 class="reveal font-display text-3xl font-semibold text-ink md:text-4xl">
+      Comment <span class="font-accent text-forest-light">ça marche ?</span>
+    </h2>
+    <p class="reveal mt-3 text-ink-soft">Une semaine qui se prépare en trois étapes</p>
+
+    <div class="mt-14 grid gap-10 md:grid-cols-3 md:gap-6">
+      {
+        etapes.map((etape, i) => (
+          <div class="reveal relative" style={`transition-delay:${i * 100}ms`}>
+            {i < etapes.length - 1 && (
+              <div class="pointer-events-none absolute left-[calc(50%+70px)] top-10 hidden w-[calc(100%-140px)] border-t-2 border-dashed border-gold/60 md:block" />
+            )}
+            <div class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-sage-light text-forest">
+              <span class="font-display text-2xl font-semibold">{etape.numero}</span>
+            </div>
+            <p class="mt-5 font-display font-semibold text-ink">{etape.titre}</p>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{etape.texte}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
