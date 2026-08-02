@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --header-height: 70px;
   --color-cream: #FBF6EC;
   --color-peach: #F4D8B8;
   --color-peach-light: #F8E7CE;
@@ -10,12 +11,11 @@
   --color-sage-light: #D3DCC0;
   --color-pink: #F4CFC8;
   --color-pink-light: #F8E1DC;
-  --color-ink: #241F1A;
-  --color-ink-soft: #55504A;
+  --color-ink: #2c2c2C;
+  --color-ink-soft: #253d4a;
   --color-gold: #C9963D;
 
   --font-display: "Poppins", sans-serif;
-  /*--font-accent: "Fraunces", Georgia, serif;*/
   --font-body: "Inter", ui-sans-serif, sans-serif;
 }
 
@@ -38,6 +38,7 @@ body {
   font-family: var(--font-body);
   color: var(--color-ink);
   background-color: var(--color-cream);
+  overflow-x: hidden;
 }
 
 .font-display {
