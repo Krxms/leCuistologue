@@ -5,30 +5,23 @@
   overflow: visible;
 }
 
-.presentation__bridge-arrow {
-  position: absolute;
-  left: 87.03%;
-  top: -107px;
-  width: 12.98%;
-  height: auto;
-  transform: scaleY(-1) rotate(-150.21deg);
-  z-index: 3;
-  pointer-events: none;
-}
 
 .presentation__content {
   position: relative;
   z-index: 2;
   padding-left: 7.19%;
   padding-top: 56px;
-  max-width: 55%;
+  max-width: 58%;
 }
 
 .presentation__title-icon {
   width: 111.7px;
   height: 111.7px;
-  transform: rotate(135deg) scaleY(-1);
+  transform: rotate(180deg) scaleY(-1);
   margin-bottom: 1rem;
+  position: relative;
+  left: 40%;
+  top: 3.5rem;
 }
 
 .presentation__title {
@@ -77,14 +70,14 @@
   align-items: center;
   justify-content: center;
   height: 60px;
-  padding-inline: 35px;
+  padding-inline: 55px;
   border: 2px solid #edb368;
   border-radius: 10px;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1.125rem;
   color: var(--color-ink);
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .presentation__photo-wrap {
@@ -104,30 +97,67 @@
   object-fit: contain;
 }
 
-.presentation__photo-deco {
+.presentation__decor {
   position: absolute;
-  left: 65.56%;
-  top: 86%;
-  width: 31%;
-  height: auto;
-  z-index: 3;
+  z-index: 4;
+  pointer-events: none;
 }
 
-.presentation__squiggle {
+.presentation__courgette {
   position: absolute;
-  left: 68.33%;
-  top: 892px;
-  width: 6.7%;
+  left: 87.03%;
+  top: -5px;
+  width: 5.6%;
   height: auto;
+  z-index: 1;
+  pointer-events: none;
+  transform: rotate(-150deg);
+}
+
+.presentation__decor--brocoli {
+  width: 8.2%;
+  height: auto;
+  left: 48%;
+  top: -50px;
+}
+
+.presentation__decor--oignon {
+  width: 8%;
+  height: auto;
+  left: 64%;
+  top: 118px;
+}
+
+.presentation__decor--aubergine {
+  width: 8%;
+  height: auto;
+  left: 83%;
+  top: 595px;
+}
+
+.presentation__decor--poivrons {
+  width: 6.8%;
+  height: auto;
+  left: 72%;
+  top: 820px;
   z-index: 1;
 }
 
-.presentation__underline {
-  position: absolute;
-  left: 65.83%;
-  right: 30.83%;
-  top: 676px;
-  height: 73px;
+.presentation__decor--champignons {
+  width: 4.2%;
+  height: auto;
+  left: 93%;
+  top: 465px;
+  transform: rotate(-70deg);
+}
+
+.presentation__decor--champignons2 {
+  width: 4.2%;
+  height: auto;
+  left: 64%;
+  top: 595px;
+  transform: rotate(0deg);
+  z-index: 1;
 }
 
 @media (max-width: 767px) {
@@ -135,16 +165,18 @@
     min-height: auto;
     padding: 3rem 1.5rem;
   }
+
   .presentation__bridge-arrow,
-  .presentation__squiggle,
-  .presentation__underline {
+  .presentation__decor {
     display: none;
   }
+
   .presentation__content {
     max-width: 100%;
     padding-left: 0;
     padding-top: 0;
   }
+
   .presentation__photo-wrap {
     position: relative;
     left: auto;

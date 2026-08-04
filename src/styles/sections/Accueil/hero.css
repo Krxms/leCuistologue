@@ -148,8 +148,8 @@
   position: absolute;
   z-index: 2;
   left: 50%;
-  bottom: 2rem;
-  transform: translateX(-50%);
+  bottom: 3.6rem;
+  transform: translateX(-30%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
