@@ -5,7 +5,6 @@
   overflow: visible;
 }
 
-
 .presentation__content {
   position: relative;
   z-index: 2;
@@ -72,10 +71,10 @@
   height: 60px;
   padding-inline: 55px;
   border: 2px solid #edb368;
-  border-radius: 10px;
+  border-radius: 4px;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--color-ink);
   margin-top: 2.5rem;
 }
@@ -160,15 +159,17 @@
   z-index: 1;
 }
 
+/* Mobile : seuls 4 légumes restent (courgette + brocoli en haut, aubergine +
+   poivron en bas), repositionnés pour ce format en colonne unique. Tous en
+   position: absolute → ne peuvent structurellement pas pousser le contenu,
+   peu importe le format. Le poivron déborde volontairement sous la section
+   (bottom négatif) pour chevaucher la section suivante, comme demandé. */
 @media (max-width: 767px) {
   .presentation {
+    position: relative;
     min-height: auto;
-    padding: 3rem 1.5rem;
-  }
-
-  .presentation__bridge-arrow,
-  .presentation__decor {
-    display: none;
+    overflow: visible;
+    padding: 1rem 1.5rem 5rem;
   }
 
   .presentation__content {
@@ -177,11 +178,71 @@
     padding-top: 0;
   }
 
+  .presentation__title-icon {
+    left: 68%;
+    top: 7.2%;
+    width: 70px;
+    height: 70px;
+  }
+
+  .presentation__cta {
+  width: 100%;
+}
+
   .presentation__photo-wrap {
     position: relative;
     left: auto;
     top: auto;
-    width: 70%;
+    width: 80%;
     margin: 3rem auto 0;
   }
+
+  /* On repart de zéro : tout masqué, puis seuls les 4 voulus réactivés */
+  .presentation__decor,
+  .presentation__courgette {
+    display: none;
+  }
+
+  .presentation__courgette {
+    display: block;
+    left: auto;
+    right: -8%;
+    top: -30px;
+    width: 18vw;
+    max-width: 68px;
+  }
+
+  .presentation__decor--brocoli {
+    display: block;
+    left: 10%;
+    top: -28px;
+    width: 20vw;
+    max-width: 78px;
+  }
+
+  .presentation__decor--aubergine {
+    display: block;
+    left: auto;
+    right: 5%;
+    top: auto;
+    bottom: 4rem;
+    width: 18vw;
+    max-width: 72px;
+    z-index: 1;
+  }
+
+  .presentation__decor--poivrons {
+    display: block;
+    left: 40%;
+    top: auto;
+    bottom: -1.75rem;
+    transform: translateX(-50%);
+    width: 16vw;
+    max-width: 62px;
+    z-index: 5;
+  }
+
+  .presentation__cta {
+  height: 44px;
+}
 }

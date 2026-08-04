@@ -126,10 +126,10 @@
   height: 46px;
   width: max-content;
   padding-inline: 1.75rem;
-  border-radius: 6px;
+  border-radius: 4px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 1rem;
   white-space: nowrap;
 }
 
@@ -193,5 +193,12 @@
   .hero__actions {
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .btn {
+    height: 44px;
+    padding-inline: 1.5rem;
+    font-size: 0.875rem;
+    width: 65%;
   }
 }
