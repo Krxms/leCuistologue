@@ -6,9 +6,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 70px;
+  padding-inline: 74px;
   background-color: #FBF8F7;
-  box-shadow: 0px 4px 11.1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 11.1px rgba(0, 0, 0, 0.055);
   transition: height 0.45s ease;
 }
 
@@ -65,10 +65,20 @@
 }
 
 .navbar--scrolling .navbar__logo {
-  height: 48px;
+  height: 52px;
 }
 
-/* Bouton burger — masqué par défaut (desktop) */
+/* Menu ouvert : la navbar reste figée à sa taille normale, quel que soit
+   le scroll — :has() permet de cibler le parent depuis l'état de l'enfant,
+   sans repasser par le JS pour ça */
+.navbar:has(.navbar__mobile-menu.is-open) {
+  height: var(--header-height) !important;
+}
+
+.navbar:has(.navbar__mobile-menu.is-open) .navbar__logo {
+  height: 89px !important;
+}
+
 .navbar__burger {
   display: none;
   flex-direction: column;
@@ -101,18 +111,23 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Panneau du menu mobile — masqué par défaut, ouvert via JS (.is-open) */
+/* Panneau du menu mobile — fond semi-opaque + flou, pour que le contenu
+   derrière (Hero, etc.) reste discret et lisible sous le menu */
 .navbar__mobile-menu {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #FBF8F7;
+  height: calc(100vh - var(--header-height));
+  background-color: rgba(251, 248, 247, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0px 4px 11.1px rgba(0, 0, 0, 0.15);
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  align-items: center;
+  gap: 1.5rem;
   transform: translateY(-10px);
   opacity: 0;
   pointer-events: none;
@@ -128,7 +143,9 @@
 .navbar__mobile-links {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
 }
 
 .navbar__mobile-link {
@@ -140,12 +157,30 @@
 
 .navbar__cta--menu {
   display: none;
+  width: 100%;
+  max-width: 20rem;
+  padding-block: 0.85rem;
+  font-size: 0.85rem;
 }
 
-/* Tablette portrait + mobile (< 1024px) : liens dans le burger */
+/* Tablette portrait + mobile (< 1024px) : liens ET bouton contact dans le
+   burger — plus de CTA visible en permanence dans la barre dès ce seuil */
 @media (max-width: 1023px) {
+
+  .navbar {
+    padding-inline: 24px;
+ }
+    
   .navbar__links {
     display: none;
+  }
+
+  .navbar__cta--bar {
+    display: none;
+  }
+
+  .navbar__cta--menu {
+    display: inline-flex;
   }
 
   .navbar__burger {
@@ -153,8 +188,8 @@
   }
 }
 
-/* Desktop et tablette paysage (≥ 1024px) : jamais de menu burger visible */
 @media (min-width: 1024px) {
+
 
   .navbar__burger {
     display: none;
@@ -165,13 +200,3 @@
   }
 }
 
-/* Mobile uniquement (< 768px) : le CTA quitte la barre pour rejoindre le menu */
-@media (max-width: 767px) {
-  .navbar__cta--bar {
-    display: none;
-  }
-
-  .navbar__cta--menu {
-    display: inline-flex;
-  }
-}

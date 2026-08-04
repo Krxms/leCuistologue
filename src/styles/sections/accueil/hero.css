@@ -7,26 +7,67 @@
   padding-inline: 64px;
 }
 
-/* Desktop large uniquement — la contrainte "tient dans l'écran" ne s'applique
-   qu'à partir d'un écran suffisamment large, pas dès la tablette portrait */
-@media (min-width: 1024px) {
+/* Desktop large uniquement (≥1280px) — hauteur pleine écran */
+@media (min-width: 1280px) {
   .hero {
     height: calc(100dvh - var(--header-height));
   }
 }
 
-/* Tablette (768-1023px, portrait comme paysage) : même mise en page qu'en
-   desktop, mais hauteur naturelle et contenu aligné en haut plutôt que
-   centré dans un espace disproportionné (le cas problématique en portrait) */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* Tablette paysage / petit laptop (1024-1279px) : hauteur naturelle,
+   alignement en haut — corrige le contenu "trop bas" */
+@media (min-width: 1024px) and (max-width: 1279px) {
   .hero {
-    min-height: 32rem;
-    padding-block: 4rem;
+    min-height: 30rem;
+    padding-block: 3rem;
   }
 
   .hero__content {
     align-self: start;
   }
+
+  /* Titre légèrement resserré pour ne plus déborder sur la photo */
+  .hero__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.01em;
+  }
+
+  .btn {
+    height: 48px;
+    padding-inline: 1.4rem;
+    font-size: 1rem;
+  }
+}
+
+/* Tablette portrait (768-1023px) : hauteur naturelle, alignement en haut,
+   boutons réduits, photo zoomée dans son cadre pour laisser de la place au titre */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero {
+    min-height: 38rem;
+    padding-block: 3rem;
+  }
+
+  .hero__content {
+    align-self: start;
+  }
+
+  .btn {
+    height: 46px;
+    padding-inline: 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .hero__background {
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
+.hero__bg-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
 }
 
 .hero__background {
@@ -45,6 +86,7 @@
   position: relative;
   z-index: 2;
   grid-column: 1 / span 7;
+  max-width: 100%;
   align-self: center;
 }
 
@@ -52,7 +94,7 @@
   font-family: var(--font-display);
   font-weight: 900;
   text-transform: uppercase;
-  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  font-size: clamp(2.25rem, 4vw, 4rem);
   line-height: 1.3;
   color: var(--color-ink);
 }
@@ -64,11 +106,10 @@
 
 .hero__description {
   margin-top: 1.5rem;
-  max-width: 90%;
+  width: 30ch;
   font-family: var(--font-body);
-  font-weight: 500;
   font-size: clamp(1.1rem, 1.4vw, 1.4375rem);
-  line-height: 1.3;
+  line-height: 1.45;
   color: var(--color-ink-soft);
 }
 
@@ -82,14 +123,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 55px;
+  height: 46px;
   width: max-content;
   padding-inline: 1.75rem;
   border-radius: 6px;
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1.125rem;
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  font-size: 0.875rem;
   white-space: nowrap;
 }
 
@@ -129,7 +169,6 @@
   }
 }
 
-/* Mobile : fond uni, pas de photo, tout centré — comme demandé */
 @media (max-width: 767px) {
   .hero {
     display: flex;
@@ -142,7 +181,7 @@
     background-color: #F8E0CF;
   }
 
-  .hero__background,
+  .hero__bg-wrapper,
   .hero__arrow {
     display: none;
   }

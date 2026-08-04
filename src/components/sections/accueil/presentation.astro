@@ -2,16 +2,23 @@
 import "../../../styles/sections/accueil/presentation.css";
 import { Image } from "astro:assets";
 
-import chefComposite from "../../../assets/accueil/presentation/chef-composite.png";
-import chefContainer from "../../../assets/accueil/presentation/chef-container.svg";
-import titleIcon from "../../../assets/accueil/presentation/title-icon.svg";
+import chefComposite from "../../../assets/accueil/presentation/def-chef.png";
+import titleIcon from "../../../assets/accueil/presentation/def-titlewow.svg";
 import bridgeArrow from "../../../assets/accueil/presentation/bridge-arrow.svg";
-import squiggle from "../../../assets/accueil/presentation/squiggle.svg";
-import underline from "../../../assets/accueil/presentation/underline.svg";
+
+import brocoli from "../../../assets/accueil/presentation/brocoli.svg";
+import oignon from "../../../assets/accueil/presentation/oignon.svg";
+import aubergine from "../../../assets/accueil/presentation/aubergine.svg";
+import champignons from "../../../assets/accueil/presentation/champignons.svg";
 ---
 
 <section class="presentation">
   <img src={bridgeArrow.src} alt="" class="presentation__bridge-arrow" aria-hidden="true" />
+
+  <img src={brocoli.src} alt="" class="presentation__decor presentation__decor--brocoli" aria-hidden="true" />
+  <img src={oignon.src} alt="" class="presentation__decor presentation__decor--oignon" aria-hidden="true" />
+  <img src={aubergine.src} alt="" class="presentation__decor presentation__decor--aubergine" aria-hidden="true" />
+  <img src={champignons.src} alt="" class="presentation__decor presentation__decor--champignons" aria-hidden="true" />
 
   <div class="presentation__content">
     <img src={titleIcon.src} alt="" class="presentation__title-icon" aria-hidden="true" />
@@ -29,9 +36,5 @@ import underline from "../../../assets/accueil/presentation/underline.svg";
 
   <div class="presentation__photo-wrap">
     <Image src={chefComposite} alt="Le chef du Cuistologue en cuisine" class="presentation__photo" />
-    <img src={chefContainer.src} alt="" class="presentation__photo-deco" aria-hidden="true" />
   </div>
-
-  <img src={squiggle.src} alt="" class="presentation__squiggle" aria-hidden="true" />
-  <img src={underline.src} alt="" class="presentation__underline" aria-hidden="true" />
 </section>
