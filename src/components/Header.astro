@@ -1,4 +1,6 @@
 ---
+import logo from "../assets/navbar/logo.svg";
+
 const navLinks = [
   { label: "Accueil", href: "/" },
   { label: "Comment ça marche ?", href: "/#comment-ca-marche" },
@@ -9,35 +11,45 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-ink/5">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-    <a href="/" class="flex items-center gap-2 font-display text-lg font-semibold text-forest">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M6 2v8a2 2 0 0 0 2 2v10M6 2v6M8 2v6M10 2v8M17 2c-2 2-2 6-2 8 0 1.5 1 2 2 2v10M17 2v20"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-        />
-      </svg>
-      Le Cuistologue
-    </a>
+<header class="navbar" id="site-navbar">
+  <div class="navbar__brand">
+    <img src={logo.src} alt="Le Cuistologue" class="navbar__logo" />
+  </div>
 
-    <nav class="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">
+  <nav class="navbar__links">
+    {
+      navLinks.map((link) => (
+        <a href={link.href} class="navbar__link">
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <a href="/contact" class="navbar__cta navbar__cta--bar">Prendre contact</a>
+
+  <button
+    class="navbar__burger"
+    id="navbar-burger"
+    aria-expanded="false"
+    aria-controls="navbar-mobile-menu"
+    aria-label="Ouvrir le menu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="navbar__mobile-menu" id="navbar-mobile-menu">
+    <nav class="navbar__mobile-links">
       {
         navLinks.map((link) => (
-          <a href={link.href} class="transition-colors hover:text-forest">
+          <a href={link.href} class="navbar__mobile-link">
             {link.label}
           </a>
         ))
       }
     </nav>
-
-    <a
-      href="/contact"
-      class="rounded-full bg-forest px-5 py-2.5 text-sm font-semibold text-cream transition-transform hover:scale-[1.03]"
-    >
-      Prendre contact
-    </a>
+    <a href="/contact" class="navbar__cta navbar__cta--menu">Prendre contact</a>
   </div>
 </header>

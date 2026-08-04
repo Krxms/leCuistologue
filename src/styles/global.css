@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --header-height: 70px;
+  --header-height: 107px;
   --color-cream: #FBF6EC;
   --color-peach: #F4D8B8;
   --color-peach-light: #F8E7CE;
