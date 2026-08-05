@@ -1,0 +1,463 @@
+.offre {
+  position: relative;
+}
+
+/* ===== Desktop (≥1211px) ===== */
+
+.offre__desktop {
+  position: relative;
+  overflow: clip;
+  min-height: 71vw;
+  z-index: 3;
+  margin-block: -3rem;
+  padding: 4rem 2rem 6rem;
+}
+
+.offre__bg {
+  position: absolute;
+  left: 50%;
+  top: -1%;
+  width: 106vw;
+  height: 102%;
+  transform: translateX(-50%);
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.offre__header {
+  position: relative;
+  z-index: 1;
+  max-width: 52%;
+  padding-left: 7.3%;
+  padding-top: 5vw;
+}
+
+.offre__title-row {
+  position: relative;
+}
+
+.offre__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 2.9vw, 3.4375rem);
+  line-height: 1.16;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+  margin: 0;
+  padding-right: 5rem;
+}
+
+.offre__title-icon {
+  position: absolute;
+  left: -10%;
+  top: -4.3rem;
+  width: 5.8vw;
+  max-width: 111.7px;
+  transform: rotate(-90deg);
+}
+
+.offre__description {
+  margin-top: 1.7vw;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.25vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.offre__include-label {
+  margin-top: 1.7vw;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.25vw, 1.5rem);
+  color: var(--color-ink);
+}
+
+.offre__checklist-wrap {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+  margin-left: 2%;
+  width: 58%;
+  aspect-ratio: 1113.122 / 331.423;
+}
+
+.offre__checklist-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.offre__checklist {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 1rem 3rem;
+  padding: 8% 9%;
+}
+
+.offre__checklist-col {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1 1 260px;
+}
+
+.offre__checklist-col li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.offre__checklist-col img {
+  width: 16px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.offre__checklist-col span {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.05vw, 1.1rem);
+  color: var(--color-ink);
+}
+
+.offre__price-block {
+  position: relative;
+  z-index: 1;
+  margin-top: 4.8rem;
+  margin-left: 7.3%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.offre__price {
+  margin: 0;
+  font-family: var(--font-display);
+}
+
+.offre__price-label {
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
+  color: var(--color-ink);
+}
+
+.offre__price-value {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
+  color: #bc843c;
+  margin-inline: 0.4rem;
+}
+
+.offre__promo {
+  position: relative;
+  margin-top: 1.5rem;
+  margin-left: 2.5rem;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.offre__promo-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.offre__promo-text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 1.2rem 3rem;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.5rem);
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.offre__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: 2rem;
+  margin-left: 8.9%;
+  height: 4.7vw;
+  max-height: 75px;
+  min-height: 46px;
+  width: 100%;
+  max-width: 410px;
+  border-radius: 6px;
+  background-color: var(--color-ink-soft);
+  color: #fdfbfa;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.15vw, 1.375rem);
+  letter-spacing: 0.05em;
+}
+
+.offre__arrow {
+  position: absolute;
+  left: 50.7%;
+  top: 61%;
+  width: 6.8%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.offre__photo {
+  position: absolute;
+  z-index: 2;
+}
+
+.offre__photo--main {
+  left: 60.89%;
+  top: 5%;
+  width: 56%;
+  height: auto;
+}
+
+.offre__photo--secondary {
+  left: 60.78%;
+  top: 70%;
+  width: 18.84%;
+  height: auto;
+}
+
+/* ===== Tablette (834-1210px) — ajuste UNIQUEMENT .offre__desktop ===== */
+
+@media (min-width: 834px) and (max-width: 1210px) {
+  .offre__header {
+    max-width: calc(100% - 3rem);
+    padding-left: 1.5rem;
+    padding-top: 3rem;
+  }
+
+  .offre__checklist-wrap {
+    margin-left: 1.5rem;
+    width: calc(100% - 3rem);
+    aspect-ratio: auto;
+  }
+
+  .offre__price-block {
+    margin-left: 1.5rem;
+  }
+
+  .offre__arrow {
+    display: none;
+  }
+
+  .offre__photo--main,
+  .offre__photo--secondary {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 60%;
+    margin: 2rem auto 0;
+    display: block;
+  }
+}
+
+/* ===== Mobile (≤833px) ===== */
+
+.offre-m {
+  display: none;
+}
+
+.offre-m__bg {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 100vw;
+  height: 107%;
+  transform: translateX(-50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.offre-m__title-row {
+  position: relative;
+  z-index: 1;
+  padding-top: 9%;
+  padding-inline: 8%;
+  text-align: left;
+}
+
+.offre-m__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 7vw, 2.4rem);
+  line-height: 1.16;
+  color: var(--color-ink);
+  margin-top: 20%;
+}
+
+.offre-m__title-icon {
+  position: absolute;
+  right: 11%;
+  top: 31%;
+  width: 14%;
+  transform: rotate(-18deg);
+}
+
+.offre-m__description {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.5rem;
+  padding-inline: 8%;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.offre-m__include-label {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.5rem;
+  padding-inline: 8%;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+
+.offre-m__checklist-wrap {
+  position: relative;
+  z-index: 1;
+  margin: 2rem auto 0;
+  width: 85%;
+  background-color: var(--color-cream);
+  border-radius: 320% 210% 359% 300% / 130% 250% 218% 120%;
+}
+
+.offre-m__checklist {
+  padding: 2.5rem 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.offre-m__checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.offre-m__checklist-item img {
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.offre-m__checklist-item span {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-ink);
+}
+
+.offre-m__arrow {
+  display: block;
+  margin: -5rem auto -1.4rem;
+  left: 26%;
+  width: 15%;
+  min-width: 24px;
+  position: relative;
+  z-index: 0;
+}
+
+.offre-m__price {
+  position: relative;
+  z-index: 1;
+  margin: 1.5rem 0 0;
+  text-align: center;
+  font-family: var(--font-display);
+}
+
+.offre-m__price-label {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--color-ink);
+}
+
+.offre-m__price-value {
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #bc843c;
+  margin-inline: 0.3rem;
+}
+
+.offre-m__promo {
+  position: relative;
+  z-index: 1;
+  margin: 1rem auto 0;
+  width: fit-content;
+}
+
+.offre-m__promo-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.offre-m__promo-text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0.8rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.offre-m__cta {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 85%;
+  max-width: 410px;
+  margin: 2.5rem auto 0;
+  padding-block: 1rem;
+  text-align: center;
+  border-radius: 6px;
+  background-color: var(--color-ink-soft);
+  color: #fdfbfa;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.05em;
+}
+
+.offre-m__photo {
+  display: none;
+}
+
+/* ===== Bascule — décide quelle version s'affiche ===== */
+
+@media (max-width: 833px) {
+  .offre__desktop {
+    display: none;
+  }
+
+  .offre-m {
+    display: block;
+    position: relative;
+  }
+}

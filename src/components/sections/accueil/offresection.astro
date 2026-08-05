@@ -1,10 +1,26 @@
 ---
-const inclus = [
+import "../../../styles/sections/accueil/offre-section.css";
+
+import bgPink from "../../../assets/accueil/service/serviceBG.svg";
+import photoMain from "../../../assets/accueil/service/serviceBigPics.png";
+import photoSecondary from "../../../assets/accueil/service/serviceSmallPics.png";
+import titleIcon from "../../../assets/accueil/service/titlewow.svg";
+import checklistBg from "../../../assets/accueil/service/checklistBG.svg";
+import checkmark from "../../../assets/accueil/service/checkmark.svg";
+import arrow from "../../../assets/accueil/service/arrow.svg";
+import serviceInfoBg from "../../../assets/accueil/service/serviceinfoBG.svg";
+import bgPinkMobile from "../../../assets/accueil/service/serviceBGmobile.svg";
+import { Image } from "astro:assets";
+
+const colonneGauche = [
   "Cuisine à domicile - batch-cooking",
   "Menus personnalisés",
   "Organisation du réfrigérateur",
   "Remise au propre de la cuisine",
   "Conseils de conservation",
+];
+
+const colonneDroite = [
   "Courses réalisées pour vous",
   "Organisation d'une routine culinaire",
   "Réserve gourmande (granola, houmous, compotes ...)",
@@ -12,52 +28,104 @@ const inclus = [
 ];
 ---
 
-<section class="bg-pink">
-  <div class="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center md:py-28">
-    <div class="reveal">
-      <h2 class="font-display text-3xl font-semibold text-ink md:text-4xl">
-        Une cuisine maison qui simplifie vraiment votre quotidien
-      </h2>
-      <p class="mt-5 max-w-lg text-ink-soft">
-        Des repas faits maison préparés chez vous, pensés pour votre
-        quotidien, avec des produits de saison et une organisation qui vous
-        simplifie la vie.
+<section class="offre">
+  <!-- ===== Desktop / tablette (≥1211px) ===== -->
+  <div class="offre__desktop">
+    <img src={bgPink.src} alt="" class="offre__bg" aria-hidden="true" />
+
+    <div class="offre__header">
+      <div class="offre__title-row">
+        <h2 class="offre__title">Une cuisine maison qui simplifie vraiment votre quotidien</h2>
+        <img src={titleIcon.src} alt="" class="offre__title-icon" aria-hidden="true" />
+      </div>
+      <p class="offre__description">
+        Des repas faits maison préparés chez vous, pensés pour votre quotidien, avec des produits de saison et une organisation qui vous simplifie la vie.
       </p>
+      <p class="offre__include-label">Chaque intervention peut inclure :</p>
+    </div>
 
-      <p class="mt-8 font-display font-semibold text-ink">Chaque intervention peut inclure :</p>
-      <ul class="mt-4 grid gap-x-8 gap-y-3 text-sm text-ink-soft sm:grid-cols-2">
-        {
-          inclus.map((item) => (
-            <li class="flex items-start gap-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="mt-0.5 shrink-0 text-forest" aria-hidden="true">
-                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              {item}
+    <div class="offre__checklist-wrap">
+      <img src={checklistBg.src} alt="" class="offre__checklist-bg" aria-hidden="true" />
+      <div class="offre__checklist">
+        <ul class="offre__checklist-col">
+          {colonneGauche.map((item) => (
+            <li>
+              <img src={checkmark.src} alt="" aria-hidden="true" />
+              <span>{item}</span>
             </li>
-          ))
-        }
-      </ul>
+          ))}
+        </ul>
+        <ul class="offre__checklist-col">
+          {colonneDroite.map((item) => (
+            <li>
+              <img src={checkmark.src} alt="" aria-hidden="true" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
 
-      <div class="mt-10 rounded-3xl bg-cream/80 p-6">
-        <p class="font-display text-xl text-ink">
-          À partir de <span class="font-semibold text-forest">69,50 €</span> / intervention
-        </p>
-        <p class="mt-2 inline-block rounded-full bg-pink-light px-4 py-1 text-xs font-semibold text-ink">
-          Offre de lancement : -30 € sur votre 1ère intervention
+    <img src={arrow.src} alt="" class="offre__arrow" aria-hidden="true" />
+
+    <div class="offre__price-block">
+      <p class="offre__price">
+        <span class="offre__price-label">A partir de</span>
+        <span class="offre__price-value">69,50 €</span>
+        <span class="offre__price-label">/ intervention</span>
+      </p>
+      <div class="offre__promo">
+        <img src={serviceInfoBg.src} alt="" class="offre__promo-bg" aria-hidden="true" />
+        <p class="offre__promo-text">
+          Offre de lancement : <strong>-30€</strong> sur votre 1ère intervention
         </p>
       </div>
-
-      <a
-        href="/formules"
-        class="mt-8 inline-block rounded-full bg-forest px-6 py-3 text-sm font-semibold text-cream transition-transform hover:scale-[1.03]"
-      >
-        Je découvre les formules !
-      </a>
+      <a href="/formules" class="offre__cta">Je découvre les formules !</a>
     </div>
 
-    <div class="reveal grid grid-cols-2 gap-4" style="transition-delay:120ms">
-      <div class="aspect-[3/4] overflow-hidden rounded-[2rem] photo-placeholder"></div>
-      <div class="mt-8 aspect-[3/4] overflow-hidden rounded-[2rem] photo-placeholder"></div>
+    <Image src={photoMain} alt="Plats préparés par Le Cuistologue, prêts à emporter" class="offre__photo offre__photo--main" />
+    <Image src={photoSecondary} alt="" class="offre__photo offre__photo--secondary" aria-hidden="true" />
+  </div>
+
+  <!-- ===== Mobile / tablette (≤1210px) ===== -->
+  <div class="offre-m">
+    <img src={bgPinkMobile.src} alt="" class="offre-m__bg" aria-hidden="true" />
+
+    <div class="offre-m__title-row">
+      <h2 class="offre-m__title">Une cuisine maison qui simplifie vraiment votre quotidien</h2>
+      <img src={titleIcon.src} alt="" class="offre-m__title-icon" aria-hidden="true" />
     </div>
+    <p class="offre-m__description">
+      Des repas faits maison préparés chez vous, pensés pour votre quotidien, avec des produits de saison et une organisation qui vous simplifie la vie.
+    </p>
+    <p class="offre-m__include-label">Chaque intervention peut inclure :</p>
+
+    <div class="offre-m__checklist-wrap">
+      <div class="offre-m__checklist">
+        {[...colonneGauche, ...colonneDroite].map((item) => (
+          <div class="offre-m__checklist-item">
+            <img src={checkmark.src} alt="" aria-hidden="true" />
+            <span>{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <img src={arrow.src} alt="" class="offre-m__arrow" aria-hidden="true" />
+
+    <p class="offre-m__price">
+      <span class="offre-m__price-label">A partir de</span>
+      <span class="offre-m__price-value">69,50 €</span>
+      <span class="offre-m__price-label">/ intervention</span>
+    </p>
+    <div class="offre-m__promo">
+      <img src={serviceInfoBg.src} alt="" class="offre-m__promo-bg" aria-hidden="true" />
+      <p class="offre-m__promo-text">
+        Offre de lancement : <strong>-30€</strong> sur votre 1ère intervention
+      </p>
+    </div>
+    <a href="/formules" class="offre-m__cta">Je découvre les formules !</a>
+
+    <Image src={photoMain} alt="Plats préparés par Le Cuistologue, prêts à emporter" class="offre-m__photo" />
   </div>
 </section>
