@@ -106,11 +106,15 @@
   overflow: visible;
   margin-block: 0rem;
   padding: 6rem 2rem;
-  margin-top: -19rem;
+  margin-top: -1rem;
 }
+
+  .presentation__photo {
+    top: -40%;
+  }
   }
 
-  @media (max-width: 834px) {
+  @media (max-width: 860px) {
     .valeurs {
   margin-block: 0rem;
 }
@@ -129,15 +133,28 @@
   overflow: visible;
   margin-block: 0rem;
   padding: 6rem 2rem;
-  margin-top: -3rem;
+  margin-top: -1rem;
 }
+
+    .presentation__photo {
+    top: -10%;
   }
+
+  .valeurs__card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #655f6c;
+  font-size: clamp(1.2rem, 1.3vw, 1.3rem);
+}
+
+  
 
 
 @media (max-width: 767px) {
   .valeurs {
     margin-block: 6.5rem;
     padding: 0rem 1.5rem;
+    margin-top: 8rem;
   }
 
   .valeurs__bg {
@@ -145,7 +162,7 @@
     bottom: -1rem;
     height: calc(100% + 2rem);
     object-fit: cover;
-    transform: translateX(-50%) scale(1.5);
+    transform: translateX(-50%) scale(1.7);
   }
 
   .valeurs__grid {
@@ -158,4 +175,8 @@
     width: 90%;
     max-width: 340px;
   }
+.valeurs__card-text {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  }
+}
 }

@@ -55,7 +55,7 @@
     height: 46px;
     padding-inline: 1.25rem;
     font-size: 0.95rem;
-      width: 100%;
+    width: 100%;
   }
 
   .hero__background {
@@ -149,8 +149,21 @@
   position: absolute;
   z-index: 2;
   left: 50%;
-  bottom: 3.6rem;
+  bottom: 5.6rem;
   transform: translateX(-30%);
+}
+
+@media (max-width: 1210px) {
+  .hero__arrow {
+    display: none;
+  }
+
+    .btn {
+    height: 44px;
+    padding-inline: 1.5rem;
+    font-size: 0.875rem;
+    width: 65%;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

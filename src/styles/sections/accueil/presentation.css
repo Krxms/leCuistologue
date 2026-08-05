@@ -83,7 +83,7 @@
 .presentation__photo-wrap {
   position: absolute;
   left: 62.55%;
-  top: 8.75vw;
+  top: 12%;
   width: 33%;
   aspect-ratio: 632 / 590;
   z-index: 1;
@@ -164,11 +164,11 @@
   width: 24%;
   height: auto;
   left: 10.5%;
-  top: -50%;
+  top: -35%;
 }
 
 /* --- Tablette (768-1023px) --- */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1210px) {
   .presentation {
     min-height: auto;
     padding-bottom: 6rem;
@@ -251,10 +251,10 @@
 }
 
 .presentation__photo-decor--potato {
-  width: 34%;
+  width: 28%;
   height: auto;
   left: 28.5%;
-  top: -100%;
+  top: -90%;
 }
 }
 
@@ -265,6 +265,7 @@
     min-height: auto;
     overflow: visible;
     padding: 1rem 1.5rem 5rem;
+    margin-top: 2rem;
   }
 
   .presentation__content {
@@ -305,6 +306,10 @@
     display: none;
   }
 
+  .presentation__photo { 
+    top: 20%;
+  }
+
   .presentation__courgette {
     display: block;
     position: absolute;
@@ -333,12 +338,20 @@
   }
 
   .presentation__photo-decor--poivrons {
+    position: absolute;
     display: block;
-    left: 45%;
+    left: 25%;
     top: auto;
-    bottom: -42%;
+    bottom: -55%;
     transform: translateX(-50%);
     width: 26%;
     z-index: 5;
   }
+
+  @media (min-width: 393px) {
+ .presentation__photo {
+  top : 9%;
+ }
+
+}
 }
