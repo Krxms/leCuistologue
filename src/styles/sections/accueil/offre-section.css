@@ -2,8 +2,9 @@
   position: relative;
 }
 
-/* ===== Desktop (base) — s'applique dès 834px, aucun override tablette :
-   tout le bloc utilise déjà vw/%/clamp(), donc il reste fluide tel quel ===== */
+/* ============================================================
+   DESKTOP (base) — s'applique à partir de 1211px
+   ============================================================ */
 
 .offre__desktop {
   position: relative;
@@ -238,7 +239,24 @@
   height: auto;
 }
 
-/* ===== Mobile (base) — masquée par défaut, activée sous 834px ===== */
+/* ============================================================
+   TABLETTE — 834px à 1210px, ZONE ISOLÉE
+   Tout ce que vous écrivez ici ne s'applique QUE dans cette plage,
+   et QUE sur les éléments de .offre__desktop (jamais .offre-m).
+   Modifiez librement ce bloc sans risque pour le mobile ou le desktop.
+   ============================================================ */
+
+@media (min-width: 834px) and (max-width: 1210px) {
+  /* Ajoutez ici vos ajustements tablette, ex : */
+  /* .offre__header { ... } */
+  /* .offre__checklist-wrap { ... } */
+  /* .offre__price-block { ... } */
+  /* .offre__photo--main, .offre__photo--secondary { ... } */
+}
+
+/* ============================================================
+   MOBILE (base) — masquée par défaut, activée sous 834px
+   ============================================================ */
 
 .offre-m {
   display: none;
@@ -416,8 +434,9 @@
   display: none;
 }
 
-/* ===== Bascule — .offre-m ne s'affiche qu'en dessous de 834px,
-   .offre__desktop couvre tout le reste (tablette incluse) sans override ===== */
+/* ============================================================
+   BASCULE — .offre-m ne s'affiche qu'en dessous de 834px
+   ============================================================ */
 
 @media (max-width: 833px) {
   .offre__desktop {
