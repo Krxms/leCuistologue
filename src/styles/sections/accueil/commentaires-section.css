@@ -1,0 +1,136 @@
+.commentaires {
+  position: relative;
+  padding: 10rem 2rem 10rem;
+  background-color: var(--color-cream);
+  z-index: 1;
+}
+
+.commentaires__header {
+  position: relative;
+  max-width: 80rem;
+  margin-inline: auto;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.commentaires__arrow {
+  position: absolute;
+  left: -18%;
+  top: -235%;
+  width: 14%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  transform: scaleX(-1);
+}
+
+.commentaires__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.75rem);
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+  margin: 0;
+  gap: 1.5rem;
+}
+
+.commentaires__title-accent {
+  position: relative;
+  display: inline-block;
+  color: #bc843c;
+  margin-inline: 0.5rem;
+}
+
+.commentaires__underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.commentaires__grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+.commentaires__card {
+  background-color: #fff;
+  border: 1px solid #f8e0cf;
+  border-radius: 10px;
+  box-shadow: -3px 4px 7.3px rgba(0, 0, 0, 0.07);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.commentaires__stars {
+  display: flex;
+  gap: 4px;
+}
+
+.commentaires__stars img {
+  width: 20px;
+  height: 20px;
+}
+
+.commentaires__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.commentaires__meta {
+  padding-top: 1rem;
+  border-top: 1px solid #eef2eb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.commentaires__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-ink);
+}
+
+.commentaires__role {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: #5e7058;
+}
+
+@media (min-width: 768px) and (max-width: 1210px) {
+  .commentaires__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .commentaires {
+    padding: 4rem 2.3rem;
+  }
+
+  .commentaires__arrow {
+      position: absolute;
+      left: -15%;
+      top: -95%;
+      width: 18%;
+      z-index: 1;
+  }
+
+  .commentaires__grid {
+    grid-template-columns: 1fr;
+  }
+}
