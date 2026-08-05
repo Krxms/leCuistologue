@@ -55,6 +55,7 @@
     height: 46px;
     padding-inline: 1.25rem;
     font-size: 0.95rem;
+      width: 100%;
   }
 
   .hero__background {
@@ -106,7 +107,7 @@
 
 .hero__description {
   margin-top: 1.5rem;
-  width: 30ch;
+  width: 33ch;
   font-family: var(--font-body);
   font-size: clamp(1.1rem, 1.4vw, 1.4375rem);
   line-height: 1.45;
@@ -116,6 +117,7 @@
 .hero__actions {
   margin-top: 2.5rem;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -124,11 +126,10 @@
   align-items: center;
   justify-content: center;
   height: 46px;
-  width: max-content;
-  padding-inline: 1.75rem;
+  padding-inline: 2.5rem;
   border-radius: 4px;
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
   white-space: nowrap;
 }

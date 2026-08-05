@@ -1,0 +1,19 @@
+<svg width="119" height="34" viewBox="0 0 119 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_g_1330_4466)">
+<ellipse cx="10.8065" cy="20.4027" rx="5.40627" ry="5.40513" transform="rotate(-5.6362 10.8065 20.4027)" fill="#EDB367" fill-opacity="0.8"/>
+<ellipse cx="43.1741" cy="21.688" rx="6.67834" ry="6.67692" transform="rotate(-5.6362 43.1741 21.688)" fill="#EDB367" fill-opacity="0.8"/>
+<ellipse cx="75.7435" cy="12.0786" rx="6.67834" ry="6.67692" transform="rotate(-5.6362 75.7435 12.0786)" fill="#EDB367" fill-opacity="0.8"/>
+<ellipse cx="107.86" cy="10.8246" rx="5.40627" ry="5.40513" transform="rotate(-5.6362 107.86 10.8246)" fill="#EDB367" fill-opacity="0.8"/>
+</g>
+<defs>
+<filter id="filter0_g_1330_4466" x="-9.77516e-05" y="0.00039053" width="118.667" height="33.7648" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.027322405949234962 0.027322405949234962" numOctaves="3" seed="3141" />
+<feDisplacementMap in="shape" scale="10.800000190734863" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_1330_4466">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+</defs>
+</svg>

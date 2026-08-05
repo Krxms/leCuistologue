@@ -1,39 +1,39 @@
 ---
+import "../../../styles/sections/accueil/valeurs-section.css";
+
+import bgBanner from "../../../assets/accueil/valeurs/bandeauValeurs.svg";
+import card1 from "../../../assets/accueil/valeurs/card-1.svg";
+import card2 from "../../../assets/accueil/valeurs/card-2.svg";
+import card3 from "../../../assets/accueil/valeurs/card-3.svg";
+import card4 from "../../../assets/accueil/valeurs/card-4.svg";
+
 const valeurs = [
-  {
-    titre: "Une cuisine artisanale",
-    texte: "Le savoir-faire d'un professionnel, directement dans votre cuisine.",
-  },
-  {
-    titre: "Pour votre quotidien",
-    texte: "Chaque intervention s'adapte à vos habitudes et à l'organisation de votre foyer.",
-  },
-  {
-    titre: "Agriculture paysanne",
-    texte: "Des produits de saison, choisis autant que possible auprès des producteurs engagés du territoire.",
-  },
-  {
-    titre: "Le goût du lien",
-    texte: "Le plaisir de cuisiner des repas qui nourrissent aussi les échanges.",
-  },
+  { titre: "Une cuisine artisanale", texte: "Le savoir-faire d'un professionnel, directement dans votre cuisine.", bg: card1.src, ratio: "384 / 232", flip: false },
+  { titre: "Pour votre quotidien", texte: "Chaque intervention s'adapte à vos habitudes et à l'organisation de votre foyer.", bg: card2.src, ratio: "382 / 232", flip: true },
+  { titre: "Agriculture paysanne", texte: "Des produits de saison, choisis autant que possible auprès des producteurs engagés du territoire.", bg: card3.src, ratio: "391 / 232", flip: false },
+  { titre: "Le goût du lien", texte: "Le plaisir de cuisiner des repas qui nourrissent aussi les échanges.", bg: card4.src, ratio: "415 / 232", flip: true },
 ];
 ---
 
-<section class="bg-sage">
-  <div class="mx-auto max-w-7xl px-6 py-16">
-    <h2 class="reveal text-center font-display text-2xl font-semibold text-forest md:text-3xl">
-      Une cuisine <span class="font-accent text-forest-light">qui a du sens</span>
+<section class="valeurs">
+  <img src={bgBanner.src} alt="" class="valeurs__bg" aria-hidden="true" />
+
+  <div class="valeurs__content">
+    <h2 class="valeurs__title">
+      Une cuisine <span class="valeurs__title-accent">qui a du sens</span>
     </h2>
 
-    <div class="mt-12 grid gap-6 md:grid-cols-4">
+    <div class="valeurs__grid">
       {
-        valeurs.map((valeur, i) => (
+        valeurs.map((valeur) => (
           <div
-            class="reveal rounded-[2rem] bg-cream/90 p-6 text-center shadow-sm"
-            style={`transition-delay:${i * 90}ms`}
+            class="valeurs__card"
+            style={`--card-bg:url(${valeur.bg}); aspect-ratio:${valeur.ratio};`}
           >
-            <p class="font-display font-semibold text-forest">{valeur.titre}</p>
-            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{valeur.texte}</p>
+            <div class:list={["valeurs__card-inner", { "valeurs__card-inner--flip": valeur.flip }]}>
+              <p class="valeurs__card-title">{valeur.titre}</p>
+              <p class="valeurs__card-text">{valeur.texte}</p>
+            </div>
           </div>
         ))
       }
