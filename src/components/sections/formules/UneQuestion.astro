@@ -9,9 +9,24 @@ import photo from "../../../assets/accueil/service/serviceBigPics.png";
 ---
 
 <section class="une-question">
+  <svg class="une-question__shape" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="une-question-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fbd9db" />
+        <stop offset="100%" stop-color="#f8c9d4" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M 0,8 Q 50,2 100,0 L 100,100 L 0,100 Z"
+      fill="url(#une-question-gradient)"
+    />
+  </svg>
+
   <div class="une-question__content">
-    <img src={iconRotate.src} alt="" class="une-question__icon" aria-hidden="true" />
-    <h2 class="une-question__title">Une question ?</h2>
+    <div class="une-question__title-row">
+  <h2 class="une-question__title">Une question ?</h2>
+  <img src={iconRotate.src} alt="" class="une-question__icon" aria-hidden="true" />
+</div>
     <p class="une-question__text">
       Vous pouvez aussi m'expliquer directement votre besoin et nous travaillons ensemble à une offre qui vous ressemble.
     </p>

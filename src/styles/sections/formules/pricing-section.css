@@ -5,7 +5,7 @@
   font-size: clamp(1.4rem, 2.4vw, 2.75rem);
   line-height: 1.4;
   color: #2c2c2c;
-  margin-top: -13rem;
+  margin-top: -12rem;
   padding: 2.5rem 1.5rem 0;
 }
 
@@ -14,7 +14,7 @@
   justify-content: center;
   align-items: stretch;
   gap: 2rem;
-  padding: 3.5rem 3.3% 4rem;
+  padding: 12rem 3.3% 4rem;
   flex-wrap: wrap;
 }
 
@@ -245,15 +245,21 @@
 }
 
 @media (max-width: 767px) {
-  .pricing {
+   .pricing {
     flex-direction: column;
     align-items: center;
-    padding: 2.5rem 1.5rem;
     gap: 2.5rem;
+    padding: 6rem 3.3% 4rem;
   }
+  
+    .pricing-title {
+  margin-top: -3rem;
+  padding: 2.5rem 1.5rem 0;
+}
 
   .pricing-card {
     width: 100%;
     max-width: 400px;
   }
 }
+

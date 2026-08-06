@@ -181,10 +181,12 @@
   .petits-plus__grid {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 
   .petits-plus-card {
     width: 100%;
     max-width: 400px;
+    margin-inline: auto;
   }
 }
