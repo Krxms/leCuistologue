@@ -1,0 +1,23 @@
+---
+import "../../../styles/sections/formules/une-question.css";
+import { Image } from "astro:assets";
+
+import iconRotate from "../../../assets/formules/question/icon-rotate.svg";
+import arrow from "../../../assets/formules/question/arrow.svg";
+// Réutilise la même photo que la section Offre de l'accueil
+import photo from "../../../assets/accueil/service/serviceBigPics.png";
+---
+
+<section class="une-question">
+  <div class="une-question__content">
+    <img src={iconRotate.src} alt="" class="une-question__icon" aria-hidden="true" />
+    <h2 class="une-question__title">Une question ?</h2>
+    <p class="une-question__text">
+      Vous pouvez aussi m'expliquer directement votre besoin et nous travaillons ensemble à une offre qui vous ressemble.
+    </p>
+    <img src={arrow.src} alt="" class="une-question__arrow" aria-hidden="true" />
+    <a href="/contact" class="une-question__cta">Me contacter</a>
+  </div>
+
+  <Image src={photo} alt="Plats préparés par Le Cuistologue" class="une-question__photo" />
+</section>

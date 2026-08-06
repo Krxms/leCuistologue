@@ -1,0 +1,190 @@
+/* ===== Groupe — réglages communs à l'ensemble des 3 cartes ===== */
+
+.petits-plus {
+  padding: 2.5rem 3.3% 12rem;
+}
+
+.petits-plus__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 3.2vw, 3.4375rem);
+  color: #2c2c28;
+  margin: 0 0 8.5rem;
+  transform: rotate(-5deg);
+}
+
+.petits-plus__title-accent {
+  color: #655f6c;
+}
+
+.petits-plus__grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+/* ===== Carte — base partagée (forme, recadrage du fond) ===== */
+
+.petits-plus-card {
+  position: relative;
+  width: 29.6%;
+  min-width: 304px;
+  max-width: 520px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.petits-plus-card__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transform: scale(1);
+}
+
+/* Chaque carte gère sa propre taille ici, indépendamment des deux autres */
+.petits-plus-card--course {
+  aspect-ratio: 600 / 402;
+  transform: scale(1.2);
+}
+
+.petits-plus-card--popote {
+  aspect-ratio: 600 / 402;
+  transform: scale(1.2);
+}
+
+.petits-plus-card--gourmande {
+  aspect-ratio: 600 / 402;
+  transform: scale(1.1);
+}
+
+/* ===== Contenu — base partagée (empilement au-dessus du fond) ===== */
+
+.petits-plus-content {
+  position: absolute;
+  z-index: 1;
+  transform: rotate(-2deg);
+}
+
+.petits-plus-content__title {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+.petits-plus-content__price {
+  margin: 0rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+
+.petits-plus-content__note {
+  margin-left: 0.6rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.6em;
+}
+
+.petits-plus-content__description {
+  margin-top: 0.8rem;
+  font-family: var(--font-body);
+  line-height: 1.3;
+  color: var(--color-ink-soft);
+  width: 90%;
+}
+
+/* ===== Contenu "Courses" — position et tailles propres à cette carte.
+   Les % restent proportionnels à SA carte (donc "fixes" dans sa propre
+   configuration, sans jamais avoir besoin de règle spécifique au
+   responsive) ; clamp() ajuste uniquement la taille du texte pour qu'il
+   tienne, sans jamais déplacer sa position. ===== */
+
+.petits-plus-content--course {
+  left: 7.6%;
+  top: 32%;
+  width: 81%;
+}
+
+.petits-plus-content--course .petits-plus-content__title {
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+}
+
+.petits-plus-content--course .petits-plus-content__price {
+  font-size: clamp(0.85rem, 1.15vw, 1.3rem);
+}
+
+.petits-plus-content--course .petits-plus-content__description {
+  font-size: clamp(0.75rem, 0.9vw, 1rem);
+}
+
+/* ===== Contenu "Popotes à emporter" — indépendant du reste ===== */
+
+.petits-plus-content--popote {
+  left: 15%;
+  top: 32%;
+  width: 81%;
+  transform: rotate(2deg) ;
+}
+
+.petits-plus-content--popote .petits-plus-content__title {
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+}
+
+.petits-plus-content--popote .petits-plus-content__price {
+  font-size: clamp(0.85rem, 1.15vw, 1.3rem);
+}
+
+.petits-plus-content--popote .petits-plus-content__description {
+  font-size: clamp(0.75rem, 0.9vw, 1rem);
+}
+
+/* ===== Contenu "Réserve gourmande" — indépendant du reste ===== */
+
+.petits-plus-content--gourmande {
+  left: 11.5%;
+  top: 34%;
+  width: 75%;
+}
+
+.petits-plus-content--gourmande .petits-plus-content__title {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+}
+
+.petits-plus-content--gourmande .petits-plus-content__price {
+  font-size: clamp(0.85rem, 1.15vw, 1.3rem);
+}
+
+.petits-plus-content--gourmande .petits-plus-content__description {
+  font-size: clamp(0.75rem, 01vw, 1.1rem);
+}
+
+/* ===== Responsive — uniquement le groupe (empilement en mobile) ===== */
+
+@media (max-width: 1210px) {
+  .petits-plus-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 767px) {
+  .petits-plus {
+    padding: 3rem 1.5rem;
+  }
+
+  .petits-plus__grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .petits-plus-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}

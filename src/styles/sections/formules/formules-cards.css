@@ -1,0 +1,179 @@
+.formules-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2.24%;
+  padding: 5.15vw 3.3% 6rem;
+  flex-wrap: wrap;
+}
+
+.formule-card {
+  position: relative;
+  width: 29.6%;
+  min-width: 320px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: var(--color-sage-light, #d9e0ce); /* teinte de repli tant que le fond PNG n'est pas branché */
+}
+
+.formule-card__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.formule-card__content {
+  position: relative;
+  z-index: 1;
+  padding: 2.9% 2.9% 2.5%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.formule-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.formule-card__meta {
+  margin-top: 0.9rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2c2c2c;
+}
+
+.formule-card__description {
+  margin-top: 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+
+.formule-card__price-box {
+  margin-top: 1.5rem;
+  background-color: #fbf8f7;
+  border-radius: 20px;
+  padding: 1.3rem 1.5rem;
+  text-align: center;
+}
+
+.formule-card__price {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.875rem;
+  color: #bc843c;
+}
+
+.formule-card__price-suffix {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--color-ink-soft);
+  margin-left: 0.5rem;
+}
+
+.formule-card__credit {
+  margin: 0.9rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: #005e1f;
+}
+
+.formule-card__credit img {
+  width: 24px;
+  height: 24px;
+}
+
+.formule-card__badges {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.formule-card__badge {
+  background-color: #e7e9ea;
+  border: 1px solid rgba(37, 61, 74, 0.5);
+  border-radius: 3px;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #4b5e45;
+}
+
+.formule-card__features {
+  list-style: none;
+  margin: 1.7rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  flex-grow: 1;
+}
+
+.formule-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.formule-card__features img {
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.formule-card__features span {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: var(--color-ink-soft);
+}
+
+.formule-card__cta {
+  display: block;
+  margin-top: 2rem;
+  padding-block: 1rem;
+  text-align: center;
+  border-radius: 6px;
+  background-color: var(--color-ink-soft);
+  color: #fdfbfa;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 1210px) {
+  .formule-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 767px) {
+  .formules-cards {
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .formule-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}

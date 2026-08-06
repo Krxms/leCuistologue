@@ -279,9 +279,9 @@
 .offre-m__bg {
   position: absolute;
   left: 50%;
-  top: 0;
+  top: 0%;
   width: 100vw;
-  height: 107%;
+  height: 100%;
   transform: translateX(-50%);
   object-fit: cover;
   z-index: 0;
@@ -342,7 +342,7 @@
   margin: 2rem auto 0;
   width: 85%;
   background-color: var(--color-cream);
-  border-radius: 320% 210% 359% 300% / 130% 250% 218% 120%;
+  border-radius: 20% 30% 40% 30% / 30% 50% 40% 30%;
 }
 
 .offre-m__checklist {
@@ -429,11 +429,13 @@
 .offre-m__cta {
   position: relative;
   z-index: 1;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 85%;
   max-width: 410px;
+  height: 46px;
   margin: 2.5rem auto 0;
-  padding-block: 1rem;
   text-align: center;
   border-radius: 6px;
   background-color: var(--color-ink-soft);
@@ -460,5 +462,6 @@
   .offre-m {
     display: block;
     position: relative;
+    padding-bottom: 10%;
   }
 }

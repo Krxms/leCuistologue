@@ -3,34 +3,41 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!navbar) return;
 
   let lastScrollY = window.scrollY;
-  let ticking = false;
+  const SEUIL = 8; // ignore les micro-variations (tactile/trackpad)
 
-  function updateNavbar() {
-    const currentScrollY = window.scrollY;
+  function shrink() {
+    navbar.classList.add("navbar--scrolling");
+  }
 
-    if (currentScrollY <= 10) {
-      // Tout en haut de la page : toujours en taille normale
-      navbar.classList.remove("navbar--scrolling");
-    } else if (currentScrollY > lastScrollY) {
-      // Défilement vers le bas : rétrécie
-      navbar.classList.add("navbar--scrolling");
-    } else {
-      // Défilement vers le haut : reprend sa taille normale
-      navbar.classList.remove("navbar--scrolling");
-    }
-
-    lastScrollY = currentScrollY;
-    ticking = false;
+  function expand() {
+    navbar.classList.remove("navbar--scrolling");
   }
 
   window.addEventListener(
     "scroll",
     () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateNavbar);
-        ticking = true;
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      if (currentScrollY <= 10) {
+        expand();
+      } else if (delta > SEUIL) {
+        shrink();
+        lastScrollY = currentScrollY;
+      } else if (delta < -SEUIL) {
+        expand();
+        lastScrollY = currentScrollY;
       }
+      // Si le déplacement est inférieur au seuil, ou si le scroll s'arrête :
+      // on ne fait rien, la navbar garde son état actuel.
     },
     { passive: true }
   );
+    const lienAccueil = document.querySelector('.navbar__link[data-href="/"]');
+  if (lienAccueil && window.location.pathname === "/") {
+    lienAccueil.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });

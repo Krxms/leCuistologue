@@ -163,16 +163,17 @@
 
 @media (max-width: 767px) {
   .howto {
-    padding: 3.5rem 1.5rem 4rem;
+    padding: 2.5rem 1.5rem 6.5rem;
   }
 
   .howto__subtitle {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  margin-bottom: 5rem;
 }
 
   .howto__steps {
     flex-direction: column;
-    gap: 3rem;
+    gap: 4rem;
   }
 
   .howto__step {

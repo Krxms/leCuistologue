@@ -1,0 +1,30 @@
+---
+import "../../../styles/sections/formules/formules-header.css";
+import { Image } from "astro:assets";
+
+import bg from "../../../assets/formules/header/bg.svg";
+import broccoli from "../../../assets/formules/header/brocoli.svg";
+import mushroom from "../../../assets/formules/header/mushroom.svg";
+import chicken from "../../../assets/formules/header/chicken.svg";
+import onion from "../../../assets/formules/header/onion.svg";
+import arrowConnector from "../../../assets/formules/header/arrow-connector.svg";
+---
+
+<section class="formules-header">
+  <img src={bg.src} alt="" class="formules-header__bg" aria-hidden="true" />
+
+  <Image src={broccoli} alt="" class="formules-header__deco formules-header__deco--broccoli" aria-hidden="true" />
+  <Image src={mushroom} alt="" class="formules-header__deco formules-header__deco--mushroom" aria-hidden="true" />
+  <Image src={chicken} alt="" class="formules-header__deco formules-header__deco--chicken" aria-hidden="true" />
+  <Image src={onion} alt="" class="formules-header__deco formules-header__deco--onion" aria-hidden="true" />
+
+  <h1 class="formules-header__title">
+    <span class="formules-header__title-line">
+      Des <span class="formules-header__title-accent">formules</span>
+    </span>
+    <span class="formules-header__title-line">
+      Adaptées à chaque <span class="formules-header__title-accent">besoin</span>
+    </span>
+  </h1>
+  <img src={arrowConnector.src} alt="" class="formules-header__arrow" aria-hidden="true" />
+</section>

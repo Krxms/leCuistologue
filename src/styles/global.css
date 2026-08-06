@@ -59,7 +59,7 @@ body {
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-}*/
+}
 
 /* Zone "photo" en attente des vrais visuels du client */
 .photo-placeholder {

@@ -2,13 +2,13 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  height: var(--header-height);
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-inline: 74px;
   background-color: #FBF8F7;
-  box-shadow: 0px 4px 11.1px rgba(0, 0, 0, 0.055);
+  box-shadow: 0px 4px 11.1px rgba(0, 0, 0, 0.25);
   transition: height 0.45s ease;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .navbar__logo {
-  height: 89px;
+  height: 48px;
   width: auto;
   transition: height 0.45s ease;
 }
@@ -28,22 +28,36 @@
   display: flex;
   align-items: center;
   gap: 1.1rem;
+  max-width: 80%;
 }
 
 .navbar__link {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: var(--color-ink);
   white-space: nowrap;
   padding-bottom: 0.3rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.navbar__link:first-child {
+.navbar__link:hover {
+  color: #a0780a;
+}
+
+.navbar__link[aria-current="page"],
+.navbar__link.is-active {
+  color: #936C00;
+  font-weight: 600;
+  /*border-bottom-color: #936C00;*/
+}
+
+/*.navbar__link:first-child {
   color: #936C00;
   font-weight: 600;
   border-bottom: 1px solid #936C00;
-}
+}*/
 
 .navbar__cta {
   display: inline-flex;
@@ -52,20 +66,21 @@
   background-color: #EDB367;
   color: var(--color-ink-soft);
   border-radius: 6px;
-  padding: 0.6rem 1.5rem;
-  font-family: "Josefin Sans", sans-serif;
+  padding: 0rem 1.5rem;
+  height: 36px;
+  font-family: "Inter";
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .navbar--scrolling {
-  height: 64px;
+  height: 50px;
 }
 
 .navbar--scrolling .navbar__logo {
-  height: 52px;
+  height: 36px;
 }
 
 /* Menu ouvert : la navbar reste figée à sa taille normale, quel que soit

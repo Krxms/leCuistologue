@@ -135,8 +135,8 @@
 .presentation__photo-decor--poivrons {
   width: 20.6%;
   height: auto;
-  left: 18%;
-  top: 105%;
+  left: 22%;
+  top: 130%;
 }
 
 .presentation__courgette {
@@ -307,23 +307,24 @@
   }
 
   .presentation__photo { 
-    top: 20%;
+    margin-top: 10%;
   }
 
   .presentation__courgette {
     display: block;
     position: absolute;
     left: auto;
-    right: -10%;
-    top: -5px;
-    width: 14vw;
+    right: 0%;
+    top: -55px;
+    width: 13vw;
     max-width: 68px;
+    transform: rotate(20deg);
   }
 
   .presentation__decor--brocoli {
     display: block;
     left: 8%;
-    top: -28px;
+    top: -60px;
     width: 20vw;
     max-width: 78px;
   }
@@ -342,7 +343,7 @@
     display: block;
     left: 25%;
     top: auto;
-    bottom: -55%;
+    bottom: -40%;
     transform: translateX(-50%);
     width: 26%;
     z-index: 5;

@@ -154,7 +154,7 @@
   .valeurs {
     margin-block: 6.5rem;
     padding: 0rem 1.5rem;
-    margin-top: 8rem;
+    margin-top: 12rem;
   }
 
   .valeurs__bg {
@@ -162,7 +162,7 @@
     bottom: -1rem;
     height: calc(100% + 2rem);
     object-fit: cover;
-    transform: translateX(-50%) scale(1.7);
+    transform: translateX(-50%) scale(1.45);
   }
 
   .valeurs__grid {
@@ -175,8 +175,13 @@
     width: 90%;
     max-width: 340px;
   }
+
 .valeurs__card-text {
   font-size: clamp(0.875rem, 1vw, 1rem);
+  }
+
+  .valeurs__card-title {
+    font-size: 1.3rem;
   }
 }
 }

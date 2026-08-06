@@ -62,7 +62,7 @@
 .commentaires__card {
   background-color: #fff;
   border: 1px solid #f8e0cf;
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: -3px 4px 7.3px rgba(0, 0, 0, 0.07);
   padding: 2rem;
   display: flex;
@@ -123,11 +123,7 @@
   }
 
   .commentaires__arrow {
-      position: absolute;
-      left: -15%;
-      top: -95%;
-      width: 18%;
-      z-index: 1;
+      display: none;
   }
 
   .commentaires__grid {

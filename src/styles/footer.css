@@ -118,7 +118,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .footer {
     padding-inline: 1.5rem;
   }
@@ -130,5 +130,11 @@
   .footer__bottom {
     flex-direction: column;
     text-align: center;
+  }
+
+  .footer__col {
+    margin-top: 0rem;
+    display: flex;
+    flex-direction: column;
   }
 }

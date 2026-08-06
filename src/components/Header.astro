@@ -9,6 +9,8 @@ const navLinks = [
   { label: "Avance immédiate", href: "/avance-immediate" },
   { label: "FAQ", href: "/faq" },
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="navbar" id="site-navbar">
@@ -17,24 +19,21 @@ const navLinks = [
   </div>
 
   <nav class="navbar__links">
-    {
-      navLinks.map((link) => (
-        <a href={link.href} class="navbar__link">
+    {navLinks.map((link) => {
+      const isActive = link.href === "/"
+        ? currentPath === "/"
+        : currentPath === link.href.split("#")[0] && link.href.includes("#") === false;
+      return (
+        <a href={link.href} class="navbar__link" data-href={link.href} aria-current={isActive ? "page" : undefined}>
           {link.label}
         </a>
-      ))
-    }
+      );
+    })}
   </nav>
 
   <a href="/contact" class="navbar__cta navbar__cta--bar">Prendre contact</a>
 
-  <button
-    class="navbar__burger"
-    id="navbar-burger"
-    aria-expanded="false"
-    aria-controls="navbar-mobile-menu"
-    aria-label="Ouvrir le menu"
-  >
+  <button class="navbar__burger" id="navbar-burger" aria-expanded="false" aria-controls="navbar-mobile-menu" aria-label="Ouvrir le menu">
     <span></span>
     <span></span>
     <span></span>
@@ -42,13 +41,11 @@ const navLinks = [
 
   <div class="navbar__mobile-menu" id="navbar-mobile-menu">
     <nav class="navbar__mobile-links">
-      {
-        navLinks.map((link) => (
-          <a href={link.href} class="navbar__mobile-link">
-            {link.label}
-          </a>
-        ))
-      }
+      {navLinks.map((link) => (
+        <a href={link.href} class="navbar__mobile-link" data-href={link.href}>
+          {link.label}
+        </a>
+      ))}
     </nav>
     <a href="/contact" class="navbar__cta navbar__cta--menu">Prendre contact</a>
   </div>
