@@ -1,31 +1,40 @@
 ---
 import "../../../styles/sections/a-propos/a-propos-content.css";
+import photo from "../../../assets/a-propos/a-propos-content/Bruno.png";
+import fondRecap from "../../../assets/a-propos/a-propos-content/fond-recap.png";
+import { Image } from "astro:assets";
 ---
 
 <section class="a-propos-content">
 
-  <div class="a-propos-content__identite">
-    <p class="a-propos-content__identite-item">
-      <span class="a-propos-content__identite-label">Nom</span> Bruno Pereira Vaz
-    </p>
-    <p class="a-propos-content__identite-item">
-      <span class="a-propos-content__identite-label">Métier</span> Cuisinier à domicile
-    </p>
-    <p class="a-propos-content__identite-item">
-      <span class="a-propos-content__identite-label">Mission</span> Défendre le bien-manger, à la maison.
-    </p>
-  </div>
+  <div class="a-propos-content__intro">
+    <Image src={photo} alt="Bruno Pereira Vaz, Le Cuistologue" class="a-propos-content__photo" />
 
-  <div class="a-propos-content__block">
-    <h2 class="a-propos-content__title">
-      Mon <span class="a-propos-content__title-accent">parcours</span>
-    </h2>
-    <ul class="a-propos-content__list">
-      <li>Master en sciences sociales – Mention bien – La Sorbonne Nouvelle Paris III</li>
-      <li>CAP Cuisine — Mention Très Bien – Chambre des Métiers et de l'Artisanat</li>
-      <li>Plusieurs années d'engagement au sein du réseau de l'agriculture paysanne</li>
-      <li>Plusieurs années en restauration traditionnelle</li>
-    </ul>
+    <div class="a-propos-content__recap">
+      <img src={fondRecap.src} alt="" class="a-propos-content__recap-bg" aria-hidden="true" />
+      <div class="a-propos-content__recap-text">
+        <h2 class="a-propos-content__recap-title">
+          En <span class="a-propos-content__recap-title-accent">Bref</span>
+        </h2>
+        <p class="a-propos-content__recap-item">
+          <strong>Nom :</strong> Bruno Pereira Vaz
+        </p>
+        <p class="a-propos-content__recap-item">
+          <strong>Métier :</strong> Cuisinier à domicile
+        </p>
+        <p class="a-propos-content__recap-item">
+          <strong>Mission :</strong> Défendre le bien-manger, à la maison.
+        </p>
+
+        <h3 class="a-propos-content__recap-subtitle">Son parcours</h3>
+        <ul class="a-propos-content__recap-list">
+          <li>Master en sciences sociales – Mention bien – La Sorbonne Nouvelle Paris III</li>
+          <li>CAP Cuisine — Mention Très Bien – Chambre des Métiers et de l'Artisanat</li>
+          <li>Plusieurs années d'engagement au sein du réseau de l'agriculture paysanne</li>
+          <li>Plusieurs années en restauration traditionnelle</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="a-propos-content__block">
@@ -50,7 +59,7 @@ import "../../../styles/sections/a-propos/a-propos-content.css";
 
   <div class="a-propos-content__block a-propos-content__block--closing">
     <h2 class="a-propos-content__title">
-      Dans la <span class="a-propos-content__title-accent">vraie vie</span>
+      Et dans la <span class="a-propos-content__title-accent">vraie vie</span> ?
     </h2>
     <div class="a-propos-content__text">
       <p>

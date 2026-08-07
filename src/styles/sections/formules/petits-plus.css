@@ -176,6 +176,7 @@
 @media (max-width: 767px) {
   .petits-plus {
     padding: 3rem 1.5rem;
+
   }
 
   .petits-plus__grid {
@@ -189,4 +190,19 @@
     max-width: 400px;
     margin-inline: auto;
   }
+
+  .petits-plus__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 3.2vw, 3.4375rem);
+  color: #2c2c28;
+  margin: 0 0 5rem;
+  transform: rotate(-5deg);
+}
+
+.petits-plus-content--course {
+  left: 7.6%;
+  top: 30%;
+  width: 81%;
+}
 }

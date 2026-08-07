@@ -163,6 +163,7 @@
     height: calc(100% + 2rem);
     object-fit: cover;
     transform: translateX(-50%) scale(1.45);
+    opacity: 1;
   }
 
   .valeurs__grid {

@@ -1,42 +1,106 @@
 .a-propos-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-  max-width: 65ch;
+  max-width: 1100px;
   margin-inline: auto;
-  padding: 4rem 3.3% 6rem;
+  padding: 0rem 3.3% 5rem;
 }
 
-/* Bloc identité — mis en avant, cohérent avec le style "price-box" déjà
-   utilisé sur les cartes de Formules (fond légèrement teinté, coins ronds) */
-.a-propos-content__identite {
-  background-color: #f8f4ef;
-  border-radius: 16px;
-  padding: 1.75rem 2rem;
+/* ===== Intro : photo + récap côte à côte, en flex — s'empile proprement
+   en dessous d'un certain seuil, sans dépendre d'un float fragile ===== */
+
+.a-propos-content__intro {
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  align-items:center;
+  gap: 2.5rem;
 }
 
-.a-propos-content__identite-item {
-  margin: 0;
+.a-propos-content__photo {
+  flex: 0 0 34%;
+  max-width: 428px;
+  /*width: 800%;
+  aspect-ratio: 1 / 1;*/
+  object-fit: cover;
+  margin-top: 5rem;
+}
+
+.a-propos-content__recap {
+  position: relative;
+  flex: 1 1 auto;
+  aspect-ratio: 2917 / 2561;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.a-propos-content__recap-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  /*height: 100%;
+  padding: 2rem;*/
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+.a-propos-content__recap-text {
+  position: relative;
+  z-index: 1;
+  padding: 0% 15.2%;
+  margin-top: 3.7rem;
+}
+
+.a-propos-content__recap-title {
+  margin: 0rem 0 2.2rem;
+  padding: 0 0 0 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  color: #2c2c28;
+  transform: rotate(-10deg);
+}
+
+.a-propos-content__recap-title-accent {
+  color: #8a9a5c;
+}
+
+.a-propos-content__recap-item {
+  margin: 0 0 0.4rem;
   font-family: var(--font-body);
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--color-ink);
 }
 
-.a-propos-content__identite-label {
+.a-propos-content__recap-subtitle {
+  margin: 1.3rem 0 0.6rem;
+  font-family: var(--font-display);
   font-weight: 700;
+  font-size: 1.1rem;
   color: var(--color-ink-soft);
 }
+
+.a-propos-content__recap-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.a-propos-content__recap-list li {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+/* ===== Blocs de texte pleine largeur, sous l'intro ===== */
 
 .a-propos-content__block {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  margin-top: 3.5rem;
 }
 
-/* Même logique que pricing-title : gras marqué, un mot en accent coloré */
 .a-propos-content__title {
   margin: 0;
   font-family: var(--font-body);
@@ -48,21 +112,6 @@
 
 .a-propos-content__title-accent {
   color: #c26665;
-}
-
-.a-propos-content__list {
-  margin: 0;
-  padding-left: 1.3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.a-propos-content__list li {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--color-ink);
 }
 
 .a-propos-content__text {
@@ -80,7 +129,7 @@
 }
 
 .a-propos-content__block--closing {
-  border-top: 1px solid rgba(37, 61, 74, 0.1);
+  /*border-top: 1px solid rgba(37, 61, 74, 0.1);*/
   padding-top: 2.5rem;
 }
 
@@ -93,13 +142,37 @@
   color: #c26665;
 }
 
+/* ===== Responsive — un seul seuil, cohérent avec l'audit à venir =====
+   Tablette (768-1023px) : photo réduite mais toujours côte à côte,
+   le récap prend le reste de l'espace. */
+@media (max-width: 1023px) {
+  .a-propos-content__photo {
+    flex: 0 0 40%;
+    max-width: 260px;
+  }
+}
+
+/* Mobile (≤767px) : empilement vertical, photo pleine largeur en premier */
 @media (max-width: 767px) {
   .a-propos-content {
     padding: 3rem 1.5rem 4rem;
-    gap: 2.5rem;
   }
 
-  .a-propos-content__identite {
-    padding: 1.4rem 1.5rem;
+  .a-propos-content__intro {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .a-propos-content__photo {
+    flex: none;
+    max-width: 220px;
+  }
+
+  .a-propos-content__recap {
+    width: 100%;
+  }
+
+  .a-propos-content__block {
+    margin-top: 2.5rem;
   }
 }

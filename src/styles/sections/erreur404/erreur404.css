@@ -10,9 +10,10 @@
 }
 
 .erreur404__visuel {
-  width: 100%;
-  max-width: 360px;
+  width: 900%;
+  max-width: 320px;
   height: auto;
+  transform: rotate(10deg);
 }
 
 .erreur404__title {
@@ -30,4 +31,12 @@
   font-family: var(--font-body);
   font-size: 1.125rem;
   color: var(--color-ink-soft);
+}
+
+@media (max-width: 768px){
+ .erreur404__visuel {
+  width: 60%;
+  max-width: 360px;
+  margin: 10%;
+}
 }
