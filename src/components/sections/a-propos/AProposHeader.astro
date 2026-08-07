@@ -1,0 +1,38 @@
+---
+import "../../../styles/sections/a-propos/a-propos-header.css";
+import { Image } from "astro:assets";
+
+import bg from "../../../assets/a-propos/header/bg.svg";
+import broccoli from "../../../assets/a-propos/header/brocoli.svg";
+import mushroom from "../../../assets/a-propos/header/mushroom.svg";
+import chicken from "../../../assets/a-propos/header/chicken.svg";
+import onion from "../../../assets/a-propos/header/onion.svg";
+import arrowConnector from "../../../assets/a-propos/header/arrow-connector.svg";
+---
+
+<section class="a-propos-header">
+  <img src={bg.src} alt="" class="a-propos-header__bg" aria-hidden="true" />
+
+  <Image src={broccoli} alt="" class="a-propos-header__deco a-propos-header__deco--broccoli" aria-hidden="true" />
+  <Image src={mushroom} alt="" class="a-propos-header__deco a-propos-header__deco--mushroom" aria-hidden="true" />
+  <Image src={chicken} alt="" class="a-propos-header__deco a-propos-header__deco--chicken" aria-hidden="true" />
+  <Image src={onion} alt="" class="a-propos-header__deco a-propos-header__deco--onion" aria-hidden="true" />
+
+<div class="a-propos-header__title-wrap">
+  <h1 class="a-propos-header__title">
+    <span class="a-propos-header__title-line">
+      <span class="a-propos-header__title-base">À</span> <span class="a-propos-header__title-accent">propos</span>
+    </span>
+    <span class="a-propos-header__title-line">
+      <span class="a-propos-header__title-base">du</span> <span class="a-propos-header__title-accent">Cuistologue</span>
+    </span>
+  </h1>
+
+  <img src={arrowConnector.src} alt="" class="a-propos-header__arrow" aria-hidden="true" />
+</div>
+
+<h2 class="about-title">
+  Bénéficiez de 50% de crédit d'impôt<br />
+  avec avance immédiate
+</h2>
+</section>

@@ -1,0 +1,105 @@
+.a-propos-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 65ch;
+  margin-inline: auto;
+  padding: 4rem 3.3% 6rem;
+}
+
+/* Bloc identité — mis en avant, cohérent avec le style "price-box" déjà
+   utilisé sur les cartes de Formules (fond légèrement teinté, coins ronds) */
+.a-propos-content__identite {
+  background-color: #f8f4ef;
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.a-propos-content__identite-item {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--color-ink);
+}
+
+.a-propos-content__identite-label {
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+
+.a-propos-content__block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Même logique que pricing-title : gras marqué, un mot en accent coloré */
+.a-propos-content__title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 2vw, 1.875rem);
+  line-height: 1.3;
+  color: #2c2c2c;
+}
+
+.a-propos-content__title-accent {
+  color: #c26665;
+}
+
+.a-propos-content__list {
+  margin: 0;
+  padding-left: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.a-propos-content__list li {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.a-propos-content__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.a-propos-content__text p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink);
+}
+
+.a-propos-content__block--closing {
+  border-top: 1px solid rgba(37, 61, 74, 0.1);
+  padding-top: 2.5rem;
+}
+
+.a-propos-content__closing-question {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: #c26665;
+}
+
+@media (max-width: 767px) {
+  .a-propos-content {
+    padding: 3rem 1.5rem 4rem;
+    gap: 2.5rem;
+  }
+
+  .a-propos-content__identite {
+    padding: 1.4rem 1.5rem;
+  }
+}

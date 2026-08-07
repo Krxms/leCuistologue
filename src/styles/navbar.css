@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  height: 64px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,7 +34,7 @@
 .navbar__link {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 1.1rem;
   color: var(--color-ink);
   white-space: nowrap;
   padding-bottom: 0.3rem;
@@ -67,10 +67,10 @@
   color: var(--color-ink-soft);
   border-radius: 6px;
   padding: 0rem 1.5rem;
-  height: 36px;
+  height: 46px;
   font-family: "Inter";
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   text-transform: uppercase;
   white-space: nowrap;
 }

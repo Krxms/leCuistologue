@@ -1,0 +1,33 @@
+.erreur404 {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  margin-top: 2%;
+}
+
+.erreur404__visuel {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+}
+
+.erreur404__title {
+  margin-top: 2rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 3.4375rem); /* 55px au max, comme les titres de section */
+  color: var(--color-ink);
+  max-width: 20ch;
+  line-height: 1.2;
+}
+
+.erreur404__text {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--color-ink-soft);
+}
