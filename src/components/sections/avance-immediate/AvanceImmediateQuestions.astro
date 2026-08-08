@@ -1,0 +1,45 @@
+---
+import "../../../styles/sections/avance-immediate/avance-immediate-questions.css";
+import endbg from "../../../assets/avance-immediate/avance-immediate-endbg.png";
+import questionBubble from "../../../assets/avance-immediate/question-bubble.svg";
+---
+
+<section class="avance-questions">
+  <svg class="avance-questions__shape" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="avance-questions-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#D9E5E4" />
+        <stop offset="100%" stop-color="#D9E5E4" />
+      </linearGradient>
+    </defs>
+    <path d="M 0,8 Q 50,2 100,0 L 100,100 L 0,100 Z" fill="url(#avance-questions-gradient)" />
+  </svg>
+
+  <img src={questionBubble.src} alt="" class="avance-questions__bubble" aria-hidden="true" />
+
+  <h2 class="avance-questions__title">Et si j'ai des questions ?</h2>
+
+  <div class="avance-questions__cards">
+    <div class="avance-questions__card">
+      <img src={endbg.src} alt="" class="avance-questions__card-bg" aria-hidden="true" />
+      <div class="avance-questions__card-content">
+        <h3 class="avance-questions__card-title">Votre interlocuteur privilégié</h3>
+        <p class="avance-questions__card-text">
+          En cas de question, Le Cuistologue reste votre interlocuteur privilégié. Un appel, un e-mail — je vous réponds personnellement, sous 24 h.
+        </p>
+        <a href="/contact" class="avance-questions__card-cta">Me contacter</a>
+      </div>
+    </div>
+
+    <div class="avance-questions__card">
+      <img src={endbg.src} alt="" class="avance-questions__card-bg" aria-hidden="true" />
+      <div class="avance-questions__card-content">
+        <h3 class="avance-questions__card-title">La FAQ officielle de l'URSSAF</h3>
+        <p class="avance-questions__card-text">
+          Vous pouvez également consulter la FAQ dédiée sur le site de l'URSSAF — toutes les réponses officielles, à jour des dernières évolutions du dispositif.
+        </p>
+        <a href="https://www.urssaf.fr" target="_blank" rel="noopener noreferrer" class="avance-questions__card-cta">Découvrir</a>
+      </div>
+    </div>
+  </div>
+</section>

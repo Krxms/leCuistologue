@@ -1,0 +1,103 @@
+.avance-questions {
+  position: relative;
+  /*overflow: hidden;*/
+  padding: 5rem 3.3% 6rem;
+  margin-top: 35rem;
+}
+
+.avance-questions__shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.avance-questions__bubble {
+  position: absolute;
+  right: 16%;
+  top: -20%;
+  width: 25%;
+  max-width: 250px;
+}
+
+.avance-questions__title {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 2.9vw, 2.75rem);
+  color: #2c2c28;
+  margin: 0 0 3rem;
+}
+
+.avance-questions__cards {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+
+.avance-questions__card {
+  position: relative;
+  width: 35%;
+  min-width: 320px;
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.avance-questions__card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.avance-questions__card-content {
+  position: relative;
+  z-index: 1;
+  padding: 2.2rem 2rem;
+}
+
+.avance-questions__card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-ink-soft);
+}
+
+.avance-questions__card-text {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.avance-questions__card-cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  .avance-questions {
+    padding: 3rem 1.5rem;
+  }
+
+  .avance-questions__bubble {
+    display: none;
+  }
+
+  .avance-questions__cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}

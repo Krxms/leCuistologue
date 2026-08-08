@@ -1,0 +1,29 @@
+---
+import "../../../styles/sections/avance-immediate/avance-immediate-header.css";
+import { Image } from "astro:assets";
+
+import bg from "../../../assets/avance-immediate/header/bg.svg";
+import broccoli from "../../../assets/avance-immediate/header/brocoli.svg";
+import mushroom from "../../../assets/avance-immediate/header/mushroom.svg";
+import chicken from "../../../assets/avance-immediate/header/chicken.svg";
+import onion from "../../../assets/avance-immediate/header/onion.svg";
+import arrowConnector from "../../../assets/avance-immediate/header/arrow-connector.svg";
+---
+
+<section class="avance-header">
+  <img src={bg.src} alt="" class="avance-header__bg" aria-hidden="true" />
+
+  <Image src={broccoli} alt="" class="avance-header__deco avance-header__deco--broccoli" aria-hidden="true" />
+  <Image src={mushroom} alt="" class="avance-header__deco avance-header__deco--mushroom" aria-hidden="true" />
+  <Image src={chicken} alt="" class="avance-header__deco avance-header__deco--chicken" aria-hidden="true" />
+  <Image src={onion} alt="" class="avance-header__deco avance-header__deco--onion" aria-hidden="true" />
+
+  <h1 class="avance-header__title">
+    <span class="avance-header__title-line avance-header__title-line--accent">L'avance immédiate</span>
+    <span class="avance-header__title-line">
+      <span class="avance-header__title-base">du</span> <span class="avance-header__title-line--accent">Crédit d'impôt</span>
+    </span>
+  </h1>
+
+  <img src={arrowConnector.src} alt="" class="avance-header__arrow" aria-hidden="true" />
+</section>

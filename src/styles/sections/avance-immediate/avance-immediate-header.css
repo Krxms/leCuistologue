@@ -1,0 +1,116 @@
+.avance-header {
+  position: relative;
+  min-height: 35.4vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.avance-header__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 55%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.avance-header__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding-left: 7.3%;
+  padding-bottom: 17%;
+  text-align: left;
+  font-family: var(--font-display);
+  line-height: 1.1;
+  transform: rotate(-2deg);
+}
+
+.avance-header__title-line {
+  display: block;
+}
+
+.avance-header__title-base {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.8rem, 3.2vw, 4.6875rem);
+  color: #2c2c28;
+}
+
+/* Particularité de cette page : pas d'accent contrasté (rose/doré) comme
+   Formules ou À propos — les mots clés restent dans le bleu-ink du site */
+.avance-header__title-line--accent {
+  font-weight: 900;
+  font-size: clamp(2.3rem, 5vw, 4.6875rem);
+  color: var(--color-ink-soft);
+}
+
+.avance-header__arrow {
+  position: absolute;
+  left: 46%;
+  top: 29%;
+  width: 15%;
+  z-index: 2;
+  pointer-events: none;
+  transform: scaleX(1) rotate(-3deg);
+}
+
+.avance-header__deco {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.avance-header__deco--broccoli {
+  left: 46%;
+  top: -10%;
+  width: 8.5%;
+}
+
+.avance-header__deco--mushroom {
+  left: 65%;
+  top: 15%;
+  width: 5.9%;
+}
+
+.avance-header__deco--chicken {
+  left: 80%;
+  top: 0%;
+  width: 13%;
+  transform: rotate(-20deg);
+}
+
+.avance-header__deco--onion {
+  left: 80%;
+  top: 40%;
+  width: 9%;
+}
+
+@media (max-width: 767px) {
+  .avance-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+    padding: 3rem 1.4rem;
+  }
+
+  .avance-header__bg {
+    width: 100%;
+    height: 70%;
+  }
+
+  .avance-header__title {
+    padding-left: 0;
+    margin-top: -6%;
+    text-align: center;
+    transform: rotate(0deg);
+  }
+
+  .avance-header__deco,
+  .avance-header__arrow {
+    display: none;
+  }
+}
