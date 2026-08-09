@@ -13,17 +13,18 @@ import bgPinkMobile from "../../../assets/accueil/service/serviceBGmobile.png";
 import { Image } from "astro:assets";
 
 const colonneGauche = [
-  "Cuisine à domicile - batch-cooking",
+  "Échange préalable sur vos habitudes et vos envies",
+  "Cuisine à domicile",
   "Menus personnalisés",
   "Organisation du réfrigérateur",
   "Remise au propre de la cuisine",
-  "Conseils de conservation",
 ];
 
 const colonneDroite = [
+  "Conseils de conservation",
   "Courses réalisées pour vous",
-  "Organisation d'une routine culinaire",
-  "Réserve gourmande (granola, houmous, compotes ...)",
+  "Organisation d’une routine culinaire",
+  "Réserve gourmande",
   "Popotes à emporter",
 ];
 ---
@@ -35,11 +36,13 @@ const colonneDroite = [
 
     <div class="offre__header">
       <div class="offre__title-row">
-        <h2 class="offre__title">Une cuisine maison qui simplifie vraiment votre quotidien</h2>
+        <h2 class="offre__title">Des solutions culinaires pensées pour vous et avec vous.</h2>
         <img src={titleIcon.src} alt="" class="offre__title-icon" aria-hidden="true" />
       </div>
       <p class="offre__description">
-        Des repas faits maison préparés chez vous, pensés pour votre quotidien, avec des produits de saison et une organisation qui vous simplifie la vie.
+        <b>Le batch cooking, c'est quoi ?</b><br> 
+        Le principe est simple : préparer plusieurs repas à l'avance, en une seule session, pour avoir une cuisine maison prête pour les jours qui suivent.<br><br>
+        Avec Le Cuistologue, pas besoin de passer votre dimanche derrière les fourneaux : je viens cuisiner directement chez vous, selon vos habitudes, vos envies et votre quotidien.
       </p>
       <p class="offre__include-label">Chaque intervention peut inclure :</p>
     </div>

@@ -7,16 +7,12 @@
   padding-inline: 64px;
 }
 
-
-/* Desktop large uniquement (≥1280px) — hauteur pleine écran */
 @media (min-width: 1280px) {
   .hero {
     height: calc(107dvh - var(--header-height));
   }
 }
 
-/* Tablette paysage / petit laptop (1024-1279px) : hauteur naturelle,
-   alignement en haut — corrige le contenu "trop bas" */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .hero {
     min-height: 30rem;
@@ -27,7 +23,6 @@
     align-self: start;
   }
 
-  /* Titre légèrement resserré pour ne plus déborder sur la photo */
   .hero__title {
     font-size: clamp(2rem, 4vw, 3.5rem);
     letter-spacing: -0.01em;
@@ -106,7 +101,7 @@
 
 .hero__description {
   margin-top: 1.5rem;
-  width: 33ch;
+  width: 46ch;
   font-family: var(--font-body);
   font-size: clamp(1.1rem, 1.4vw, 1.4375rem);
   line-height: 1.45;
