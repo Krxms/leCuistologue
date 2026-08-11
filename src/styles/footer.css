@@ -122,6 +122,14 @@
 @media (max-width: 767px) {
   .footer {
     padding-inline: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer__description {
+    font-size: 0.875rem;
   }
 
   .footer__top {
@@ -134,8 +142,17 @@
   }
 
   .footer__col {
-    margin-top: 0rem;
+    margin-top: -1rem;
     display: flex;
     flex-direction: column;
+    gap: 0rem;
   }
+
+  .footer__col-title {
+    margin : 1rem 0 0;
+  }
+
+  .footer__col a {
+  font-size: 0.875rem;
+}
 }

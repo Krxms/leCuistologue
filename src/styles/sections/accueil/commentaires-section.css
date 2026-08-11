@@ -128,4 +128,8 @@
   .commentaires__grid {
     grid-template-columns: 1fr;
   }
+
+  .commentaires__card {
+    padding: 1rem;
+  }
 }

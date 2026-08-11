@@ -116,6 +116,16 @@
     text-align: center;
   }
 
+  .a-propos-cta__text {
+    font-weight: 500;
+  }
+
+  .a-propos-cta__icon {
+    width: 8.8vw;
+    margin-left: 94%;
+    margin-top: -22%;
+  }
+
   .a-propos-cta__title-row {
     justify-content: center;
   }

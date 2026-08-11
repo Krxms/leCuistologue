@@ -154,7 +154,7 @@
   .valeurs {
     margin-block: 6.5rem;
     padding: 0rem 1.5rem;
-    margin-top: 12rem;
+    margin-top: 6rem;
   }
 
   .valeurs__bg {
@@ -182,7 +182,7 @@
   }
 
   .valeurs__card-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 }

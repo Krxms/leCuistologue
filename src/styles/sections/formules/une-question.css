@@ -29,10 +29,11 @@
 }
 
 .une-question__icon {
+  position: absolute;
   width: 5.8vw;
   max-width: 111.7px;
   display: flex;
-  margin-left: -4%;
+  margin-left: 46%;
   margin-top: -15%;
   transform: rotate(45deg);
   flex-shrink: 0;
@@ -109,5 +110,15 @@
   .une-question__arrow,
   .une-question__photo {
     display: none;
+  }
+
+  .une-question__icon {
+    width: 8.8vw;
+    margin-left: 70%;
+    margin-top: -14%;
+  }
+
+  .une-question__text {
+    font-weight: 500;
   }
 }

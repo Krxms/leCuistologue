@@ -200,9 +200,33 @@
   transform: rotate(-5deg);
 }
 
+.petits-plus-content__description {
+  margin-top: 0.3rem;
+}
+
 .petits-plus-content--course {
   left: 7.6%;
   top: 30%;
   width: 81%;
+}
+
+.petits-plus-card--course {
+  margin-left: 1rem;
+}
+
+.petits-plus-card--gourmande {
+  margin-left: -0.5rem;
+}
+
+.petits-plus-content--gourmande .petits-plus-content__title {
+  font-size: clamp(0.9rem, 1.4vw, 0.9rem);
+}
+
+.petits-plus-content--gourmande .petits-plus-content__price {
+  font-size: clamp(0.9rem, 1.4vw, 0.9rem);
+}
+
+.petits-plus-content--gourmande .petits-plus-content__description {
+  font-size: clamp(0.82rem, 1.4vw, 0.9rem);
 }
 }

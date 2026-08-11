@@ -216,7 +216,7 @@
 .avance-content__conditions-intro {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #B25656; 
   margin: 0 0 1rem;
 }
@@ -230,7 +230,7 @@
 
 .avance-content__conditions-list li {
   font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.5;
   color: var(--color-ink);
 }

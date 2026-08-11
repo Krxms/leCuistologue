@@ -461,9 +461,17 @@
     display: none;
   }
 
+  .offre-m__checklist-wrap {
+    border-radius: 6%;
+  }
+
   .offre-m {
     display: block;
     position: relative;
     padding-bottom: 10%;
+  }
+
+  .offre-m__promo-text {
+    padding: 0.8rem 1.2rem;
   }
 }

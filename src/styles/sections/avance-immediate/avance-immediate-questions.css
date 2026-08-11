@@ -96,8 +96,18 @@
     display: none;
   }
 
+  .avance-questions__title {
+    margin-top: 4rem;
+  }
+
   .avance-questions__cards {
     flex-direction: column;
     align-items: center;
+    padding: 1.2rem 1rem;
+    gap: 1rem;
+  }
+
+  .avance-questions__card-title {
+    font-size: 1rem;
   }
 }
