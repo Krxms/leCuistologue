@@ -1,0 +1,95 @@
+---
+import "../../../styles/sections/contact/contact-form.css";
+---
+
+<section class="contact-form-section">
+  <!--
+    ⚠️ Formulaire visuellement complet et fonctionnel côté affichage
+    (validation, bascule du champ téléphone), mais SANS traitement d'envoi
+    réel pour l'instant. Il faudra brancher :
+    - un point d'envoi (Cloudflare Pages Function, ou service tiers type
+      Formspree/Resend) qui transmet le message au cuisinier par mail
+    - l'envoi d'un mail de confirmation automatique au client
+    À traiter dans une prochaine étape, comme évoqué précédemment.
+  -->
+  <form class="contact-form" id="contact-form">
+
+    <div class="contact-form__field">
+      <label for="nom">Nom complet</label>
+      <input type="text" id="nom" name="nom" required autocomplete="name" />
+    </div>
+
+    <div class="contact-form__field">
+      <label for="email">Adresse e-mail</label>
+      <input type="email" id="email" name="email" required autocomplete="email" />
+    </div>
+
+    <fieldset class="contact-form__preference">
+      <legend>Comment préférez-vous que je vous réponde ?</legend>
+      <div class="contact-form__radio-group">
+        <label class="contact-form__radio">
+          <input type="radio" name="preference" value="email" checked />
+          Par e-mail
+        </label>
+        <label class="contact-form__radio">
+          <input type="radio" name="preference" value="telephone" />
+          Par téléphone
+        </label>
+      </div>
+    </fieldset>
+
+    <div class="contact-form__field contact-form__field--telephone" id="champ-telephone" hidden>
+      <label for="telephone">Numéro de téléphone</label>
+      <input type="tel" id="telephone" name="telephone" autocomplete="tel" />
+    </div>
+
+    <div class="contact-form__field">
+      <label for="sujet">Sujet</label>
+      <input type="text" id="sujet" name="sujet" required />
+    </div>
+
+    <div class="contact-form__field">
+      <label for="message">Votre message</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+    </div>
+
+    <button type="submit" class="contact-form__submit">Envoyer le message</button>
+
+    <p class="contact-form__status" id="contact-form-status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<script>
+  const radios = document.querySelectorAll('input[name="preference"]');
+  const champTelephone = document.getElementById("champ-telephone");
+  const inputTelephone = document.getElementById("telephone") as HTMLInputElement;
+
+  function mettreAJourChampTelephone() {
+    const preferenceTelephone = document.querySelector<HTMLInputElement>(
+      'input[name="preference"]:checked'
+    )?.value === "telephone";
+
+    if (champTelephone) {
+      champTelephone.hidden = !preferenceTelephone;
+    }
+    if (inputTelephone) {
+      inputTelephone.required = preferenceTelephone;
+    }
+  }
+
+  radios.forEach((radio) => radio.addEventListener("change", mettreAJourChampTelephone));
+  mettreAJourChampTelephone();
+
+  // Point d'accroche pour le futur envoi réel — actuellement bloque juste
+  // le rechargement de page et affiche un message temporaire.
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const statusEl = document.getElementById("contact-form-status");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (statusEl) {
+      statusEl.textContent =
+        "Le formulaire n'est pas encore relié à un envoi réel — à venir prochainement.";
+    }
+  });
+</script>

@@ -123,4 +123,15 @@
   .faq-cta__photo {
     display: none;
   }
+
+  .faq-cta__icon {
+  width: 11.8vw;
+  max-width: 111.7px;
+  display: flex;
+  margin-left: 95%;
+  margin-top: -23%;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  position: absolute;
+}
 }

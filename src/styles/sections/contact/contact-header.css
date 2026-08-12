@@ -1,0 +1,27 @@
+.contact-header {
+  text-align: center;
+  padding: 5rem 1.5rem 2rem;
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+.contact-header__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 3.4375rem);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.contact-header__text {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--color-ink-soft);
+}
+
+@media (max-width: 767px) {
+  .contact-header {
+    padding: 3rem 1.5rem 1.5rem;
+  }
+}

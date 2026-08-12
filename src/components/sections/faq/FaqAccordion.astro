@@ -159,6 +159,10 @@ Vous avez un projet de site, une envie de refaire le vôtre ou simplement une qu
 Si vous ne savez pas quelle formule choisir ou si votre besoin ne correspond pas exactement à ce qui est présenté sur le site, contactez-moi. Nous verrons ensemble ce qui peut vous convenir.`,
   },
 ];
+
+const milieu = Math.ceil(questions.length / 2);
+const colonneGauche = questions.slice(0, milieu);
+const colonneDroite = questions.slice(milieu);
 ---
 
 <section class="faq-accordion">
@@ -174,43 +178,37 @@ Si vous ne savez pas quelle formule choisir ou si votre besoin ne correspond pas
 
   <div class="faq-accordion__grid">
     <div class="faq-accordion__col">
-      {questions.filter((_, i) => i % 2 === 0).map((item) => {
-        const index = questions.indexOf(item);
-        return (
-          <details class="faq-accordion__item" name="faq">
-            <summary class="faq-accordion__question">
-              <span class="faq-accordion__number">{String(index + 1).padStart(2, "0")}</span>
-              <span class="faq-accordion__question-text">{item.q}</span>
-              <span class="faq-accordion__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="faq-accordion__answer">
-              {item.r.split("\n\n").map((paragraphe) => (
-                <p>{paragraphe}</p>
-              ))}
-            </div>
-          </details>
-        );
-      })}
+      {colonneGauche.map((item, i) => (
+        <details class="faq-accordion__item" name="faq">
+          <summary class="faq-accordion__question">
+            <span class="faq-accordion__number">{String(i + 1).padStart(2, "0")}</span>
+            <span class="faq-accordion__question-text">{item.q}</span>
+            <span class="faq-accordion__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-accordion__answer">
+            {item.r.split("\n\n").map((paragraphe) => (
+              <p>{paragraphe}</p>
+            ))}
+          </div>
+        </details>
+      ))}
     </div>
 
     <div class="faq-accordion__col">
-      {questions.filter((_, i) => i % 2 === 1).map((item) => {
-        const index = questions.indexOf(item);
-        return (
-          <details class="faq-accordion__item" name="faq">
-            <summary class="faq-accordion__question">
-              <span class="faq-accordion__number">{String(index + 1).padStart(2, "0")}</span>
-              <span class="faq-accordion__question-text">{item.q}</span>
-              <span class="faq-accordion__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="faq-accordion__answer">
-              {item.r.split("\n\n").map((paragraphe) => (
-                <p>{paragraphe}</p>
-              ))}
-            </div>
-          </details>
-        );
-      })}
+      {colonneDroite.map((item, i) => (
+        <details class="faq-accordion__item" name="faq">
+          <summary class="faq-accordion__question">
+            <span class="faq-accordion__number">{String(i + milieu + 1).padStart(2, "0")}</span>
+            <span class="faq-accordion__question-text">{item.q}</span>
+            <span class="faq-accordion__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-accordion__answer">
+            {item.r.split("\n\n").map((paragraphe) => (
+              <p>{paragraphe}</p>
+            ))}
+          </div>
+        </details>
+      ))}
     </div>
   </div>
 </section>
