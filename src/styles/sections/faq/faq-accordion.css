@@ -1,0 +1,131 @@
+.faq-accordion {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.faq-accordion__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.faq-accordion__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.faq-accordion__hint {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+}
+
+.faq-accordion__intro {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+
+.faq-accordion__intro a {
+  color: #617854;
+  font-weight: 600;
+}
+
+.faq-accordion__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2.5rem;
+  align-items: start;
+}
+
+.faq-accordion__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-accordion__item {
+  border: 1px solid rgba(37, 61, 74, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-accordion__item[open] {
+  border-color: #617854;
+}
+
+.faq-accordion__question {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+}
+
+.faq-accordion__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-accordion__number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #617854;
+  flex-shrink: 0;
+}
+
+.faq-accordion__question-text {
+  flex: 1;
+}
+
+.faq-accordion__icon {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--color-ink-soft);
+  border-bottom: 2px solid var(--color-ink-soft);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.faq-accordion__item[open] .faq-accordion__icon {
+  transform: rotate(-135deg);
+}
+
+.faq-accordion__answer {
+  padding: 0 1.4rem 1.4rem 3.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.faq-accordion__answer p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+
+@media (max-width: 900px) {
+  .faq-accordion__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .faq-accordion__answer {
+    padding-left: 1.4rem;
+  }
+}

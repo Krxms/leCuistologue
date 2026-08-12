@@ -1,0 +1,21 @@
+---
+import "../../../styles/sections/faq/faq-header.css";
+import { Image } from "astro:assets";
+
+import broccoli from "../../../assets/faq/header/brocoli.svg";
+import mushroom from "../../../assets/faq/header/mushroom.svg";
+import onion from "../../../assets/faq/header/onion.svg";
+import arrowConnector from "../../../assets/faq/header/arrow-connector.svg";
+---
+
+<section class="faq-header">
+  <Image src={broccoli} alt="" class="faq-header__deco faq-header__deco--broccoli" aria-hidden="true" />
+  <Image src={mushroom} alt="" class="faq-header__deco faq-header__deco--mushroom" aria-hidden="true" />
+  <Image src={onion} alt="" class="faq-header__deco faq-header__deco--onion" aria-hidden="true" />
+
+  <h1 class="faq-header__title">
+    <span class="faq-header__title-base">Une</span> <span class="faq-header__title-accent">Question ?</span>
+  </h1>
+
+  <img src={arrowConnector.src} alt="" class="faq-header__arrow" aria-hidden="true" />
+</section>

@@ -1,0 +1,35 @@
+---
+import "../../../styles/sections/faq/faq-cta.css";
+import { Image } from "astro:assets";
+
+import iconRotate from "../../../assets/faq/cta/icon-rotate.svg";
+import photo from "../../../assets/accueil/service/serviceBigPics.png";
+---
+
+<section class="faq-cta">
+  <svg class="faq-cta__shape" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="faq-cta-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fbd9db" />
+        <stop offset="100%" stop-color="#f8c9d4" />
+      </linearGradient>
+    </defs>
+    <path d="M 0,8 Q 50,2 100,0 L 100,100 L 0,100 Z" fill="url(#faq-cta-gradient)" />
+  </svg>
+
+  <div class="faq-cta__content">
+    <div class="faq-cta__title-row">
+      <h2 class="faq-cta__title">Prêt à simplifier vos semaines ?</h2>
+      <img src={iconRotate.src} alt="" class="faq-cta__icon" aria-hidden="true" />
+    </div>
+    <p class="faq-cta__text">
+      Ne laissez plus le manque de temps dicter votre alimentation. Découvrez la solution qui vous convient le mieux.
+    </p>
+    <div class="faq-cta__actions">
+      <a href="/formules" class="faq-cta__btn faq-cta__btn--primary">Je découvre les formules</a>
+      <a href="/contact" class="faq-cta__btn faq-cta__btn--secondary">Contacter le Cuistologue</a>
+    </div>
+  </div>
+
+  <Image src={photo} alt="Plats préparés par Le Cuistologue" class="faq-cta__photo" />
+</section>
