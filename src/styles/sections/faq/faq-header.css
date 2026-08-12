@@ -1,28 +1,39 @@
 .faq-header {
   position: relative;
   min-height: 32.2vw;
-  background-color: #C7D0BF;
+  height: 55%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.faq-header__bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 5520%;
+  height: 55%;
+  background-color: #c4cdb0;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .faq-header__title {
   position: relative;
   z-index: 1;
   margin: 0;
-  text-align: center;
+  text-align: start;
   font-family: var(--font-display);
   line-height: 1.1;
+  margin-left: -63%;
+  padding-bottom: 17%;
+  transform: rotate(-2deg);
 }
 
 .faq-header__title-base {
   font-weight: 700;
   font-size: clamp(1.8rem, 3.2vw, 3.4375rem);
-  color: #617854;
+  color: #2c2c2c;
 }
 
 .faq-header__title-accent {
@@ -33,12 +44,12 @@
 
 .faq-header__arrow {
   position: absolute;
-  left: 43.75%;
-  top: 21.32%;
-  width: 5%;
+  left: 35%;
+  top: 29%;
+  width: 15%;
   z-index: 2;
   pointer-events: none;
-  transform: rotate(15deg) scaleX(-1);
+  transform: scaleX(1) rotate(-3deg);
 }
 
 .faq-header__deco {
