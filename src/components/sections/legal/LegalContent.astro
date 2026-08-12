@@ -1,0 +1,36 @@
+---
+import "../../../styles/sections/legal/legal-content.css";
+
+interface Section {
+  titre: string;
+  paragraphes: string[];
+  liste?: string[];
+}
+
+interface Props {
+  titrePage: string;
+  intro?: string;
+  sections: Section[];
+}
+
+const { titrePage, intro, sections } = Astro.props;
+---
+
+<section class="legal-content">
+  <h1 class="legal-content__title">{titrePage}</h1>
+  {intro && <p class="legal-content__intro">{intro}</p>}
+
+  {sections.map((section) => (
+    <div class="legal-content__section">
+      {section.titre && <h2 class="legal-content__section-title">{section.titre}</h2>}
+      {section.paragraphes.map((p) => (
+        <p class="legal-content__paragraph">{p}</p>
+      ))}
+      {section.liste && (
+        <ul class="legal-content__list">
+          {section.liste.map((item) => <li>{item}</li>)}
+        </ul>
+      )}
+    </div>
+  ))}
+</section>

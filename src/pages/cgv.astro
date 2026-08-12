@@ -1,0 +1,288 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalContent from "../components/sections/legal/LegalContent.astro";
+
+const sections = [
+  {
+    titre: "Identification de l'entreprise",
+    paragraphes: [
+      "Les présentes Conditions Générales de Vente sont celles de l'entreprise :",
+      "Le Cuistologue — SIRET : 10163002800013 — Siège social : 5 rue de la Mairie, 60240 Serans.",
+      "Entreprise individuelle sous le régime de la micro-entreprise.",
+      "Assurance responsabilité professionnelle : Assurance multirisques professionnelle – Crédit Agricole.",
+      "Les présentes conditions régissent l'ensemble des prestations réalisées par Le Cuistologue auprès de clients particuliers.",
+    ],
+  },
+  {
+    titre: "Article 1 – Objet des présentes Conditions Générales de Vente",
+    paragraphes: [
+      "Les présentes Conditions Générales de Vente (CGV) ont pour objet de définir les droits et obligations respectifs de Le Cuistologue et de ses clients dans le cadre de prestations de cuisine réalisées directement au domicile des particuliers.",
+      "Le Cuistologue propose un service de préparation de repas au domicile du client, consistant à cuisiner directement dans son environnement habituel afin de lui permettre de disposer de préparations faites maison adaptées à ses besoins, ses habitudes et son organisation quotidienne.",
+      "Toute réservation, signature de devis ou acceptation d'une proposition commerciale implique l'adhésion pleine et entière du client aux présentes CGV.",
+    ],
+  },
+  {
+    titre: "Article 2 – Nature des prestations",
+    paragraphes: [
+      "Les prestations réalisées par Le Cuistologue comprennent notamment :",
+    ],
+    liste: [
+      "un échange préalable permettant d'identifier les attentes, habitudes alimentaires et préférences du client ;",
+      "la définition des préparations culinaires envisagées ;",
+      "la préparation des repas directement au domicile du client ;",
+      "l'organisation et le rangement des préparations réalisées ;",
+      "le nettoyage de l'espace de travail et du matériel utilisé ;",
+      "la transmission de recommandations générales relatives à la conservation et au réchauffage.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Les prestations du Cuistologue relèvent d'une démarche artisanale de cuisine à domicile.",
+      "Elles ne constituent pas :",
+    ],
+    liste: [
+      "une activité de restauration commerciale ;",
+      "un service de livraison de repas préparés ;",
+      "un accompagnement médical ou diététique ;",
+      "une prescription alimentaire.",
+    ],
+  },
+  {
+    titre: "Article 3 – Éligibilité aux Services à la Personne (SAP)",
+    paragraphes: [
+      "Lorsque les conditions réglementaires sont réunies, les prestations proposées par Le Cuistologue peuvent relever du dispositif des Services à la Personne.",
+      "Dans ce cadre, le client peut bénéficier des avantages fiscaux prévus par la réglementation applicable, notamment du crédit d'impôt prévu à l'article 199 sexdecies du Code général des impôts.",
+      "L'application de cet avantage fiscal est conditionnée :",
+    ],
+    liste: [
+      "à l'éligibilité effective de la prestation réalisée ;",
+      "au respect des conditions prévues par la réglementation ;",
+      "à la situation fiscale personnelle du client.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Le Cuistologue remet au client les justificatifs nécessaires conformément aux obligations applicables aux organismes de services à la personne.",
+    ],
+  },
+  {
+    titre: "Article 4 – Avance immédiate du crédit d'impôt",
+    paragraphes: [
+      "Lorsque le service est proposé et que le client remplit les conditions nécessaires, Le Cuistologue peut permettre l'utilisation du dispositif d'avance immédiate du crédit d'impôt mis en place par l'Urssaf.",
+      "Ce dispositif permet au client de bénéficier d'une déduction immédiate correspondant à l'avantage fiscal applicable, au lieu d'attendre le remboursement lors de la déclaration fiscale.",
+      "La mise en œuvre de ce dispositif nécessite notamment :",
+    ],
+    liste: [
+      "l'acceptation du dispositif par le client ;",
+      "la création et l'activation de son compte personnel auprès des services compétents ;",
+      "la validation des demandes de paiement conformément à la procédure applicable.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Le Cuistologue ne peut être tenu responsable d'un refus, d'un blocage ou d'un retard lié aux services administratifs, aux conditions personnelles du client ou au fonctionnement des plateformes concernées.",
+      "En cas d'impossibilité d'utilisation de l'avance immédiate, le client reste redevable du montant total de la prestation réalisée.",
+    ],
+  },
+  {
+    titre: "Article 5 – Devis et réservation",
+    paragraphes: [
+      "Toute prestation fait l'objet d'un échange préalable permettant de définir :",
+    ],
+    liste: [
+      "les besoins du client ;",
+      "le contenu de la prestation ;",
+      "les modalités pratiques d'intervention ;",
+      "le tarif applicable.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Lorsque cela est nécessaire, un devis est transmis au client.",
+      "La réservation devient définitive après :",
+    ],
+    liste: [
+      "acceptation du devis ;",
+      "ou confirmation écrite de la prestation.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Le Cuistologue se réserve la possibilité de refuser une intervention lorsque les conditions nécessaires à sa bonne réalisation ne sont pas réunies.",
+    ],
+  },
+  {
+    titre: "Article 6 – Tarifs et paiement",
+    paragraphes: [
+      "Les tarifs applicables sont ceux indiqués dans le devis ou dans la proposition commerciale acceptée par le client.",
+      "Ils sont exprimés en euros.",
+      "Les éventuels frais complémentaires (notamment déplacements spécifiques ou achats réalisés pour le compte du client) sont communiqués avant validation.",
+      "Sauf accord particulier, le paiement intervient à l'issue de la prestation.",
+      "Les moyens de paiement acceptés sont communiqués au client lors de la réservation.",
+      "Tout retard de paiement pourra entraîner la suspension de nouvelles prestations jusqu'à régularisation.",
+    ],
+  },
+  {
+    titre: "Article 7 – Droit de rétractation",
+    paragraphes: [
+      "Conformément au Code de la consommation, le client consommateur dispose d'un délai légal de rétractation lorsqu'un contrat est conclu à distance ou hors établissement.",
+      "Toutefois, lorsque le client demande expressément que la prestation commence avant la fin du délai légal de rétractation, celui-ci reconnaît que l'exécution anticipée de la prestation peut entraîner les conséquences prévues par la réglementation applicable.",
+      "Lorsque la prestation est entièrement exécutée avant la fin du délai de rétractation avec l'accord exprès du client, celui-ci reconnaît perdre son droit de rétractation conformément aux dispositions légales.",
+    ],
+  },
+  {
+    titre: "Article 8 – Conditions d'intervention au domicile du client",
+    paragraphes: [
+      "Le client s'engage à permettre l'accès au domicile aux horaires convenus.",
+      "Il garantit la disponibilité :",
+    ],
+    liste: [
+      "d'une cuisine accessible ;",
+      "d'un espace de travail adapté ;",
+      "d'eau potable ;",
+      "d'électricité ;",
+      "d'équipements fonctionnels ;",
+      "d'un espace de conservation adapté.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Le client informe Le Cuistologue de toute situation particulière pouvant affecter l'intervention.",
+    ],
+  },
+  {
+    titre: "Article 9 – Hygiène, sécurité et environnement de travail",
+    paragraphes: [
+      "Le Cuistologue applique les règles d'hygiène adaptées à son activité.",
+      "Le client s'engage à mettre à disposition un environnement permettant une préparation alimentaire dans des conditions satisfaisantes.",
+      "Le Cuistologue pourra interrompre ou adapter une prestation lorsque les conditions de sécurité ou d'hygiène ne permettent pas sa réalisation dans des conditions normales.",
+      "La présence d'animaux domestiques dans la zone de préparation pourra nécessiter leur éloignement temporaire.",
+    ],
+  },
+  {
+    titre: "Article 10 – Produits alimentaires",
+    paragraphes: [
+      "Les produits utilisés doivent être propres à la consommation.",
+      "Lorsque Le Cuistologue réalise les achats, il sélectionne les produits conformément aux attentes convenues avec le client.",
+      "Lorsque les produits sont fournis par le client, celui-ci demeure responsable :",
+    ],
+    liste: [
+      "de leur achat ;",
+      "de leur transport ;",
+      "de leur conservation avant intervention ;",
+      "de leur état sanitaire.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Le Cuistologue pourra refuser l'utilisation d'un produit présentant un risque apparent.",
+    ],
+  },
+  {
+    titre: "Article 11 – Allergies, intolérances et contraintes alimentaires",
+    paragraphes: [
+      "Le client doit informer Le Cuistologue avant toute intervention de toute allergie, intolérance ou contrainte alimentaire.",
+      "Le Cuistologue adapte les préparations en fonction des informations communiquées.",
+      "Cependant, les prestations étant réalisées dans une cuisine domestique, Le Cuistologue ne peut garantir l'absence totale de traces allergènes ou de contamination croisée.",
+      "Le client demeure responsable de l'exactitude et de l'exhaustivité des informations transmises.",
+    ],
+  },
+  {
+    titre: "Article 12 – Conservation des préparations",
+    paragraphes: [
+      "Les préparations réalisées sont remises au client accompagnées de recommandations générales de conservation et de réchauffage.",
+      "Après la fin de l'intervention, le client est responsable :",
+    ],
+    liste: [
+      "du respect de la chaîne du froid ;",
+      "des conditions de stockage ;",
+      "de la consommation dans des délais adaptés ;",
+      "du respect des consignes transmises.",
+    ],
+  },
+  {
+    titre: "Article 13 – Responsabilité",
+    paragraphes: [
+      "Le Cuistologue est tenu à une obligation de moyens.",
+      "Sa responsabilité ne pourra être engagée notamment en cas :",
+    ],
+    liste: [
+      "d'informations erronées ou incomplètes transmises par le client ;",
+      "de mauvaise conservation des préparations après intervention ;",
+      "d'utilisation inadaptée des équipements du domicile ;",
+      "de défaillance du matériel appartenant au client ;",
+      "d'événement indépendant de sa volonté.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Le Cuistologue dispose d'une assurance professionnelle couvrant son activité.",
+    ],
+  },
+  {
+    titre: "Article 14 – Annulation et report",
+    paragraphes: [
+      "Toute annulation doit être communiquée dès que possible.",
+      "Une annulation tardive pourra donner lieu à une facturation correspondant aux frais réellement engagés et au préjudice subi.",
+      "Les situations exceptionnelles seront étudiées au cas par cas.",
+    ],
+  },
+  {
+    titre: "Article 15 – Données personnelles",
+    paragraphes: [
+      "Les données collectées sont utilisées uniquement dans le cadre :",
+    ],
+    liste: [
+      "de la gestion des prestations ;",
+      "du suivi client ;",
+      "de la facturation ;",
+      "des obligations liées aux Services à la Personne.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Elles ne sont ni vendues ni cédées à des tiers.",
+      "Le client dispose des droits prévus par la réglementation applicable relative à la protection des données personnelles.",
+    ],
+  },
+  {
+    titre: "Article 16 – Réclamations",
+    paragraphes: [
+      "Toute réclamation doit être adressée à Le Cuistologue dans les meilleurs délais suivant la prestation concernée.",
+      "Une recherche de solution amiable sera privilégiée.",
+    ],
+  },
+  {
+    titre: "Article 17 – Médiation de la consommation",
+    paragraphes: [
+      "En cas de litige entre le Client et l'entreprise, ceux-ci s'efforceront de le résoudre à l'amiable (le Client adressera une réclamation écrite auprès du professionnel ou, le cas échéant, auprès du Service Relations Clientèle du professionnel).",
+      "À défaut d'accord amiable ou en l'absence de réponse du professionnel dans un délai raisonnable d'un (1) mois, le Client consommateur au sens de l'article L.612-2 du code de la consommation a la possibilité de saisir gratuitement, si un désaccord subsiste, le médiateur compétent inscrit sur la liste des médiateurs établie par la Commission d'évaluation et de contrôle de la médiation de la consommation en application de l'article L.615-1 du code de la consommation, à savoir :",
+      "La Société Médiation Professionnelle — http://www.mediateur-consommation-smp.fr — Alteritae, 5 rue Salvaing, 12000 Rodez.",
+    ],
+  },
+  {
+    titre: "Article 18 – Droit applicable",
+    paragraphes: [
+      "Les présentes CGV sont soumises au droit français.",
+      "En cas de différend, les parties rechercheront prioritairement une solution amiable.",
+      "À défaut d'accord, le litige pourra être porté devant les juridictions compétentes conformément aux règles applicables.",
+    ],
+  },
+];
+---
+
+<BaseLayout title="Conditions générales de vente">
+  <LegalContent
+    titrePage="Conditions générales de vente"
+    sections={sections}
+  />
+</BaseLayout>

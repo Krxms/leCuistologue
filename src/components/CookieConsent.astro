@@ -1,0 +1,176 @@
+---
+---
+
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <div class="cookie-banner__content">
+    <h2 class="cookie-banner__title">Votre vie privée, votre choix</h2>
+    <p class="cookie-banner__text">
+      Nous utilisons des cookies nécessaires au bon fonctionnement et à la sécurité du site. Avec votre accord, nous utilisons également Google Analytics afin de mesurer l'audience du site et d'améliorer son utilisation.
+    </p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="cookie-btn cookie-btn--ghost" id="cookie-refuse-all">Tout refuser</button>
+      <button type="button" class="cookie-btn cookie-btn--outline" id="cookie-customize">Personnaliser</button>
+      <button type="button" class="cookie-btn cookie-btn--primary" id="cookie-accept-all">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<div id="cookie-panel-overlay" class="cookie-panel-overlay" hidden>
+  <div class="cookie-panel" role="dialog" aria-modal="true" aria-labelledby="cookie-panel-title">
+    <h2 id="cookie-panel-title" class="cookie-panel__title">Gérer mes cookies</h2>
+
+    <div class="cookie-panel__item">
+      <div class="cookie-panel__item-header">
+        <span class="cookie-panel__item-name">Cookies nécessaires</span>
+        <span class="cookie-panel__item-status">Toujours actifs</span>
+      </div>
+      <p class="cookie-panel__item-text">
+        Nécessaires au fonctionnement et à la sécurité du site.
+      </p>
+    </div>
+
+    <div class="cookie-panel__item">
+      <div class="cookie-panel__item-header">
+        <span class="cookie-panel__item-name">Mesure d'audience — Google Analytics</span>
+        <label class="cookie-toggle">
+          <input type="checkbox" id="cookie-toggle-analytics" />
+          <span class="cookie-toggle__slider"></span>
+        </label>
+      </div>
+      <p class="cookie-panel__item-text">
+        Permet de mesurer la fréquentation du site et d'en améliorer l'utilisation.
+      </p>
+    </div>
+
+    <div class="cookie-panel__actions">
+      <button type="button" class="cookie-btn cookie-btn--ghost" id="panel-refuse-all">Tout refuser</button>
+      <button type="button" class="cookie-btn cookie-btn--outline" id="panel-save">Enregistrer mes choix</button>
+      <button type="button" class="cookie-btn cookie-btn--primary" id="panel-accept-all">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = "cuistologue-cookie-consent";
+
+  interface Consent {
+    necessary: true;
+    analytics: boolean;
+    timestamp: string;
+  }
+
+  function lireConsentement(): Consent | null {
+    try {
+      const brut = localStorage.getItem(STORAGE_KEY);
+      return brut ? JSON.parse(brut) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function enregistrerConsentement(analytics: boolean) {
+    const consent: Consent = {
+      necessary: true,
+      analytics,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+    appliquerConsentement(consent);
+  }
+
+  function appliquerConsentement(consent: Consent) {
+    if (consent.analytics) {
+      chargerGoogleAnalytics();
+    }
+  }
+
+  function chargerGoogleAnalytics() {
+    if ((window as any).__gaCharge) return;
+    (window as any).__gaCharge = true;
+
+    // TODO : remplacer G-XXXXXXX par le véritable identifiant de mesure
+    // une fois Google Analytics créé, puis décommenter les lignes ci-dessous.
+    //
+    // const script = document.createElement("script");
+    // script.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
+    // script.async = true;
+    // document.head.appendChild(script);
+    //
+    // (window as any).dataLayer = (window as any).dataLayer || [];
+    // function gtag(...args: any[]) { (window as any).dataLayer.push(args); }
+    // gtag("js", new Date());
+    // gtag("config", "G-XXXXXXX");
+
+    console.info("[cookies] Consentement Analytics accepté — prêt pour l'intégration de Google Analytics.");
+  }
+
+  const banner = document.getElementById("cookie-banner");
+  const overlay = document.getElementById("cookie-panel-overlay");
+  const toggleAnalytics = document.getElementById("cookie-toggle-analytics") as HTMLInputElement;
+
+  function ouvrirBanniere() {
+    banner?.removeAttribute("hidden");
+  }
+
+  function fermerBanniere() {
+    banner?.setAttribute("hidden", "");
+  }
+
+  function ouvrirPanneau() {
+    const consent = lireConsentement();
+    if (toggleAnalytics) {
+      toggleAnalytics.checked = consent?.analytics ?? false;
+    }
+    overlay?.removeAttribute("hidden");
+  }
+
+  function fermerPanneau() {
+    overlay?.setAttribute("hidden", "");
+  }
+
+  const consentExistant = lireConsentement();
+  if (consentExistant) {
+    appliquerConsentement(consentExistant);
+  } else {
+    ouvrirBanniere();
+  }
+
+  document.getElementById("cookie-accept-all")?.addEventListener("click", () => {
+    enregistrerConsentement(true);
+    fermerBanniere();
+  });
+
+  document.getElementById("cookie-refuse-all")?.addEventListener("click", () => {
+    enregistrerConsentement(false);
+    fermerBanniere();
+  });
+
+  document.getElementById("cookie-customize")?.addEventListener("click", () => {
+    fermerBanniere();
+    ouvrirPanneau();
+  });
+
+  document.getElementById("panel-accept-all")?.addEventListener("click", () => {
+    enregistrerConsentement(true);
+    fermerPanneau();
+  });
+
+  document.getElementById("panel-refuse-all")?.addEventListener("click", () => {
+    enregistrerConsentement(false);
+    fermerPanneau();
+  });
+
+  document.getElementById("panel-save")?.addEventListener("click", () => {
+    enregistrerConsentement(toggleAnalytics?.checked ?? false);
+    fermerPanneau();
+  });
+
+  document.getElementById("footer-gerer-cookies")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    ouvrirPanneau();
+  });
+
+  overlay?.addEventListener("click", (e) => {
+    if (e.target === overlay) fermerPanneau();
+  });
+</script>

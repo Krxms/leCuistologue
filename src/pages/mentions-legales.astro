@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalContent from "../components/sections/legal/LegalContent.astro";
+
+const sections = [
+  {
+    titre: "Éditeur du site",
+    paragraphes: [
+      "Le présent site est édité par :",
+      "Le Cuistologue, nom commercial de Bruno Pereira Vaz, entrepreneur individuel.",
+      "Adresse : 5 rue de la Mairie, 60240 Serans",
+      "E-mail : contact@lecuistologue.fr",
+      "Téléphone : 06 19 95 74 09",
+      "SIREN : 101 630 028",
+      "SIRET : SIRET : 101 630 028 00013",
+      "Immatriculation au Registre national des entreprises (RNE)",
+      "TVA non applicable – article 293 B du Code général des impôts. [à confirmer]",
+    ],
+  },
+
+   {
+    titre: "Directeur de la publication",
+    paragraphes: [
+      "Bruno Pereira Vaz",
+    ],
+  },
+  {
+    titre: "Services à la personne",
+    paragraphes: [
+      "Le Cuistologue est déclaré en qualité d'organisme de services à la personne.",
+      "Numéro d'enregistrement de la déclaration Services à la personne : [à compléter]",
+      "Les prestations éligibles réalisées dans le cadre de cette déclaration peuvent ouvrir droit, sous réserve du respect des conditions légales en vigueur, au crédit d'impôt applicable aux services à la personne.",
+    ],
+  },
+  {
+    titre: "Hébergement du site",
+    paragraphes: [
+      "Le site est hébergé par :",
+      "Cloudflare, Inc.",
+      "Adresse : Cloudflare Inc., 101 Townsend St., San Francisco, CA 94107 États-Unis",
+      "Téléphone : +1 650 319 8930",
+    ],
+  },
+
+  {
+    titre: "Réalisation du site",
+    paragraphes: [
+      "Ce site a été conçu et développé par Antoine Bruneau.",
+      "Contact : antoinebruneau@protonmail.com",
+    ],
+  },
+
+  {
+    titre: "Propriété intellectuelle",
+    paragraphes: [
+      "L'ensemble des contenus présents sur ce site, notamment les textes, éléments graphiques, illustrations, photographies, logos, icônes et éléments de mise en page, est protégé par les dispositions applicables en matière de propriété intellectuelle.",
+      "Sauf mention contraire, ces contenus sont la propriété de Le Cuistologue ou sont utilisés avec l'autorisation de leurs titulaires respectifs.",
+      "Toute reproduction, représentation, modification, adaptation ou exploitation, totale ou partielle, des contenus du site sans autorisation préalable est interdite, sauf dans les cas prévus par la loi.",
+    ],
+  },
+  {
+    titre: "Liens hypertextes",
+    paragraphes: [
+      "Le site peut contenir des liens vers des sites ou services édités par des tiers. Le Cuistologue ne peut être tenu responsable du contenu, du fonctionnement ou des pratiques de ces sites externes.",
+    ],
+  },
+  {
+    titre: "Données personnelles et cookies",
+    paragraphes: [
+      "Les modalités de collecte et de traitement des données personnelles ainsi que les informations relatives aux cookies utilisés sur le site sont détaillées dans la Politique de confidentialité, accessible depuis le pied de page du site.",
+      "Les préférences relatives aux cookies peuvent également être modifiées à tout moment via le lien « Gérer mes cookies ».",
+    ],
+  },
+];
+---
+
+<BaseLayout title="Mentions légales">
+  <LegalContent
+    titrePage="Mentions légales"
+    sections={sections}
+  />
+</BaseLayout>

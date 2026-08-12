@@ -18,9 +18,8 @@ const navigation = [
 
 const conditions = [
   { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
   { label: "CGV", href: "/cgv" },
-  { label: "Cookies", href: "/cookies" },
+  { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
 ];
 
 const annee = new Date().getFullYear();
@@ -30,10 +29,9 @@ const annee = new Date().getFullYear();
   <div class="footer__top">
     <div class="footer__brand">
       <img src={logo.src} alt="Le Cuistologue" class="footer__logo" />
-      <h2 class="footer__tagline">Une autre façon de bien manger.</h2>
+      <h2 class="footer__tagline">Du bon sens dans nos cuisine.</h2>
       <p class="footer__description">
-        Des repas préparés directement chez vous, selon vos goûts et votre rythme de vie, pour retrouver le plaisir de bien manger sans passer vos soirées en cuisine.
-
+        Des repas préparés directement chez vous, à partir de produits de saison, pour retrouver le plaisir de bien manger sans passer des heures en cuisine.
       </p>
       <div class="footer__social">
         <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
@@ -60,13 +58,14 @@ const annee = new Date().getFullYear();
         {conditions.map((item) => (
           <li><a href={item.href}>{item.label}</a></li>
         ))}
+        <li><a href="#" id="footer-gerer-cookies">Gérer mes cookies</a></li>
       </ul>
     </nav>
 
     <div class="footer__col">
       <h3 class="footer__col-title">Contact</h3>
       <ul>
-        <li><a href="tel:0601020304">06 01 02 03 04</a></li>
+        <li><a href="tel:0619957409">06 19 95 74 09</a></li>
         <li><a href="mailto:contact@lecuistologue.fr">contact@lecuistologue.fr</a></li>
       </ul>
       <Image src={servicesIcon} alt="Services à la personne" class="footer__services-icon" />

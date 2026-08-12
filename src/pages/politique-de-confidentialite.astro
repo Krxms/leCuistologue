@@ -1,0 +1,314 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalContent from "../components/sections/legal/LegalContent.astro";
+
+const sections = [
+  {
+    titre: "",
+    paragraphes: [
+      "Dernière mise à jour : 12 août 2026",
+      "La présente politique de confidentialité a pour objectif de vous informer de manière claire et transparente sur la manière dont Le Cuistologue collecte, utilise et protège vos données personnelles lorsque vous consultez le site ou utilisez les services et formulaires qui y sont proposés.",
+    ],
+  },
+  {
+    titre: "1. Responsable du traitement",
+    paragraphes: [
+      "Le responsable du traitement des données personnelles est :",
+      "Bruno Pereira Vaz, entrepreneur individuel exerçant sous le nom commercial Le Cuistologue.",
+      "SIRET : 101 630 028 00013",
+      "Adresse : 5 rue de la Mairie, 60240 Serans",
+      "E-mail : contact@lecuistologue.fr",
+      "Téléphone : 06 19 95 74 09",
+    ],
+  },
+  {
+    titre: "2. Données personnelles collectées",
+    paragraphes: [
+      "Les données collectées dépendent de votre utilisation du site et des informations que vous choisissez de transmettre.",
+    ],
+  },
+  {
+    titre: "Formulaire de contact",
+    paragraphes: [
+      "Lorsque vous utilisez le formulaire de contact, les données suivantes peuvent être collectées :",
+    ],
+    liste: [
+      "nom et prénom ;",
+      "adresse e-mail ;",
+      "numéro de téléphone, lorsque vous choisissez d'être recontacté par ce moyen ;",
+      "sujet de la demande ;",
+      "contenu du message ;",
+      "toute information communiquée volontairement dans les champs libres.",
+    ],
+  },
+  {
+    titre: "Formulaires de choix de prestation",
+    paragraphes: [
+      "Lorsque vous utilisez l'un des formulaires permettant de choisir, configurer ou demander une prestation, les données suivantes peuvent notamment être collectées :",
+    ],
+    liste: [
+      "nom et prénom ;",
+      "adresse e-mail ;",
+      "numéro de téléphone ;",
+      "adresse, commune ou zone d'intervention ;",
+      "formule ou prestation souhaitée ;",
+      "nombre de personnes concernées par la prestation ;",
+      "informations relatives à vos besoins et à votre organisation ;",
+      "préférences et contraintes alimentaires ;",
+      "informations nécessaires à l'établissement d'un devis ou à l'organisation de la prestation ;",
+      "toute information communiquée volontairement dans les champs libres.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Seules les informations nécessaires au traitement de votre demande et à la réalisation des prestations sont destinées à être collectées.",
+    ],
+  },
+  {
+    titre: "Données techniques et de navigation",
+    paragraphes: [
+      "Lors de votre navigation, certaines données techniques peuvent également être traitées automatiquement, notamment :",
+    ],
+    liste: [
+      "adresse IP et données de connexion nécessaires au fonctionnement et à la sécurité du site ;",
+      "informations techniques relatives au navigateur et à l'appareil utilisé ;",
+      "journaux techniques et données permettant de détecter ou prévenir des comportements malveillants ;",
+      "données statistiques relatives à la consultation et à l'utilisation du site lorsque vous avez accepté les cookies de mesure d'audience.",
+    ],
+  },
+  {
+    titre: "3. Finalités et bases légales des traitements",
+    paragraphes: [
+      "Vos données sont utilisées uniquement pour des finalités déterminées.",
+    ],
+  },
+  {
+    titre: "Répondre à vos demandes",
+    paragraphes: [
+      "Les informations transmises par le formulaire de contact permettent à Le Cuistologue de répondre aux questions et sollicitations qui lui sont adressées.",
+      "Ce traitement repose sur l'intérêt légitime de Le Cuistologue à répondre aux demandes reçues.",
+    ],
+  },
+  {
+    titre: "Étudier une demande de prestation ou établir un devis",
+    paragraphes: [
+      "Les informations transmises via les formulaires de choix de prestation permettent notamment de :",
+    ],
+    liste: [
+      "comprendre vos besoins ;",
+      "identifier la prestation adaptée ;",
+      "préparer une proposition ou un devis ;",
+      "vous recontacter au sujet de votre demande ;",
+      "organiser les modalités de la future prestation.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Ces traitements reposent sur l'exécution de mesures précontractuelles prises à votre demande.",
+    ],
+  },
+  {
+    titre: "Gérer et réaliser les prestations",
+    paragraphes: [
+      "Lorsqu'une prestation est réservée, les données nécessaires sont utilisées afin de :",
+    ],
+    liste: [
+      "organiser et réaliser la prestation ;",
+      "assurer le suivi de la relation client ;",
+      "gérer la facturation et les paiements ;",
+      "assurer le suivi administratif ;",
+      "satisfaire aux obligations applicables aux prestations de Services à la Personne, lorsque celles-ci sont concernées ;",
+      "gérer les éventuelles réclamations.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Ces traitements reposent, selon les cas, sur l'exécution du contrat conclu avec le client ou sur le respect des obligations légales auxquelles Le Cuistologue est soumis.",
+    ],
+  },
+  {
+    titre: "Mesurer l'audience du site",
+    paragraphes: [
+      "Sous réserve de votre consentement, Google Analytics est utilisé afin d'obtenir des statistiques permettant notamment de comprendre la fréquentation du site, les pages consultées et son utilisation générale.",
+      "Ce traitement repose sur votre consentement.",
+      "Vous pouvez refuser ces traceurs ou retirer votre consentement à tout moment depuis l'outil « Gérer mes cookies » accessible sur le site.",
+    ],
+  },
+  {
+    titre: "Assurer la sécurité et le fonctionnement du site",
+    paragraphes: [
+      "Certaines données techniques peuvent être traitées afin d'assurer la disponibilité, les performances et la sécurité du site, notamment par l'intermédiaire de Cloudflare.",
+      "Ces traitements reposent sur l'intérêt légitime de Le Cuistologue à assurer la sécurité et le bon fonctionnement de son site ainsi que, lorsqu'ils utilisent des traceurs strictement nécessaires, sur la nécessité technique de fournir le service demandé.",
+    ],
+  },
+  {
+    titre: "4. Allergies, intolérances et autres informations sensibles",
+    paragraphes: [
+      "Dans le cadre de ses prestations de cuisine à domicile, Le Cuistologue peut avoir besoin de connaître certaines préférences, contraintes alimentaires, allergies ou intolérances afin d'adapter les préparations aux besoins du client.",
+      "Les simples préférences alimentaires sont utilisées uniquement dans la mesure nécessaire à la préparation de la prestation demandée.",
+      "Certaines informations relatives notamment aux allergies, intolérances, pathologies ou autres éléments révélant l'état de santé d'une personne peuvent constituer des données personnelles sensibles.",
+      "Lorsqu'une donnée concernant la santé est collectée, son traitement est effectué uniquement pour permettre l'adaptation de la prestation concernée et repose sur le consentement explicite de la personne concernée.",
+      "Ce consentement peut être retiré à tout moment en contactant Le Cuistologue.",
+      "Le retrait du consentement n'affecte pas la licéité des traitements effectués avant ce retrait. Lorsque l'information concernée est indispensable pour adapter la prestation de manière appropriée, son absence peut toutefois empêcher Le Cuistologue de proposer l'adaptation demandée.",
+      "Ces informations ne sont utilisées à aucune fin publicitaire ou commerciale.",
+    ],
+  },
+  {
+    titre: "5. Caractère obligatoire ou facultatif des informations",
+    paragraphes: [
+      "Les champs signalés comme obligatoires dans les formulaires sont nécessaires au traitement de votre demande.",
+      "En l'absence de ces informations, Le Cuistologue peut ne pas être en mesure de répondre à la demande, d'établir une proposition ou d'organiser la prestation souhaitée.",
+      "Les autres informations sont facultatives.",
+      "Il est recommandé de ne communiquer dans les champs de texte libre que les informations strictement nécessaires à votre demande.",
+    ],
+  },
+  {
+    titre: "6. Destinataires et prestataires",
+    paragraphes: [
+      "Les données sont accessibles à Le Cuistologue dans la mesure nécessaire à la gestion des demandes et à la réalisation de ses prestations.",
+      "Elles peuvent également être traitées par des prestataires techniques strictement nécessaires au fonctionnement des services concernés, notamment :",
+    ],
+    liste: [
+      "Cloudflare, pour l'hébergement, la distribution, les performances et la sécurité du site ;",
+      "Google, dans le cadre de Google Analytics, uniquement selon les choix de consentement exprimés ;",
+      "WordPress.com (Automattic Inc.), pour l'hébergement du contenu éditorial et la gestion du site via son interface d'administration ;",
+      "[prestataire utilisé pour la transmission des formulaires ou l'envoi des e-mails, si applicable] ;",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Lorsque cela est nécessaire à la réalisation d'une prestation ou au respect d'une obligation légale, certaines données peuvent également être communiquées aux organismes ou prestataires concernés, notamment dans le cadre des dispositifs de Services à la Personne.",
+      "Ces destinataires ne reçoivent que les informations nécessaires à l'accomplissement de leurs missions.",
+      "Le Cuistologue ne vend ni ne loue les données personnelles collectées à des tiers.",
+      "Les informations recueillies pour répondre à une demande ou réaliser une prestation ne sont pas utilisées pour adresser des communications commerciales non sollicitées sans base juridique appropriée.",
+    ],
+  },
+  {
+    titre: "7. Durée de conservation",
+    paragraphes: [
+      "Les données personnelles ne sont conservées que pendant la durée nécessaire aux finalités pour lesquelles elles ont été collectées.",
+    ],
+  },
+  {
+    titre: "Demandes de contact ou de prestation sans suite",
+    paragraphes: [
+      "Les données relatives à une demande qui ne débouche pas sur une prestation sont conservées pendant une durée maximale de 12 mois à compter du dernier échange, sauf nécessité particulière justifiant une conservation plus longue.",
+    ],
+  },
+  {
+    titre: "Données relatives aux clients",
+    paragraphes: [
+      "Les données nécessaires à l'exécution des prestations sont conservées pendant toute la durée de la relation contractuelle.",
+      "À son terme, seules les données devant être conservées pour répondre à une obligation légale ou permettre la constatation, l'exercice ou la défense de droits peuvent être archivées pendant les durées applicables.",
+      "Les documents comptables et pièces justificatives soumis à l'obligation légale de conservation sont notamment conservés pendant 10 ans.",
+    ],
+  },
+  {
+    titre: "Allergies et données relatives à la santé",
+    paragraphes: [
+      "Les données sensibles relatives aux allergies, intolérances ou à l'état de santé ne sont conservées que pendant la durée strictement nécessaire à l'adaptation et à la réalisation des prestations concernées.",
+      "Elles sont supprimées lorsqu'elles ne sont plus nécessaires, sous réserve d'une obligation légale ou d'une nécessité particulière liée à la constatation, à l'exercice ou à la défense d'un droit.",
+    ],
+  },
+  {
+    titre: "Données de mesure d'audience",
+    paragraphes: [
+      "Les données collectées par Google Analytics sont conservées conformément à la durée configurée dans l'outil et aux choix exprimés par l'utilisateur.",
+      "Les informations détaillées relatives aux traceurs utilisés et à leur durée de vie sont accessibles depuis l'outil « Gérer mes cookies ».",
+    ],
+  },
+  {
+    titre: "8. Cookies et autres traceurs",
+    paragraphes: [
+      "Le site utilise ou peut utiliser différentes catégories de cookies et technologies similaires.",
+    ],
+  },
+  {
+    titre: "Cookies strictement nécessaires",
+    paragraphes: [
+      "Certains cookies ou traceurs sont nécessaires au fonctionnement, à la sécurité ou à la fourniture du site.",
+      "Ils peuvent notamment être utilisés dans le cadre des services techniques fournis par Cloudflare.",
+      "Ces traceurs strictement nécessaires ne sont pas soumis au consentement préalable de l'utilisateur.",
+    ],
+  },
+  {
+    titre: "Mesure d'audience – Google Analytics",
+    paragraphes: [
+      "Le site utilise Google Analytics afin de mesurer son audience et de disposer de statistiques relatives à son utilisation.",
+      "Les traceurs Google Analytics nécessitant un consentement ne sont activés que conformément au choix exprimé par l'utilisateur.",
+      "Lors de sa première visite, l'utilisateur peut :",
+    ],
+    liste: [
+      "accepter les cookies concernés ;",
+      "les refuser ;",
+      "personnaliser ses choix.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Le refus doit permettre de continuer à utiliser le site.",
+      "Les préférences peuvent être modifiées ou le consentement retiré à tout moment depuis le lien « Gérer mes cookies » disponible sur le site.",
+      "Le retrait du consentement n'affecte pas les traitements effectués avant celui-ci.",
+    ],
+  },
+  {
+    titre: "9. Transferts de données hors de l'Espace économique européen",
+    paragraphes: [
+      "Certains prestataires techniques utilisés par le site appartiennent à des groupes internationaux et peuvent être amenés à traiter certaines données depuis des pays situés en dehors de l'Union européenne ou de l'Espace économique européen.",
+      "Cela peut notamment concerner les services fournis par Cloudflare, Google et WordPress.com (Automattic Inc.).",
+      "Lorsque de tels transferts ont lieu, ils doivent être encadrés par les mécanismes prévus par la réglementation applicable afin d'assurer un niveau de protection approprié des données personnelles.",
+      "Le Cuistologue veille à sélectionner des prestataires fournissant les garanties contractuelles et organisationnelles nécessaires au traitement des données qui leur sont confiées.",
+    ],
+  },
+  {
+    titre: "10. Vos droits",
+    paragraphes: [
+      "Conformément au Règlement général sur la protection des données et à la loi Informatique et Libertés, vous disposez, selon le traitement concerné et sa base juridique :",
+    ],
+    liste: [
+      "d'un droit d'accès à vos données personnelles ;",
+      "d'un droit de rectification des données inexactes ou incomplètes ;",
+      "d'un droit à l'effacement dans les conditions prévues par la réglementation ;",
+      "d'un droit à la limitation du traitement ;",
+      "d'un droit d'opposition lorsque celui-ci est applicable ;",
+      "d'un droit à la portabilité lorsque celui-ci est applicable ;",
+      "du droit de retirer votre consentement à tout moment lorsque le traitement repose sur celui-ci.",
+    ],
+  },
+  {
+    titre: "",
+    paragraphes: [
+      "Pour exercer vos droits, vous pouvez contacter :",
+      "Le Cuistologue — 5 rue de la Mairie, 60240 Serans — contact@lecuistologue.fr",
+      "Afin de protéger vos données, des informations permettant de vérifier votre identité pourront être demandées lorsqu'elles sont nécessaires au traitement de votre demande.",
+      "Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de la Commission nationale de l'informatique et des libertés (CNIL).",
+    ],
+  },
+  {
+    titre: "11. Sécurité des données",
+    paragraphes: [
+      "Le Cuistologue met en œuvre des mesures techniques et organisationnelles appropriées afin de protéger les données personnelles contre la perte, l'altération, la destruction, l'accès non autorisé ou la divulgation.",
+      "L'accès aux données personnelles est limité aux personnes et prestataires qui en ont besoin pour assurer les finalités décrites dans la présente politique.",
+    ],
+  },
+  {
+    titre: "12. Modification de la politique de confidentialité",
+    paragraphes: [
+      "La présente politique de confidentialité peut être modifiée afin de tenir compte notamment des évolutions du site, des services utilisés, des traitements de données ou de la réglementation applicable.",
+      "La version applicable est celle publiée sur le site à la date de consultation.",
+    ],
+  },
+];
+---
+
+<BaseLayout title="Politique de confidentialité">
+  <LegalContent
+    titrePage="Politique de confidentialité"
+    sections={sections}
+  />
+</BaseLayout>
