@@ -1,0 +1,214 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/reserver.css";
+import { formules } from "../lib/formules-data";
+---
+
+<BaseLayout title="Réserver une formule">
+  <section class="reserver">
+    <div class="reserver__grid">
+
+      <!-- Les 3 récapitulatifs existent tous, un seul est affiché selon
+           le choix fait sur la page Formules (lu côté navigateur, voir
+           script plus bas — nécessaire car le site est statique). -->
+      <aside class="reserver__recap-wrap">
+        {formules.map((formule) => (
+          <div class="reserver__recap" data-recap-formule={formule.slug} hidden>
+            <p class="reserver__recap-label">Formule sélectionnée</p>
+            <h1 class="reserver__recap-title">{formule.titre}</h1>
+            <p class="reserver__recap-accroche">{formule.accroche}</p>
+
+            <p class="reserver__recap-comprend">Comprend</p>
+            <ul class="reserver__recap-features">
+              {formule.fonctionnalites.map((item) => <li>{item}</li>)}
+            </ul>
+
+            <div class="reserver__recap-price">
+              <p class="reserver__recap-price-before">{formule.prixPlein} avant crédit d'impôt</p>
+              <p class="reserver__recap-price-value">
+                {formule.prixReduit}
+                <span class="reserver__recap-price-suffix">{formule.suffixePrix}</span>
+              </p>
+            </div>
+
+            <a href="/formules" class="reserver__recap-change">← Choisir une autre formule</a>
+          </div>
+        ))}
+      </aside>
+
+      <!-- Colonne droite : formulaire -->
+      <div class="reserver__form-wrap">
+        <h2 class="reserver__form-title">Vos informations</h2>
+        <p class="reserver__form-text">
+          Une fois votre demande envoyée, vous recevez un e-mail de confirmation, et Le Cuistologue vous recontacte personnellement sous 24h pour affiner votre besoin.
+        </p>
+
+        <!--
+          ⚠️ Formulaire visuellement complet et fonctionnel côté affichage,
+          mais SANS traitement d'envoi réel pour l'instant.
+        -->
+        <form class="reserver-form" id="reserver-form">
+          <input type="hidden" name="formule" id="input-formule-slug" value="essentielle" />
+
+          <div class="reserver-form__row">
+            <div class="reserver-form__field">
+              <label for="nom">Nom complet</label>
+              <input type="text" id="nom" name="nom" required autocomplete="name" />
+            </div>
+            <div class="reserver-form__field">
+              <label for="personnes">Nombre de personnes du foyer</label>
+              <input type="number" id="personnes" name="personnes" min="1" max="20" required />
+            </div>
+          </div>
+
+          <div class="reserver-form__row">
+            <div class="reserver-form__field">
+              <label for="email">Adresse e-mail</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="reserver-form__field">
+              <label for="date-souhaitee">Date souhaitée pour la 1ère intervention</label>
+              <input type="date" id="date-souhaitee" name="date-souhaitee" required />
+            </div>
+          </div>
+
+          <fieldset class="reserver-form__preference">
+            <legend>Comment préférez-vous que je vous réponde ?</legend>
+            <div class="reserver-form__radio-group">
+              <label class="reserver-form__radio">
+                <input type="radio" name="preference" value="email" checked />
+                Par e-mail
+              </label>
+              <label class="reserver-form__radio">
+                <input type="radio" name="preference" value="telephone" />
+                Par téléphone
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="reserver-form__field reserver-form__field--telephone" id="champ-telephone" hidden>
+            <label for="telephone">Numéro de téléphone</label>
+            <input type="tel" id="telephone" name="telephone" autocomplete="tel" />
+          </div>
+
+          <div class="reserver-form__field">
+            <label for="commune">Commune / zone d'intervention</label>
+            <input type="text" id="commune" name="commune" required placeholder="Ex : Serans (60)" />
+            <p class="reserver-form__hint">
+              Zone d'intervention habituelle : Yvelines (78), Val-d'Oise (95), Oise (60), Eure (27). Hors de cette zone ? Indiquez votre commune, nous verrons ensemble si une intervention est possible.
+            </p>
+          </div>
+
+          <fieldset class="reserver-form__preference">
+            <legend>Allergies ou intolérances alimentaires ?</legend>
+            <div class="reserver-form__radio-group">
+              <label class="reserver-form__radio">
+                <input type="radio" name="allergies" value="non" checked />
+                Non
+              </label>
+              <label class="reserver-form__radio">
+                <input type="radio" name="allergies" value="oui" />
+                Oui
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="reserver-form__field reserver-form__field--allergies" id="champ-allergies" hidden>
+            <label for="allergies-details">Précisez lesquelles</label>
+            <textarea id="allergies-details" name="allergies-details" rows="2"></textarea>
+          </div>
+
+          <div class="reserver-form__field">
+            <label for="message">Précisions complémentaires (facultatif)</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+          </div>
+
+          <button type="submit" class="reserver-form__submit">Envoyer ma demande</button>
+
+          <p class="reserver-form__status" id="reserver-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // ---- Date minimale = aujourd'hui, posée côté client (fiable, même
+  // raison que pour la formule : calculée au vrai moment de la visite) ----
+  const inputDate = document.getElementById("date-souhaitee") as HTMLInputElement;
+  if (inputDate) {
+    inputDate.min = new Date().toISOString().split("T")[0];
+  }
+
+  // ---- Lecture de la formule choisie depuis l'URL (?formule=...) ----
+  // Nécessaire côté client car le site est généré statiquement : la
+  // frontmatter Astro tourne au moment du build, pas à chaque visite,
+  // donc elle ne peut jamais connaître le vrai paramètre de l'URL.
+  const params = new URLSearchParams(window.location.search);
+  const slugChoisi = params.get("formule") || "essentielle";
+
+  const recaps = document.querySelectorAll<HTMLElement>("[data-recap-formule]");
+  let slugValide = "essentielle";
+
+  recaps.forEach((recap) => {
+    const estLeBon = recap.dataset.recapFormule === slugChoisi;
+    recap.hidden = !estLeBon;
+    if (estLeBon) slugValide = slugChoisi;
+  });
+
+  // Si le slug dans l'URL ne correspond à aucune formule connue,
+  // on affiche la première par défaut plutôt qu'une page vide.
+  if (![...recaps].some((r) => r.dataset.recapFormule === slugChoisi)) {
+    const premier = recaps[0];
+    if (premier) {
+      premier.hidden = false;
+      slugValide = premier.dataset.recapFormule || "essentielle";
+    }
+  }
+
+  const inputFormuleSlug = document.getElementById("input-formule-slug") as HTMLInputElement;
+  if (inputFormuleSlug) {
+    inputFormuleSlug.value = slugValide;
+  }
+
+  // ---- Bascule champ téléphone ----
+  const radiosPreference = document.querySelectorAll('input[name="preference"]');
+  const champTelephone = document.getElementById("champ-telephone");
+  const inputTelephone = document.getElementById("telephone") as HTMLInputElement;
+
+  function majTelephone() {
+    const veutTelephone = document.querySelector<HTMLInputElement>(
+      'input[name="preference"]:checked'
+    )?.value === "telephone";
+    champTelephone?.toggleAttribute("hidden", !veutTelephone);
+    if (inputTelephone) inputTelephone.required = veutTelephone;
+  }
+  radiosPreference.forEach((r) => r.addEventListener("change", majTelephone));
+  majTelephone();
+
+  // ---- Bascule champ allergies ----
+  const radiosAllergies = document.querySelectorAll('input[name="allergies"]');
+  const champAllergies = document.getElementById("champ-allergies");
+
+  function majAllergies() {
+    const aDesAllergies = document.querySelector<HTMLInputElement>(
+      'input[name="allergies"]:checked'
+    )?.value === "oui";
+    champAllergies?.toggleAttribute("hidden", !aDesAllergies);
+  }
+  radiosAllergies.forEach((r) => r.addEventListener("change", majAllergies));
+  majAllergies();
+
+  // ---- Point d'accroche pour le futur envoi réel ----
+  const form = document.getElementById("reserver-form") as HTMLFormElement;
+  const statusEl = document.getElementById("reserver-form-status");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (statusEl) {
+      statusEl.textContent =
+        "Le formulaire n'est pas encore relié à un envoi réel — à venir prochainement.";
+    }
+  });
+</script>

@@ -1,57 +1,7 @@
 ---
 import "../../../styles/sections/formules/pricing-section.css";
 import checkmark from "../../../assets/formules/cards/checkmark.svg";
-import checkmarkCircle from "../../../assets/formules/cards/checkmark-circle.svg";
-import bgCard from "../../../assets/formules/cards/bg-card.png";
-
-const formules = [
-  {
-    titre: "Formule Essentielle",
-    prixReduit: "69,50 €",
-    prixPlein: "139 €",
-    fonctionnalites: [
-      "Vos habitudes prises en compte",
-      "Menus de la semaine personnalisés",
-      "Liste de courses préparée",
-      "Repas cuisinés à domicile",
-      "Réfrigérateur organisé",
-      "Conseils de conservation",
-      "Cuisine propre et rangée",
-    ],
-  },
-  {
-    titre: "Formule Sérénité",
-    prixReduit: "84,50 €",
-    suffixePrix: "/ session",
-    prixPlein: "169 €",
-    fonctionnalites: [
-      "Vos habitudes prises en compte",
-      "Préférences alimentaires respectées",
-      "Menus de la semaine personnalisés",
-      "Liste de courses préparée",
-      "Repas cuisinés à domicile",
-      "Réfrigérateur organisé",
-      "Conseils de conservation",
-      "Cuisine propre et rangée",
-    ],
-  },
-  {
-    titre: "Routine du Cuistologue",
-    prixReduit: "76,50 €",
-    suffixePrix: "/ session",
-    prixPlein: "153 €",
-    fonctionnalites: [
-      "Vos habitudes prises en compte",
-      "Préférences alimentaires respectées",
-      "Menus de la semaine personnalisés",
-      "Liste de courses préparée",
-      "Repas cuisinés à domicile",
-      "Réfrigérateur organisé",
-      "Conseils de conservation",
-      "Cuisine propre et rangée",
-    ],
-  },
-];
+import { formules } from "../../../lib/formules-data";
 ---
 
 <h2 class="pricing-title">
@@ -61,27 +11,17 @@ const formules = [
 
 <section class="pricing">
   {formules.map((formule) => (
-    <div class="pricing-card">
+    <div class:list={["pricing-card", { "pricing-card--mise-en-avant": formule.misEnAvant }]}>
       <div class="pricing-card__content">
         <h3 class="pricing-card__title">{formule.titre}</h3>
-        <p class="pricing-card__meta">1 à 2 personnes</p>
 
-        <div class="pricing-card__price-box">
-          <p class="pricing-card__price">
-            {formule.prixReduit}
-            {formule.suffixePrix && <span class="pricing-card__price-suffix">{formule.suffixePrix}</span>}
-          </p>
-          <p class="pricing-card__credit">
-            <img src={checkmarkCircle.src} alt="" aria-hidden="true" />
-            Après crédit d'impôt <span class="pricing-card__credit-strike">({formule.prixPlein} avant réduction)</span>
-          </p>
-        </div>
+        <p class="pricing-card__accroche">{formule.accroche}</p>
 
-        <div class="pricing-card__badges">
-          <span class="pricing-card__badge">10 à 15 portions</span>
-          <span class="pricing-card__badge">~ 2h30</span>
-        </div>
+        <p class="pricing-card__ideal">
+          <strong>Idéale pour :</strong> {formule.ideal}
+        </p>
 
+        <p class="pricing-card__comprend">Comprend</p>
         <ul class="pricing-card__features">
           {formule.fonctionnalites.map((item) => (
             <li>
@@ -91,7 +31,24 @@ const formules = [
           ))}
         </ul>
 
-        <a href="/contact" class="pricing-card__cta">Je me lance</a>
+        <p class="pricing-card__resultat">{formule.resultat}</p>
+        <p class="pricing-card__duree">{formule.duree}</p>
+
+        <div class="pricing-card__price-box">
+          <p class="pricing-card__price-before">{formule.prixPlein} avant crédit d'impôt</p>
+          <p class="pricing-card__price">
+            {formule.prixReduit}
+            {formule.suffixePrix && <span class="pricing-card__price-suffix">{formule.suffixePrix}</span>}
+          </p>
+          <span
+            class="pricing-card__badge-saving"
+            class:list={{ "pricing-card__badge-saving--vide": !formule.mention }}
+          >
+            {formule.mention || "\u00A0"}
+          </span>
+        </div>
+
+        <a href={`/reserver?formule=${formule.slug}`} class="pricing-card__cta">Je me lance</a>
       </div>
     </div>
   ))}
