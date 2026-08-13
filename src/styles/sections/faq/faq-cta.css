@@ -29,11 +29,12 @@
 }
 
 .faq-cta__icon {
+  position: absolute;
   width: 5.8vw;
   max-width: 111.7px;
   display: flex;
-  margin-left: -4%;
-  margin-top: -15%;
+  margin-left: 65%;
+  margin-top: -18%;
   transform: rotate(45deg);
   flex-shrink: 0;
 }
