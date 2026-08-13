@@ -67,7 +67,7 @@
   color: var(--color-ink-soft);
   border-radius: 6px;
   padding: 0rem 1.5rem;
-  height: 46px;
+  height: 35px;
   font-family: "Inter";
   font-weight: 600;
   font-size: 0.875rem;
@@ -76,16 +76,13 @@
 }
 
 .navbar--scrolling {
-  height: 50px;
+  height: 55px;
 }
 
 .navbar--scrolling .navbar__logo {
-  height: 36px;
+  height: 45px;
 }
 
-/* Menu ouvert : la navbar reste figée à sa taille normale, quel que soit
-   le scroll — :has() permet de cibler le parent depuis l'état de l'enfant,
-   sans repasser par le JS pour ça */
 .navbar:has(.navbar__mobile-menu.is-open) {
   height: var(--header-height) !important;
 }
@@ -126,8 +123,6 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Panneau du menu mobile — fond semi-opaque + flou, pour que le contenu
-   derrière (Hero, etc.) reste discret et lisible sous le menu */
 .navbar__mobile-menu {
   position: absolute;
   top: 100%;
@@ -177,8 +172,6 @@
   font-size: 0.85rem;
 }
 
-/* Tablette portrait + mobile (< 1024px) : liens ET bouton contact dans le
-   burger — plus de CTA visible en permanence dans la barre dès ce seuil */
 @media (max-width: 1023px) {
 
   .navbar {

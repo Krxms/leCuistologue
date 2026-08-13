@@ -24,14 +24,37 @@
   min-width: 320px;
   border-radius: 20px;
   background-color: #fdfbfa;
-  border: 1px solid rgba(37, 61, 74, 0.08);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(37, 61, 74, 0.06);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.06),
+    0 20px 40px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 12px 28px rgba(0, 0, 0, 0.08),
+    0 24px 48px rgba(0, 0, 0, 0.06);
 }
 
 .pricing-card--mise-en-avant {
-  background-color: #ffffff;
+  background-color: rgba(188, 132, 60, 0.096);
   border: 2px solid #bc843c;
-  box-shadow: 0 12px 32px rgba(188, 132, 60, 0.16);
+  /*box-shadow:
+    0 4px 8px rgba(188, 132, 60, 0.15),
+    0 16px 32px rgba(188, 132, 60, 0.18),
+    0 28px 56px rgba(188, 132, 60, 0.12);*/
+}
+
+.pricing-card--mise-en-avant:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 6px 12px rgba(188, 132, 60, 0.08),
+    0 20px 40px rgba(188, 132, 60, 0.12),
+    0 32px 64px rgba(188, 132, 60, 0.05);
 }
 
 .pricing-card__ribbon {
@@ -52,7 +75,7 @@
 }
 
 .pricing-card__content {
-  padding: 2.4rem 1.9rem 4rem;
+  padding: 0.8rem 1.9rem 4rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -65,7 +88,7 @@
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #9a9a92;
+  color: #6b665f;
 }
 
 .pricing-card__title {
@@ -77,15 +100,17 @@
   min-height: 3.6rem;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .pricing-card__accroche {
   margin: 0.5rem 0 1rem;
   font-family: var(--font-body);
   font-weight: 600;
-  font-style: italic;
+  /*font-style: italic;*/
   font-size: 0.95rem;
-  color: #bc843c;
+  color: #253d4a;
   min-height: 2.6rem;
 }
 
@@ -101,13 +126,28 @@
   margin: 0.8rem 0 0;
   font-family: var(--font-body);
   font-size: 0.85rem;
-  color: #6b6b6b;
+  color: #4a4a45;
   min-height: 3rem;
 }
 
 .pricing-card__ideal strong {
   color: var(--color-ink);
 }
+
+/* ===== Encart "Comprend" — fond inversé selon la carte ===== */
+
+.pricing-card__features-box {
+  border-radius: 14px;
+  padding: 1.2rem 1.3rem;
+  background-color: #fbf2e2;
+  min-height: 21rem;
+}
+
+.pricing-card--mise-en-avant .pricing-card__features-box {
+  background-color: #ffffff;
+}
+
+/* ===== Prix — même fond que les cartes latérales sur les 3 cartes ===== */
 
 .pricing-card__price-box {
   margin-top: auto;
@@ -118,12 +158,16 @@
   text-align: center;
 }
 
+.pricing-card__price-box--mise-en-avant {
+ background-color: #0f36cf;
+}
+
 .pricing-card__price-before {
   margin: 0 0 0.4rem;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 0.85rem;
-  color: #9a9a92;
+  color: #7a756c;
   text-decoration: line-through;
 }
 
@@ -162,13 +206,13 @@
 }
 
 .pricing-card__comprend {
-  margin: 1.4rem 0 0.8rem;
+  margin: 0 0 0.8rem;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #9a9a92;
+  color: #6b665f;
 }
 
 .pricing-card__features {
@@ -178,7 +222,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  min-height: 20rem;
 }
 
 .pricing-card__features li {
@@ -208,7 +251,7 @@
   font-style: italic;
   font-size: 0.83rem;
   line-height: 1.45;
-  color: #6b6b6b;
+  color: #4a4a45;
   min-height: 5rem;
 }
 
@@ -220,6 +263,10 @@
   color: var(--color-ink-soft);
   min-height: 1.5rem;
 }
+
+/* ===== CTA — même couleur sur les 3 cartes, pas de différenciation
+   par palier (cohérent avec Stripe/Linear/Notion : le CTA reste la
+   couleur de marque, seul le cadre de la carte signale l'emphase) ===== */
 
 .pricing-card__cta {
   display: block;
@@ -240,17 +287,45 @@
   background-color: #1a2b35;
 }
 
-.pricing-card--mise-en-avant .pricing-card__cta {
-  background-color: #bc843c;
+/* ===== Textes recolorés sur la carte centrale (fond teinté) ===== */
+
+.pricing-card--mise-en-avant .pricing-card__numero,
+.pricing-card--mise-en-avant .pricing-card__ideal,
+.pricing-card--mise-en-avant .pricing-card__resultat,
+.pricing-card--mise-en-avant .pricing-card__duree {
+  color: #2c2c2c;
 }
 
-.pricing-card--mise-en-avant .pricing-card__cta:hover {
-  background-color: #a5732f;
+/* ===== Emphase carte centrale ===== */
+
+.pricing-card:not(.pricing-card--mise-en-avant) {
+  margin-top: 1.5rem;
+}
+
+.pricing-card--mise-en-avant {
+  transform: scale(1);
+  z-index: 1;
+}
+
+.pricing-card--mise-en-avant:hover {
+  transform: scale(1.01) translateY(-1.5px);
 }
 
 @media (max-width: 1210px) {
   .pricing-card {
     width: 45%;
+  }
+
+  .pricing-card--mise-en-avant {
+    transform: none;
+  }
+
+  .pricing-card--mise-en-avant:hover {
+    transform: translateY(-4px);
+  }
+
+  .pricing-card:not(.pricing-card--mise-en-avant) {
+    margin-top: 0;
   }
 }
 

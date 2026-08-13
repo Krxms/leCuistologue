@@ -21,15 +21,17 @@ import { formules } from "../../../lib/formules-data";
           <strong>Idéale pour :</strong> {formule.ideal}
         </p>
 
-        <p class="pricing-card__comprend">Comprend</p>
-        <ul class="pricing-card__features">
-          {formule.fonctionnalites.map((item) => (
-            <li>
-              <img src={checkmark.src} alt="" aria-hidden="true" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <div class="pricing-card__features-box">
+          <p class="pricing-card__comprend">Comprend :</p>
+          <ul class="pricing-card__features">
+            {formule.fonctionnalites.map((item) => (
+              <li>
+                <img src={checkmark.src} alt="" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <p class="pricing-card__resultat">{formule.resultat}</p>
         <p class="pricing-card__duree">{formule.duree}</p>
