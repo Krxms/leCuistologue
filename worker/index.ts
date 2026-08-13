@@ -36,6 +36,50 @@ function echapper(texte: string) {
   return texte.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+function habillerEmail(titre: string, contenuHtml: string): string {
+  return `
+<!DOCTYPE html>
+<html lang="fr">
+<body style="margin:0; padding:0; background-color:#f4f1ec; font-family:Arial, sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f1ec; padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px; background-color:#ffffff; border-radius:12px; overflow:hidden;">
+
+          <!-- En-tête -->
+          <tr>
+            <td align="center" style="background-color:#253d4a; padding:28px 24px;">
+              <img src="https://lecuistologue.fr/images/logo-email.png" alt="Le Cuistologue" width="140" style="display:block; margin-bottom:12px;" />
+              <p style="margin:0; color:#fdfbfa; font-size:18px; font-weight:600;">${echapper(titre)}</p>
+            </td>
+          </tr>
+
+          <!-- Contenu -->
+          <tr>
+            <td style="padding:28px 24px; color:#2c2c2c; font-size:15px; line-height:1.6;">
+              ${contenuHtml}
+            </td>
+          </tr>
+
+          <!-- Pied de page -->
+          <tr>
+            <td align="center" style="background-color:#f8f4ef; padding:20px 24px; font-size:12px; color:#6b6b6b;">
+              <p style="margin:0 0 4px;">Le Cuistologue — Cuisine à domicile</p>
+              <p style="margin:0;">
+                <a href="mailto:contact@lecuistologue.fr" style="color:#bc843c; text-decoration:none;">contact@lecuistologue.fr</a>
+                &nbsp;·&nbsp; 06 19 95 74 09
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
 async function handleSend(request: Request, env: Env): Promise<Response> {
   let data: any;
   try {
@@ -80,7 +124,7 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
   await envoyerEmail(env, {
     to: EMAIL_CUISTOLOGUE,
     subject: objet,
-    html: detailsHtml,
+    html: habillerEmail(objet, detailsHtml),
   });
 
   const confirmationHtml = `
@@ -93,7 +137,7 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
   await envoyerEmail(env, {
     to: email,
     subject: "Votre demande a bien été reçue — Le Cuistologue",
-    html: confirmationHtml,
+    html: habillerEmail("Votre demande a bien été reçue", confirmationHtml),
   });
 
   return new Response(JSON.stringify({ ok: true }), {
