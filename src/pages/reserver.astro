@@ -134,17 +134,11 @@ import { formules } from "../lib/formules-data";
 </BaseLayout>
 
 <script>
-  // ---- Date minimale = aujourd'hui, posée côté client (fiable, même
-  // raison que pour la formule : calculée au vrai moment de la visite) ----
   const inputDate = document.getElementById("date-souhaitee") as HTMLInputElement;
   if (inputDate) {
     inputDate.min = new Date().toISOString().split("T")[0];
   }
 
-  // ---- Lecture de la formule choisie depuis l'URL (?formule=...) ----
-  // Nécessaire côté client car le site est généré statiquement : la
-  // frontmatter Astro tourne au moment du build, pas à chaque visite,
-  // donc elle ne peut jamais connaître le vrai paramètre de l'URL.
   const params = new URLSearchParams(window.location.search);
   const slugChoisi = params.get("formule") || "essentielle";
 
@@ -157,8 +151,6 @@ import { formules } from "../lib/formules-data";
     if (estLeBon) slugValide = slugChoisi;
   });
 
-  // Si le slug dans l'URL ne correspond à aucune formule connue,
-  // on affiche la première par défaut plutôt qu'une page vide.
   if (![...recaps].some((r) => r.dataset.recapFormule === slugChoisi)) {
     const premier = recaps[0];
     if (premier) {
@@ -172,7 +164,6 @@ import { formules } from "../lib/formules-data";
     inputFormuleSlug.value = slugValide;
   }
 
-  // ---- Bascule champ téléphone ----
   const radiosPreference = document.querySelectorAll('input[name="preference"]');
   const champTelephone = document.getElementById("champ-telephone");
   const inputTelephone = document.getElementById("telephone") as HTMLInputElement;
@@ -187,7 +178,6 @@ import { formules } from "../lib/formules-data";
   radiosPreference.forEach((r) => r.addEventListener("change", majTelephone));
   majTelephone();
 
-  // ---- Bascule champ allergies ----
   const radiosAllergies = document.querySelectorAll('input[name="allergies"]');
   const champAllergies = document.getElementById("champ-allergies");
 
@@ -200,15 +190,52 @@ import { formules } from "../lib/formules-data";
   radiosAllergies.forEach((r) => r.addEventListener("change", majAllergies));
   majAllergies();
 
-  // ---- Point d'accroche pour le futur envoi réel ----
   const form = document.getElementById("reserver-form") as HTMLFormElement;
   const statusEl = document.getElementById("reserver-form-status");
 
-  form?.addEventListener("submit", (e) => {
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (statusEl) {
-      statusEl.textContent =
-        "Le formulaire n'est pas encore relié à un envoi réel — à venir prochainement.";
+    const boutonEnvoyer = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    boutonEnvoyer.disabled = true;
+    if (statusEl) statusEl.textContent = "Envoi en cours...";
+
+    const formData = new FormData(form);
+    const formuleActuelle = document.querySelector<HTMLElement>("[data-recap-formule]:not([hidden])");
+
+    const data = {
+      type: "reservation",
+      formule: formData.get("formule"),
+      formuleTitre: formuleActuelle?.querySelector(".reserver__recap-title")?.textContent || "",
+      nom: formData.get("nom"),
+      email: formData.get("email"),
+      telephone: formData.get("telephone"),
+      preference: formData.get("preference"),
+      personnes: formData.get("personnes"),
+      dateSouhaitee: formData.get("date-souhaitee"),
+      commune: formData.get("commune"),
+      allergies: formData.get("allergies"),
+      allergiesDetails: formData.get("allergies-details"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const resultat = await res.json() as { ok: boolean; erreur?: string };
+
+      if (resultat.ok) {
+        if (statusEl) statusEl.textContent = "Votre demande a bien été envoyée. Vous recevrez une confirmation par e-mail.";
+        form.reset();
+      } else {
+        if (statusEl) statusEl.textContent = "Une erreur est survenue. Réessayez ou contactez-nous directement par téléphone.";
+        boutonEnvoyer.disabled = false;
+      }
+    } catch {
+      if (statusEl) statusEl.textContent = "Une erreur réseau est survenue. Réessayez.";
+      boutonEnvoyer.disabled = false;
     }
   });
 </script>

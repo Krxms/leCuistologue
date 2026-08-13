@@ -68,28 +68,50 @@ import "../../../styles/sections/contact/contact-form.css";
     const preferenceTelephone = document.querySelector<HTMLInputElement>(
       'input[name="preference"]:checked'
     )?.value === "telephone";
-
-    if (champTelephone) {
-      champTelephone.hidden = !preferenceTelephone;
-    }
-    if (inputTelephone) {
-      inputTelephone.required = preferenceTelephone;
-    }
+    if (champTelephone) champTelephone.hidden = !preferenceTelephone;
+    if (inputTelephone) inputTelephone.required = preferenceTelephone;
   }
-
   radios.forEach((radio) => radio.addEventListener("change", mettreAJourChampTelephone));
   mettreAJourChampTelephone();
 
-  // Point d'accroche pour le futur envoi réel — actuellement bloque juste
-  // le rechargement de page et affiche un message temporaire.
   const form = document.getElementById("contact-form") as HTMLFormElement;
   const statusEl = document.getElementById("contact-form-status");
 
-  form?.addEventListener("submit", (e) => {
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (statusEl) {
-      statusEl.textContent =
-        "Le formulaire n'est pas encore relié à un envoi réel — à venir prochainement.";
+    const boutonEnvoyer = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    boutonEnvoyer.disabled = true;
+    if (statusEl) statusEl.textContent = "Envoi en cours...";
+
+    const formData = new FormData(form);
+    const data = {
+      type: "contact",
+      nom: formData.get("nom"),
+      email: formData.get("email"),
+      telephone: formData.get("telephone"),
+      preference: formData.get("preference"),
+      sujet: formData.get("sujet"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const resultat = await res.json() as { ok: boolean; erreur?: string };
+
+      if (resultat.ok) {
+        if (statusEl) statusEl.textContent = "Votre message a bien été envoyé. Vous recevrez une confirmation par e-mail.";
+        form.reset();
+      } else {
+        if (statusEl) statusEl.textContent = "Une erreur est survenue. Réessayez ou contactez-nous directement par téléphone.";
+        boutonEnvoyer.disabled = false;
+      }
+    } catch {
+      if (statusEl) statusEl.textContent = "Une erreur réseau est survenue. Réessayez.";
+      boutonEnvoyer.disabled = false;
     }
   });
 </script>
