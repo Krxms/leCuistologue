@@ -89,6 +89,7 @@
 
 @media (max-width: 767px) {
   .avance-questions {
+    margin-top: 1rem;
     padding: 3rem 1.5rem;
   }
 

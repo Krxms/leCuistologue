@@ -3,6 +3,7 @@ import "../../../styles/sections/avance-immediate/avance-immediate-content.css";
 import smallbg from "../../../assets/avance-immediate/avance-immediate-smallbg.png";
 import largebg from "../../../assets/avance-immediate/avance-immediate-largebg.png";
 import urssaf from "../../../assets/avance-immediate/urssaf.png";
+import urssafMobile from "../../../assets/avance-immediate/UrssafMobile.svg";
 import arrowConnector2 from "../../../assets/avance-immediate/arrow-connector2.svg";
 ---
 
@@ -49,7 +50,7 @@ import arrowConnector2 from "../../../assets/avance-immediate/arrow-connector2.s
         <img src={largebg.src} alt="" class="avance-content__card-bg" aria-hidden="true" />
         <p class="avance-content__card-text">
           Après chaque prestation réalisée à votre domicile, <b>Le Cuistologue</b> dépose une demande de paiement sur votre espace URSSAF.<br><br>
-          Vous disposez de 48 heures pour l'accepter ou la refuser.<br><br> 
+          Vous disposez de 48 heures pour l'accepter ou la refuser.<br><br>
           Depuis votre compte, vous pouvez également consulter à tout moment : le montant du crédit d'impôt déjà utilisé ; le montant encore disponible pour l'année en cours.<br><br>
           Les plafonds applicables au crédit d'impôt sont détaillés sur le site officiel impots.gouv.fr, dans la rubrique consacrée à l'emploi à domicile.
         </p>
@@ -60,7 +61,8 @@ import arrowConnector2 from "../../../assets/avance-immediate/arrow-connector2.s
   <div class="avance-content__comment">
     <h2 class="avance-content__comment-title">Comment ça marche ?</h2>
     <img src={arrowConnector2.src} alt="" class="avance-content__comment-arrow" aria-hidden="true" />
-    <img src={urssaf.src} alt="Interface de l'espace URSSAF pour l'avance immédiate" class="avance-content__comment-image" />
+    <img src={urssaf.src} alt="Interface de l'espace URSSAF pour l'avance immédiate" class="avance-content__comment-image avance-content__comment-image--desktop" />
+    <img src={urssafMobile.src} alt="Interface de l'espace URSSAF pour l'avance immédiate" class="avance-content__comment-image avance-content__comment-image--mobile" />
   </div>
 
 </section>
