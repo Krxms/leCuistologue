@@ -92,6 +92,21 @@
   width: 9%;
 }
 
+@media (min-width: 1024px) and (max-width: 1210px) {
+  .formules-header__arrow {
+    left: 59%;
+    top: 32%;
+  }
+}
+
+@media (max-width: 834px) {
+.formules-header__arrow {
+  left: 61%;
+  top: 33%;
+}
+}
+
+
 @media (max-width: 767px) {
   .formules-header {
     display: flex;

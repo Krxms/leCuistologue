@@ -9,49 +9,184 @@ import { formules } from "../../../lib/formules-data";
   avec avance immédiate
 </h2>
 
-<section class="pricing">
-  {formules.map((formule) => (
-    <div class:list={["pricing-card", { "pricing-card--mise-en-avant": formule.misEnAvant }]}>
-      <div class="pricing-card__content">
-        <h3 class="pricing-card__title">{formule.titre}</h3>
+<div class="pricing-stage" id="pricing-stage">
+  <button type="button" class="pricing-nav pricing-nav--prev" id="pricing-prev" aria-label="Formule précédente">‹</button>
 
-        <p class="pricing-card__accroche">{formule.accroche}</p>
+  <section class="pricing" id="pricing-deck">
+    {formules.map((formule) => (
+      <div class:list={["pricing-card", { "pricing-card--mise-en-avant": formule.misEnAvant }]}>
+        <div class="pricing-card__content">
+          <h3 class="pricing-card__title">{formule.titre}</h3>
 
-        <p class="pricing-card__ideal">
-          <strong>Idéale pour :</strong> {formule.ideal}
-        </p>
+          <p class="pricing-card__accroche">{formule.accroche}</p>
 
-        <div class="pricing-card__features-box">
-          <p class="pricing-card__comprend">Comprend :</p>
-          <ul class="pricing-card__features">
-            {formule.fonctionnalites.map((item) => (
-              <li>
-                <img src={checkmark.src} alt="" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <p class="pricing-card__resultat">{formule.resultat}</p>
-        <p class="pricing-card__duree">{formule.duree}</p>
-
-        <div class="pricing-card__price-box">
-          <p class="pricing-card__price-before">{formule.prixPlein} avant crédit d'impôt</p>
-          <p class="pricing-card__price">
-            {formule.prixReduit}
-            {formule.suffixePrix && <span class="pricing-card__price-suffix">{formule.suffixePrix}</span>}
+          <p class="pricing-card__ideal">
+            <strong>Idéale pour :</strong> {formule.ideal}
           </p>
-          <span
-            class="pricing-card__badge-saving"
-            class:list={{ "pricing-card__badge-saving--vide": !formule.mention }}
-          >
-            {formule.mention || "\u00A0"}
-          </span>
-        </div>
 
-        <a href={`/reserver?formule=${formule.slug}`} class="pricing-card__cta">Je me lance</a>
+          <div class="pricing-card__features-box">
+            <p class="pricing-card__comprend">Comprend :</p>
+            <ul class="pricing-card__features">
+              {formule.fonctionnalites.map((item) => (
+                <li>
+                  <img src={checkmark.src} alt="" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p class="pricing-card__resultat">{formule.resultat}</p>
+          <p class="pricing-card__duree">{formule.duree}</p>
+
+          <div class="pricing-card__price-box">
+            <p class="pricing-card__price-before">{formule.prixPlein} avant crédit d'impôt</p>
+            <p class="pricing-card__price">
+              {formule.prixReduit}
+              {formule.suffixePrix && <span class="pricing-card__price-suffix">{formule.suffixePrix}</span>}
+            </p>
+            <span
+              class="pricing-card__badge-saving"
+              class:list={{ "pricing-card__badge-saving--vide": !formule.mention }}
+            >
+              {formule.mention || "\u00A0"}
+            </span>
+          </div>
+
+          <a href={`/reserver?formule=${formule.slug}`} class="pricing-card__cta">Je me lance</a>
+        </div>
       </div>
-    </div>
-  ))}
-</section>
+    ))}
+  </section>
+
+  <button type="button" class="pricing-nav pricing-nav--next" id="pricing-next" aria-label="Formule suivante">›</button>
+
+  <div class="pricing-dots" id="pricing-dots"></div>
+</div>
+
+<script>
+  const mq = window.matchMedia("(max-width: 1210px)");
+  const stage = document.getElementById("pricing-stage") as HTMLElement | null;
+  const deck = document.getElementById("pricing-deck") as HTMLElement | null;
+  const dotsWrap = document.getElementById("pricing-dots") as HTMLElement | null;
+  const btnPrev = document.getElementById("pricing-prev");
+  const btnNext = document.getElementById("pricing-next");
+
+  if (stage && deck && dotsWrap) {
+    const cards = Array.from(deck.querySelectorAll<HTMLElement>(".pricing-card"));
+    const N = cards.length;
+
+    let index = cards.findIndex((c) => c.classList.contains("pricing-card--mise-en-avant"));
+    if (index === -1) index = Math.floor(N / 2);
+
+    let dragging = false;
+    let startX = 0;
+    let dragDX = 0;
+    let moved = false;
+    let actif = false;
+
+    const dots = cards.map((_, i) => {
+      const b = document.createElement("button");
+      b.className = "pricing-dot";
+      b.type = "button";
+      b.setAttribute("aria-label", "Aller à la formule " + (i + 1));
+      b.addEventListener("click", () => go(i));
+      dotsWrap.appendChild(b);
+      return b;
+    });
+
+    function offset(i: number): number {
+      let d = i - index;
+      d -= Math.round(d / N) * N;
+      return d;
+    }
+
+    function render(dragShift = 0) {
+      // Écartement différent selon la largeur réelle de l'écran :
+      // 80 sur l'iPad portrait (< 1024px), 100 au-delà (iPad paysage)
+      const largeurEcartement = window.innerWidth < 1024 ? 60 : 100;
+
+      cards.forEach((carte, i) => {
+        const off = offset(i) + dragShift;
+        const abs = Math.abs(off);
+        const tx = off * largeurEcartement;
+        const scale = Math.max(0.86, 1 - abs * 0.1);
+        const zi = 100 - Math.round(abs * 10);
+
+        carte.style.transform = `translate(-50%, -50%) translateX(${tx}%) scale(${scale})`;
+        carte.style.zIndex = String(zi);
+      });
+      dots.forEach((d, i) => d.classList.toggle("pricing-dot--active", i === index));
+    }
+
+    function go(i: number) {
+      index = ((i % N) + N) % N;
+      render();
+    }
+    const next = () => go(index + 1);
+    const prev = () => go(index - 1);
+
+    btnNext?.addEventListener("click", next);
+    btnPrev?.addEventListener("click", prev);
+
+    cards.forEach((carte, i) => {
+      carte.addEventListener("click", (e) => {
+        if (!actif) return;
+        if (!moved && i !== index) {
+          e.preventDefault();
+          go(i);
+        }
+      });
+    });
+
+    const largeurCarte = () => Math.max(200, stage.clientWidth * 0.6);
+
+    function onDown(e: PointerEvent) {
+      if (!actif) return;
+      dragging = true;
+      moved = false;
+      startX = e.clientX;
+      dragDX = 0;
+      cards.forEach((c) => (c.style.transition = "none"));
+      deck?.setPointerCapture?.(e.pointerId);
+    }
+    function onMoveP(e: PointerEvent) {
+      if (!dragging) return;
+      dragDX = e.clientX - startX;
+      if (Math.abs(dragDX) > 6) moved = true;
+      render(-dragDX / largeurCarte());
+    }
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      cards.forEach((c) => (c.style.transition = ""));
+      const shift = Math.round(-dragDX / largeurCarte());
+      if (shift !== 0) go(index + shift);
+      else render();
+    }
+
+    deck.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onMoveP);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+
+    function appliquerEtatEcran(correspond: boolean) {
+      actif = correspond;
+      if (correspond) {
+        render();
+      } else {
+        cards.forEach((carte) => {
+          carte.style.transform = "";
+          carte.style.zIndex = "";
+        });
+      }
+    }
+
+    appliquerEtatEcran(mq.matches);
+    mq.addEventListener("change", (e) => appliquerEtatEcran(e.matches));
+
+    window.addEventListener("resize", () => {
+      if (actif) render();
+    });
+  }
+</script>

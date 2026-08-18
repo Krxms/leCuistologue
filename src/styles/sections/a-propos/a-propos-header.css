@@ -103,6 +103,12 @@
   padding: 2.5rem 1.5rem 0;
 }
 
+@media (max-width: 834px) {
+.a-propos-header__arrow {
+  left: 115%;
+}
+}
+
 @media (max-width: 767px) {
   .a-propos-header {
     display: flex;

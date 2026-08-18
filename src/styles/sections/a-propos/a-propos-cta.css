@@ -103,12 +103,22 @@
   z-index: 0;
 }
 
+@media (min-width: 1024px) and (max-width: 1210px) {
+.a-propos-cta__actions {
+  margin-top: 3rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 600px;
+}
+}
+
 @media (max-width: 834px) {
   .a-propos-cta {
     min-height: auto;
     flex-direction: column;
-    padding: 3rem 1.5rem;
-  }
+    padding: 5rem 1.5rem;
+}
 
   .a-propos-cta__content {
     max-width: 100%;
@@ -122,8 +132,8 @@
 
   .a-propos-cta__icon {
     width: 8.8vw;
-    margin-left: 94%;
-    margin-top: -22%;
+    margin-left: 69%;
+    margin-top: -11%;
   }
 
   .a-propos-cta__title-row {

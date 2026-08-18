@@ -43,10 +43,6 @@
 .pricing-card--mise-en-avant {
   background-color: rgba(188, 132, 60, 0.096);
   border: 2px solid #bc843c;
-  /*box-shadow:
-    0 4px 8px rgba(188, 132, 60, 0.15),
-    0 16px 32px rgba(188, 132, 60, 0.18),
-    0 28px 56px rgba(188, 132, 60, 0.12);*/
 }
 
 .pricing-card--mise-en-avant:hover {
@@ -108,7 +104,6 @@
   margin: 0.5rem 0 1rem;
   font-family: var(--font-body);
   font-weight: 600;
-  /*font-style: italic;*/
   font-size: 0.95rem;
   color: #253d4a;
   min-height: 2.6rem;
@@ -134,8 +129,6 @@
   color: var(--color-ink);
 }
 
-/* ===== Encart "Comprend" — fond inversé selon la carte ===== */
-
 .pricing-card__features-box {
   border-radius: 14px;
   padding: 1.2rem 1.3rem;
@@ -147,8 +140,6 @@
   background-color: #ffffff;
 }
 
-/* ===== Prix — même fond que les cartes latérales sur les 3 cartes ===== */
-
 .pricing-card__price-box {
   margin-top: auto;
   margin-bottom: 1.5rem;
@@ -159,7 +150,7 @@
 }
 
 .pricing-card__price-box--mise-en-avant {
- background-color: #0f36cf;
+  background-color: #0f36cf;
 }
 
 .pricing-card__price-before {
@@ -264,10 +255,6 @@
   min-height: 1.5rem;
 }
 
-/* ===== CTA — même couleur sur les 3 cartes, pas de différenciation
-   par palier (cohérent avec Stripe/Linear/Notion : le CTA reste la
-   couleur de marque, seul le cadre de la carte signale l'emphase) ===== */
-
 .pricing-card__cta {
   display: block;
   margin-top: 1.6rem;
@@ -287,16 +274,12 @@
   background-color: #1a2b35;
 }
 
-/* ===== Textes recolorés sur la carte centrale (fond teinté) ===== */
-
 .pricing-card--mise-en-avant .pricing-card__numero,
 .pricing-card--mise-en-avant .pricing-card__ideal,
 .pricing-card--mise-en-avant .pricing-card__resultat,
 .pricing-card--mise-en-avant .pricing-card__duree {
   color: #2c2c2c;
 }
-
-/* ===== Emphase carte centrale ===== */
 
 .pricing-card:not(.pricing-card--mise-en-avant) {
   margin-top: 1.5rem;
@@ -311,41 +294,177 @@
   transform: scale(1.01) translateY(-1.5px);
 }
 
+/* ============================================================
+   Contrôles du carrousel — masqués par défaut (desktop),
+   révélés uniquement en dessous de 1211px
+   ============================================================ */
+
+.pricing-stage {
+  position: relative;
+}
+
+.pricing-nav,
+.pricing-dots {
+  display: none;
+}
+
+.pricing-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fdfbfa;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.pricing-nav--prev {
+  left: 0.5rem;
+}
+
+.pricing-nav--next {
+  right: 0.5rem;
+}
+
+.pricing-dots {
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pricing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background-color: rgba(37, 61, 74, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.pricing-dot--active {
+  background-color: #bc843c;
+  transform: scale(1.4);
+}
+
+/* ============================================================
+   CARROUSEL — en dessous de 1211px uniquement
+   ============================================================ */
+
 @media (max-width: 1210px) {
-  .pricing-card {
-    width: 45%;
+  .pricing-title {
+    margin-top: -7rem;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+
+    .pricing-nav {
+    display: flex;
+    z-index: 90;
+  }
+
+  .pricing-dots {
+    display: flex;
+  }
+
+  /* .pricing porte à la fois le style desktop (ci-dessus, non
+     modifié) et devient ici la "scène" du carrousel */
+    .pricing {
+    position: relative;
+    height: 1080px;
+    overflow: hidden;
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+
+    .pricing-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(132vw, 350px);
+    min-width: 0;
+    margin-top: 0 !important;
+    transition: transform 0.45s ease-out;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 20px 44px rgba(0, 0, 0, 0.08);
+    height: 920px;
+    gap: 10rem;
   }
 
   .pricing-card--mise-en-avant {
-    transform: none;
-  }
-
-  .pricing-card--mise-en-avant:hover {
-    transform: translateY(-4px);
-  }
-
-  .pricing-card:not(.pricing-card--mise-en-avant) {
-    margin-top: 0;
-  }
+  background-color: rgb(244, 235, 228);
+  border: 2px solid #bc843c;
 }
 
-@media (max-width: 767px) {
-  .pricing {
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-    padding: 6rem 3.3% 4rem;
+  .pricing-card__content {
+    padding: 1.1rem 1.4rem 1.6rem;
   }
 
-  .pricing-title {
-    margin-top: -5rem;
-    margin-bottom: -2rem;
-    padding: 2.5rem 1.5rem 0;
-    font-size: clamp(1.2rem, 2.4vw, 2.75rem);
+  .pricing-card__title {
+    font-size: 1.15rem;
+    min-height: auto;
   }
 
-  .pricing-card {
-    width: 100%;
-    max-width: 400px;
+  .pricing-card__accroche {
+    font-size: 0.8rem;
+    min-height: auto;
+    margin: 0.4rem 0 0.6rem;
+  }
+
+  .pricing-card__ideal {
+    font-size: 0.76rem;
+    min-height: auto;
+    margin: 0.5rem 0 0;
+  }
+
+  .pricing-card__features-box {
+    margin-top: 0.8rem;
+    padding: 0.9rem 1rem;
+    min-height: 0;
+  }
+
+  .pricing-card__comprend {
+    font-size: 0.74rem;
+    margin: 0 0 0.55rem;
+  }
+
+  .pricing-card__features {
+    gap: 0.45rem;
+  }
+
+  .pricing-card__features span {
+    font-size: 0.78rem;
+    line-height: 1.32;
+  }
+
+  .pricing-card__resultat {
+    font-size: 0.72rem;
+    min-height: 0;
+    margin: 0.8rem 0 0;
+    padding-top: 0.8rem;
+  }
+
+  .pricing-card__duree {
+    font-size: 0.72rem;
+    min-height: 0;
+    margin: 0.5rem 0 0.9rem;
+  }
+
+  .pricing-card__price {
+    font-size: 1.75rem;
+  }
+
+  .pricing-card__cta {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    padding-block: 0.7rem;
   }
 }
