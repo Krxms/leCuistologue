@@ -86,6 +86,21 @@
   width: 9%;
 }
 
+@media (min-width: 1023px) and (max-width: 1210px) {
+  .avance-header__arrow {
+  position: absolute;
+  left: 51%;
+  top: 29%;
+  }
+}
+
+@media (max-width: 834px){
+  .avance-header__arrow {
+  left: 51%;
+  top: 31%;
+}
+}
+
 @media (max-width: 767px) {
   .avance-header {
     display: flex;

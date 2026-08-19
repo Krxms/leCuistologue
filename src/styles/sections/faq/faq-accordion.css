@@ -132,9 +132,38 @@
   color: var(--color-ink-soft);
 }
 
-@media (max-width: 900px) {
+@media (min-width: 1023px) and (max-width: 1210px) {
+  .faq-accordion {
+    margin-top: -9.4rem;
+    max-width: 1000px;
+    margin-bottom: 2rem;
+  }
+
+  .faq-accordion__title {
+    margin-top: 1rem;
+    font-size: clamp(1.4rem, 2.4vw, 2.75rem);
+  }
+}
+
+@media (max-width: 834px) {
+  .faq-accordion {
+    margin-top: -7rem;
+    max-width: 720px;
+    margin-bottom: 2rem;
+  }
+
+  .faq-accordion__title {
+    font-size: clamp(1.4rem, 2.4vw, 2.75rem);
+    font-weight: 700;
+  }
+
   .faq-accordion__grid {
     grid-template-columns: 1fr;
+  }
+
+  .faq-accordion__col {
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 }
 

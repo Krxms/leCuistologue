@@ -176,11 +176,132 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 1023px) {
+/* ============================================================
+   TABLETTE PAYSAGE — 1024px à 1210px
+   ============================================================ */
+
+@media (min-width: 1024px) and (max-width: 1210px) {
+  .avance-content {
+    margin-top: -10.5rem;
+  }
+
   .avance-content__grid {
+
     flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "p1"
+      "p2"
+      "small"
+      "conditions"
+      "large";
+  }
+
+  /* Les deux conteneurs deviennent "transparents" structurellement :
+     leurs enfants sont désormais des membres directs de la grille
+     ci-dessus, ce qui permet de les repositionner librement. */
+  .avance-content__left {
+    display: contents;
+  }
+
+  .avance-content__cards {
+    display: contents;
+  }
+
+  .avance-content__paragraph:first-of-type {
+    grid-area: p1;
+  }
+
+  .avance-content__paragraph:last-of-type {
+    grid-area: p2;
+  }
+
+  .avance-content__card--small {
+    grid-area: small;
+  }
+
+  .avance-content__conditions {
+    grid-area: conditions;
+  }
+
+  .avance-content__card--large {
+    grid-area: large;
   }
 }
+
+/* ============================================================
+   TABLETTE PORTRAIT — jusqu'à 834px
+   ============================================================ */
+
+@media (max-width: 834px) {
+  .avance-content__grid {
+    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "p1"
+      "p2"
+      "small"
+      "conditions"
+      "large";
+  }
+
+  .avance-content__left {
+    display: contents;
+  }
+
+  .avance-content__cards {
+    display: contents;
+  }
+
+  .avance-content__paragraph:first-of-type {
+    grid-area: p1;
+  }
+
+  .avance-content__paragraph:last-of-type {
+    grid-area: p2;
+  }
+
+    .avance-content__card--small {
+    grid-area: small;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .avance-content__conditions {
+    grid-area: conditions;
+  }
+
+  .avance-content__card--large {
+    grid-area: large;
+  }
+
+  .avance-content {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: 4rem 3.3% 5rem;
+    margin-top: -8.2rem;
+  }
+
+  .avance-content__card-bulb {
+    position: absolute;
+    top: -2.8rem;
+    left: 40.5rem;
+    width: 86px;
+    height: auto;
+    z-index: 2;
+    transform: scaleX(-1);
+  }
+
+  .avance-content__grid {
+    margin-top: 2.5rem;
+    margin-bottom: 6.5rem;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+}
+
 
 @media (max-width: 767px) {
   .avance-content {
@@ -268,9 +389,6 @@
     align-items: center;
   }
 
-  /* ===== Cartes mobile : fond image contenu (pas recadré), superposé
-     au texte via CSS Grid ===== */
-
   .avance-content__card {
     display: grid;
     border-radius: 16px;
@@ -325,8 +443,6 @@
   .avance-content__comment-arrow {
     display: none;
   }
-
-  /* ===== Bascule : desktop masquée, mobile affichée ===== */
 
   .avance-content__comment-image--desktop {
     display: none;

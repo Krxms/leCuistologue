@@ -100,11 +100,17 @@
   z-index: 0;
 }
 
+@media (min-width: 1023px) and (max-width: 1210px) {
+.faq-cta {
+  height: 550px;
+}
+}
+
 @media (max-width: 834px) {
   .faq-cta {
     min-height: auto;
     flex-direction: column;
-    padding: 3rem 1.5rem;
+    padding: 7rem 1.5rem;
   }
 
   .faq-cta__content {
@@ -129,8 +135,8 @@
   width: 11.8vw;
   max-width: 111.7px;
   display: flex;
-  margin-left: 95%;
-  margin-top: -23%;
+  margin-left: 69%;
+  margin-top: -12%;
   transform: rotate(45deg);
   flex-shrink: 0;
   position: absolute;

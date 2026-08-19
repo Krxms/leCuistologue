@@ -65,7 +65,7 @@ import { formules } from "../../../lib/formules-data";
 </div>
 
 <script>
-  const mq = window.matchMedia("(max-width: 1210px)");
+  const mq = window.matchMedia("(min-width: 768px) and (max-width: 1210px)");
   const stage = document.getElementById("pricing-stage") as HTMLElement | null;
   const deck = document.getElementById("pricing-deck") as HTMLElement | null;
   const dotsWrap = document.getElementById("pricing-dots") as HTMLElement | null;
@@ -103,7 +103,7 @@ import { formules } from "../../../lib/formules-data";
 
     function render(dragShift = 0) {
       // Écartement différent selon la largeur réelle de l'écran :
-      // 80 sur l'iPad portrait (< 1024px), 100 au-delà (iPad paysage)
+      // 60 sur l'iPad portrait (< 1024px), 100 au-delà (iPad paysage)
       const largeurEcartement = window.innerWidth < 1024 ? 60 : 100;
 
       cards.forEach((carte, i) => {
@@ -115,6 +115,7 @@ import { formules } from "../../../lib/formules-data";
 
         carte.style.transform = `translate(-50%, -50%) translateX(${tx}%) scale(${scale})`;
         carte.style.zIndex = String(zi);
+        carte.classList.toggle("pricing-card--stage-active", i === index && dragShift === 0);
       });
       dots.forEach((d, i) => d.classList.toggle("pricing-dot--active", i === index));
     }

@@ -91,13 +91,14 @@
   margin: 0.3rem 0 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--color-ink-soft);
   min-height: 3.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .pricing-card__accroche {
@@ -358,27 +359,25 @@
 }
 
 /* ============================================================
-   CARROUSEL — en dessous de 1211px uniquement
+   TABLETTE PAYSAGE — 1023px à 1210px
    ============================================================ */
 
-@media (max-width: 1210px) {
+@media (min-width: 1023px) and (max-width: 1210px) {
   .pricing-title {
-    margin-top: -7rem;
+    margin-top: -9rem;
     font-size: clamp(1.4rem, 3vw, 2rem);
   }
 
-    .pricing-nav {
+  .pricing-nav {
     display: flex;
-    z-index: 90;
+    z-index: 100;
   }
 
   .pricing-dots {
     display: flex;
   }
 
-  /* .pricing porte à la fois le style desktop (ci-dessus, non
-     modifié) et devient ici la "scène" du carrousel */
-    .pricing {
+  .pricing {
     position: relative;
     height: 1080px;
     overflow: hidden;
@@ -386,7 +385,7 @@
     padding: 0;
   }
 
-    .pricing-card {
+  .pricing-card {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -400,9 +399,9 @@
   }
 
   .pricing-card--mise-en-avant {
-  background-color: rgb(244, 235, 228);
-  border: 2px solid #bc843c;
-}
+    background-color: rgb(244, 235, 228);
+    border: 2px solid #bc843c;
+  }
 
   .pricing-card__content {
     padding: 1.1rem 1.4rem 1.6rem;
@@ -466,5 +465,158 @@
     font-size: 0.85rem;
     margin-top: 1rem;
     padding-block: 0.7rem;
+  }
+}
+
+/* ============================================================
+   TABLETTE PORTRAIT — 768px à 1022px
+   (bloc manquant auparavant à cause d'une faute de frappe :
+   "max-witdh" au lieu de "max-width" — la règle ne s'appliquait
+   jamais, laissant les cartes sans positionnement de carrousel)
+   ============================================================ */
+
+@media (min-width: 768px) and (max-width: 1022px) {
+  .pricing-title {
+    margin-top: -7rem;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .pricing-nav {
+    display: flex;
+    z-index: 100;
+  }
+
+  .pricing-dots {
+    display: flex;
+  }
+
+  .pricing {
+    position: relative;
+    height: 1080px;
+    overflow: hidden;
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+
+  .pricing-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(132vw, 350px);
+    min-width: 0;
+    margin-top: 0 !important;
+    transition: transform 0.45s ease-out;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 20px 44px rgba(0, 0, 0, 0.08);
+    height: 920px;
+    gap: 10rem;
+  }
+
+  .pricing-card--mise-en-avant {
+    background-color: rgb(244, 235, 228);
+    border: 2px solid #bc843c;
+  }
+
+  .pricing-card__content {
+    padding: 1.1rem 1.4rem 1.6rem;
+  }
+
+  .pricing-card__title {
+    font-size: 1.15rem;
+    min-height: auto;
+  }
+
+  .pricing-card__accroche {
+    font-size: 0.8rem;
+    min-height: auto;
+    margin: 0.4rem 0 0.6rem;
+  }
+
+  .pricing-card__ideal {
+    font-size: 0.76rem;
+    min-height: auto;
+    margin: 0.5rem 0 0;
+  }
+
+  .pricing-card__features-box {
+    margin-top: 0.8rem;
+    padding: 0.9rem 1rem;
+    min-height: 0;
+  }
+
+  .pricing-card__comprend {
+    font-size: 0.74rem;
+    margin: 0 0 0.55rem;
+  }
+
+  .pricing-card__features {
+    gap: 0.45rem;
+  }
+
+  .pricing-card__features span {
+    font-size: 0.78rem;
+    line-height: 1.32;
+  }
+
+  .pricing-card__resultat {
+    font-size: 0.72rem;
+    min-height: 0;
+    margin: 0.8rem 0 0;
+    padding-top: 0.8rem;
+  }
+
+  .pricing-card__duree {
+    font-size: 0.72rem;
+    min-height: 0;
+    margin: 0.5rem 0 0.9rem;
+  }
+
+  .pricing-card__price {
+    font-size: 1.75rem;
+  }
+
+  .pricing-card__cta {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    padding-block: 0.7rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .pricing-stage {
+    padding: 3rem 1.5rem;
+  }
+
+  .pricing-title {
+    margin-top: -5rem;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+  }
+
+  .pricing-nav,
+  .pricing-dots {
+    display: none;
+  }
+
+  .pricing {
+    position: static;
+    height: auto;
+    overflow: visible;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+  }
+
+  .pricing-card {
+    position: static;
+    order: 1;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 0 !important;
+    transform: none !important;
+    transition: none;
+  }
+
+  .pricing-card--mise-en-avant {
+    order: 0;
   }
 }

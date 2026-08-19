@@ -39,7 +39,7 @@
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--color-ink-soft);
-  margin: 0;
+  margin-bottom: 2rem;
 }
 
 .formule-card__meta {
