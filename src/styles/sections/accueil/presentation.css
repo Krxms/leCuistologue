@@ -10,7 +10,6 @@
   position: relative;
   z-index: 2;
   padding-left: 7.19%;
-  padding-top: -10vw;
   max-width: 58%;
 }
 
@@ -187,7 +186,7 @@
     top: 7vw;
   }
 
-    .presentation__photo-decor--poivrons {
+  .presentation__photo-decor--poivrons {
     width: 25%;
     height: auto;
     left: 26%;
@@ -210,7 +209,7 @@
     top: -10%;
   }
 
-    .presentation__photo-decor--aubergine {
+  .presentation__photo-decor--aubergine {
     width: 24.24%;
     height: auto;
     left: 63%;
@@ -259,8 +258,12 @@
     left: 28.5%;
     top: -90%;
   }
+}
 
-
+@media (max-width: 1210px) {
+  .presentation__photo {
+    top: -40%;
+  }
 }
 
 /* ============================================================
@@ -273,6 +276,10 @@
     padding-bottom: 6rem;
   }
 
+  .presentation__photo {
+    top: -10%;
+  }
+
   .presentation__title-icon {
     width: 111.7px;
     height: 111.7px;
@@ -283,7 +290,7 @@
     top: 7vw;
   }
 
-    .presentation__photo-decor--poivrons {
+  .presentation__photo-decor--poivrons {
     width: 33%;
     height: auto;
     left: 74%;
@@ -311,10 +318,10 @@
   }
 
   .presentation__photo-decor--aubergine {
-    width: 30.5%;
+    width: 24.24%;
     height: auto;
-    left: 62%;
-    top: 90%;
+    left: 43%;
+    top: 68%;
   }
 
   .presentation__photo-decor--champignons {
@@ -330,13 +337,6 @@
     height: auto;
     left: -15.3%;
     top: 120%;
-  }
-
-    .presentation__photo-decor--aubergine {
-    width: 24.24%;
-    height: auto;
-    left: 43%;
-    top: 68%;
   }
 
   .presentation__decor--brocoli {
@@ -404,7 +404,7 @@
     display: none;
   }
 
-  .presentation__photo { 
+  .presentation__photo {
     margin-top: 10%;
   }
 
@@ -446,10 +446,10 @@
     width: 26%;
     z-index: 5;
   }
-
-  @media (min-width: 393px) {
-    .presentation__photo {
-      top: 9%;
-    }
-  }
 }
+
+/*@media (min-width: 393px) and (max-width: 767px) {
+  .presentation__photo {
+    top: 9%;
+  }
+}*/

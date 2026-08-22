@@ -87,29 +87,16 @@
   text-decoration: underline;
 }
 
-@media (min-width: 1023px) and (max-width: 1210px) {
+@media (max-width: 1210px) {
   .avance-questions__bubble {
-  right: 4%;
-  top: -15%;
-}
+    right: 4%;
+    top: -15%;
+  }
 
-.avance-questions__cards {
-  gap: 2rem;
+  .avance-questions__cards {
+    gap: 2rem;
+  }
 }
-}
-
-
-@media (max-width : 834px) {
-  .avance-questions__bubble {
-  right: 4%;
-  top: -15%;
-}
-
-.avance-questions__cards {
-  gap: 2rem;
-}
-}
-
 
 @media (max-width: 767px) {
   .avance-questions {

@@ -151,40 +151,29 @@
   color: #c26665;
 }
 
-@media (min-width: 1024px) and (max-width: 1210px) {
+@media (max-width: 1210px) {
   .a-propos-content {
-    max-width: 1100px;
-    margin-inline: auto;
-    padding: 0rem 3.3% 5rem;
     margin-top: -5rem;
   }
 
   .a-propos-content__recap-tags {
-    display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     gap: 0.8rem;
-    align-items: flex-start;
   }
 }
 
 @media (max-width: 834px) {
   .a-propos-content__intro {
-    display: flex;
-    align-items: center;
     gap: 1.8rem;
   }
 
   .a-propos-content {
     max-width: 736px;
-    margin-inline: auto;
-    padding: 0rem 3.3% 5rem;
-    margin-top: -5rem;
   }
 
   .a-propos-content__photo {
     flex: 0 0 40%;
-    max-width: 260px;
+    max-width: 236px;
   }
 
   .a-propos-content__recap-subtitle {
@@ -192,43 +181,22 @@
   }
 
   .a-propos-content__recap-text {
-    position: relative;
-    z-index: 1;
-    padding: 0% 15.2%;
     margin-top: 3.75rem;
   }
 
   .a-propos-content__recap-tags {
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.8rem;
     margin-top: 1.5rem;
   }
 
   .a-propos-content__recap-tag {
-    font-family: var(--font-body);
-    font-weight: 600;
     font-size: 0.66rem;
-    color: var(--color-ink-soft);
-    background-color: rgba(37, 61, 74, 0.08);
-    border-radius: 999px;
     padding: 0.4rem 0.4rem;
     white-space: wrap;
   }
 
   .a-propos-content__recap-title {
     margin: 0rem 0 1.4rem;
-    padding: 0 0 0 0;
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
-    color: #2c2c28;
-    transform: rotate(-10deg);
-  }
-
-  .a-propos-content__photo {
-    flex: 0 0 40%;
-    max-width: 236px;
   }
 }
 
@@ -254,36 +222,16 @@
 
   .a-propos-content__recap-title {
     margin: 0rem 0 2rem;
-    font-weight: 900;
-    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
-  }
-
-  .a-propos-content__recap-subtitle {
-    display: none;
-    margin: 0.5rem 0 1rem 0rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.8rem;
-    color: var(--color-ink-soft);
   }
 
   .a-propos-content__recap-quote {
-    margin: 0.8rem 0 1rem;
-    padding-left: 1rem;
-    border-left: 3px solid #8a9a5c;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-style: italic;
+    margin-bottom: 1rem;
     font-size: 0.9rem;
     line-height: 1.2;
-    color: var(--color-ink);
   }
 
   .a-propos-content__recap-item {
-    margin-bottom: 0 0 0rem;
-    font-family: var(--font-body);
     font-size: 0.875rem;
-    color: var(--color-ink);
   }
 
   .a-propos-content__recap-tag {
@@ -299,4 +247,8 @@
   .a-propos-content__title {
     font-size: clamp(1.2rem, 2vw, 1.875rem);
   }
+
+  .a-propos-content__block--closing {
+  padding-top: 0;
+}
 }

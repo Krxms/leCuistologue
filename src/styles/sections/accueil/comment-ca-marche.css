@@ -102,7 +102,6 @@
   }
 
   .howto__steps {
-    flex-direction: center;
     gap: 2rem;
   }
 
@@ -120,46 +119,20 @@
 }
 
 @media (max-width: 834px) {
-  .howto__steps {
-    flex-direction: center;
-    gap: 2rem;
-  }
-
   .howto__step {
     width: 20%;
     max-width: 300px;
   }
 
-  .howto__connector {
-    display:flex;
-    width: 8%;
-    height: 20px;
-    margin-top: -11rem;
+  .howto__step-title {
+    font-weight: 700;
+    font-size: 1rem;
   }
 
-  .howto__step-number {
-  font-family: "Oswald", sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: var(--color-ink);
-}
-
-.howto__step-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.3;
-  color: var(--color-ink);
-  text-align: center;
-}
-
-.howto__step-text {
-  margin-top: 0.75rem;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-}
+  .howto__step-text {
+    font-size: 0.9rem;
   }
-
+}
 
 @media (max-width: 767px) {
   .howto {
@@ -167,9 +140,9 @@
   }
 
   .howto__subtitle {
-  font-size: 1.1rem;
-  margin-bottom: 5rem;
-}
+    font-size: 1.1rem;
+    margin-bottom: 5rem;
+  }
 
   .howto__steps {
     flex-direction: column;

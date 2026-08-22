@@ -148,20 +148,6 @@
     font-size: 0.875rem;
     width: 65%;
   }
-
-    .presentation__photo-decor--aubergine {
-    width: 24.24%;
-    height: auto;
-    left: 62%;
-    top: 28%;
-  }
-
-   .presentation__photo-decor--poivrons {
-    width: 22%;
-    height: auto;
-    left: 29%;
-    top: 68%;
-  }
 }
 
 /* ============================================================
@@ -197,8 +183,8 @@
   }
 
   .hero__description {
-  width: 35ch;
-}
+    width: 35ch;
+  }
 }
 
 /* ============================================================

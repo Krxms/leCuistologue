@@ -4,7 +4,6 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  
 }
 
 .formules-header__bg {
@@ -35,10 +34,6 @@
   letter-spacing: 0.02em;
   font-size: clamp(1.8rem, 3.2vw, 4.6875rem);
   color: var(--color-ink);
-}
-
-.formules-header__title-line:first-child {
-  font-size: clamp(1.8rem, 3.2vw, 4.6875rem)
 }
 
 .formules-header__title-line:last-child .formules-header__title-accent,
@@ -100,12 +95,11 @@
 }
 
 @media (max-width: 834px) {
-.formules-header__arrow {
-  left: 61%;
-  top: 33%;
+  .formules-header__arrow {
+    left: 61%;
+    top: 33%;
+  }
 }
-}
-
 
 @media (max-width: 767px) {
   .formules-header {
@@ -117,9 +111,9 @@
   }
 
   .formules-header__bg {
-  width: 100%;
-  height: 70%;
-}
+    width: 100%;
+    height: 70%;
+  }
 
   .formules-header__title {
     padding-left: 0;

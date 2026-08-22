@@ -89,13 +89,6 @@
   z-index: 0;
 }
 
-@media (min-width: 1024px) and (max-width: 1210px) {
-  .une-question__icon {
-    margin-left: 48%;
-    margin-top: -15%;
-  }
-}
-
 @media (max-width: 834px) {
   .une-question {
     min-height: auto;
@@ -112,7 +105,6 @@
   .une-question__title-row {
     justify-content: center;
   }
-
 
   .une-question__arrow,
   .une-question__photo {
@@ -132,7 +124,6 @@
 
 @media (max-width: 767px) {
   .une-question__icon {
-    width: 8.8vw;
     margin-left: 69%;
     margin-top: -12%;
   }

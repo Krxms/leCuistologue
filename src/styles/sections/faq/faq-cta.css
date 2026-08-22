@@ -101,9 +101,9 @@
 }
 
 @media (min-width: 1023px) and (max-width: 1210px) {
-.faq-cta {
-  height: 550px;
-}
+  .faq-cta {
+    height: 550px;
+  }
 }
 
 @media (max-width: 834px) {
@@ -132,13 +132,8 @@
   }
 
   .faq-cta__icon {
-  width: 11.8vw;
-  max-width: 111.7px;
-  display: flex;
-  margin-left: 69%;
-  margin-top: -12%;
-  transform: rotate(45deg);
-  flex-shrink: 0;
-  position: absolute;
-}
+    width: 11.8vw;
+    margin-left: 69%;
+    margin-top: -12%;
+  }
 }

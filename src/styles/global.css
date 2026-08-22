@@ -51,7 +51,7 @@ body {
 }
 
 /* Révélation douce au scroll */
-/*.reveal {
+.reveal {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.7s ease, transform 0.7s ease;

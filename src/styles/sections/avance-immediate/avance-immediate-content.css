@@ -177,16 +177,16 @@
 }
 
 /* ============================================================
-   TABLETTE PAYSAGE — 1024px à 1210px
+   TABLETTE — jusqu'à 1210px (paysage et portrait partagent la
+   même bascule en grille à une colonne)
    ============================================================ */
 
-@media (min-width: 1024px) and (max-width: 1210px) {
+@media (max-width: 1210px) {
   .avance-content {
     margin-top: -10.5rem;
   }
 
   .avance-content__grid {
-
     flex-direction: column;
     display: grid;
     grid-template-columns: 1fr;
@@ -235,48 +235,6 @@
    ============================================================ */
 
 @media (max-width: 834px) {
-  .avance-content__grid {
-    flex-direction: column;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "p1"
-      "p2"
-      "small"
-      "conditions"
-      "large";
-  }
-
-  .avance-content__left {
-    display: contents;
-  }
-
-  .avance-content__cards {
-    display: contents;
-  }
-
-  .avance-content__paragraph:first-of-type {
-    grid-area: p1;
-  }
-
-  .avance-content__paragraph:last-of-type {
-    grid-area: p2;
-  }
-
-    .avance-content__card--small {
-    grid-area: small;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .avance-content__conditions {
-    grid-area: conditions;
-  }
-
-  .avance-content__card--large {
-    grid-area: large;
-  }
-
   .avance-content {
     max-width: 760px;
     margin-inline: auto;
@@ -284,115 +242,65 @@
     margin-top: -8.2rem;
   }
 
+  .avance-content__card--small {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
   .avance-content__card-bulb {
-    position: absolute;
     top: -2.8rem;
     left: 40.5rem;
-    width: 86px;
-    height: auto;
-    z-index: 2;
-    transform: scaleX(-1);
   }
 
   .avance-content__grid {
     margin-top: 2.5rem;
-    margin-bottom: 6.5rem;
-    gap: 2.5rem;
-    align-items: flex-start;
   }
 }
-
 
 @media (max-width: 767px) {
   .avance-content {
     max-width: 1200px;
-    margin-inline: auto;
     padding: 3rem 1.5rem 4rem;
     margin-top: -16.8%;
   }
 
   .avance-content__intro-title {
-    text-align: center;
-    font-family: var(--font-body);
-    font-weight: 800;
     font-size: clamp(1.2rem, 2vw, 2.75rem);
-    line-height: 1.4;
-    color: #2c2c2c;
-    margin: 0;
   }
 
   .avance-content__intro-text {
-    text-align: center;
     margin-top: 1.2rem;
-    font-family: var(--font-body);
     font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--color-ink-soft);
   }
 
   .avance-content__grid {
-    margin-top: 1rem;
-    margin-bottom: 6.5rem;
     display: flex;
-    gap: 2.5rem;
-    align-items: flex-start;
+    margin-top: 1rem;
   }
 
   .avance-content__left {
-    flex: 1 1 75%;
     display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
-    margin-top: 1.5rem;
   }
 
   .avance-content__paragraph {
-    font-family: var(--font-body);
     font-size: 1rem;
-    line-height: 1.65;
-    color: var(--color-ink);
-    margin: 0;
-  }
-
-  .avance-content__conditions {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
   }
 
   .avance-content__conditions-intro {
-    font-family: var(--font-body);
-    font-weight: 600;
     font-size: 1rem;
-    color: #B25656;
-    margin: 0 0 1rem;
-  }
-
-  .avance-content__conditions-list {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
   }
 
   .avance-content__conditions-list li {
-    font-family: var(--font-body);
     font-size: 1rem;
-    line-height: 1.5;
-    color: var(--color-ink);
   }
 
   .avance-content__cards {
-    flex: 1 1 55%;
     display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
     align-items: center;
   }
 
   .avance-content__card {
     display: grid;
-    border-radius: 16px;
-    overflow: visible;
     width: 110%;
   }
 
@@ -403,8 +311,6 @@
 
   .avance-content__card-bg {
     grid-area: 1 / 1;
-    width: 100%;
-    height: 100%;
     object-fit: contain;
   }
 
@@ -416,26 +322,10 @@
     grid-area: 1 / 1;
     align-self: center;
     justify-self: center;
-    padding: 1.5rem 1.75rem;
-    font-family: var(--font-body);
     font-size: 0.875rem;
-    line-height: 1.5;
-    color: var(--color-ink);
-    margin: 0;
-  }
-
-  .avance-content__comment {
-    position: relative;
-    margin-top: 3rem;
-    text-align: center;
   }
 
   .avance-content__comment-title {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.6rem, 2.6vw, 2.5rem);
-    color: #2c2c2c;
-    margin: 0;
     text-align: center;
     transform: rotate(0deg);
   }
@@ -450,5 +340,7 @@
 
   .avance-content__comment-image--mobile {
     display: block;
+    margin: 16rem auto 10rem;
+    transform: scale(1.3);
   }
 }

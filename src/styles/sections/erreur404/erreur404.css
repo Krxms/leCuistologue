@@ -10,7 +10,7 @@
 }
 
 .erreur404__visuel {
-  width: 900%;
+  width: 100%;
   max-width: 320px;
   height: auto;
   transform: rotate(10deg);
@@ -33,10 +33,10 @@
   color: var(--color-ink-soft);
 }
 
-@media (max-width: 768px){
- .erreur404__visuel {
-  width: 60%;
-  max-width: 360px;
-  margin: 10%;
-}
+@media (max-width: 767px) {
+  .erreur404__visuel {
+    width: 60%;
+    max-width: 360px;
+    margin: 10%;
+  }
 }

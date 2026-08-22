@@ -51,7 +51,7 @@
 .a-propos-header__arrow {
   position: absolute;
   left: 108%;
-  top:23%;
+  top: 23%;
   margin-left: -2rem;
   width: 16rem;
   max-width: 20vw;
@@ -104,9 +104,9 @@
 }
 
 @media (max-width: 834px) {
-.a-propos-header__arrow {
-  left: 115%;
-}
+  .a-propos-header__arrow {
+    left: 115%;
+  }
 }
 
 @media (max-width: 767px) {
@@ -122,6 +122,10 @@
     width: 100%;
     height: 78%;
   }
+
+  .a-propos-header__title-wrap {
+  padding-left: 0;
+}
 
   .a-propos-header__title {
     padding-left: 0;

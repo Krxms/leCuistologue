@@ -130,7 +130,7 @@
   left: 15%;
   top: 32%;
   width: 81%;
-  transform: rotate(2deg) ;
+  transform: rotate(2deg);
 }
 
 .petits-plus-content--popote .petits-plus-content__title {
@@ -162,7 +162,7 @@
 }
 
 .petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.75rem, 01vw, 1.1rem);
+  font-size: clamp(0.75rem, 1vw, 1.1rem);
 }
 
 /* ============================================================
@@ -175,36 +175,36 @@
   }
 
   .petits-plus-content {
-  width: 66%;
-}
+    width: 66%;
+  }
 
-.petits-plus-content--course .petits-plus-content__price {
-  font-size: clamp(1.2rem, 1.15vw, 1.3rem);
-}
+  .petits-plus-content--course .petits-plus-content__price {
+    font-size: clamp(1.2rem, 1.15vw, 1.3rem);
+  }
 
-.petits-plus-content--popote .petits-plus-content__price {
-  font-size: clamp(1.2rem, 1.15vw, 1.3rem);
-}
+  .petits-plus-content--popote .petits-plus-content__price {
+    font-size: clamp(1.2rem, 1.15vw, 1.3rem);
+  }
 
-.petits-plus-content--gourmande .petits-plus-content__price {
-  font-size: clamp(1.28rem, 1.15vw, 1.3rem);
-}
+  .petits-plus-content--gourmande .petits-plus-content__price {
+    font-size: clamp(1.28rem, 1.15vw, 1.3rem);
+  }
 
   .petits-plus-content__description {
-  margin-top: 0.3rem;
-}
+    margin-top: 0.3rem;
+  }
 
-.petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(1.1rem, 1vw, 1.1rem);
-}
+  .petits-plus-content--gourmande .petits-plus-content__description {
+    font-size: clamp(1.1rem, 1vw, 1.1rem);
+  }
 
-.petits-plus-content--popote .petits-plus-content__description {
-  font-size: clamp(0.95rem, 1vw, 1.1rem);
-}
+  .petits-plus-content--popote .petits-plus-content__description {
+    font-size: clamp(0.95rem, 1vw, 1.1rem);
+  }
 
-.petits-plus-content--course .petits-plus-content__description {
-  font-size: clamp(0.95rem, 1vw, 1.1rem);
-}
+  .petits-plus-content--course .petits-plus-content__description {
+    font-size: clamp(0.95rem, 1vw, 1.1rem);
+  }
 }
 
 /* ============================================================
@@ -218,21 +218,20 @@
 
   .petits-plus-content__description {
     margin-top: 0.3rem;
-}
+  }
 
-.petits-plus__title {
-  margin: 0 0 5.5rem;
-}
+  .petits-plus__title {
+    margin: 0 0 5.5rem;
+  }
 
-.petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.84rem, 01vw, 1.1rem);
-}
+  .petits-plus-content--gourmande .petits-plus-content__description {
+    font-size: clamp(0.84rem, 1vw, 1.1rem);
+  }
 }
 
 @media (max-width: 767px) {
   .petits-plus {
     padding: 3rem 1.5rem;
-
   }
 
   .petits-plus__grid {
@@ -248,41 +247,36 @@
   }
 
   .petits-plus__title {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2rem, 3.2vw, 3.4375rem);
-  color: #2c2c28;
-  margin: 0 0 5rem;
-  transform: rotate(-5deg);
-}
+    margin: 0 0 5rem;
+  }
 
-.petits-plus-content__description {
-  margin-top: 0.3rem;
-}
+  .petits-plus-content__description {
+    margin-top: 0.3rem;
+  }
 
-.petits-plus-content--course {
-  left: 7.6%;
-  top: 30%;
-  width: 81%;
-}
+  .petits-plus-content--course {
+    left: 7.6%;
+    top: 30%;
+    width: 81%;
+  }
 
-.petits-plus-card--course {
-  margin-left: 1rem;
-}
+  .petits-plus-card--course {
+    margin-left: 1rem;
+  }
 
-.petits-plus-card--gourmande {
-  margin-left: -0.5rem;
-}
+  .petits-plus-card--gourmande {
+    margin-left: -0.5rem;
+  }
 
-.petits-plus-content--gourmande .petits-plus-content__title {
-  font-size: clamp(0.9rem, 1.4vw, 0.9rem);
-}
+  .petits-plus-content--gourmande .petits-plus-content__title {
+    font-size: clamp(0.9rem, 1.4vw, 0.9rem);
+  }
 
-.petits-plus-content--gourmande .petits-plus-content__price {
-  font-size: clamp(0.9rem, 1.4vw, 0.9rem);
-}
+  .petits-plus-content--gourmande .petits-plus-content__price {
+    font-size: clamp(0.9rem, 1.4vw, 0.9rem);
+  }
 
-.petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.84rem, 01vw, 1.1rem);
-}
+  .petits-plus-content--gourmande .petits-plus-content__description {
+    font-size: clamp(0.84rem, 1vw, 1.1rem);
+  }
 }

@@ -64,7 +64,7 @@
   font-family: var(--font-body);
   font-weight: 400;
   font-size: clamp(1.05rem, 1.25vw, 1.5rem);
-  line-height: 1.;
+  line-height: 1;
   color: var(--color-ink);
 }
 
@@ -248,7 +248,7 @@
    Modifiez librement ce bloc sans risque pour le mobile ou le desktop.
    ============================================================ */
 
-@media (min-width: 834px) and (max-width: 1210px) { 
+@media (min-width: 834px) and (max-width: 1210px) {
   .offre__photo--main {
     left: 55.9%;
     top: 5%;
@@ -257,18 +257,17 @@
   }
 
   .offre__photo--secondary {
-   display: none;
+    display: none;
   }
 
-   .offre__bg {
+  .offre__bg {
     padding-top: 0rem;
     bottom: -1rem;
     height: calc(100% + 2rem);
     object-fit: cover;
     transform: translateX(-50%) scale(1);
-   }
+  }
 }
-
 
 /* ============================================================
    MOBILE (base) — masquée par défaut, activée sous 834px
