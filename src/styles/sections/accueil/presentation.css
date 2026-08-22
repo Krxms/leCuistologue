@@ -167,97 +167,195 @@
   top: -35%;
 }
 
-/* --- Tablette (768-1023px) --- */
-@media (min-width: 768px) and (max-width: 1210px) {
+/* ============================================================
+   TABLETTE PAYSAGE — 1023px à 1210px
+   ============================================================ */
+
+@media (min-width: 1023px) and (max-width: 1210px) {
   .presentation {
     min-height: auto;
     padding-bottom: 6rem;
   }
 
   .presentation__title-icon {
-  width: 111.7px;
-  height: 111.7px;
-  transform: rotate(180deg) scaleY(-1);
-  margin-bottom: 1rem;
-  position: relative;
-  left: 26vw;
-  top: 7vw;
+    width: 111.7px;
+    height: 111.7px;
+    transform: rotate(180deg) scaleY(-1);
+    margin-bottom: 1rem;
+    position: relative;
+    left: 26vw;
+    top: 7vw;
+  }
+
+    .presentation__photo-decor--poivrons {
+    width: 25%;
+    height: auto;
+    left: 26%;
+    top: 67%;
+  }
+
+  .presentation__photo-wrap {
+    position: absolute;
+    left: 62.55%;
+    top: 25vw;
+    width: 39%;
+    aspect-ratio: 632 / 590;
+    z-index: 1;
+  }
+
+  .presentation__photo-decor--oignon {
+    width: 26%;
+    height: auto;
+    left: -10%;
+    top: -10%;
+  }
+
+    .presentation__photo-decor--aubergine {
+    width: 24.24%;
+    height: auto;
+    left: 63%;
+    top: 28%;
+  }
+
+  .presentation__photo-decor--champignons {
+    width: 12.73%;
+    height: auto;
+    left: 95.3%;
+    top: 50.25%;
+    transform: rotate(-70deg);
+  }
+
+  .presentation__photo-decor--champignons2 {
+    width: 16%;
+    height: auto;
+    left: -15.3%;
+    top: 120%;
+  }
+
+  .presentation__courgette {
+    position: absolute;
+    left: 93%;
+    top: 8vw;
+    width: 8%;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+    transform: rotate(-150deg);
+  }
+
+  .presentation__decor--brocoli {
+    position: absolute;
+    width: 12%;
+    height: auto;
+    left: 48%;
+    top: -3.6vw;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .presentation__photo-decor--potato {
+    width: 28%;
+    height: auto;
+    left: 28.5%;
+    top: -90%;
+  }
+
+
 }
 
-.presentation__photo-decor--poivrons {
-  width: 35%;
-  height: auto;
-  left: 69%;
-  top: 148%;
-}
+/* ============================================================
+   TABLETTE PORTRAIT — jusqu'à 834px
+   ============================================================ */
 
-.presentation__photo-wrap {
-  position: absolute;
-  left: 62.55%;
-  top: 25vw;
-  width: 39%;
-  aspect-ratio: 632 / 590;
-  z-index: 1;
-}
+@media (max-width: 834px) {
+  .presentation {
+    min-height: auto;
+    padding-bottom: 6rem;
+  }
 
-.presentation__photo-decor--oignon {
-  width: 26%;
-  height: auto;
-  left: -10%;
-  top: -10%;
-}
+  .presentation__title-icon {
+    width: 111.7px;
+    height: 111.7px;
+    transform: rotate(180deg) scaleY(-1);
+    margin-bottom: 1rem;
+    position: relative;
+    left: 26vw;
+    top: 7vw;
+  }
 
-.presentation__photo-decor--aubergine {
-  width: 24.24%;
-  height: auto;
-  left: 62%;
-  top: 90%;
-}
+    .presentation__photo-decor--poivrons {
+    width: 33%;
+    height: auto;
+    left: 74%;
+    top: 151%;
+  }
 
-.presentation__photo-decor--champignons {
-  width: 12.73%;
-  height: auto;
-  left: 95.3%;
-  top: 50.25%;
-  transform: rotate(-70deg);
-}
+  .presentation__photo-wrap {
+    position: absolute;
+    left: 62.55%;
+    top: 25vw;
+    width: 39%;
+    aspect-ratio: 632 / 590;
+    z-index: 1;
+  }
 
-.presentation__photo-decor--champignons2 {
-  width: 16%;
-  height: auto;
-  left: -15.3%;
-  top: 120%;
-}
+  .presentation__courgette {
+    top: 18vw;
+  }
 
-.presentation__courgette {
-  position: absolute;
-  left: 93%;
-  top: 8vw;
-  width: 8%;
-  height: auto;
-  z-index: 1;
-  pointer-events: none;
-  transform: rotate(-150deg);
-}
+  .presentation__photo-decor--oignon {
+    width: 26%;
+    height: auto;
+    left: -10%;
+    top: -10%;
+  }
 
-.presentation__decor--brocoli {
-  position: absolute;
-  width: 12%;
-  height: auto;
-  left: 48%;
-  top: -3.6vw;
-  z-index: 4;
-  pointer-events: none;
-}
+  .presentation__photo-decor--aubergine {
+    width: 30.5%;
+    height: auto;
+    left: 62%;
+    top: 90%;
+  }
 
-.presentation__photo-decor--potato {
-  width: 28%;
-  height: auto;
-  left: 28.5%;
-  top: -90%;
-}
-}
+  .presentation__photo-decor--champignons {
+    width: 12.73%;
+    height: auto;
+    left: 95.3%;
+    top: 50.25%;
+    transform: rotate(-70deg);
+  }
 
+  .presentation__photo-decor--champignons2 {
+    width: 16%;
+    height: auto;
+    left: -15.3%;
+    top: 120%;
+  }
+
+    .presentation__photo-decor--aubergine {
+    width: 24.24%;
+    height: auto;
+    left: 43%;
+    top: 68%;
+  }
+
+  .presentation__decor--brocoli {
+    position: absolute;
+    width: 12%;
+    height: auto;
+    left: 48%;
+    top: -3.6vw;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .presentation__photo-decor--potato {
+    width: 28%;
+    height: auto;
+    left: 28.5%;
+    top: -90%;
+  }
+}
 
 @media (max-width: 767px) {
   .presentation {
@@ -350,9 +448,8 @@
   }
 
   @media (min-width: 393px) {
- .presentation__photo {
-  top : 9%;
- }
-
-}
+    .presentation__photo {
+      top: 9%;
+    }
+  }
 }

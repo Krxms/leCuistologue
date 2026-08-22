@@ -59,23 +59,23 @@
 }
 
 .faq-header__deco--broccoli {
-  left: 60.68%;
-  top: 43%;
-  width: 6.4%;
-  transform: rotate(104deg);
+  width: 10.4%;
+  top: 26%;
+  left: 67.7%;
+  transform: rotate(72deg);
 }
 
 .faq-header__deco--mushroom {
-  left: 66.2%;
-  top: 2%;
-  width: 15%;
+  width: 5%;
+  top: 14%;
+  left: 58.2%;
   transform: rotate(-73deg);
 }
 
 .faq-header__deco--onion {
-  left: -5.8%;
-  top: 52%;
-  width: 14.6%;
+  width: 12.6%;
+  top: -19%;
+  left: 37.2%;
 }
 
 @media (max-width: 767px) {

@@ -165,12 +165,68 @@
   font-size: clamp(0.75rem, 01vw, 1.1rem);
 }
 
-/* ===== Responsive — uniquement le groupe (empilement en mobile) ===== */
+/* ============================================================
+   TABLETTE PAYSAGE — 1023px à 1210px
+   ============================================================ */
 
-@media (max-width: 1210px) {
+@media (min-width: 1023px) and (max-width: 1210px) {
   .petits-plus-card {
     width: 45%;
   }
+
+  .petits-plus-content {
+  width: 66%;
+}
+
+.petits-plus-content--course .petits-plus-content__price {
+  font-size: clamp(1.2rem, 1.15vw, 1.3rem);
+}
+
+.petits-plus-content--popote .petits-plus-content__price {
+  font-size: clamp(1.2rem, 1.15vw, 1.3rem);
+}
+
+.petits-plus-content--gourmande .petits-plus-content__price {
+  font-size: clamp(1.28rem, 1.15vw, 1.3rem);
+}
+
+  .petits-plus-content__description {
+  margin-top: 0.3rem;
+}
+
+.petits-plus-content--gourmande .petits-plus-content__description {
+  font-size: clamp(1.1rem, 1vw, 1.1rem);
+}
+
+.petits-plus-content--popote .petits-plus-content__description {
+  font-size: clamp(0.95rem, 1vw, 1.1rem);
+}
+
+.petits-plus-content--course .petits-plus-content__description {
+  font-size: clamp(0.95rem, 1vw, 1.1rem);
+}
+}
+
+/* ============================================================
+   TABLETTE PORTRAIT — 768px à 1022px
+   ============================================================ */
+
+@media (min-width: 768px) and (max-width: 1022px) {
+  .petits-plus-card {
+    width: 45%;
+  }
+
+  .petits-plus-content__description {
+    margin-top: 0.3rem;
+}
+
+.petits-plus__title {
+  margin: 0 0 5.5rem;
+}
+
+.petits-plus-content--gourmande .petits-plus-content__description {
+  font-size: clamp(0.84rem, 01vw, 1.1rem);
+}
 }
 
 @media (max-width: 767px) {
@@ -227,6 +283,6 @@
 }
 
 .petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+  font-size: clamp(0.84rem, 01vw, 1.1rem);
 }
 }
