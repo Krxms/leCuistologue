@@ -2,6 +2,8 @@
 import "../../../styles/sections/avance-immediate/avance-immediate-content.css";
 import smallbg from "../../../assets/avance-immediate/avance-immediate-smallbg.png";
 import largebg from "../../../assets/avance-immediate/avance-immediate-largebg.png";
+import smallbg834 from "../../../assets/avance-immediate/avance-immediate-smallbg-834.svg";
+import largebg834 from "../../../assets/avance-immediate/avance-immediate-largebg-834.svg";
 import urssaf from "../../../assets/avance-immediate/urssaf.png";
 import urssafMobile from "../../../assets/avance-immediate/UrssafMobile.svg";
 import arrowConnector2 from "../../../assets/avance-immediate/arrow-connector2.svg";
@@ -10,16 +12,16 @@ import lightBulb from "../../../assets/avance-immediate/light-bulb.svg";
 
 <section class="avance-content">
 
-  <h2 class="avance-content__intro-title reveal">
+  <h2 class="avance-content__intro-title">
     Déduit directement de votre facture,<br />
     vous ne payez plus que le reste à charge !
   </h2>
-  <p class="avance-content__intro-text reveal">
+  <p class="avance-content__intro-text">
     L'avance immédiate est un service mis en place par l'URSSAF et la Direction générale des Finances publiques.
   </p>
 
   <div class="avance-content__grid">
-    <div class="avance-content__left reveal">
+    <div class="avance-content__left">
       <p class="avance-content__paragraph">
         Ce service - optionnel et gratuit - permet la déduction <b>immédiate de votre crédit d'impôt de 50 %</b> lors du paiement de votre facture à votre organisme prestataire de service.
       </p>
@@ -40,16 +42,18 @@ import lightBulb from "../../../assets/avance-immediate/light-bulb.svg";
     </div>
 
     <div class="avance-content__cards">
-      <div class="avance-content__card avance-content__card--small reveal">
-        <img src={smallbg.src} alt="" class="avance-content__card-bg" aria-hidden="true" />
+      <div class="avance-content__card avance-content__card--small">
+        <img src={smallbg.src} alt="" class="avance-content__card-bg avance-content__card-bg--default" aria-hidden="true" />
+        <img src={smallbg834.src} alt="" class="avance-content__card-bg avance-content__card-bg--834" aria-hidden="true" />
         <img src={lightBulb.src} alt="" class="avance-content__card-bulb" aria-hidden="true" />
         <p class="avance-content__card-text">
           Vous pouvez créer votre compte grâce au lien d'auto-déclaration envoyé par <b>Le Cuistologue</b>, ou me confier la création de ce compte.
         </p>
       </div>
 
-      <div class="avance-content__card avance-content__card--large reveal">
-        <img src={largebg.src} alt="" class="avance-content__card-bg" aria-hidden="true" />
+      <div class="avance-content__card avance-content__card--large">
+        <img src={largebg.src} alt="" class="avance-content__card-bg avance-content__card-bg--default" aria-hidden="true" />
+        <img src={largebg834.src} alt="" class="avance-content__card-bg avance-content__card-bg--834" aria-hidden="true" />
         <p class="avance-content__card-text">
           Après chaque prestation réalisée à votre domicile, <b>Le Cuistologue</b> dépose une demande de paiement sur votre espace URSSAF.<br><br>
           Vous disposez de 48 heures pour l'accepter ou la refuser.<br><br>
@@ -60,7 +64,7 @@ import lightBulb from "../../../assets/avance-immediate/light-bulb.svg";
     </div>
   </div>
 
-  <div class="avance-content__comment reveal">
+  <div class="avance-content__comment">
     <h2 class="avance-content__comment-title">Comment ça marche ?</h2>
     <img src={arrowConnector2.src} alt="" class="avance-content__comment-arrow" aria-hidden="true" />
     <img src={urssaf.src} alt="Interface de l'espace URSSAF pour l'avance immédiate" class="avance-content__comment-image avance-content__comment-image--desktop" />

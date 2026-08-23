@@ -2,7 +2,7 @@
   position: relative;
   /*overflow: hidden;*/
   padding: 5rem 3.3% 6rem;
-  margin-top: 20rem;
+  margin-top: 15rem;
 }
 
 .avance-questions__shape {
@@ -85,6 +85,11 @@
   font-size: 0.95rem;
   color: var(--color-ink-soft);
   text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.avance-questions__card-cta:hover {
+  color: var(--color-gold);
 }
 
 /* Zone intermédiaire : lisse le passage desktop -> tablette
@@ -96,6 +101,10 @@
 }
 
 @media (max-width: 1210px) {
+  .avance-questions {
+    margin-top: 7rem;
+  }
+
   .avance-questions__bubble {
     right: 4%;
     top: -15%;
@@ -110,7 +119,7 @@
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .avance-questions {
-    margin-top: clamp(1rem, calc(-216.5075rem + 28.3582vw), 20rem);
+    margin-top: clamp(1rem, calc(-67.6866rem + 8.9552vw), 7rem);
     padding-top: clamp(3rem, calc(-19.8955rem + 2.9851vw), 5rem);
     padding-bottom: clamp(3rem, calc(-31.3433rem + 4.4776vw), 6rem);
   }

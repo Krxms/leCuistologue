@@ -86,12 +86,62 @@
 .a-propos-cta__btn--primary {
   background-color: var(--color-ink-soft);
   color: #fdfbfa;
+  transition: background-color 0.2s ease;
+}
+
+.a-propos-cta__btn--primary:hover {
+  background-color: #1a2b35;
+}
+
+@property --btn-sweep {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }
 
 .a-propos-cta__btn--secondary {
+  position: relative;
   background-color: transparent;
+  /* Bordure réelle : filet de secours toujours visible, et c'est
+     elle qu'on voit tant que l'anneau doré ne l'a pas recouverte. */
   border: 2px solid var(--color-ink-soft);
   color: var(--color-ink-soft);
+  transition: border-color 800ms ease;
+}
+
+.a-propos-cta__btn--secondary:hover {
+  border-color: var(--color-gold);
+}
+
+/* L'anneau animé : un conic-gradient masqué pour ne garder que
+   l'épaisseur de la bordure (technique padding-box / mask-composite),
+   qui balaie du bleu vers l'or en partant de la droite. Posé bien
+   au-dessus de la bordure réelle (inset: -2px = son épaisseur). */
+.a-propos-cta__btn--secondary::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  --btn-sweep: 0deg;
+  background: conic-gradient(from 90deg, var(--color-gold) var(--btn-sweep), var(--color-ink-soft) var(--btn-sweep));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: --btn-sweep 800ms ease;
+}
+
+.a-propos-cta__btn--secondary:hover::after {
+  --btn-sweep: 360deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .a-propos-cta__btn--secondary,
+  .a-propos-cta__btn--secondary::after {
+    transition: none;
+  }
 }
 
 .a-propos-cta__photo {

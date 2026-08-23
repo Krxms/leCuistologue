@@ -3,6 +3,8 @@ import "../../../styles/sections/accueil/hero.css";
 
 import heroBackground from "../../../assets/accueil/hero/HeroBG.png";
 import heroArrow from "../../../assets/accueil/hero/hero-arrow.svg";
+import brocoli from "../../../assets/accueil/presentation/brocoli.svg";
+import potato from "../../../assets/accueil/presentation/PdT.svg";
 
 import { Image } from "astro:assets";
 ---
@@ -11,6 +13,9 @@ import { Image } from "astro:assets";
   <div class="hero__bg-wrapper">
   <Image src={heroBackground} alt="" class="hero__background" aria-hidden="true" />
 </div>
+
+  <img src={brocoli.src} alt="" class="hero__decor hero__decor--brocoli" aria-hidden="true" />
+  <img src={potato.src} alt="" class="hero__decor hero__decor--potato" aria-hidden="true" />
 
   <div class="hero__content">
     <h1 class="hero__title">

@@ -10,7 +10,7 @@ const avis = await fetchGoogleReviews();
 ---
 
 <section class="commentaires">
-  <div class="commentaires__header reveal">
+  <div class="commentaires__header">
     <img src={arrow.src} alt="" class="commentaires__arrow" aria-hidden="true" />
     <h2 class="commentaires__title">
       C'est encore eux qui en parlent le
@@ -24,7 +24,7 @@ const avis = await fetchGoogleReviews();
   <div class="commentaires__grid">
     {
       avis.map((item) => (
-        <div class="commentaires__card reveal">
+        <div class="commentaires__card">
           <div class="commentaires__stars">
             {[...Array(item.note)].map(() => (
               <img src={star.src} alt="" aria-hidden="true" />

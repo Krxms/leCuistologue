@@ -58,6 +58,11 @@
   background-color: var(--color-ink-soft);
   color: #fdfbfa;
   border: none;
+  transition: background-color 0.2s ease;
+}
+
+.cookie-btn--primary:hover {
+  background-color: #1a2b35;
 }
 
 .cookie-btn--outline {

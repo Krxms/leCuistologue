@@ -156,6 +156,11 @@
   font-weight: 600;
   font-size: 1.125rem;
   letter-spacing: 0.05em;
+  transition: background-color 0.2s ease;
+}
+
+.formule-card__cta:hover {
+  background-color: #1a2b35;
 }
 
 @media (max-width: 1210px) {

@@ -34,7 +34,7 @@ const colonneDroite = [
   <div class="offre__desktop">
     <img src={bgPink.src} alt="" class="offre__bg" aria-hidden="true" />
 
-    <div class="offre__header reveal">
+    <div class="offre__header">
       <div class="offre__title-row">
         <h2 class="offre__title">Des solutions culinaires pensées pour vous et avec vous.</h2>
         <img src={titleIcon.src} alt="" class="offre__title-icon" aria-hidden="true" />
@@ -47,7 +47,7 @@ const colonneDroite = [
       <p class="offre__include-label">Chaque intervention peut inclure :</p>
     </div>
 
-    <div class="offre__checklist-wrap reveal">
+    <div class="offre__checklist-wrap">
       <img src={checklistBg.src} alt="" class="offre__checklist-bg" aria-hidden="true" />
       <div class="offre__checklist">
         <ul class="offre__checklist-col">
@@ -71,7 +71,7 @@ const colonneDroite = [
 
     <img src={arrow.src} alt="" class="offre__arrow" aria-hidden="true" />
 
-    <div class="offre__price-block reveal">
+    <div class="offre__price-block">
       <p class="offre__price">
         <span class="offre__price-label">A partir de</span>
         <span class="offre__price-value">74,50 €</span>
@@ -94,7 +94,7 @@ const colonneDroite = [
   <div class="offre-m">
     <img src={bgPinkMobile.src} alt="" class="offre-m__bg" aria-hidden="true" />
 
-    <div class="offre-m__title-row reveal">
+    <div class="offre-m__title-row">
       <h2 class="offre-m__title">Une cuisine maison qui simplifie vraiment votre quotidien</h2>
       <img src={titleIcon.src} alt="" class="offre-m__title-icon" aria-hidden="true" />
     </div>
@@ -103,7 +103,7 @@ const colonneDroite = [
     </p>
     <p class="offre-m__include-label">Chaque intervention peut inclure :</p>
 
-    <div class="offre-m__checklist-wrap reveal">
+    <div class="offre-m__checklist-wrap">
       <div class="offre-m__checklist">
         {[...colonneGauche, ...colonneDroite].map((item) => (
           <div class="offre-m__checklist-item">

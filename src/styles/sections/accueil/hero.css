@@ -32,6 +32,56 @@
   pointer-events: none;
 }
 
+/* Décors repris de la section Présentation : positionnés ici pour
+   apparaître avec la hero au chargement plutôt qu'avec un léger
+   décalage propre à la section suivante. Positions exprimées par
+   rapport au bas de la hero (bottom), car elles chevauchaient à
+   l'origine le haut de Présentation avec des valeurs négatives —
+   les deux se rejoignent au même endroit visuellement. */
+.hero__decor {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero__decor--brocoli {
+  width: 8%;
+  height: auto;
+  left: 48%;
+  bottom: -5vw;
+}
+
+.hero__decor--potato {
+  width: 10%;
+  height: auto;
+  left: 66.02%;
+  bottom: -3.5vw;
+}
+
+@media (max-width: 1210px) {
+  .hero__decor--brocoli {
+    width: 12%;
+  }
+
+  .hero__decor--potato {
+    width: 10.92%;
+    left: 73.66%;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero__decor--brocoli {
+    left: 8%;
+    bottom: 60px;
+    width: 20vw;
+    max-width: 78px;
+  }
+
+  .hero__decor--potato {
+    display: none;
+  }
+}
+
 .hero__content {
   position: relative;
   z-index: 2;
@@ -86,12 +136,62 @@
 .btn--primary {
   background-color: var(--color-ink-soft);
   color: #fdfbfa;
+  transition: background-color 0.2s ease;
+}
+
+.btn--primary:hover {
+  background-color: #1a2b35;
+}
+
+@property --btn-sweep {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }
 
 .btn--secondary {
+  position: relative;
   background-color: transparent;
+  /* Bordure réelle : filet de secours toujours visible, et c'est
+     elle qu'on voit tant que l'anneau doré ne l'a pas recouverte. */
   border: 2px solid var(--color-ink-soft);
   color: var(--color-ink-soft);
+  transition: border-color 800ms ease;
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-gold);
+}
+
+/* L'anneau animé : un conic-gradient masqué pour ne garder que
+   l'épaisseur de la bordure (technique padding-box / mask-composite),
+   qui balaie du bleu vers l'or en partant de la droite. Posé bien
+   au-dessus de la bordure réelle (inset: -2px = son épaisseur). */
+.btn--secondary::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  --btn-sweep: 0deg;
+  background: conic-gradient(from 90deg, var(--color-gold) var(--btn-sweep), var(--color-ink-soft) var(--btn-sweep));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: --btn-sweep 800ms ease;
+}
+
+.btn--secondary:hover::after {
+  --btn-sweep: 360deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--secondary,
+  .btn--secondary::after {
+    transition: none;
+  }
 }
 
 .hero__arrow {

@@ -65,7 +65,7 @@
   justify-content: center;
   background-color: #EDB367;
   color: var(--color-ink-soft);
-  border-radius: 6px;
+  border-radius: 3px;
   padding: 0rem 1.5rem;
   height: 35px;
   font-family: "Inter";
@@ -73,6 +73,11 @@
   font-size: 0.875rem;
   text-transform: uppercase;
   white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.navbar__cta:hover {
+  background-color: #DAA35B;
 }
 
 .navbar--scrolling {

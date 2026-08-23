@@ -89,11 +89,14 @@
 }
 
 .avance-content__card--small {
-  aspect-ratio: 658 / 173;
+  /* Ratio exact du fichier (1998 x 543) : l'ancienne valeur
+     (658/173) ne correspondait pas tout à fait à l'image réelle,
+     ce qui faisait rogner ~3,3% sur les côtés via object-fit:cover. */
+  aspect-ratio: 1998 / 543;
 }
 
 .avance-content__card--large {
-  aspect-ratio: 652 / 589;
+  aspect-ratio: 1994 / 1805;
 }
 
 .avance-content__card-bg {
@@ -103,6 +106,13 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+}
+
+/* Deux fonds par carte : celui du dessus (photo/desktop) et une
+   variante sur mesure pour le palier ≤834px (voir plus bas), à la
+   manière de .avance-content__comment-image--desktop/--mobile. */
+.avance-content__card-bg--834 {
+  display: none;
 }
 
 .avance-content__card-bulb {
@@ -178,7 +188,10 @@
 
 /* ============================================================
    TABLETTE — jusqu'à 1210px (paysage et portrait partagent la
-   même bascule en grille à une colonne)
+   même mise en page : texte à gauche, cartes empilées à droite,
+   comme sur desktop, avec des proportions adaptées à la largeur
+   plus réduite pour que les cartes gardent une hauteur raisonnable
+   par rapport à leur texte)
    ============================================================ */
 
 @media (max-width: 1210px) {
@@ -187,20 +200,68 @@
   }
 
   .avance-content__grid {
-    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .avance-content__comment-image--desktop {
+    margin: 6rem auto 6rem;
+    transform: scale(1.15);
+  }
+
+  .avance-content__comment-arrow {
+    top: 14rem;
+    left: -1rem;
+  }
+
+  .avance-content__left {
+    flex: 1 1 55%;
+  }
+
+  .avance-content__cards {
+    flex: 1 1 45%;
+  }
+
+  /* La position fixe en rem de l'ampoule était calibrée pour la
+     largeur desktop de la carte ; ancrée à droite, elle reste
+     correcte quelle que soit la largeur de la carte à cette
+     proportion réduite. */
+  .avance-content__card-bulb {
+    top: -1.5rem;
+    left: auto;
+    right: -0.5rem;
+    width: 60px;
+  }
+}
+
+/* ============================================================
+   TABLETTE PORTRAIT — jusqu'à 834px
+   ============================================================ */
+
+@media (max-width: 834px) {
+  .avance-content {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: 4rem 3.3% 5rem;
+    margin-top: -8.2rem;
+  }
+
+  /* En dessous de 834px, le texte et sa carte associée sont
+     empilés en une seule colonne plutôt que côte à côte : chaque
+     carte retrouve alors (presque) toute la largeur du conteneur,
+     largement suffisante pour que le texte tienne sans forcer le
+     ratio du fond à rogner ses bords. */
+  .avance-content__grid {
+    margin-top: 2.5rem;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
       "p1"
-      "p2"
       "small"
-      "conditions"
-      "large";
+      "p2"
+      "large"
+      "conditions";
   }
 
-  /* Les deux conteneurs deviennent "transparents" structurellement :
-     leurs enfants sont désormais des membres directs de la grille
-     ci-dessus, ce qui permet de les repositionner librement. */
   .avance-content__left {
     display: contents;
   }
@@ -219,6 +280,12 @@
 
   .avance-content__card--small {
     grid-area: small;
+    /* Annule le ratio fixe hérité de la base (1998/543) : la
+       hauteur doit suivre le texte, pas ce ratio. */
+    aspect-ratio: auto;
+    /* Largeur forcée explicitement plutôt que de compter sur
+       l'étirement automatique de la grille sur cette carte. */
+    width: 100%;
   }
 
   .avance-content__conditions {
@@ -227,33 +294,30 @@
 
   .avance-content__card--large {
     grid-area: large;
-  }
-}
-
-/* ============================================================
-   TABLETTE PORTRAIT — jusqu'à 834px
-   ============================================================ */
-
-@media (max-width: 834px) {
-  .avance-content {
-    max-width: 760px;
-    margin-inline: auto;
-    padding: 4rem 3.3% 5rem;
-    margin-top: -8.2rem;
+    aspect-ratio: auto;
+    width: 100%;
   }
 
-  .avance-content__card--small {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  /* Bascule vers les fonds dessinés pour ce palier plutôt que les
+     photos desktop recadrées. */
+  .avance-content__card-bg--default {
+    display: none;
   }
 
-  .avance-content__card-bulb {
-    top: -2.8rem;
-    left: 40.5rem;
+  /* Ni le petit ni le grand encart n'ont exactement la quantité de
+     texte prévue par les dimensions du SVG (grand trop court, petit
+     trop haut) : plutôt que forcer un ratio fixe qui rogne ou laisse
+     du vide, la hauteur suit le texte (aucun ratio imposé sur la
+     carte) et ce fond vectoriel — une simple forme, pas une photo —
+     s'étire pour la remplir exactement. */
+  .avance-content__card-bg--834 {
+    display: block;
+    object-fit: fill;
   }
 
-  .avance-content__grid {
-    margin-top: 2.5rem;
+  .avance-content__card-text {
+    padding: 1.7rem 1.75rem;
+    line-height: 1.4;
   }
 }
 
@@ -284,11 +348,13 @@
 
   .avance-content__grid {
     display: flex;
+    flex-direction: column;
     margin-top: 1rem;
   }
 
   .avance-content__left {
     display: flex;
+    flex: 1 1 auto;
   }
 
   .avance-content__paragraph {
@@ -305,6 +371,7 @@
 
   .avance-content__cards {
     display: flex;
+    flex: 1 1 auto;
     align-items: center;
   }
 

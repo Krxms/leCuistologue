@@ -64,12 +64,21 @@
   font-style: italic;
 }
 
+@property --cta-sweep {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .presentation__cta {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 46px;
   padding-inline: 55px;
+  /* Bordure réelle : filet de secours toujours visible, et c'est
+     elle qu'on voit tant que l'anneau bleu ne l'a pas recouverte. */
   border: 2px solid #edb368;
   border-radius: 6px;
   font-family: var(--font-body);
@@ -77,6 +86,41 @@
   font-size: 1rem;
   color: var(--color-ink);
   margin-top: 2.5rem;
+  transition: border-color 800ms ease;
+}
+
+.presentation__cta:hover {
+  border-color: var(--color-ink-soft);
+}
+
+/* L'anneau animé : même technique que le CTA secondaire de la hero,
+   mais inversée : part de l'or (couleur de base ici) et balaie vers
+   le bleu en partant de la droite. */
+.presentation__cta::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  --cta-sweep: 0deg;
+  background: conic-gradient(from 90deg, var(--color-ink-soft) var(--cta-sweep), #edb368 var(--cta-sweep));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: --cta-sweep 800ms ease;
+}
+
+.presentation__cta:hover::after {
+  --cta-sweep: 360deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .presentation__cta,
+  .presentation__cta::after {
+    transition: none;
+  }
 }
 
 .presentation__photo-wrap {
@@ -147,23 +191,6 @@
   z-index: 1;
   pointer-events: none;
   transform: rotate(-150deg);
-}
-
-.presentation__decor--brocoli {
-  position: absolute;
-  width: 8%;
-  height: auto;
-  left: 48%;
-  top: -3.6vw;
-  z-index: 4;
-  pointer-events: none;
-}
-
-.presentation__photo-decor--potato {
-  width: 24%;
-  height: auto;
-  left: 10.5%;
-  top: -35%;
 }
 
 /* Zone intermédiaire : lisse le passage desktop -> tablette paysage
@@ -243,23 +270,6 @@
     z-index: 1;
     pointer-events: none;
     transform: rotate(-150deg);
-  }
-
-  .presentation__decor--brocoli {
-    position: absolute;
-    width: 12%;
-    height: auto;
-    left: 48%;
-    top: -3.6vw;
-    z-index: 4;
-    pointer-events: none;
-  }
-
-  .presentation__photo-decor--potato {
-    width: 28%;
-    height: auto;
-    left: 28.5%;
-    top: -90%;
   }
 }
 
@@ -342,22 +352,6 @@
     top: 120%;
   }
 
-  .presentation__decor--brocoli {
-    position: absolute;
-    width: 12%;
-    height: auto;
-    left: 48%;
-    top: -3.6vw;
-    z-index: 4;
-    pointer-events: none;
-  }
-
-  .presentation__photo-decor--potato {
-    width: 28%;
-    height: auto;
-    left: 28.5%;
-    top: -90%;
-  }
 }
 
 /* Zone intermédiaire : lisse le passage tablette -> mobile
@@ -412,7 +406,6 @@
   }
 
   .presentation__photo-decor,
-  .presentation__decor--brocoli,
   .presentation__courgette {
     display: none;
   }
@@ -430,14 +423,6 @@
     width: 13vw;
     max-width: 68px;
     transform: rotate(20deg);
-  }
-
-  .presentation__decor--brocoli {
-    display: block;
-    left: 8%;
-    top: -60px;
-    width: 20vw;
-    max-width: 78px;
   }
 
   .presentation__photo-decor--aubergine {
