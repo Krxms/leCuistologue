@@ -33,6 +33,15 @@
   color: var(--color-ink-soft);
 }
 
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .erreur404__visuel {
+    width: clamp(60%, calc(-397.9104% + 59.7015vw), 100%);
+    margin: clamp(0%, calc(124.4776% + -14.9254vw), 10%);
+  }
+}
+
 @media (max-width: 767px) {
   .erreur404__visuel {
     width: 60%;

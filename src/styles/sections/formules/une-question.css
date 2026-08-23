@@ -89,6 +89,15 @@
   z-index: 0;
 }
 
+/* Zone intermédiaire : lisse l'apparition du padding mobile
+   sans changer les valeurs exactes à 1023px et 834px. */
+@media (min-width: 835px) and (max-width: 1023px) {
+  .une-question {
+    padding-top: clamp(0rem, calc(16.2381rem + -1.5873vw), 3rem);
+    padding-inline: clamp(0rem, calc(8.1190rem + -0.7937vw), 1.5rem);
+  }
+}
+
 @media (max-width: 834px) {
   .une-question {
     min-height: auto;

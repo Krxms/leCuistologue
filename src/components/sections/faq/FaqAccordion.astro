@@ -166,7 +166,7 @@ const colonneDroite = questions.slice(milieu);
 ---
 
 <section class="faq-accordion">
-  <div class="faq-accordion__header">
+  <div class="faq-accordion__header reveal">
     <h2 class="faq-accordion__title">Les questions que vous vous posez peut-être</h2>
     <p class="faq-accordion__hint">
       Comment se déroule une intervention ? Que peut-on préparer ? Qui fait les courses ? Comment les plats sont-ils conservés ?
@@ -177,7 +177,7 @@ const colonneDroite = questions.slice(milieu);
   </div>
 
   <div class="faq-accordion__grid">
-    <div class="faq-accordion__col">
+    <div class="faq-accordion__col reveal">
       {colonneGauche.map((item, i) => (
         <details class="faq-accordion__item" name="faq">
           <summary class="faq-accordion__question">
@@ -194,7 +194,7 @@ const colonneDroite = questions.slice(milieu);
       ))}
     </div>
 
-    <div class="faq-accordion__col">
+    <div class="faq-accordion__col reveal">
       {colonneDroite.map((item, i) => (
         <details class="faq-accordion__item" name="faq">
           <summary class="faq-accordion__question">

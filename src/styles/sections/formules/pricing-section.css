@@ -358,6 +358,14 @@
   transform: scale(1.4);
 }
 
+/* Zone intermédiaire : lisse le passage desktop -> tablette
+   sans changer les valeurs exactes à 1280px et 1210px. */
+@media (min-width: 1211px) and (max-width: 1280px) {
+  .pricing-title {
+    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+  }
+}
+
 /* ============================================================
    TABLETTE — 768px à 1210px (paysage et portrait partagent le
    même carrousel de cartes ; seul le décalage du titre varie,

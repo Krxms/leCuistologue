@@ -119,6 +119,14 @@
   }
 }
 
+/* Zone intermédiaire : lisse le rétrécissement du logo
+   sans changer les valeurs exactes à 1023px et 834px. */
+@media (min-width: 835px) and (max-width: 1023px) {
+  .footer__logo {
+    max-width: clamp(200px, calc(-682.5397px + 105.8201vw), 400px);
+  }
+}
+
 @media (max-width: 834px) {
   .footer__top {
     grid-template-columns: 1.4fr 1fr 1fr 1fr;

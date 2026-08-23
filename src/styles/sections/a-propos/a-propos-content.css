@@ -151,6 +151,14 @@
   color: #c26665;
 }
 
+/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
+   sans changer les valeurs exactes à 1280px et 1210px. */
+@media (min-width: 1211px) and (max-width: 1280px) {
+  .a-propos-content {
+    margin-top: clamp(-12rem, calc(116.0000rem + -10.0000vw), -5rem);
+  }
+}
+
 @media (max-width: 1210px) {
   .a-propos-content {
     margin-top: -5rem;
@@ -197,6 +205,15 @@
 
   .a-propos-content__recap-title {
     margin: 0rem 0 1.4rem;
+  }
+}
+
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .a-propos-content {
+    padding-top: clamp(0rem, calc(37.3433rem + -4.4776vw), 3rem);
+    padding-bottom: clamp(4rem, calc(-7.4478rem + 1.4925vw), 5rem);
   }
 }
 

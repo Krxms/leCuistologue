@@ -166,16 +166,19 @@
   top: -35%;
 }
 
+/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
+   sans changer les valeurs exactes à 1280px et 1210px. */
+@media (min-width: 1211px) and (max-width: 1280px) {
+  .presentation {
+    padding-bottom: clamp(0rem, calc(109.7143rem + -8.5714vw), 6rem);
+  }
+}
+
 /* ============================================================
    TABLETTE PAYSAGE — 1023px à 1210px
    ============================================================ */
 
 @media (min-width: 1023px) and (max-width: 1210px) {
-  .presentation {
-    min-height: auto;
-    padding-bottom: 6rem;
-  }
-
   .presentation__title-icon {
     width: 111.7px;
     height: 111.7px;
@@ -261,6 +264,11 @@
 }
 
 @media (max-width: 1210px) {
+  .presentation {
+    min-height: auto;
+    padding-bottom: 6rem;
+  }
+
   .presentation__photo {
     top: -40%;
   }
@@ -271,11 +279,6 @@
    ============================================================ */
 
 @media (max-width: 834px) {
-  .presentation {
-    min-height: auto;
-    padding-bottom: 6rem;
-  }
-
   .presentation__photo {
     top: -10%;
   }
@@ -354,6 +357,16 @@
     height: auto;
     left: 28.5%;
     top: -90%;
+  }
+}
+
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .presentation {
+    padding-top: clamp(0rem, calc(12.4478rem + -1.4925vw), 1rem);
+    padding-bottom: clamp(5rem, calc(-6.4478rem + 1.4925vw), 6rem);
+    padding-inline: clamp(0rem, calc(18.6716rem + -2.2388vw), 1.5rem);
   }
 }
 

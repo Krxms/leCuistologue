@@ -20,6 +20,15 @@
   color: var(--color-ink-soft);
 }
 
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .contact-header {
+    padding-top: clamp(3rem, calc(-19.8955rem + 2.9851vw), 5rem);
+    padding-bottom: clamp(1.5rem, calc(-4.2239rem + 0.7463vw), 2rem);
+  }
+}
+
 @media (max-width: 767px) {
   .contact-header {
     padding: 3rem 1.5rem 1.5rem;

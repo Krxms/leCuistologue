@@ -106,6 +106,15 @@
   }
 }
 
+/* Zone intermédiaire : lisse l'apparition du padding mobile
+   sans changer les valeurs exactes à 1023px et 834px. */
+@media (min-width: 835px) and (max-width: 1023px) {
+  .faq-cta {
+    padding-top: clamp(0rem, calc(37.8889rem + -3.7037vw), 7rem);
+    padding-inline: clamp(0rem, calc(8.1190rem + -0.7937vw), 1.5rem);
+  }
+}
+
 @media (max-width: 834px) {
   .faq-cta {
     min-height: auto;

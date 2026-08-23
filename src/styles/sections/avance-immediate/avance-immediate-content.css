@@ -257,6 +257,15 @@
   }
 }
 
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .avance-content {
+    padding-top: clamp(3rem, calc(-8.4478rem + 1.4925vw), 4rem);
+    padding-bottom: clamp(4rem, calc(-7.4478rem + 1.4925vw), 5rem);
+  }
+}
+
 @media (max-width: 767px) {
   .avance-content {
     max-width: 1200px;

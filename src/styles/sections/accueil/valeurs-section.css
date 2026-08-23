@@ -87,6 +87,15 @@
   transform: scaleX(-1);
 }
 
+/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
+   sans changer les valeurs exactes à 1280px et 1210px. */
+@media (min-width: 1211px) and (max-width: 1280px) {
+  .valeurs {
+    margin-top: clamp(-3rem, calc(33.5714rem + -2.8571vw), -1rem);
+    margin-bottom: clamp(-3rem, calc(51.8571rem + -4.2857vw), 0rem);
+  }
+}
+
 @media (max-width: 1210px) {
   .valeurs {
     margin-block: 0rem;
@@ -105,6 +114,17 @@
 @media (max-width: 834px) {
   .valeurs__card-title {
     font-size: clamp(1.2rem, 1.3vw, 1.3rem);
+  }
+}
+
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .valeurs {
+    margin-top: clamp(-1rem, calc(86.1343rem + -10.4478vw), 6rem);
+    margin-bottom: clamp(0rem, calc(80.9104rem + -9.7015vw), 6.5rem);
+    padding-block: clamp(0rem, calc(-68.6866rem + 8.9552vw), 6rem);
+    padding-inline: clamp(1.5rem, calc(-4.2239rem + 0.7463vw), 2rem);
   }
 }
 

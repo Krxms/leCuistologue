@@ -116,6 +116,15 @@
   }
 }
 
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .commentaires {
+    padding-block: clamp(4rem, calc(-64.6866rem + 8.9552vw), 10rem);
+    padding-inline: clamp(2rem, calc(5.7343rem + -0.4478vw), 2.3rem);
+  }
+}
+
 @media (max-width: 767px) {
   .commentaires {
     padding: 4rem 2.3rem;

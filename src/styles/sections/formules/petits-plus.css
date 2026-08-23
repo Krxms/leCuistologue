@@ -170,6 +170,12 @@
    ============================================================ */
 
 @media (min-width: 1023px) and (max-width: 1210px) {
+  /* Zone intermédiaire : lisse le passage desktop -> tablette
+     sans changer les valeurs exactes à 1210px et 1023px. */
+  .petits-plus__title {
+    margin-bottom: clamp(5.5rem, calc(-10.9118rem + 1.6043vw), 8.5rem);
+  }
+
   .petits-plus-card {
     width: 45%;
   }
@@ -226,6 +232,15 @@
 
   .petits-plus-content--gourmande .petits-plus-content__description {
     font-size: clamp(0.84rem, 1vw, 1.1rem);
+  }
+}
+
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .petits-plus {
+    padding-top: clamp(2.5rem, calc(8.7239rem + -0.7463vw), 3rem);
+    padding-bottom: clamp(3rem, calc(-100.0299rem + 13.4328vw), 12rem);
   }
 }
 

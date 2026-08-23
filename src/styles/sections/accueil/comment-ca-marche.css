@@ -96,6 +96,15 @@
   margin-top: -7rem; /* remonte au niveau des illustrations, pas du texte */
 }
 
+/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
+   sans changer les valeurs exactes à 1280px et 1210px. */
+@media (min-width: 1211px) and (max-width: 1280px) {
+  .howto {
+    padding-top: clamp(3.5rem, calc(-108.8571rem + 9.2857vw), 10rem);
+    padding-bottom: clamp(8rem, calc(-26.5714rem + 2.8571vw), 10rem);
+  }
+}
+
 @media (max-width: 1210px) {
   .howto {
     padding: 3.5rem 1.5rem 8rem;
@@ -131,6 +140,15 @@
 
   .howto__step-text {
     font-size: 0.9rem;
+  }
+}
+
+/* Zone intermédiaire : lisse le passage tablette portrait -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .howto {
+    padding-top: clamp(2.5rem, calc(-8.9478rem + 1.4925vw), 3.5rem);
+    padding-bottom: clamp(4.5rem, calc(-35.5672rem + 5.2239vw), 8rem);
   }
 }
 

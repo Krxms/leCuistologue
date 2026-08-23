@@ -87,6 +87,14 @@
   text-decoration: underline;
 }
 
+/* Zone intermédiaire : lisse le passage desktop -> tablette
+   sans changer les valeurs exactes à 1280px et 1210px. */
+@media (min-width: 1211px) and (max-width: 1280px) {
+  .avance-questions__cards {
+    gap: clamp(2rem, calc(-49.8571rem + 4.2857vw), 5rem);
+  }
+}
+
 @media (max-width: 1210px) {
   .avance-questions__bubble {
     right: 4%;
@@ -95,6 +103,20 @@
 
   .avance-questions__cards {
     gap: 2rem;
+  }
+}
+
+/* Zone intermédiaire : lisse le passage tablette -> mobile
+   sans changer les valeurs exactes à 834px et 767px. */
+@media (min-width: 768px) and (max-width: 834px) {
+  .avance-questions {
+    margin-top: clamp(1rem, calc(-216.5075rem + 28.3582vw), 20rem);
+    padding-top: clamp(3rem, calc(-19.8955rem + 2.9851vw), 5rem);
+    padding-bottom: clamp(3rem, calc(-31.3433rem + 4.4776vw), 6rem);
+  }
+
+  .avance-questions__cards {
+    gap: clamp(1rem, calc(-10.4478rem + 1.4925vw), 2rem);
   }
 }
 
