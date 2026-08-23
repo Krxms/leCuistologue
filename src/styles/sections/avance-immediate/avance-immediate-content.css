@@ -172,8 +172,8 @@
   height: auto;
   margin: 12rem auto 0;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: scale(1.3);
+  /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);*/
+  transform: scale(1.1);
 }
 
 /* ===== Image mobile : masquée par défaut, prend le relais sous 767px ===== */
@@ -185,7 +185,7 @@
   height: auto;
   margin: 3rem auto 0;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);*/
 }
 
 /* ============================================================
@@ -406,7 +406,7 @@
 
   .avance-content__comment-image--mobile {
     display: block;
-    margin: 13rem auto 14rem;
+    margin: 16rem auto 14rem;
     transform: scale(1.3);
   }
 }

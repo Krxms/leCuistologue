@@ -155,6 +155,10 @@
     justify-content: center;
   }
 
+  .footer__description {
+    text-align: center;
+  }
+
   .footer__brand {
   display: flex;
   flex-direction: column;
