@@ -108,10 +108,12 @@
   z-index: 0;
 }
 
-/* Deux fonds par carte : celui du dessus (photo/desktop) et une
-   variante sur mesure pour le palier ≤834px (voir plus bas), à la
+/* Trois fonds par carte : celui du dessus (photo/desktop) et deux
+   variantes sur mesure, une pour le palier tablette portrait
+   (≤834px) et une pour mobile (≤767px, voir plus bas), à la
    manière de .avance-content__comment-image--desktop/--mobile. */
-.avance-content__card-bg--834 {
+.avance-content__card-bg--834,
+.avance-content__card-bg--mobile {
   display: none;
 }
 
@@ -316,7 +318,7 @@
   }
 
   .avance-content__card-text {
-    padding: 1.7rem 1.75rem;
+    padding: 2.3rem 1.75rem;
     line-height: 1.4;
   }
 }
@@ -346,15 +348,14 @@
     font-size: 0.9rem;
   }
 
+  /* Le palier tablette portrait (≤834px) empile déjà chaque
+     paragraphe avec sa carte associée (grid-template-areas,
+     display: contents sur __left/__cards) : le mobile hérite
+     directement de cette mise en page plutôt que d'y substituer
+     un empilement "tout le texte puis toutes les cartes". Seuls
+     les réglages propres à la largeur mobile sont ajustés ici. */
   .avance-content__grid {
-    display: flex;
-    flex-direction: column;
     margin-top: 1rem;
-  }
-
-  .avance-content__left {
-    display: flex;
-    flex: 1 1 auto;
   }
 
   .avance-content__paragraph {
@@ -369,35 +370,24 @@
     font-size: 1rem;
   }
 
-  .avance-content__cards {
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-  }
-
-  .avance-content__card {
-    display: grid;
-    width: 110%;
-  }
-
-  .avance-content__card--small,
-  .avance-content__card--large {
-    aspect-ratio: auto;
-  }
-
-  .avance-content__card-bg {
-    grid-area: 1 / 1;
-    object-fit: contain;
-  }
-
   .avance-content__card-bulb {
     display: none;
   }
 
+  /* Sous 767px, le fond dessiné pour la tablette portrait (--834,
+     conçu pour ~712px de large) cède la place à une variante
+     dessinée pour la largeur mobile (~335px) : le texte s'y insère
+     désormais correctement sans avoir à étirer un fond trop large. */
+  .avance-content__card-bg--834 {
+    display: none;
+  }
+
+  .avance-content__card-bg--mobile {
+    display: block;
+    object-fit: fill;
+  }
+
   .avance-content__card-text {
-    grid-area: 1 / 1;
-    align-self: center;
-    justify-self: center;
     font-size: 0.875rem;
   }
 

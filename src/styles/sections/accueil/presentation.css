@@ -414,17 +414,18 @@
     margin-top: 10%;
   }
 
-  .presentation__courgette {
+  
+    .presentation__courgette {
     display: block;
     position: absolute;
     left: auto;
-    right: 0%;
-    top: -55px;
-    width: 13vw;
+    right: 66%;
+    top: -87px;
+    width: 38vw;
     max-width: 68px;
-    transform: rotate(20deg);
+    transform: rotate(290deg);
   }
-
+  
   .presentation__photo-decor--aubergine {
     display: block;
     left: auto;

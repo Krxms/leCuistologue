@@ -155,6 +155,12 @@
     justify-content: center;
   }
 
+  .footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
   .footer__top {
     grid-template-columns: 1fr;
   }
