@@ -16,6 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Ferme le menu si on clique/tape en dehors du menu ou du burger
+  document.addEventListener("click", (event) => {
+    if (
+      menu.classList.contains("is-open") &&
+      !menu.contains(event.target) &&
+      !burger.contains(event.target)
+    ) {
+      menu.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    }
+  });
+
   // Referme le menu si la fenêtre est agrandie au-delà du seuil burger
   window.addEventListener("resize", () => {
     if (window.innerWidth >= 1024) {
