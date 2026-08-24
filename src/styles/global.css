@@ -42,6 +42,16 @@ body {
   overflow-x: clip;
 }
 
+/* overflow-x sur html/body seul ne suffit pas partout (Safari/iPadOS
+   ne supporte pas toujours "clip" de façon fiable), mais le mettre à
+   "hidden" sur le html/body eux-mêmes casse le position:sticky de la
+   navbar (elle perd sa référence de défilement). En le posant sur
+   <main> à la place — un enfant, pas la racine — le débordement
+   horizontal des sections est bien coupé sans toucher au sticky. */
+main {
+  overflow-x: hidden;
+}
+
 .font-display {
   font-family: var(--font-display);
 }

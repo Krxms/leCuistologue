@@ -148,7 +148,7 @@
 @media (min-width: 768px) and (max-width: 834px) {
   .howto {
     padding-top: clamp(2.5rem, calc(-8.9478rem + 1.4925vw), 3.5rem);
-    padding-bottom: clamp(4.5rem, calc(-35.5672rem + 5.2239vw), 8rem);
+    padding-bottom: clamp(8.5rem, calc(-35.5672rem + 5.2239vw), 8rem);
   }
 }
 

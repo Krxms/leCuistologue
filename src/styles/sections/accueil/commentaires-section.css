@@ -125,9 +125,10 @@
    ============================================================ */
 
 @media (min-width: 835px) and (max-width: 1210px) {
-  .commentaires__arrow {
+    .commentaires__arrow {
     left: 8%;
-    top: -131%;
+    top: -175%;
+    width: 8.2%;
   }
 }
 

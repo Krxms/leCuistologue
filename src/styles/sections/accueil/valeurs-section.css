@@ -44,7 +44,7 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: clamp(1.9rem, 2vw, 2.7rem);
+  gap: 2.5rem;
 }
 
 .valeurs__card {
@@ -121,10 +121,29 @@
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .valeurs {
-    margin-top: clamp(-1rem, calc(86.1343rem + -10.4478vw), 6rem);
+    /*margin-top: clamp(-1rem, calc(86.1343rem + -10.4478vw), 6rem);
     margin-bottom: clamp(0rem, calc(80.9104rem + -9.7015vw), 6.5rem);
-    padding-block: clamp(0rem, calc(-68.6866rem + 8.9552vw), 6rem);
+    padding-block: clamp(0rem, calc(-68.6866rem + 8.9552vw), 6rem);*/
     padding-inline: clamp(1.5rem, calc(-4.2239rem + 0.7463vw), 2rem);
+  }
+
+  .valeurs__bg  {
+    transform: translateX(-55%) scale(1.1);
+  }
+
+  /* 4 cartes sur une seule ligne à cette largeur (768-834px) ne
+     laissent que ~190px par carte une fois les paddings retirés,
+     largement sous leur largeur prévue (290-320px) : le fond et le
+     texte de chaque carte s'en trouvent écrasés. Deux colonnes
+     redonnent à chaque carte sa largeur normale. */
+  .valeurs__grid {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    column-gap: 1.5rem;
+  }
+
+  .valeurs__card {
+    width: clamp(340px, 42vw, 320px);
   }
 }
 

@@ -65,9 +65,11 @@
     width: 12%;
   }
 
-  .hero__decor--potato {
+    .hero__decor--potato {
     width: 10.92%;
     left: 73.66%;
+    top: 91%;
+    transform: rotate(-3deg);
   }
 }
 
