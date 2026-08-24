@@ -247,13 +247,15 @@
 }
 
 /* ============================================================
-   TABLETTE — 834px à 1210px, ZONE ISOLÉE
+   TABLETTE PORTRAIT — jusqu'à 834px, ZONE ISOLÉE
    Tout ce que vous écrivez ici ne s'applique QUE dans cette plage,
    et QUE sur les éléments de .offre__desktop (jamais .offre-m).
-   Modifiez librement ce bloc sans risque pour le mobile ou le desktop.
+   Modifiez librement ce bloc sans risque pour le mobile, le desktop
+   ou la zone paysage ci-dessous.
    ============================================================ */
 
-@media (min-width: 834px) and (max-width: 1210px) {
+@media (max-width: 834px) {
+
   /* Recalculée à partir des dimensions réelles de la photo (85% de
      large, ratio ~1.047) pour qu'elle ne soit jamais rognée par
      l'overflow:clip de la section, même une fois la checklist
@@ -262,11 +264,25 @@
     min-height: calc(88vw - 56px);
   }
 
+  .offre__header {
+    max-width: 90%;
+  }
+
   .offre__photo--main {
-    left: 55.9%;
+    left: 64.9%;
     top: 5%;
-    width: 85%;
+    width: 59%;
     height: auto;
+  }
+
+  .offre__description {
+    width: 74%;
+  }
+
+  .offre__arrow {
+    left: 74.7%;
+    top: 62%;
+    width: 7.8%;
   }
 
   .offre__photo--secondary {
@@ -289,11 +305,18 @@
     display: none;
   }
 
+  /* Pleine largeur (alignée sur le même retrait que le titre) plutôt
+     que 65% : à cette largeur réduite, un encart étroit forçait des
+     colonnes trop comprimées. */
   .offre__checklist-wrap {
     aspect-ratio: auto;
-    width: 65%;
+    width: auto;
+    margin-inline: 0;
     background-color: var(--color-cream);
-    border-radius: 20% 20% 20% 20%/20% 20% 20% 20%;
+    /* Un rayon en % se calcule séparément en largeur/hauteur : sur
+       une carte large et peu haute, ça donnait des coins en pente
+       plutôt que des arrondis réguliers. Valeur fixe à la place. */
+    border-radius: 32px;
   }
 
   /* Deux colonnes garanties (au lieu du flex qui repassait en une
@@ -307,7 +330,141 @@
   }
 
   .offre__checklist-col {
+    align-items: left;
+  }
+
+  /* Le titre et la description restent alignés à gauche (comme sur
+     desktop), mais tout ce qui suit la checklist (prix, promo, CTA)
+     passe en bloc centré plutôt qu'aligné sur le même retrait. */
+  .offre__price-block {
+    margin-left: 0;
+    width: 100%;
     align-items: center;
+  }
+
+  .offre__price {
+    text-align: center;
+  }
+
+  .offre__promo {
+    margin-left: 0;
+    align-self: center;
+  }
+
+  .offre__cta {
+    margin-left: 0;
+    align-self: center;
+  }
+}
+
+/* ============================================================
+   TABLETTE PAYSAGE — 835px à 1210px, ZONE ISOLÉE
+   Tout ce que vous écrivez ici ne s'applique QUE dans cette plage,
+   et QUE sur les éléments de .offre__desktop (jamais .offre-m).
+   Modifiez librement ce bloc sans risque pour le mobile, le desktop
+   ou la zone portrait ci-dessus.
+   ============================================================ */
+
+@media (min-width: 835px) and (max-width: 1210px) {
+
+  /* Recalculée à partir des dimensions réelles de la photo (85% de
+     large, ratio ~1.047) pour qu'elle ne soit jamais rognée par
+     l'overflow:clip de la section, même une fois la checklist
+     raccourcie par le passage en deux colonnes ci-dessous. */
+  .offre__desktop {
+    min-height: calc(88vw - 56px);
+  }
+
+  .offre__header {
+    max-width: 90%;
+  }
+
+   .offre__photo--main {
+    left: 67.9%;
+    top: 9%;
+    width: 66%;
+    height: auto;
+  }
+
+  .offre__description {
+    width: 74%;
+  }
+
+  .offre__arrow {
+    left: 60%;
+    top: 62%;
+    width: 7.8%;
+  }
+
+  .offre__photo--secondary {
+    display: none;
+  }
+
+  .offre__bg {
+    padding-top: 0rem;
+    bottom: -1rem;
+    height: calc(100% + 2rem);
+    object-fit: cover;
+    transform: translateX(-50%) scale(1);
+  }
+
+  /* Le fond image (ratio fixe) ne peut pas s'adapter à la hauteur du
+     texte une fois la liste repassée en une colonne à cette largeur.
+     On le remplace par un aplat de couleur, comme sur la version
+     mobile, qui grandit naturellement avec le contenu. */
+  .offre__checklist-bg {
+    display: none;
+  }
+
+  /* Pleine largeur (alignée sur le même retrait que le titre) plutôt
+     que 65% : à cette largeur réduite, un encart étroit forçait des
+     colonnes trop comprimées. */
+    .offre__checklist-wrap {
+    aspect-ratio: auto;
+    width: 60%;
+    margin-inline: 80px;
+    background-color: var(--color-cream);
+    /* Même souci qu'en portrait : un rayon en % donne des coins en
+       pente sur une carte large et peu haute. Valeur fixe à la place. */
+    border-radius: 32px;
+  }
+
+  /* Deux colonnes garanties (au lieu du flex qui repassait en une
+     seule colonne faute de place), padding resserré pour laisser
+     de la place au texte, colonnes centrées pour un rendu propre. */
+  .offre__checklist {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 4%;
+  }
+
+  .offre__checklist-col {
+    align-items: left;
+  }
+
+  /* Le titre et la description restent alignés à gauche (comme sur
+     desktop), mais tout ce qui suit la checklist (prix, promo, CTA)
+     passe en bloc centré plutôt qu'aligné sur le même retrait. */
+  .offre__price-block {
+    margin-left: 0;
+    width: 60%;
+    margin-inline: 80px;
+    align-items: center;
+  }
+
+  .offre__price {
+    text-align: center;
+  }
+
+  .offre__promo {
+    margin-left: 0;
+    align-self: center;
+  }
+
+  .offre__cta {
+    margin-left: 0;
+    align-self: center;
   }
 }
 

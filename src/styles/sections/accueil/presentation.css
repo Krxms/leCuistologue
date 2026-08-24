@@ -61,7 +61,7 @@
 
 .presentation__text em {
   font-weight: 600;
-  font-style: italic;
+  font-style: normal;
 }
 
 @property --cta-sweep {
@@ -126,7 +126,7 @@
 .presentation__photo-wrap {
   position: absolute;
   left: 62.55%;
-  top: 12%;
+  top: 15%;
   width: 33%;
   aspect-ratio: 632 / 590;
   z-index: 1;
@@ -149,8 +149,8 @@
 .presentation__photo-decor--oignon {
   width: 24.24%;
   height: auto;
-  left: -15.4%;
-  top: -0.46%;
+  left: -45%;
+  top: 0%;
 }
 
 .presentation__photo-decor--aubergine {
@@ -161,10 +161,10 @@
 }
 
 .presentation__photo-decor--champignons {
-  width: 12.73%;
+  width: 15.73%;
   height: auto;
   left: 95.3%;
-  top: 50.25%;
+  top: 62%;
   transform: rotate(-70deg);
 }
 
@@ -184,13 +184,13 @@
 
 .presentation__courgette {
   position: absolute;
-  left: 87.03%;
-  top: 3vw;
-  width: 5.6%;
+  left: 68%;
+  top: 2vw;
+  width: 6.6%;
   height: auto;
   z-index: 1;
   pointer-events: none;
-  transform: rotate(-150deg);
+  transform: rotate(-80deg);
 }
 
 /* Zone intermédiaire : lisse le passage desktop -> tablette paysage

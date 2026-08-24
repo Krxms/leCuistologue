@@ -110,18 +110,49 @@
   color: #5e7058;
 }
 
-@media (min-width: 768px) and (max-width: 1210px) {
+/* ============================================================
+   TABLETTE — jusqu'à 1210px (portrait et paysage confondus)
+   ============================================================ */
+
+@media (max-width: 1210px) {
   .commentaires__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* ============================================================
+   TABLETTE PAYSAGE — 835px à 1210px
+   ============================================================ */
+
+@media (min-width: 835px) and (max-width: 1210px) {
+  .commentaires__arrow {
+    left: 8%;
+    top: -131%;
+  }
+}
+
+
 /* Zone intermédiaire : lisse le passage tablette -> mobile
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
+
+.commentaires__header {
+  margin-top: 4rem;
+}
+
   .commentaires {
     padding-block: clamp(4rem, calc(-64.6866rem + 8.9552vw), 10rem);
     padding-inline: clamp(2rem, calc(5.7343rem + -0.4478vw), 2.3rem);
+  }
+
+.commentaires__arrow {
+    position: absolute;
+    left: 4%;
+    top: -168%;
+    width: 9%;
+    height: auto;
+    z-index: 5;
+    transform: scaleX(-1);
   }
 }
 

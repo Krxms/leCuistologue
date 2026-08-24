@@ -45,17 +45,19 @@
 }
 
 .hero__decor--brocoli {
-  width: 8%;
+  width: 7.6%;
   height: auto;
-  left: 48%;
-  bottom: -5vw;
+  left: 52%;
+  bottom: -3vw;
 }
 
 .hero__decor--potato {
-  width: 10%;
+  width: 8.7%;
   height: auto;
-  left: 66.02%;
-  bottom: -3.5vw;
+  left: 98%;
+  bottom: -16vw;
+  transform: rotate(0-25eg);
+  transform: scaleX(-1);
 }
 
 @media (max-width: 1210px) {
