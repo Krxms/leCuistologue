@@ -23,6 +23,11 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
   overflow-x: clip;
+  /* iOS Safari affiche le fond de <html> (pas celui de body) dans la
+     zone de rebond au-delà du bas de page : sans couleur ici, ce
+     rebond montre le blanc par défaut du navigateur. On reprend la
+     couleur du footer, dernier élément visible en bas de page. */
+  background-color: #f8e0cf;
 }
 
 @media (prefers-reduced-motion: reduce) {
