@@ -1,5 +1,11 @@
 .avance-questions {
   position: relative;
+  /* z-index:0 crée un contexte d'empilement propre à cette section :
+     le fond en z-index:-1 juste en dessous reste alors garanti
+     derrière TOUT le contenu (y compris les éléments non positionnés
+     comme le titre), sans dépendre de l'ordre du DOM ni de ce qui se
+     passe hors de la section (fond de body/html, sections voisines). */
+  z-index: 0;
   /*overflow: hidden;*/
   padding: 5rem 3.3% 6rem;
   margin-top: 15rem;
@@ -10,6 +16,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 .avance-questions__bubble {
