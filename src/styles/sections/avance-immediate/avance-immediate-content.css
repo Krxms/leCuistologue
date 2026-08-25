@@ -161,6 +161,8 @@
   width: 55%;
   top: 25rem;
   left: -10rem;
+    z-index: 1;
+
 }
 
 /* ===== Image desktop : visible par défaut ===== */
@@ -173,7 +175,7 @@
   margin: 12rem auto 0;
   border-radius: 16px;
   /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);*/
-  transform: scale(1.1);
+  transform: scale(1.4);
 }
 
 /* ===== Image mobile : masquée par défaut, prend le relais sous 767px ===== */
