@@ -85,6 +85,14 @@
   text-decoration: underline;
 }
 
+.footer__zone {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--color-ink-soft);
+}
+
 .footer__services-icon {
   margin-top: 1.5rem;
   width: 90px;

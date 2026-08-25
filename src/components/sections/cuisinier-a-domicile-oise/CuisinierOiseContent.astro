@@ -1,0 +1,32 @@
+---
+import "../../../styles/sections/cuisinier-a-domicile-oise/cuisinier-oise-content.css";
+
+const zones = ["Oise", "Val-d'Oise", "Yvelines"];
+---
+
+<section class="cuisinier-oise">
+  <div class="cuisinier-oise__content">
+    <h1 class="cuisinier-oise__title">Cuisinier à domicile dans l'Oise</h1>
+
+    <p class="cuisinier-oise__text">
+      Le Cuistologue intervient à domicile dans l'Oise et les départements limitrophes pour préparer des repas maison adaptés à votre quotidien, à partir de produits de saison.
+    </p>
+
+    <p class="cuisinier-oise__text">
+      Chaque intervention est pensée sur-mesure : échange préalable sur vos habitudes et vos envies, courses réalisées pour vous, préparation directement dans votre cuisine, puis organisation d'une routine culinaire qui vous simplifie la vie. Le détail des <a href="/formules">formules et tarifs</a> est disponible sur la page dédiée.
+    </p>
+
+    <h2 class="cuisinier-oise__subtitle">Zone d'intervention</h2>
+    <ul class="cuisinier-oise__zones">
+      {zones.map((zone) => (
+        <li>{zone}</li>
+      ))}
+    </ul>
+
+    <p class="cuisinier-oise__note">
+      Vous êtes en dehors de cette zone ? <a href="/contact">Contactez-nous</a> : nous étudions chaque demande selon la distance et les conditions de la prestation.
+    </p>
+
+    <a href="/contact" class="cuisinier-oise__cta">Demander un devis</a>
+  </div>
+</section>

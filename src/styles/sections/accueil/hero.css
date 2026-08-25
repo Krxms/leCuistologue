@@ -117,11 +117,31 @@
   color: var(--color-ink-soft);
 }
 
-.hero__actions {
+/* Le wrapper épouse la largeur naturelle des deux CTA (width:
+   fit-content) : la ligne de réassurance juste en dessous peut
+   alors s'étirer à width:100% pour aller bord à bord avec elles. */
+.hero__actions-group {
   margin-top: 2.5rem;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+/* Simple ligne de réassurance ("il vient chez moi ?"), pas un bloc
+   de mots-clés : le contenu SEO local vit dans la section dédiée
+   plus bas sur la page et sur la page /cuisinier-a-domicile-oise/. */
+.hero__zone {
+  margin-top: 1.25rem;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--color-ink-soft);
 }
 
 .btn {
@@ -260,6 +280,10 @@
     font-size: 0.875rem;
     width: 65%;
   }
+
+  .hero__actions-group {
+    width: 100%;
+  }
 }
 
 /* ============================================================
@@ -286,6 +310,13 @@
     height: 46px;
     padding-inline: 1.25rem;
     font-size: 0.95rem;
+    width: 100%;
+  }
+
+  /* Les CTA repassent en largeur %, incompatible avec un wrapper
+     fit-content (le % se résoudrait en auto) : on lui redonne une
+     largeur normale à ce palier. */
+  .hero__actions-group {
     width: 100%;
   }
 
@@ -337,6 +368,7 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+
 
   .btn {
     height: 44px;

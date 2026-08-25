@@ -34,6 +34,21 @@ const {
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Oswald:wght@500&family=Josefin+Sans:wght@600&family=Jost:wght@400&display=swap"
       rel="stylesheet"
     />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Le Cuistologue",
+      "url": "https://lecuistologue.fr",
+      "telephone": "+33619957409",
+      "email": "contact@lecuistologue.fr",
+      "description": "Cuisinier à domicile spécialiste du batch cooking, préparation de repas maison directement chez vous.",
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Oise" },
+        { "@type": "AdministrativeArea", "name": "Val-d'Oise" },
+        { "@type": "AdministrativeArea", "name": "Yvelines" }
+      ]
+    })} />
   </head>
   <body class="bg-cream text-ink">
     <Header />

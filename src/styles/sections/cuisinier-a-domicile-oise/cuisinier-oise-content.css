@@ -1,0 +1,113 @@
+.cuisinier-oise {
+  padding: 8rem 2rem 6rem;
+  background-color: var(--color-cream);
+}
+
+.cuisinier-oise__content {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.cuisinier-oise__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.2;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.cuisinier-oise__text {
+  margin-top: 1.5rem;
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.cuisinier-oise__text a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.cuisinier-oise__text a:hover {
+  color: var(--color-gold);
+}
+
+.cuisinier-oise__subtitle {
+  margin-top: 3rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 1.8vw, 1.75rem);
+  color: var(--color-ink);
+}
+
+.cuisinier-oise__zones {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cuisinier-oise__zones li {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  background-color: var(--color-peach-light);
+  border: 1px solid var(--color-peach);
+  border-radius: 999px;
+  padding: 0.55rem 1.4rem;
+}
+
+.cuisinier-oise__note {
+  margin-top: 1.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-ink-soft);
+}
+
+.cuisinier-oise__note a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.cuisinier-oise__note a:hover {
+  color: var(--color-gold);
+}
+
+.cuisinier-oise__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5rem;
+  height: 46px;
+  padding-inline: 2.5rem;
+  border-radius: 4px;
+  background-color: var(--color-ink-soft);
+  color: #fdfbfa;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s ease;
+}
+
+.cuisinier-oise__cta:hover {
+  background-color: #1a2b35;
+}
+
+@media (max-width: 767px) {
+  .cuisinier-oise {
+    padding: 5rem 1.5rem 4rem;
+  }
+
+  .cuisinier-oise__cta {
+    width: 100%;
+  }
+}

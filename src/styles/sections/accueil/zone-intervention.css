@@ -1,0 +1,97 @@
+.zone-intervention {
+  position: relative;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+/* Même forme/dégradé que les CTA de bas de page des autres pages
+   (À propos, FAQ) : léger galbe sur le bord haut plutôt qu'une
+   ligne droite. */
+.zone-intervention__shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.zone-intervention__content {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.zone-intervention__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 2.4vw, 2.5rem);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.zone-intervention__text {
+  margin-top: 1.2rem;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--color-ink-soft);
+}
+
+.zone-intervention__list {
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.zone-intervention__list li {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  background-color: #DAA35B;
+  border-radius: 999px;
+  padding: 0.55rem 1.4rem;
+}
+
+.zone-intervention__note {
+  margin-top: 1.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+}
+
+.zone-intervention__note a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.zone-intervention__note a:hover {
+  color: var(--color-gold);
+}
+
+.zone-intervention__link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.zone-intervention__link:hover {
+  color: var(--color-gold);
+}
+
+@media (max-width: 767px) {
+  .zone-intervention {
+    padding: 4rem 1.5rem;
+  }
+}
