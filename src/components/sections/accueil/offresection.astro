@@ -14,15 +14,15 @@ import { Image } from "astro:assets";
 
 const colonneGauche = [
   "Échange préalable sur vos habitudes et vos envies",
-  "Cuisine à domicile",
   "Menus personnalisés",
+  "Courses réalisées pour vous",
+  "Cuisine à domicile",
   "Organisation du réfrigérateur",
-  "Remise au propre de la cuisine",
 ];
 
 const colonneDroite = [
+  "Remise au propre de la cuisine",
   "Conseils de conservation",
-  "Courses réalisées pour vous",
   "Organisation d’une routine culinaire",
   "Réserve gourmande",
   "Popotes à emporter",
@@ -36,35 +36,52 @@ const colonneDroite = [
 
     <div class="offre__header">
       <div class="offre__title-row">
-        <h2 class="offre__title">Des solutions culinaires pensées pour vous et avec vous.</h2>
-        <img src={titleIcon.src} alt="" class="offre__title-icon" aria-hidden="true" />
+        <h2 class="offre__title">
+          Des solutions culinaires pensées pour vous et avec vous.
+        </h2>
+        <img
+          src={titleIcon.src}
+          alt=""
+          class="offre__title-icon"
+          aria-hidden="true"
+        />
       </div>
       <p class="offre__description">
-        <b>Le batch cooking, c'est quoi ?</b><br>
-        Le principe est simple : préparer plusieurs repas à l'avance, en une seule session, pour avoir une cuisine maison prête pour les jours qui suivent.<br><br>
-        Avec Le Cuistologue, pas besoin de passer votre dimanche derrière les fourneaux : je viens cuisiner directement chez vous, selon vos habitudes, vos envies et votre quotidien.
+        <b>Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine.</b><br />
+        Choisissez votre formule selon votre appétit, vos habitudes et la quantité
+        de repas que vous souhaitez déléguer.<br><br>
+        Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
       </p>
       <p class="offre__include-label">Chaque intervention peut inclure :</p>
     </div>
 
     <div class="offre__checklist-wrap">
-      <img src={checklistBg.src} alt="" class="offre__checklist-bg" aria-hidden="true" />
+      <img
+        src={checklistBg.src}
+        alt=""
+        class="offre__checklist-bg"
+        aria-hidden="true"
+      />
       <div class="offre__checklist">
         <ul class="offre__checklist-col">
-          {colonneGauche.map((item) => (
-            <li>
-              <img src={checkmark.src} alt="" aria-hidden="true" />
-              <span>{item}</span>
-            </li>
-          ))}
+          {
+            colonneGauche.map((item) => (
+              <li>
+                <img src={checkmark.src} alt="" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))
+          }
         </ul>
         <ul class="offre__checklist-col">
-          {colonneDroite.map((item) => (
-            <li>
-              <img src={checkmark.src} alt="" aria-hidden="true" />
-              <span>{item}</span>
-            </li>
-          ))}
+          {
+            colonneDroite.map((item) => (
+              <li>
+                <img src={checkmark.src} alt="" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -78,16 +95,30 @@ const colonneDroite = [
         <span class="offre__price-label">/ intervention</span>
       </p>
       <div class="offre__promo">
-        <img src={serviceInfoBg.src} alt="" class="offre__promo-bg" aria-hidden="true" />
+        <img
+          src={serviceInfoBg.src}
+          alt=""
+          class="offre__promo-bg"
+          aria-hidden="true"
+        />
         <p class="offre__promo-text">
-          Offre de lancement : <strong>-30€</strong> sur votre 1ère intervention
+          Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
         </p>
       </div>
       <a href="/formules" class="offre__cta">Je découvre les formules !</a>
     </div>
 
-    <Image src={photoMain} alt="Plats préparés par Le Cuistologue, prêts à emporter" class="offre__photo offre__photo--main" />
-    <Image src={photoSecondary} alt="" class="offre__photo offre__photo--secondary" aria-hidden="true" />
+    <Image
+      src={photoMain}
+      alt="Plats préparés par Le Cuistologue, prêts à emporter"
+      class="offre__photo offre__photo--main"
+    />
+    <Image
+      src={photoSecondary}
+      alt=""
+      class="offre__photo offre__photo--secondary"
+      aria-hidden="true"
+    />
   </div>
 
   <!-- ===== Mobile / tablette (≤1210px) ===== -->
@@ -95,22 +126,34 @@ const colonneDroite = [
     <img src={bgPinkMobile.src} alt="" class="offre-m__bg" aria-hidden="true" />
 
     <div class="offre-m__title-row">
-      <h2 class="offre-m__title">Une cuisine maison qui simplifie vraiment votre quotidien</h2>
-      <img src={titleIcon.src} alt="" class="offre-m__title-icon" aria-hidden="true" />
+      <h2 class="offre-m__title">
+        Des solutions culinaires pensées pour vous et avec vous.
+      </h2>
+      <img
+        src={titleIcon.src}
+        alt=""
+        class="offre-m__title-icon"
+        aria-hidden="true"
+      />
     </div>
     <p class="offre-m__description">
-      Des repas faits maison préparés chez vous, pensés pour votre quotidien, avec des produits de saison et une organisation qui vous simplifie la vie.
+      <b>Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine.</b><br /><br />
+      Choisissez votre formule selon votre appétit, vos habitudes et la quantité
+      de repas que vous souhaitez déléguer.<br><br>
+      Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
     </p>
     <p class="offre-m__include-label">Chaque intervention peut inclure :</p>
 
     <div class="offre-m__checklist-wrap">
       <div class="offre-m__checklist">
-        {[...colonneGauche, ...colonneDroite].map((item) => (
-          <div class="offre-m__checklist-item">
-            <img src={checkmark.src} alt="" aria-hidden="true" />
-            <span>{item}</span>
-          </div>
-        ))}
+        {
+          [...colonneGauche, ...colonneDroite].map((item) => (
+            <div class="offre-m__checklist-item">
+              <img src={checkmark.src} alt="" aria-hidden="true" />
+              <span>{item}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
 
@@ -118,17 +161,26 @@ const colonneDroite = [
 
     <p class="offre-m__price">
       <span class="offre-m__price-label">A partir de</span>
-      <span class="offre-m__price-value">69,50 €</span>
+      <span class="offre-m__price-value">74,50 €</span>
       <span class="offre-m__price-label">/ intervention</span>
     </p>
     <div class="offre-m__promo">
-      <img src={serviceInfoBg.src} alt="" class="offre-m__promo-bg" aria-hidden="true" />
+      <img
+        src={serviceInfoBg.src}
+        alt=""
+        class="offre-m__promo-bg"
+        aria-hidden="true"
+      />
       <p class="offre-m__promo-text">
-        Offre de lancement : <strong>-30€</strong> sur votre 1ère intervention
+        Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
       </p>
     </div>
     <a href="/formules" class="offre-m__cta">Je découvre les formules !</a>
 
-    <Image src={photoMain} alt="Plats préparés par Le Cuistologue, prêts à emporter" class="offre-m__photo" />
+    <Image
+      src={photoMain}
+      alt="Plats préparés par Le Cuistologue, prêts à emporter"
+      class="offre-m__photo"
+    />
   </div>
 </section>

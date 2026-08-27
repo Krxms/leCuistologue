@@ -30,7 +30,7 @@
 .offre__header {
   position: relative;
   z-index: 1;
-  max-width: 52%;
+  max-width: 58%;
   padding-left: 7.3%;
   padding-top: 5vw;
 }
@@ -81,7 +81,7 @@
   z-index: 1;
   margin-top: 3rem;
   margin-left: 2%;
-  width: 58%;
+  width: 65%;
   aspect-ratio: 1113.122 / 331.423;
 }
 

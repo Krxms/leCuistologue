@@ -130,7 +130,7 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
   const confirmationHtml = `
     <p>Bonjour ${echapper(nom)},</p>
     <p>Votre demande a bien été reçue${estReservation ? ` pour la formule <strong>${echapper(data.formuleTitre || "")}</strong>` : ""}.</p>
-    <p>Le Cuistologue vous recontacte personnellement sous 24h pour affiner votre besoin.</p>
+    <p>Le Cuistologue vous recontacte personnellement sous 24h (jours ouvrés) pour affiner votre besoin.</p>
     <p>À très vite,<br>Le Cuistologue</p>
   `;
 

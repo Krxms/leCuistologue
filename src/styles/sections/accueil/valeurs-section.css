@@ -48,7 +48,7 @@
 }
 
 .valeurs__card {
-  width: clamp(290px, 20vw, 320px);
+  width: clamp(320px, 22vw, 360px);
   flex-shrink: 1;
   background-image: var(--card-bg);
   background-size: 100% 100%;

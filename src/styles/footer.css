@@ -13,7 +13,7 @@
 .footer__brand {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .footer__logo {
@@ -39,6 +39,7 @@
   line-height: 1.3;
   color: var(--color-ink-soft);
   max-width: 40rem;
+  text-align: center;
 }
 
 .footer__social {
