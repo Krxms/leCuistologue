@@ -1,6 +1,16 @@
 ---
 import "../../../styles/sections/faq/faq-accordion.css";
 
+const emailRegex = /[\w.+-]+@[\w-]+\.[\w.-]+/g;
+
+function linkifyEmail(texte: string) {
+  const echappe = texte
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  return echappe.replace(emailRegex, (email) => `<a href="mailto:${email}">${email}</a>`);
+}
+
 const questions = [
   {
     q: "Comment fonctionne Le Cuistologue ?",
@@ -187,7 +197,7 @@ const colonneDroite = questions.slice(milieu);
           </summary>
           <div class="faq-accordion__answer">
             {item.r.split("\n\n").map((paragraphe) => (
-              <p>{paragraphe}</p>
+              <p set:html={linkifyEmail(paragraphe)} />
             ))}
           </div>
         </details>
@@ -204,7 +214,7 @@ const colonneDroite = questions.slice(milieu);
           </summary>
           <div class="faq-accordion__answer">
             {item.r.split("\n\n").map((paragraphe) => (
-              <p>{paragraphe}</p>
+              <p set:html={linkifyEmail(paragraphe)} />
             ))}
           </div>
         </details>

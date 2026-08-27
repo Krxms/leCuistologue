@@ -52,9 +52,14 @@ body {
    "hidden" sur le html/body eux-mêmes casse le position:sticky de la
    navbar (elle perd sa référence de défilement). En le posant sur
    <main> à la place — un enfant, pas la racine — le débordement
-   horizontal des sections est bien coupé sans toucher au sticky. */
+   horizontal des sections est bien coupé sans toucher au sticky.
+   "clip" plutôt que "hidden" ici : "hidden" fait de <main> un vrai
+   conteneur de défilement isolé, ce qui empêche Safari de calculer
+   le backdrop-filter (flou) du menu burger — qui doit flouter le
+   contenu de la hero, située dans <main> — car ce contenu se
+   retrouve alors dans un contexte de rendu séparé. */
 main {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .font-display {

@@ -132,6 +132,16 @@
   color: var(--color-ink-soft);
 }
 
+.faq-accordion__answer a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.faq-accordion__answer a:hover {
+  color: var(--color-gold);
+}
+
 /* Zone intermédiaire : lisse le passage desktop -> tablette paysage
    sans changer les valeurs exactes à 1280px et 1210px. */
 @media (min-width: 1211px) and (max-width: 1280px) {
