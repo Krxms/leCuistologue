@@ -99,7 +99,7 @@
   font-weight: 900;
   text-transform: uppercase;
   font-size: clamp(2.25rem, 5vw, 5rem);
-  line-height: 1.1;
+  line-height: 1.4;
   color: var(--color-ink);
 }
 
@@ -114,11 +114,12 @@
 
 .hero__description {
   margin-top: 1rem;
-  width: 46ch;
+  width: 48ch;
   font-family: var(--font-body);
-  font-size: clamp(1.1rem, 1.4vw, 1.4375rem);
+  font-size: clamp(1rem, 1.4vw, 1.4375rem);
   line-height: 1.45;
   color: var(--color-ink-soft);
+  padding-left: 3%;
 }
 
 /* Le wrapper épouse la largeur naturelle des deux CTA (width:
@@ -140,6 +141,7 @@
    de mots-clés : le contenu SEO local vit dans la section dédiée
    plus bas sur la page et sur la page /cuisinier-a-domicile-oise/. */
 .hero__zone {
+  display: none;
   margin-top: 1.25rem;
   width: 100%;
   text-align: center;
