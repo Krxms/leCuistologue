@@ -39,11 +39,11 @@
   color: var(--color-ink-soft);
 }
 
-.reserver__recap-accroche {
+.reserver__recap-portions {
   margin: 0.6rem 0 0;
   font-family: var(--font-body);
-  font-style: italic;
   font-size: 0.92rem;
+  line-height: 1.5;
   color: var(--color-ink);
 }
 
@@ -83,34 +83,74 @@
   font-weight: 700;
 }
 
-.reserver__recap-price {
+.reserver__recap-pricing {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(37, 61, 74, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.reserver__recap-price-before {
+.reserver__recap-price-option {
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  background-color: #ffffff;
+}
+
+.reserver__recap-price-option-label {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: #9a9a92;
-  text-decoration: line-through;
 }
 
-.reserver__recap-price-value {
-  margin: 0.2rem 0 0;
+.reserver__recap-price-option-full {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: #9a9a92;
+}
+
+.reserver__recap-price-option-reduced {
+  margin: 0.15rem 0 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.9rem;
+  font-size: 1.5rem;
+  color: var(--color-ink-soft);
+}
+
+.reserver__recap-price-option-reduced span {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #9a9a92;
+  margin-left: 0.2rem;
+}
+
+.reserver__recap-price-option--routine {
+  background-color: #fbf2e2;
+  border: 1px solid rgba(188, 132, 60, 0.2);
+}
+
+.reserver__recap-price-option--routine .reserver__recap-price-option-label {
   color: #bc843c;
 }
 
-.reserver__recap-price-suffix {
+.reserver__recap-price-option--routine .reserver__recap-price-option-reduced {
+  font-size: 1.8rem;
+  color: #bc843c;
+}
+
+.reserver__recap-price-option-note {
+  margin: 0.5rem 0 0;
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.85rem;
-  color: var(--color-ink-soft);
-  margin-left: 0.3rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: #9a9a92;
 }
 
 .reserver__recap-change {
@@ -204,7 +244,9 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  /* Même écart que label -> champ (.reserver-form__field) : légende
+     -> groupe de choix, pour un rythme vertical cohérent partout. */
+  gap: 0.4rem;
 }
 
 .reserver-form__preference legend {
@@ -234,6 +276,81 @@
   accent-color: var(--color-ink-soft);
   width: 17px;
   height: 17px;
+}
+
+.reserver-form__checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.reserver-form__checkbox-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reserver-form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.reserver-form__checkbox input {
+  accent-color: var(--color-ink-soft);
+  width: 17px;
+  height: 17px;
+}
+
+/* Infobulle : icône "i" au survol/focus (souris/clavier) ou au tap
+   (tactile, basculé en JS — voir le script en bas de page). */
+.reserver-form__info {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(37, 61, 74, 0.3);
+  background: none;
+  color: var(--color-ink-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 0.72rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.reserver-form__tooltip {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 0.4rem;
+  z-index: 5;
+  width: max-content;
+  max-width: 260px;
+  background-color: var(--color-ink-soft);
+  color: #fdfbfa;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.reserver-form__info:hover + .reserver-form__tooltip,
+.reserver-form__info:focus-visible + .reserver-form__tooltip {
+  display: block;
+}
+
+.reserver-form__tooltip[hidden] {
+  display: none;
 }
 
 .reserver-form__submit {

@@ -16,19 +16,30 @@ import { formules } from "../lib/formules-data";
           <div class="reserver__recap" data-recap-formule={formule.slug} hidden>
             <p class="reserver__recap-label">Formule sélectionnée</p>
             <h1 class="reserver__recap-title">{formule.titre}</h1>
-            <p class="reserver__recap-accroche">{formule.accroche}</p>
+            <p class="reserver__recap-portions">{formule.portions}</p>
 
             <p class="reserver__recap-comprend">Comprend</p>
             <ul class="reserver__recap-features">
               {formule.fonctionnalites.map((item) => <li>{item}</li>)}
             </ul>
 
-            <div class="reserver__recap-price">
-              <p class="reserver__recap-price-before">{formule.prixPlein} avant crédit d'impôt</p>
-              <p class="reserver__recap-price-value">
-                {formule.prixReduit}
-                <span class="reserver__recap-price-suffix">{formule.suffixePrix}</span>
-              </p>
+            <div class="reserver__recap-pricing">
+              <div class="reserver__recap-price-option">
+                <p class="reserver__recap-price-option-label">Session ponctuelle</p>
+                <p class="reserver__recap-price-option-full">{formule.ponctuelle.prixPlein} avant crédit d'impôt</p>
+                <p class="reserver__recap-price-option-reduced">
+                  {formule.ponctuelle.prixReduit} <span>après crédit d'impôt</span>
+                </p>
+              </div>
+
+              <div class="reserver__recap-price-option reserver__recap-price-option--routine">
+                <p class="reserver__recap-price-option-label">La Routine du Cuistologue</p>
+                <p class="reserver__recap-price-option-full">{formule.routine.prixPlein} avant crédit d'impôt / session</p>
+                <p class="reserver__recap-price-option-reduced">
+                  {formule.routine.prixReduit} <span>après crédit d'impôt</span>
+                </p>
+                <p class="reserver__recap-price-option-note">Abonnement 4 semaines renouvelable, sans engagement.</p>
+              </div>
             </div>
 
             <a href="/formules" class="reserver__recap-change">← Choisir une autre formule</a>
@@ -48,7 +59,7 @@ import { formules } from "../lib/formules-data";
           mais SANS traitement d'envoi réel pour l'instant.
         -->
         <form class="reserver-form" id="reserver-form">
-          <input type="hidden" name="formule" id="input-formule-slug" value="essentielle" />
+          <input type="hidden" name="formule" id="input-formule-slug" value="belle-tablee" />
 
           <div class="reserver-form__row">
             <div class="reserver-form__field">
@@ -118,6 +129,44 @@ import { formules } from "../lib/formules-data";
             <textarea id="allergies-details" name="allergies-details" rows="2"></textarea>
           </div>
 
+          <fieldset class="reserver-form__preference">
+            <legend>Souhaitez-vous ajouter des options ? (facultatif)</legend>
+            <div class="reserver-form__checkbox-group">
+              <div class="reserver-form__checkbox-row">
+                <label class="reserver-form__checkbox">
+                  <input type="checkbox" name="options" value="courses" />
+                  Courses réalisées pour vous
+                </label>
+                <button type="button" class="reserver-form__info" data-info-target="info-courses" aria-expanded="false" aria-label="Détails de l'option Courses réalisées pour vous">i</button>
+                <span class="reserver-form__tooltip" id="info-courses" role="tooltip" hidden>
+                  Contenu et tarif à préciser.
+                </span>
+              </div>
+
+              <div class="reserver-form__checkbox-row">
+                <label class="reserver-form__checkbox">
+                  <input type="checkbox" name="options" value="popotes" />
+                  Popotes à emporter
+                </label>
+                <button type="button" class="reserver-form__info" data-info-target="info-popotes" aria-expanded="false" aria-label="Détails de l'option Popotes à emporter">i</button>
+                <span class="reserver-form__tooltip" id="info-popotes" role="tooltip" hidden>
+                  Contenu et tarif à préciser.
+                </span>
+              </div>
+
+              <div class="reserver-form__checkbox-row">
+                <label class="reserver-form__checkbox">
+                  <input type="checkbox" name="options" value="reserve-gourmande" />
+                  Réserve gourmande
+                </label>
+                <button type="button" class="reserver-form__info" data-info-target="info-reserve-gourmande" aria-expanded="false" aria-label="Détails de l'option Réserve gourmande">i</button>
+                <span class="reserver-form__tooltip" id="info-reserve-gourmande" role="tooltip" hidden>
+                  Contenu et tarif à préciser.
+                </span>
+              </div>
+            </div>
+          </fieldset>
+
           <div class="reserver-form__field">
             <label for="message">Précisions complémentaires (facultatif)</label>
             <textarea id="message" name="message" rows="4"></textarea>
@@ -134,16 +183,44 @@ import { formules } from "../lib/formules-data";
 </BaseLayout>
 
 <script>
+  // Infobulles des options : au survol/focus, le CSS suffit (:hover/:focus-visible).
+  // Au tap tactile, il n'y a ni survol ni fermeture naturelle : on bascule donc
+  // l'affichage au clic, et on referme au clic ailleurs sur la page.
+  const boutonsInfo = document.querySelectorAll<HTMLButtonElement>(".reserver-form__info");
+
+  function fermerToutesLesInfobulles(sauf?: HTMLButtonElement) {
+    boutonsInfo.forEach((bouton) => {
+      if (bouton === sauf) return;
+      bouton.setAttribute("aria-expanded", "false");
+      const cible = document.getElementById(bouton.dataset.infoTarget || "");
+      cible?.setAttribute("hidden", "");
+    });
+  }
+
+  boutonsInfo.forEach((bouton) => {
+    bouton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const cible = document.getElementById(bouton.dataset.infoTarget || "");
+      const estOuverte = bouton.getAttribute("aria-expanded") === "true";
+      fermerToutesLesInfobulles(bouton);
+      bouton.setAttribute("aria-expanded", estOuverte ? "false" : "true");
+      if (estOuverte) cible?.setAttribute("hidden", "");
+      else cible?.removeAttribute("hidden");
+    });
+  });
+
+  document.addEventListener("click", () => fermerToutesLesInfobulles());
+
   const inputDate = document.getElementById("date-souhaitee") as HTMLInputElement;
   if (inputDate) {
     inputDate.min = new Date().toISOString().split("T")[0];
   }
 
   const params = new URLSearchParams(window.location.search);
-  const slugChoisi = params.get("formule") || "essentielle";
+  const slugChoisi = params.get("formule") || "belle-tablee";
 
   const recaps = document.querySelectorAll<HTMLElement>("[data-recap-formule]");
-  let slugValide = "essentielle";
+  let slugValide = "belle-tablee";
 
   recaps.forEach((recap) => {
     const estLeBon = recap.dataset.recapFormule === slugChoisi;
@@ -155,7 +232,7 @@ import { formules } from "../lib/formules-data";
     const premier = recaps[0];
     if (premier) {
       premier.hidden = false;
-      slugValide = premier.dataset.recapFormule || "essentielle";
+      slugValide = premier.dataset.recapFormule || "belle-tablee";
     }
   }
 
@@ -213,6 +290,7 @@ import { formules } from "../lib/formules-data";
       personnes: formData.get("personnes"),
       dateSouhaitee: formData.get("date-souhaitee"),
       commune: formData.get("commune"),
+      options: formData.getAll("options"),
       allergies: formData.get("allergies"),
       allergiesDetails: formData.get("allergies-details"),
       message: formData.get("message"),

@@ -9,12 +9,26 @@
   padding: 2.5rem 1.5rem 0;
 }
 
+.pricing-intro {
+  margin: 1rem auto 0;
+  max-width: 40rem;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--color-ink-soft);
+  padding-inline: 1.5rem;
+}
+
 .pricing {
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  /* flex-start plutôt que stretch : sans ça, ouvrir la liste d'une
+     carte étire les 3 cartes à la même hauteur (comportement par
+     défaut de stretch) et décale les encarts de prix des autres. */
+  align-items: flex-start;
   gap: 2rem;
-  padding: 7rem 3.3% 4rem;
+  padding: 4rem 3.3% 4rem;
   flex-wrap: wrap;
 }
 
@@ -77,16 +91,6 @@
   height: 100%;
 }
 
-.pricing-card__numero {
-  margin: 0;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #6b665f;
-}
-
 .pricing-card__title {
   margin: 0.3rem 0 0;
   font-family: var(--font-display);
@@ -98,103 +102,28 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
-.pricing-card__accroche {
-  margin: 0.5rem 0 1rem;
+.pricing-card__portions {
+  margin: 0 0 1.2rem;
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #253d4a;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-ink);
   min-height: 2.6rem;
 }
 
-.pricing-card__intro {
-  margin: 0.8rem 0 0;
-  font-family: var(--font-body);
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--color-ink);
-}
-
-.pricing-card__ideal {
-  margin: 0.8rem 0 0;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: #4a4a45;
-  min-height: 3rem;
-}
-
-.pricing-card__ideal strong {
-  color: var(--color-ink);
-}
-
 .pricing-card__features-box {
+  position: relative;
   border-radius: 14px;
   padding: 1.2rem 1.3rem;
   background-color: #fbf2e2;
-  min-height: 21rem;
 }
 
 .pricing-card--mise-en-avant .pricing-card__features-box {
   background-color: #ffffff;
-}
-
-.pricing-card__price-box {
-  margin-top: auto;
-  margin-bottom: 1.5rem;
-  background-color: #f8f4ef;
-  border-radius: 14px;
-  padding: 1.1rem 1.2rem;
-  text-align: center;
-}
-
-.pricing-card__price-box--mise-en-avant {
-  background-color: #0f36cf;
-}
-
-.pricing-card__price-before {
-  margin: 0 0 0.4rem;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.85rem;
-  color: #7a756c;
-  text-decoration: line-through;
-}
-
-.pricing-card__price {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 2.4rem;
-  color: #bc843c;
-  line-height: 1;
-}
-
-.pricing-card__price-suffix {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--color-ink-soft);
-  margin-left: 0.3rem;
-}
-
-.pricing-card__badge-saving {
-  display: inline-block;
-  margin-top: 0.75rem;
-  padding: 0.35rem 0.9rem;
-  background-color: #bc843c21;
-  border-radius: 2px;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.75rem;
-  color: #bc843c;
-  min-height: 1.2rem;
-}
-
-.pricing-card__badge-saving--vide {
-  visibility: hidden;
 }
 
 .pricing-card__comprend {
@@ -235,25 +164,190 @@
   color: var(--color-ink-soft);
 }
 
-.pricing-card__resultat {
-  margin: 1.2rem 0 0;
-  padding-top: 1.2rem;
-  border-top: 1px solid rgba(37, 61, 74, 0.08);
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: 0.83rem;
-  line-height: 1.45;
-  color: #4a4a45;
-  min-height: 5rem;
+/* Carte raccourcie : seules les 3 premières prestations sont
+   visibles d'emblée, le reste se déplie au clic (même technique
+   que l'accordéon FAQ). */
+.pricing-card__features-more {
+  margin-top: 0.7rem;
 }
 
-.pricing-card__duree {
-  margin: 1rem 0 3rem;
+.pricing-card__features-more summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  /* Zone cliquable généreuse (pas juste la hauteur du texte) : plus
+     facile à viser à la souris. */
+  padding: 0.5rem 0.5rem;
+  margin: -0.5rem -0.2rem;
+  border-radius: 8px;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.83rem;
+  font-size: 0.8rem;
+  color: #bc843c;
+  transition: background-color 0.15s ease;
+}
+
+.pricing-card__features-more summary:hover {
+  background-color: rgba(188, 132, 60, 0.08);
+}
+
+.pricing-card__features-more summary::-webkit-details-marker {
+  display: none;
+}
+
+.pricing-card__features-more-icon {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #bc843c;
+  border-bottom: 2px solid #bc843c;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+/* Une fois ouvert : plus aucun artefact au milieu de la liste — le
+   résumé entier sort du flux et devient un vrai bouton rond (32px,
+   pas juste le trait visible du "moins") dans le coin haut-droit de
+   l'encart, pour refermer proprement sans avoir à viser un pixel. */
+.pricing-card__features-more[open] summary {
+  position: absolute;
+  top: 0.85rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.pricing-card__features-more[open] .pricing-card__features-more-label {
+  display: none;
+}
+
+.pricing-card__features-more[open] .pricing-card__features-more-icon {
+  width: 10px;
+  height: 2px;
+  border: none;
+  background-color: #bc843c;
+  transform: none;
+}
+
+.pricing-card__features-more .pricing-card__features {
+  margin-top: 0.7rem;
+}
+
+.pricing-card__tags {
+  margin: 0 0 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pricing-card__tag {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
   color: var(--color-ink-soft);
-  min-height: 1.5rem;
+  background-color: #f8f4ef;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+}
+
+.pricing-card--mise-en-avant .pricing-card__tag {
+  background-color: #ffffff;
+}
+
+/* ===== Zone tarifs : deux options par formule, la Routine du
+   Cuistologue mise en avant "subtilement" par rapport à la session
+   ponctuelle (fond teinté + prix plus grand et en couleur d'accent,
+   plutôt qu'un gros badge). Le tarif plein reste toujours affiché,
+   jamais barré : tout le monde n'est pas éligible au crédit d'impôt. */
+.pricing-card__pricing {
+  /* Un peu plus que l'écart entre les deux options de prix (gap
+     ci-dessous), pour bien séparer visuellement la liste des
+     prestations de la zone tarifs. */
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pricing-card__price-option {
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  background-color: #f8f4ef;
+  text-align: center;
+}
+
+.pricing-card--mise-en-avant .pricing-card__price-option {
+  background-color: #ffffff;
+}
+
+.pricing-card__price-option-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #7a756c;
+}
+
+.pricing-card__price-option-full {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #7a756c;
+}
+
+.pricing-card__price-option-reduced {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-ink-soft);
+  line-height: 1.2;
+}
+
+.pricing-card__price-option-reduced span {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #7a756c;
+  margin-left: 0.2rem;
+}
+
+.pricing-card__price-option--routine {
+  background-color: #fbf2e2;
+  border: 1px solid rgba(188, 132, 60, 0.2);
+}
+
+.pricing-card--mise-en-avant .pricing-card__price-option--routine {
+  background-color: rgba(188, 132, 60, 0.08);
+}
+
+.pricing-card__price-option--routine .pricing-card__price-option-label {
+  color: #bc843c;
+}
+
+.pricing-card__price-option--routine .pricing-card__price-option-reduced {
+  font-size: 1.9rem;
+  color: #bc843c;
+}
+
+.pricing-card__price-option-note {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: #7a756c;
 }
 
 .pricing-card__cta {
@@ -275,19 +369,8 @@
   background-color: #1a2b35;
 }
 
-.pricing-card--mise-en-avant .pricing-card__numero,
-.pricing-card--mise-en-avant .pricing-card__ideal,
-.pricing-card--mise-en-avant .pricing-card__resultat,
-.pricing-card--mise-en-avant .pricing-card__duree {
-  color: #2c2c2c;
-}
-
-.pricing-card:not(.pricing-card--mise-en-avant) {
-  margin-top: 1.5rem;
-}
 
 .pricing-card--mise-en-avant {
-  transform: scale(1);
   z-index: 1;
 }
 
@@ -358,7 +441,7 @@
   transform: scale(1.4);
 }
 
-/* Zone intermédiaire : lisse le passage desktop -> tablette
+/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
    sans changer les valeurs exactes à 1280px et 1210px. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .pricing-title {
@@ -378,21 +461,17 @@
     font-size: clamp(1.4rem, 3vw, 2rem);
   }
 
-  .pricing-nav {
-    display: flex;
-    z-index: 100;
-  }
-
-  .pricing-dots {
-    display: flex;
-  }
-
   .pricing {
     position: relative;
-    height: 1080px;
+    /* Assez haut pour la carte dépliée (liste complète + tarifs +
+       CTA) sans rien couper — la scène clippe (overflow:hidden) tout
+       ce qui dépasse, donc mieux vaut prévoir large ici plutôt que
+       de plafonner la carte elle-même. */
+    height: 900px;
     overflow: hidden;
     flex-wrap: nowrap;
     padding: 0;
+    margin-top: 1rem;
   }
 
   .pricing-card {
@@ -404,7 +483,9 @@
     margin-top: 0 !important;
     transition: transform 0.45s ease-out;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 20px 44px rgba(0, 0, 0, 0.08);
-    height: 920px;
+    /* Pas de max-height : la carte doit toujours englober tout son
+       contenu (y compris le CTA), fermée comme dépliée. */
+    height: auto;
     gap: 10rem;
   }
 
@@ -422,16 +503,19 @@
     min-height: auto;
   }
 
-  .pricing-card__accroche {
+  .pricing-card__portions {
     font-size: 0.8rem;
     min-height: auto;
     margin: 0.4rem 0 0.6rem;
   }
 
-  .pricing-card__ideal {
-    font-size: 0.76rem;
-    min-height: auto;
-    margin: 0.5rem 0 0;
+  .pricing-card__tags {
+    margin: 0 0 0.9rem;
+  }
+
+  .pricing-card__tag {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.7rem;
   }
 
   .pricing-card__features-box {
@@ -454,21 +538,28 @@
     line-height: 1.32;
   }
 
-  .pricing-card__resultat {
+  .pricing-card__features-more summary {
     font-size: 0.72rem;
-    min-height: 0;
-    margin: 0.8rem 0 0;
-    padding-top: 0.8rem;
   }
 
-  .pricing-card__duree {
-    font-size: 0.72rem;
-    min-height: 0;
-    margin: 0.5rem 0 0.9rem;
+  .pricing-card__price-option {
+    padding: 0.7rem 0.85rem;
   }
 
-  .pricing-card__price {
-    font-size: 1.75rem;
+  .pricing-card__price-option-full {
+    font-size: 0.72rem;
+  }
+
+  .pricing-card__price-option-reduced {
+    font-size: 1.2rem;
+  }
+
+  .pricing-card__price-option--routine .pricing-card__price-option-reduced {
+    font-size: 1.5rem;
+  }
+
+  .pricing-card__price-option-note {
+    font-size: 0.65rem;
   }
 
   .pricing-card__cta {
@@ -477,6 +568,28 @@
     padding-block: 0.7rem;
   }
 }
+
+/* ============================================================
+   TABLETTE PORTRAIT — 768px à 1023px (même seuil que le JS pour
+   l'écartement du carrousel) : les 3 cartes ne sont pas toutes
+   pleinement visibles, flèches + dots restent utiles ici.
+   ============================================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .pricing-nav {
+    display: flex;
+    z-index: 100;
+  }
+
+  .pricing-dots {
+    display: flex;
+  }
+}
+
+/* Tablette paysage (1024px à 1210px) : aucune navigation affichée —
+   les 3 cartes sont déjà toutes visibles, comme sur desktop. Rien à
+   écrire ici, .pricing-nav et .pricing-dots restent sur le
+   display:none hérité de la règle de base. */
 
 @media (max-width: 767px) {
   .pricing-stage {
@@ -511,6 +624,14 @@
     margin-top: 0 !important;
     transform: none !important;
     transition: none;
+  }
+
+  /* Réduite pour que les prestations les plus courtes tiennent sur
+     une seule ligne à cette largeur (les plus longues continueront
+     de passer à la ligne, ça reste une question de longueur de
+     texte, pas seulement de taille de police). */
+  .pricing-card__features span {
+    font-size: 0.8rem;
   }
 
   .pricing-card--mise-en-avant {

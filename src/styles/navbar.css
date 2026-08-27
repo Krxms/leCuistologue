@@ -88,6 +88,19 @@
   height: 45px;
 }
 
+/* Pas de rétrécissement au scroll sur tablette/mobile : la navbar
+   garde sa taille initiale quel que soit l'état "navbar--scrolling"
+   ajouté par le script. */
+@media (max-width: 1210px) {
+  .navbar--scrolling {
+    height: 70px;
+  }
+
+  .navbar--scrolling .navbar__logo {
+    height: 48px;
+  }
+}
+
 .navbar:has(.navbar__mobile-menu.is-open) {
   height: var(--header-height) !important;
 }

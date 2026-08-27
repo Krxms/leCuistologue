@@ -107,12 +107,23 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
   `;
 
   if (estReservation) {
+    const libellesOptions: Record<string, string> = {
+      courses: "Courses réalisées pour vous",
+      popotes: "Popotes à emporter",
+      "reserve-gourmande": "Réserve gourmande",
+    };
+    const optionsChoisies = Array.isArray(data.options) ? data.options : [];
+    const optionsTexte = optionsChoisies.length
+      ? optionsChoisies.map((o: string) => libellesOptions[o] || o).join(", ")
+      : "Aucune";
+
     detailsHtml += `
       <hr />
       <p><strong>Formule :</strong> ${echapper(data.formuleTitre || data.formule || "")}</p>
       <p><strong>Nombre de personnes :</strong> ${echapper(String(data.personnes || ""))}</p>
       <p><strong>Date souhaitée :</strong> ${echapper(data.dateSouhaitee || "")}</p>
       <p><strong>Commune / zone :</strong> ${echapper(data.commune || "")}</p>
+      <p><strong>Options souhaitées :</strong> ${echapper(optionsTexte)}</p>
       <p><strong>Allergies :</strong> ${data.allergies === "oui" ? "Oui — " + echapper(data.allergiesDetails || "") : "Non"}</p>
     `;
   } else {

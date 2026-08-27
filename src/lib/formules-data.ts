@@ -1,83 +1,61 @@
+export interface FormuleTarif {
+  prixPlein: string;
+  prixReduit: string;
+}
+
 export interface Formule {
   slug: string;
   titre: string;
-  accroche: string;
-  ideal: string;
+  portions: string;
   fonctionnalites: string[];
-  resultat: string;
+  ideal: string;
   duree: string;
-  prixPlein: string;
-  prixReduit: string;
-  suffixePrix: string;
-  mention?: string;
+  ponctuelle: FormuleTarif;
+  routine: FormuleTarif;
   misEnAvant?: boolean;
 }
 
+const fonctionnalitesCommunes = [
+  "Échange préalable sur vos habitudes",
+  "Élaboration du menu de la semaine",
+  "Confection de la liste des courses",
+  "Préparation de plusieurs repas à domicile",
+  "Étiquetage et organisation des préparations dans votre réfrigérateur",
+  "Conseils de conservation et de réchauffage",
+  "Nettoyage de la cuisine après intervention",
+];
+
 export const formules: Formule[] = [
   {
-    slug: "essentielle",
-    titre: "L'Essentielle",
-    accroche: "Une première expérience simple pour retrouver le plaisir d'une cuisine maison.",
-    ideal: "1 à 2 personnes",
-    fonctionnalites: [
-      "Échange préalable sur vos habitudes et vos envies",
-      "Élaboration du menu de la semaine",
-      "Confection de la liste des courses",
-      "Préparation de plusieurs repas à domicile",
-      "Étiquetage et organisation dans votre réfrigérateur",
-      "Conseils de conservation et de réchauffage",
-      "Nettoyage de la cuisine après intervention",
-    ],
-    resultat: "Vos repas de la semaine sont prêts et votre frigo est organisé (environ 10 à 15 repas individuels selon les recettes choisies et les habitudes du foyer).",
-    duree: "Environ 2h (selon le menu choisi)",
-    prixPlein: "149 €",
-    prixReduit: "74,50 €",
-    suffixePrix: "/ intervention",
+    slug: "petit-panier",
+    titre: "Le Petit Panier",
+    portions: "10 à 15 portions de plats, selon les recettes choisies et les habitudes du foyer.",
+    fonctionnalites: fonctionnalitesCommunes,
+    ideal: "1 à 2 mangeurs",
+    duree: "Environ 2h",
+    ponctuelle: { prixPlein: "159 €", prixReduit: "79,50 €" },
+    routine: { prixPlein: "149 €", prixReduit: "74,50 €" },
   },
   {
-    slug: "serenite",
-    titre: "La Sérénité",
+    slug: "belle-tablee",
+    titre: "La Belle Tablée",
     misEnAvant: true,
-    accroche: "La solution préférée des familles, des actifs débordés et des aînés.",
-    ideal: "2 à 4 personnes",
-    fonctionnalites: [
-      "Échange préalable sur vos habitudes, vos envies et votre organisation",
-      "Élaboration du menu de la semaine",
-      "Confection de la liste des courses",
-      "Adaptation aux préférences alimentaires de chaque membre du foyer",
-      "Préparation de plusieurs repas directement dans votre cuisine",
-      "Étiquetage et organisation dans votre réfrigérateur",
-      "Conseils de conservation et de réchauffage",
-      "Remise au propre de la cuisine après intervention",
-    ],
-    resultat: "Vos repas de la semaine sont prêts et votre frigo est organisé (environ 20 à 25 repas individuels selon les recettes choisies et les habitudes du foyer).",
-    duree: "Environ 3h (selon le menu choisi)",
-    prixPlein: "189 €",
-    prixReduit: "94,50 €",
-    suffixePrix: "/ intervention",
+    portions: "20 à 25 portions de plats, selon les recettes choisies et les habitudes du foyer.",
+    fonctionnalites: fonctionnalitesCommunes,
+    ideal: "Jusqu'à 4 mangeurs",
+    duree: "Environ 3 heures",
+    ponctuelle: { prixPlein: "209 €", prixReduit: "104,50 €" },
+    routine: { prixPlein: "189 €", prixReduit: "94,50 €" },
   },
   {
-    slug: "routine",
-    titre: "La Routine du Cuistologue",
-    accroche: "Une année de cuisine maison, sans avoir à y penser.",
-    ideal: "Les foyers qui souhaitent installer durablement une routine de cuisine maison",
-    fonctionnalites: [
-      "15 interventions réparties librement sur l'année",
-      "Échange préalable pour adapter chaque intervention aux envies, aux saisons et aux contraintes du moment",
-      "Élaboration du menu de la semaine",
-      "Confection de la liste des courses",
-      "Adaptation aux préférences alimentaires de chaque membre du foyer",
-      "Préparation de plusieurs repas directement dans votre cuisine",
-      "Étiquetage et organisation dans votre réfrigérateur",
-      "Conseils de conservation et de réchauffage",
-      "Remise au propre de la cuisine après chaque intervention",
-    ],
-    resultat: "Vos repas de la semaine sont prêts et votre frigo est organisé (environ 20 à 25 repas individuels selon les recettes choisies et les habitudes du foyer).",
-    duree: "Environ 3h par intervention",
-    prixPlein: "169 €",
-    prixReduit: "84,50 €",
-    suffixePrix: "/ intervention",
-    mention: "Jusqu'à 300 € d'économies sur l'année.",
+    slug: "grande-recolte",
+    titre: "La Grande Récolte",
+    portions: "30 à 35 portions de plats, selon les recettes choisies et les habitudes du foyer.",
+    fonctionnalites: fonctionnalitesCommunes,
+    ideal: "Jusqu'à 6 mangeurs",
+    duree: "Environ 4h",
+    ponctuelle: { prixPlein: "259 €", prixReduit: "129,50 €" },
+    routine: { prixPlein: "229 €", prixReduit: "114,50 €" },
   },
 ];
 

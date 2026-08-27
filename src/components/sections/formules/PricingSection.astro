@@ -8,6 +8,10 @@ import { formules } from "../../../lib/formules-data";
   Bénéficiez de 50% de crédit d'impôt<br />
   avec avance immédiate
 </h2>
+<p class="pricing-intro">
+  Choisissez votre formule selon votre appétit, vos habitudes et le nombre de repas souhaités
+  <br />(le nombre de mangeurs indiqué est simplement un repère).
+</p>
 
 <div class="pricing-stage" id="pricing-stage">
   <button type="button" class="pricing-nav pricing-nav--prev" id="pricing-prev" aria-label="Formule précédente">‹</button>
@@ -18,39 +22,59 @@ import { formules } from "../../../lib/formules-data";
         <div class="pricing-card__content">
           <h3 class="pricing-card__title">{formule.titre}</h3>
 
-          <p class="pricing-card__accroche">{formule.accroche}</p>
+          <p class="pricing-card__portions">{formule.portions}</p>
 
-          <p class="pricing-card__ideal">
-            <strong>Idéale pour :</strong> {formule.ideal}
-          </p>
+          <div class="pricing-card__tags">
+            <span class="pricing-card__tag">{formule.ideal}</span>
+            <span class="pricing-card__tag">{formule.duree}</span>
+          </div>
 
           <div class="pricing-card__features-box">
             <p class="pricing-card__comprend">Comprend :</p>
             <ul class="pricing-card__features">
-              {formule.fonctionnalites.map((item) => (
+              {formule.fonctionnalites.slice(0, 3).map((item) => (
                 <li>
                   <img src={checkmark.src} alt="" aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
+
+            {formule.fonctionnalites.length > 3 && (
+              <details class="pricing-card__features-more">
+                <summary>
+                  <span class="pricing-card__features-more-label">Voir les {formule.fonctionnalites.length} prestations incluses</span>
+                  <span class="pricing-card__features-more-icon" aria-hidden="true"></span>
+                </summary>
+                <ul class="pricing-card__features">
+                  {formule.fonctionnalites.slice(3).map((item) => (
+                    <li>
+                      <img src={checkmark.src} alt="" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
           </div>
 
-          <p class="pricing-card__resultat">{formule.resultat}</p>
-          <p class="pricing-card__duree">{formule.duree}</p>
+          <div class="pricing-card__pricing">
+            <div class="pricing-card__price-option">
+              <p class="pricing-card__price-option-label">Session ponctuelle</p>
+              <p class="pricing-card__price-option-full">{formule.ponctuelle.prixPlein} avant crédit d'impôt</p>
+              <p class="pricing-card__price-option-reduced">
+                {formule.ponctuelle.prixReduit} <span>après crédit d'impôt</span>
+              </p>
+            </div>
 
-          <div class="pricing-card__price-box">
-            <p class="pricing-card__price-before">{formule.prixPlein} avant crédit d'impôt</p>
-            <p class="pricing-card__price">
-              {formule.prixReduit}
-              {formule.suffixePrix && <span class="pricing-card__price-suffix">{formule.suffixePrix}</span>}
-            </p>
-            <span
-              class="pricing-card__badge-saving"
-              class:list={{ "pricing-card__badge-saving--vide": !formule.mention }}
-            >
-              {formule.mention || "\u00A0"}
-            </span>
+            <div class="pricing-card__price-option pricing-card__price-option--routine">
+              <p class="pricing-card__price-option-label">La Routine du Cuistologue</p>
+              <p class="pricing-card__price-option-full">{formule.routine.prixPlein} avant crédit d'impôt / session</p>
+              <p class="pricing-card__price-option-reduced">
+                {formule.routine.prixReduit} <span>après crédit d'impôt</span>
+              </p>
+              <p class="pricing-card__price-option-note">Abonnement 4 semaines renouvelable et sans engagement.</p>
+            </div>
           </div>
 
           <a href={`/reserver?formule=${formule.slug}`} class="pricing-card__cta">Je me lance</a>
@@ -79,6 +103,14 @@ import { formules } from "../../../lib/formules-data";
     let index = cards.findIndex((c) => c.classList.contains("pricing-card--mise-en-avant"));
     if (index === -1) index = Math.floor(N / 2);
 
+    // Position de chaque carte, en continu (pas recalculée "à zéro" à
+    // chaque navigation) : taper/glisser vers la droite fait tourner
+    // TOUTES les cartes d'un même cran vers la gauche (et inversement),
+    // comme si elles étaient posées sur un cylindre — la carte visée
+    // vient bien du côté où elle se trouvait, et aucune carte non
+    // concernée ne traverse l'écran pour "raccourcir" un trajet.
+    let offsets = cards.map((_, i) => i - index);
+
     let dragging = false;
     let startX = 0;
     let dragDX = 0;
@@ -95,19 +127,13 @@ import { formules } from "../../../lib/formules-data";
       return b;
     });
 
-    function offset(i: number): number {
-      let d = i - index;
-      d -= Math.round(d / N) * N;
-      return d;
-    }
-
     function render(dragShift = 0) {
       // Écartement différent selon la largeur réelle de l'écran :
       // 60 sur l'iPad portrait (< 1024px), 100 au-delà (iPad paysage)
       const largeurEcartement = window.innerWidth < 1024 ? 60 : 100;
 
       cards.forEach((carte, i) => {
-        const off = offset(i) + dragShift;
+        const off = offsets[i] + dragShift;
         const abs = Math.abs(off);
         const tx = off * largeurEcartement;
         const scale = Math.max(0.86, 1 - abs * 0.1);
@@ -120,9 +146,21 @@ import { formules } from "../../../lib/formules-data";
       dots.forEach((d, i) => d.classList.toggle("pricing-dot--active", i === index));
     }
 
-    function go(i: number) {
-      index = ((i % N) + N) % N;
+    // Décale TOUTES les cartes du même cran (delta), plutôt que de
+    // recalculer leur position individuellement — c'est ce qui
+    // garantit que la rotation reste cohérente pour l'ensemble.
+    function tourner(delta: number) {
+      offsets = offsets.map((o) => o - delta);
       render();
+    }
+
+    function go(i: number) {
+      // Plus court chemin pour amener LA CARTE VISÉE au centre ;
+      // les autres suivent avec ce même delta dans tourner().
+      let delta = i - index;
+      delta -= Math.round(delta / N) * N;
+      index = ((i % N) + N) % N;
+      tourner(delta);
     }
     const next = () => go(index + 1);
     const prev = () => go(index - 1);
@@ -155,7 +193,14 @@ import { formules } from "../../../lib/formules-data";
       if (!dragging) return;
       dragDX = e.clientX - startX;
       if (Math.abs(dragDX) > 6) moved = true;
-      render(-dragDX / largeurCarte());
+      // Le signe doit matcher celui du calcul de "shift" dans onUp
+      // (Math.round(-dragDX / largeurCarte())) pour que le rendu en
+      // direct pendant le glissement se raccorde sans saut à la carte
+      // sur laquelle on relâche. Avant : signe inversé ici, donc un
+      // swipe droite -> gauche faisait apparaître l'aperçu de la carte
+      // de GAUCHE pendant le geste, avant de se corriger d'un coup sur
+      // celle de droite au relâchement.
+      render(dragDX / largeurCarte());
     }
     function onUp() {
       if (!dragging) return;

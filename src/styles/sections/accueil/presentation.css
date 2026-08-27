@@ -117,6 +117,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .presentation__cta,
   .presentation__cta::after {
     transition: none;
@@ -254,7 +255,7 @@
     transform: rotate(-70deg);
   }
 
-    .presentation__photo-decor--champignons2 {
+  .presentation__photo-decor--champignons2 {
     width: 18%;
     height: auto;
     left: -31.3%;
@@ -289,7 +290,7 @@
    ============================================================ */
 
 @media (max-width: 834px) {
-    .presentation__photo {
+  .presentation__photo {
     top: 14%;
     left: -10%;
   }
@@ -304,7 +305,7 @@
     top: 7vw;
   }
 
-   .presentation__photo-decor--aubergine {
+  .presentation__photo-decor--aubergine {
     width: 31.2%;
     height: auto;
     left: 43%;
@@ -353,7 +354,7 @@
     top: 120%;
   }
 
-    .presentation__photo-decor--poivrons {
+  .presentation__photo-decor--poivrons {
     left: 88%;
     width: 45%;
     top: 140%;
@@ -422,18 +423,18 @@
     display: none;
   }
 
-  
-    .presentation__courgette {
+
+  .presentation__courgette {
     display: block;
     position: absolute;
     left: auto;
-    right: 66%;
-    top: -87px;
-    width: 38vw;
+    right: 6%;
+    top: -127px;
+    width: 13vw;
     max-width: 68px;
-    transform: rotate(290deg);
+    transform: rotate(210deg);
   }
-  
+
   .presentation__photo-decor--aubergine {
     display: block;
     left: auto;

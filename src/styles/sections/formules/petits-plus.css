@@ -121,7 +121,8 @@
 }
 
 .petits-plus-content--course .petits-plus-content__description {
-  font-size: clamp(0.75rem, 0.9vw, 1rem);
+  font-size: clamp(0.65rem, 0.78vw, 0.82rem);
+  line-height: 1.25;
 }
 
 /* ===== Contenu "Popotes à emporter" — indépendant du reste ===== */
@@ -142,7 +143,7 @@
 }
 
 .petits-plus-content--popote .petits-plus-content__description {
-  font-size: clamp(0.75rem, 0.9vw, 1rem);
+  font-size: clamp(0.68rem, 0.82vw, 0.9rem);
 }
 
 /* ===== Contenu "Réserve gourmande" — indépendant du reste ===== */
@@ -162,7 +163,7 @@
 }
 
 .petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.75rem, 1vw, 1.1rem);
+  font-size: clamp(0.68rem, 0.9vw, 0.95rem);
 }
 
 /* ============================================================
@@ -201,15 +202,18 @@
   }
 
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(1.1rem, 1vw, 1.1rem);
+    font-size: clamp(0.95rem, 1vw, 1rem);
   }
 
   .petits-plus-content--popote .petits-plus-content__description {
-    font-size: clamp(0.95rem, 1vw, 1.1rem);
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
   }
 
+  /* Texte plus long que les deux autres cartes : réduction plus
+     marquée pour tenir dans le fond. */
   .petits-plus-content--course .petits-plus-content__description {
-    font-size: clamp(0.95rem, 1vw, 1.1rem);
+    font-size: clamp(0.75rem, 0.85vw, 0.85rem);
+    line-height: 1.25;
   }
 }
 
@@ -231,7 +235,7 @@
   }
 
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.84rem, 1vw, 1.1rem);
+    font-size: clamp(0.76rem, 0.9vw, 0.95rem);
   }
 }
 
@@ -292,6 +296,6 @@
   }
 
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.84rem, 1vw, 1.1rem);
+    font-size: clamp(0.76rem, 0.9vw, 0.95rem);
   }
 }
