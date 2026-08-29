@@ -25,6 +25,25 @@
   z-index: 1;
 }
 
+/* Poivron déplacé depuis Presentation. Placement de premier jet
+   (coin haut-gauche, léger chevauchement du bord) — à ajuster une
+   fois vu à l'écran. */
+.valeurs__decor {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.valeurs__decor--poivrons {
+  display: none;
+  width: 8%;
+  max-width: 110px;
+  height: auto;
+  left: 3%;
+  top: -2.5rem;
+  transform: rotate(-8deg);
+}
+
 .valeurs__title {
   text-align: center;
   font-family: var(--font-display);
@@ -44,7 +63,7 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
 .valeurs__card {

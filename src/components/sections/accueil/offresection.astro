@@ -5,7 +5,6 @@ import bgPink from "../../../assets/accueil/service/serviceBG.png";
 import photoMain from "../../../assets/accueil/service/serviceBigPics.png";
 import photoSecondary from "../../../assets/accueil/service/serviceSmallPics.png";
 import titleIcon from "../../../assets/accueil/service/titlewow.svg";
-import checklistBg from "../../../assets/accueil/service/checklistBG.svg";
 import checkmark from "../../../assets/accueil/service/checkmark.svg";
 import arrow from "../../../assets/accueil/service/arrow.svg";
 import serviceInfoBg from "../../../assets/accueil/service/serviceInfoBG.svg";
@@ -37,7 +36,7 @@ const colonneDroite = [
     <div class="offre__header">
       <div class="offre__title-row">
         <h2 class="offre__title">
-          Des solutions culinaires pensées pour vous et avec vous.
+          Des solutions culinaires pensées pour vous et <br><span class="offre__titleAccent">avec vous.</span>
         </h2>
         <img
           src={titleIcon.src}
@@ -56,18 +55,11 @@ const colonneDroite = [
     </div>
 
     <div class="offre__checklist-wrap">
-      <img
-        src={checklistBg.src}
-        alt=""
-        class="offre__checklist-bg"
-        aria-hidden="true"
-      />
       <div class="offre__checklist">
         <ul class="offre__checklist-col">
           {
             colonneGauche.map((item) => (
               <li>
-                <img src={checkmark.src} alt="" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))
@@ -77,7 +69,6 @@ const colonneDroite = [
           {
             colonneDroite.map((item) => (
               <li>
-                <img src={checkmark.src} alt="" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))
@@ -127,7 +118,7 @@ const colonneDroite = [
 
     <div class="offre-m__title-row">
       <h2 class="offre-m__title">
-        Des solutions culinaires pensées pour vous et avec vous.
+        Des solutions culinaires pensées pour vous et <span class="offre-m__titleAccent">avec vous.</span>
       </h2>
       <img
         src={titleIcon.src}

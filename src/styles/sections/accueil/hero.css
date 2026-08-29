@@ -4,12 +4,40 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: 20px;
-  padding-inline: 64px;
+  /* Padding gauche réduit (64 -> 48px) : décale légèrement tout le
+     bloc titre/sous-titre/CTA vers la gauche. */
+  padding-left: 48px;
+  padding-right: 64px;
+  z-index: 20;
+  /* aspect-ratio a été tenté ici pour matcher la forme de l'image,
+     mais sur une fenêtre large et peu haute (grand écran, navigateur
+     pas maximisé en hauteur), la hauteur calculée devenait
+     imprévisible et poussait le titre hors-écran. Retour à un
+     plancher simple, fiable à toutes les proportions de fenêtre. */
+  min-height: 30rem;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / span 8;
+  max-width: 100%;
+  align-self: center;
+  padding-left: 2rem;
+  padding-bottom: 6.8rem;
+}
+
+.hero__arrow {
+  top: 40rem;
 }
 
 @media (min-width: 1280px) {
   .hero {
-    height: calc(107dvh - var(--header-height));
+    /* 107 -> 118dvh : le haut de la hero reste au même endroit (juste
+       sous la navbar, fixé par le flux normal), seule la hauteur
+       augmente donc seul le bas descend — plus d'air entre les CTA
+       et le bas du fond. */
+    height: calc(118dvh - var(--header-height));
   }
 }
 
@@ -26,8 +54,17 @@
   display: block;
   width: 100%;
   height: 100%;
+  /* "cover" plutôt que "fill" : sans que le conteneur ait exactement
+     le ratio de l'image (aspect-ratio a été tenté puis abandonné car
+     imprévisible selon la forme de la fenêtre), étirer l'image la
+     déforme visiblement. Recadrer proprement les bords reste le
+     compromis le plus fiable.
+     object-position en bas (pas centre) : le brocoli dessiné en bas
+     de l'image doit toujours rester dans le cadre — si le recadrage
+     rognait en haut ET en bas, il pouvait disparaître selon la forme
+     du conteneur. Ancré en bas, seul le haut de l'image est rogné. */
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
   z-index: 0;
   pointer-events: none;
 }
@@ -45,6 +82,7 @@
 }
 
 .hero__decor--brocoli {
+  display: none;
   width: 7.6%;
   height: auto;
   left: 52%;
@@ -52,6 +90,7 @@
 }
 
 .hero__decor--potato {
+  display: none;
   width: 8.7%;
   height: auto;
   left: 98%;
@@ -71,8 +110,10 @@
     top: 91%;
     transform: rotate(-3deg);
   }
+  .hero__description {
+    width: 38ch;
+  }
 }
-
 
 
 @media (max-width: 767px) {
@@ -91,7 +132,9 @@
 .hero__content {
   position: relative;
   z-index: 2;
-  grid-column: 1 / span 7;
+  /* 7 -> 8 colonnes : plus de largeur disponible pour que le titre
+     s'étende davantage. */
+  grid-column: 1 / span 8;
   max-width: 100%;
   align-self: center;
 }
@@ -100,7 +143,7 @@
   font-family: var(--font-display);
   font-weight: 900;
   text-transform: uppercase;
-  font-size: clamp(2.875rem, 6vw, 5rem);
+  font-size: clamp(2.9rem, 5vw, 5rem);
   line-height: 1.2;
   color: var(--color-ink);
 }
@@ -130,7 +173,6 @@
   font-size: clamp(1rem, 1.4vw, 1.4375rem);
   line-height: 1.45;
   color: var(--color-ink-soft);
-  padding-left: 3%;
 }
 
 /* Le wrapper épouse la largeur naturelle des deux CTA (width:
@@ -269,12 +311,18 @@
 }
 
 /* ============================================================
-   TABLETTE PAYSAGE — 1023px à 1210px
+   TABLETTE — 768px à 1279px, EN CONTINU
+   Une seule zone (au lieu de deux paliers avec une rupture nette à
+   834px, et un trou entre 1210 et 1280 où aucune règle ne
+   s'appliquait) : la hauteur de la hero et la taille du titre
+   suivent une formule continue sur toute la plage, donc l'image et
+   le bloc texte/CTA se réduisent de façon linéaire au lieu de sauter
+   d'une valeur à l'autre à chaque palier.
    ============================================================ */
 
-@media (min-width: 1023px) and (max-width: 1210px) {
+@media (min-width: 768px) and (max-width: 1279px) {
   .hero {
-    min-height: 30rem;
+    min-height: clamp(30rem, calc(51.9005rem + -1.81vw), 38rem);
     padding-block: 3rem;
   }
 
@@ -283,8 +331,12 @@
   }
 
   .hero__title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    letter-spacing: -0.01em;
+    font-size: clamp(4.2rem, calc(-0.0588rem + 0.2941vw), 3.5rem);
+    letter-spacing: -0.008em;
+  }
+
+   .hero__description {
+    width: 35ch;
   }
 
   .hero__arrow {
@@ -292,9 +344,9 @@
   }
 
   .btn {
-    height: 44px;
-    padding-inline: 1.5rem;
-    font-size: 0.875rem;
+    height: 45px;
+    padding-inline: 1.4rem;
+    font-size: 0.9rem;
     width: 65%;
   }
 
@@ -303,47 +355,20 @@
   }
 }
 
-/* ============================================================
-   TABLETTE PORTRAIT — jusqu'à 834px
-   ============================================================ */
-
-@media (max-width: 834px) {
+/* Zone intermédiaire : lisse le passage tablette -> desktop pour la
+   hauteur de la hero. Sans ça, la hauteur passait brutalement du
+   plancher tablette (~30rem, atteint dès ~1210px) à
+   calc(118dvh - header) (~50rem sur une hauteur d'écran courante)
+   entre 1279px et 1280px — un bond net pile à la dernière largeur
+   tablette, qui rendait l'écart avec la Présentation visiblement
+   différent juste avant le passage en desktop alors qu'il doit
+   rester le même sur tout le format tablette. Formule calée sur une
+   hauteur d'écran de référence de 768px (résolution laptop courante)
+   pour rejoindre en douceur la valeur desktop, sans changer les
+   valeurs exactes à 1211px (déjà au plancher tablette) et 1280px. */
+@media (min-width: 1211px) and (max-width: 1279px) {
   .hero {
-    min-height: 38rem;
-    padding-block: 3rem;
-  }
-
-  .hero__content {
-    align-self: start;
-    max-width: 33ch;
-    margin-top: 2rem;
-  }
-
-  .hero__arrow {
-    display: none;
-  }
-
-  .btn {
-    height: 46px;
-    padding-inline: 1.25rem;
-    font-size: 0.95rem;
-    width: 100%;
-  }
-
-  /* Les CTA repassent en largeur %, incompatible avec un wrapper
-     fit-content (le % se résoudrait en auto) : on lui redonne une
-     largeur normale à ce palier. */
-  .hero__actions-group {
-    width: 100%;
-  }
-
-  .hero__background {
-    transform: scale(1);
-    transform-origin: center;
-  }
-
-  .hero__description {
-    width: 35ch;
+    height: clamp(30rem, calc(-320.13rem + 462.667vw), 50rem);
   }
 }
 
@@ -359,7 +384,7 @@
     justify-content: center;
     text-align: center;
     min-height: 40.5rem;
-    padding: 2rem 1.5rem;
+    padding: 5rem 1.5rem;
     background-color: #F8E0CF;
   }
 
@@ -369,6 +394,10 @@
 
   .hero__description {
     width: 34ch;
+    /* Une largeur fixe (ch) n'est pas centrée par défaut dans son
+       conteneur : elle ne l'était pas ici (collée à gauche), d'où le
+       sous-titre qui semblait décalé par rapport au titre et aux CTA. */
+    margin-inline: auto;
     line-height: 1.1;
   }
 

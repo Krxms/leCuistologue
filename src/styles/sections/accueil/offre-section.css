@@ -12,7 +12,7 @@
   min-height: 71vw;
   z-index: 3;
   margin-block: -3rem;
-  padding: 4rem 2rem 6rem;
+  padding: 4rem 0rem 6rem;
 }
 
 .offre__bg {
@@ -50,6 +50,14 @@
   padding-right: 5rem;
 }
 
+.offre__titleAccent {
+  color: #DAA35B;
+}
+
+.offre__titleAccent {
+  color: #DAA35B;
+}
+
 .offre__title-icon {
   display: none;
   position: absolute;
@@ -80,39 +88,38 @@
 .offre__checklist-wrap {
   position: relative;
   z-index: 1;
-  margin-top: 3rem;
+  /* Fond retiré : la liste n'a plus de cadre imposant une hauteur
+     fixe (aspect-ratio), donc l'espacement avec "Chaque intervention
+     peut inclure :" repasse sur une marge normale, comme le reste du
+     texte de la colonne. */
+  margin-top: 1.5rem;
   margin-left: 2%;
-  width: 65%;
-  aspect-ratio: 1113.122 / 331.423;
-}
-
-.offre__checklist-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  width: 72%;
 }
 
 .offre__checklist {
   position: relative;
   z-index: 1;
-  height: 100%;
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
-  gap: 1rem 3rem;
-  padding: 8% 9%;
+  /* Colonnes resserrées : l'espace entre elles n'a plus besoin de
+     laisser respirer un fond décoratif. */
+  gap: 0rem;
 }
 
 .offre__checklist-col {
   list-style: none;
-  margin: 0;
+  margin-left: 4.5%;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.5rem;
   flex: 1 1 260px;
+  /* Remontée ici (plutôt que sur le span) : la puce ci-dessous est en
+     em, donc calée sur cette même taille — puce et texte évoluent
+     ensemble à chaque palier, jusqu'au dernier format tablette,
+     sans valeur à resynchroniser séparément. */
+  font-size: clamp(1.1rem, 1.05vw, 1.3rem);
 }
 
 .offre__checklist-col li {
@@ -121,15 +128,19 @@
   gap: 0.7rem;
 }
 
-.offre__checklist-col img {
-  width: 16px;
-  height: auto;
+/* Puce ronde à la place du checkmark image, même bleu que le CTA. */
+.offre__checklist-col li::before {
+  content: "";
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background-color: var(--color-ink-soft);
   flex-shrink: 0;
 }
 
 .offre__checklist-col span {
   font-family: var(--font-body);
-  font-size: clamp(0.85rem, 1.05vw, 1.1rem);
   color: var(--color-ink);
 }
 
@@ -137,15 +148,20 @@
   position: relative;
   z-index: 1;
   margin-top: 4.8rem;
-  margin-left: 7.3%;
+  /* Centré par rapport aux colonnes de la checklist (même largeur/
+     retrait que .offre__checklist-wrap), au lieu de l'alignement à
+     gauche calé sur le titre. Même comportement partout hors mobile. */
+  margin-left: -5%;
+  width: 72%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .offre__price {
   margin: 0;
   font-family: var(--font-display);
+  text-align: center;
 }
 
 .offre__price-label {
@@ -164,9 +180,8 @@
 .offre__promo {
   position: relative;
   margin-top: 1.5rem;
-  margin-left: 2.5rem;
   display: inline-block;
-  align-self: flex-start;
+  align-self: center;
 }
 
 .offre__promo-bg {
@@ -196,12 +211,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-start;
+  align-self: center;
   margin-top: 2rem;
-  margin-left: 8.9%;
-  height: 4.7vw;
-  max-height: 46px;
-  min-height: 66px;
+  /* Hauteur réduite un peu (66px -> 60px) ; l'ancien trio
+     height/max-height/min-height était incohérent (min-height plus
+     grand que max-height, donc min-height gagnait toujours et les
+     deux autres ne servaient à rien) — remplacé par une seule
+     valeur claire. */
+  height: 60px;
   width: 100%;
   max-width: 410px;
   border-radius: 6px;
@@ -220,12 +237,13 @@
 
 .offre__arrow {
   position: absolute;
-  left: 50.7%;
-  top: 66%;
-  width: 4.8%;
+  left: 4%;
+  top: 69%;
+  width: 4.3%;
   height: auto;
   z-index: 0;
   pointer-events: none;
+  transform: scaleX(-1) rotate(35deg);
 }
 
 .offre__photo {
@@ -241,9 +259,9 @@
 }
 
 .offre__photo--secondary {
-  left: 60.78%;
-  top: 70%;
-  width: 18.84%;
+  left: 58%;
+  top: 53%;
+  width: 32%;
   height: auto;
 }
 
@@ -286,10 +304,6 @@
     width: 7.8%;
   }
 
-  .offre__photo--secondary {
-    display: none;
-  }
-
   .offre__bg {
     padding-top: 0rem;
     bottom: -1rem;
@@ -298,63 +312,17 @@
     transform: translateX(-50%) scale(1);
   }
 
-  /* Le fond image (ratio fixe) ne peut pas s'adapter à la hauteur du
-     texte une fois la liste repassée en une colonne à cette largeur.
-     On le remplace par un aplat de couleur, comme sur la version
-     mobile, qui grandit naturellement avec le contenu. */
-  .offre__checklist-bg {
-    display: none;
-  }
-
-  /* Pleine largeur (alignée sur le même retrait que le titre) plutôt
-     que 65% : à cette largeur réduite, un encart étroit forçait des
-     colonnes trop comprimées. */
-  .offre__checklist-wrap {
-    aspect-ratio: auto;
-    width: auto;
-    margin-inline: 0;
-    background-color: var(--color-cream);
-    /* Un rayon en % se calcule séparément en largeur/hauteur : sur
-       une carte large et peu haute, ça donnait des coins en pente
-       plutôt que des arrondis réguliers. Valeur fixe à la place. */
-    border-radius: 32px;
-  }
-
   /* Deux colonnes garanties (au lieu du flex qui repassait en une
-     seule colonne faute de place), padding resserré pour laisser
-     de la place au texte, colonnes centrées pour un rendu propre. */
+     seule colonne faute de place à cette largeur). Le reste (fond,
+     largeur du cadre, centrage du bloc prix/promo/CTA) reste celui
+     du bloc de base : même comportement partout hors mobile. */
   .offre__checklist {
-    height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 4%;
   }
 
   .offre__checklist-col {
     align-items: left;
-  }
-
-  /* Le titre et la description restent alignés à gauche (comme sur
-     desktop), mais tout ce qui suit la checklist (prix, promo, CTA)
-     passe en bloc centré plutôt qu'aligné sur le même retrait. */
-  .offre__price-block {
-    margin-left: 0;
-    width: 100%;
-    align-items: center;
-  }
-
-  .offre__price {
-    text-align: center;
-  }
-
-  .offre__promo {
-    margin-left: 0;
-    align-self: center;
-  }
-
-  .offre__cta {
-    margin-left: 0;
-    align-self: center;
   }
 }
 
@@ -397,10 +365,6 @@
     width: 7.8%;
   }
 
-  .offre__photo--secondary {
-    display: none;
-  }
-
   .offre__bg {
     padding-top: 0rem;
     bottom: -1rem;
@@ -409,63 +373,17 @@
     transform: translateX(-50%) scale(1);
   }
 
-  /* Le fond image (ratio fixe) ne peut pas s'adapter à la hauteur du
-     texte une fois la liste repassée en une colonne à cette largeur.
-     On le remplace par un aplat de couleur, comme sur la version
-     mobile, qui grandit naturellement avec le contenu. */
-  .offre__checklist-bg {
-    display: none;
-  }
-
-  /* Pleine largeur (alignée sur le même retrait que le titre) plutôt
-     que 65% : à cette largeur réduite, un encart étroit forçait des
-     colonnes trop comprimées. */
-    .offre__checklist-wrap {
-    aspect-ratio: auto;
-    width: 60%;
-    margin-inline: 80px;
-    background-color: var(--color-cream);
-    /* Même souci qu'en portrait : un rayon en % donne des coins en
-       pente sur une carte large et peu haute. Valeur fixe à la place. */
-    border-radius: 32px;
-  }
-
   /* Deux colonnes garanties (au lieu du flex qui repassait en une
-     seule colonne faute de place), padding resserré pour laisser
-     de la place au texte, colonnes centrées pour un rendu propre. */
+     seule colonne faute de place à cette largeur). Le reste (fond,
+     largeur du cadre, centrage du bloc prix/promo/CTA) reste celui
+     du bloc de base : même comportement partout hors mobile. */
   .offre__checklist {
-    height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 4%;
   }
 
   .offre__checklist-col {
     align-items: left;
-  }
-
-  /* Le titre et la description restent alignés à gauche (comme sur
-     desktop), mais tout ce qui suit la checklist (prix, promo, CTA)
-     passe en bloc centré plutôt qu'aligné sur le même retrait. */
-  .offre__price-block {
-    margin-left: 0;
-    width: 60%;
-    margin-inline: 80px;
-    align-items: center;
-  }
-
-  .offre__price {
-    text-align: center;
-  }
-
-  .offre__promo {
-    margin-left: 0;
-    align-self: center;
-  }
-
-  .offre__cta {
-    margin-left: 0;
-    align-self: center;
   }
 }
 
@@ -503,6 +421,10 @@
   line-height: 1.16;
   color: var(--color-ink);
   margin-top: 13%;
+}
+
+.offre-m__titleAccent {
+  color: #DAA35B;
 }
 
 .offre-m__title-icon {

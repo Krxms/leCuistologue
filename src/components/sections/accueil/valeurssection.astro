@@ -1,11 +1,12 @@
 ---
 import "../../../styles/sections/accueil/valeurs-section.css";
 
-import bgBanner from "../../../assets/accueil/valeurs/bandeauValeurs.svg";
+import bgBanner from "../../../assets/accueil/valeurs/bandeauValeurs.png";
 import card1 from "../../../assets/accueil/valeurs/card-1.svg";
 import card2 from "../../../assets/accueil/valeurs/card-2.svg";
 import card3 from "../../../assets/accueil/valeurs/card-3.svg";
 import card4 from "../../../assets/accueil/valeurs/card-4.svg";
+import poivrons from "../../../assets/accueil/valeurs/poivrons.svg";
 
 const valeurs = [
   { titre: "Une cuisine artisanale", texte: "Le savoir-faire d'un professionnel, directement dans votre cuisine.", bg: card1.src, ratio: "384 / 232", flip: false },
@@ -17,6 +18,7 @@ const valeurs = [
 
 <section class="valeurs">
   <img src={bgBanner.src} alt="" class="valeurs__bg" aria-hidden="true" />
+  <img src={poivrons.src} alt="" class="valeurs__decor valeurs__decor--poivrons" aria-hidden="true" />
 
   <div class="valeurs__content">
     <h2 class="valeurs__title">
