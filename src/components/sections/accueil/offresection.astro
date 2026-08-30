@@ -2,8 +2,7 @@
 import "../../../styles/sections/accueil/offre-section.css";
 
 import bgPink from "../../../assets/accueil/service/serviceBG.png";
-import photoMain from "../../../assets/accueil/service/serviceBigPics.png";
-import photoSecondary from "../../../assets/accueil/service/serviceSmallPics.png";
+import photoMain from "../../../assets/accueil/service/serviceBigPicsAll.png";
 import titleIcon from "../../../assets/accueil/service/titlewow.svg";
 import checkmark from "../../../assets/accueil/service/checkmark.svg";
 import arrow from "../../../assets/accueil/service/arrow.svg";
@@ -52,9 +51,7 @@ const colonneDroite = [
         Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
       </p>
       <p class="offre__include-label">Chaque intervention peut inclure :</p>
-    </div>
 
-    <div class="offre__checklist-wrap">
       <div class="offre__checklist">
         <ul class="offre__checklist-col">
           {
@@ -75,40 +72,34 @@ const colonneDroite = [
           }
         </ul>
       </div>
+
+      <div class="offre__price-block">
+        <p class="offre__price">
+          <span class="offre__price-label">A partir de</span>
+          <span class="offre__price-value">74,50 €</span>
+          <span class="offre__price-label">/ intervention</span>
+        </p>
+        <div class="offre__promo">
+          <img
+            src={serviceInfoBg.src}
+            alt=""
+            class="offre__promo-bg"
+            aria-hidden="true"
+          />
+          <p class="offre__promo-text">
+            Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
+          </p>
+        </div>
+        <a href="/formules" class="offre__cta">Je découvre les formules !</a>
+      </div>
     </div>
 
     <img src={arrow.src} alt="" class="offre__arrow" aria-hidden="true" />
-
-    <div class="offre__price-block">
-      <p class="offre__price">
-        <span class="offre__price-label">A partir de</span>
-        <span class="offre__price-value">74,50 €</span>
-        <span class="offre__price-label">/ intervention</span>
-      </p>
-      <div class="offre__promo">
-        <img
-          src={serviceInfoBg.src}
-          alt=""
-          class="offre__promo-bg"
-          aria-hidden="true"
-        />
-        <p class="offre__promo-text">
-          Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
-        </p>
-      </div>
-      <a href="/formules" class="offre__cta">Je découvre les formules !</a>
-    </div>
 
     <Image
       src={photoMain}
       alt="Plats préparés par Le Cuistologue, prêts à emporter"
       class="offre__photo offre__photo--main"
-    />
-    <Image
-      src={photoSecondary}
-      alt=""
-      class="offre__photo offre__photo--secondary"
-      aria-hidden="true"
     />
   </div>
 

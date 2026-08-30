@@ -1,7 +1,10 @@
 .faq-header {
   position: relative;
-  min-height: 32.2vw;
-  height: 55%;
+  /* Alignée sur les autres headers de page (Formules, À propos,
+     Avance immédiate) : même min-height partout. L'ancien
+     height:55% était incohérent avec min-height et ne servait à
+     rien de plus qu'un plancher plus bas que les autres pages. */
+  min-height: 35.4vw;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -37,19 +40,28 @@
 }
 
 .faq-header__title-accent {
+  position: relative;
   font-weight: 900;
   font-size: clamp(2.3rem, 4vw, 4.6875rem);
   color: #617854;
 }
 
+/* Ancrée sur le mot "Question ?" lui-même (position:relative
+   ci-dessus), pas sur tout le <h1> : le titre entier peut être plus
+   large que ce seul mot (ex. "Vous avez" sur l'autre ligne), alors
+   qu'un span inline comme l'accent se limite exactement à la largeur
+   réelle du texte. left:100% tombe donc pile à la fin du mot, quel
+   que soit le format — plus de dérive horizontale ni verticale au
+   responsive. */
 .faq-header__arrow {
   position: absolute;
-  left: 35%;
-  top: 29%;
-  width: 15%;
+  left: 105%;
+  top: 180%;
+  margin-left: 0.5rem;
+  width: 15vw;
   z-index: 2;
   pointer-events: none;
-  transform: scaleX(1) rotate(-3deg);
+  transform: translateY(-50%) scaleX(1) rotate(-3deg);
 }
 
 .faq-header__deco {

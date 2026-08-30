@@ -40,19 +40,28 @@
 }
 
 .avance-header__title-line--accent {
+  position: relative;
   font-weight: 900;
   font-size: clamp(2.3rem, 5vw, 4.6875rem);
   color: var(--color-ink-soft);
 }
 
+/* Ancrée sur le mot "Crédit d'impôt" lui-même (position:relative
+   ci-dessus), pas sur toute la ligne ni sur le <h1> : ces deux-là
+   s'étirent en display:block sur toute la largeur du titre (donc sur
+   la largeur de la ligne la plus longue), alors qu'un span inline
+   comme l'accent se limite exactement à la largeur réelle du texte.
+   left:100% tombe donc pile à la fin du mot, quel que soit le format
+   — plus de dérive horizontale ni verticale au responsive. */
 .avance-header__arrow {
   position: absolute;
-  left: 46%;
-  top: 29%;
-  width: 15%;
+  left: 102%;
+  top: 158%;
+  margin-left: 0.5rem;
+  width: 15vw;
   z-index: 2;
   pointer-events: none;
-  transform: scaleX(1) rotate(-3deg);
+  transform: translateY(-50%) scaleX(1) rotate(-3deg);
 }
 
 .avance-header__deco {
@@ -84,20 +93,6 @@
   left: 80%;
   top: 40%;
   width: 9%;
-}
-
-@media (min-width: 1023px) and (max-width: 1210px) {
-  .avance-header__arrow {
-    left: 51%;
-    top: 29%;
-  }
-}
-
-@media (max-width: 834px) {
-  .avance-header__arrow {
-    left: 51%;
-    top: 31%;
-  }
 }
 
 @media (max-width: 767px) {

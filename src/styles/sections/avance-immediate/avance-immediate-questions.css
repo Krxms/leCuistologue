@@ -8,6 +8,12 @@
   z-index: 0;
   /*overflow: hidden;*/
   padding: 5rem 3.3% 6rem;
+  /* Référence desktop figée sur toute la plage non-mobile (comme
+     .avance-content__comment-visual juste au-dessus) : l'image ne
+     change plus de taille en dessous de 1210px, donc l'écart avant
+     cette section n'a plus de raison de rétrécir non plus — sinon la
+     flèche (dont la position est désormais fixe par rapport à
+     l'image) finit par déborder sur le texte de cette section. */
   margin-top: 15rem;
 }
 
@@ -19,10 +25,16 @@
   z-index: -1;
 }
 
+/* top en rem (fixe) plutôt qu'en % : un % vertical se calcule sur la
+   hauteur de .avance-questions, qui varie avec le contenu (titre,
+   cartes qui s'empilent...) — la bulle dérivait donc jusqu'à chevaucher
+   le titre quand la section devenait plus courte. En rem, l'écart
+   avec le haut de la section reste identique quel que soit le format,
+   hors mobile (right:% reste correct : il suit la largeur, stable). */
 .avance-questions__bubble {
   position: absolute;
-  right: 16%;
-  top: -20%;
+  right: 6%;
+  top: -7rem;
   width: 25%;
   max-width: 250px;
 }
@@ -107,15 +119,6 @@
 }
 
 @media (max-width: 1210px) {
-  .avance-questions {
-    margin-top: 7rem;
-  }
-
-  .avance-questions__bubble {
-    right: 4%;
-    top: -15%;
-  }
-
   .avance-questions__cards {
     gap: 2rem;
   }
@@ -125,7 +128,6 @@
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .avance-questions {
-    margin-top: clamp(1rem, calc(-67.6866rem + 8.9552vw), 7rem);
     padding-top: clamp(3rem, calc(-19.8955rem + 2.9851vw), 5rem);
     padding-bottom: clamp(3rem, calc(-31.3433rem + 4.4776vw), 6rem);
   }

@@ -85,41 +85,32 @@
   color: var(--color-ink);
 }
 
-.offre__checklist-wrap {
-  position: relative;
-  z-index: 1;
-  /* Fond retiré : la liste n'a plus de cadre imposant une hauteur
-     fixe (aspect-ratio), donc l'espacement avec "Chaque intervention
-     peut inclure :" repasse sur une marge normale, comme le reste du
-     texte de la colonne. */
-  margin-top: 1.5rem;
-  margin-left: 2%;
-  width: 72%;
-}
-
 .offre__checklist {
-  position: relative;
-  z-index: 1;
+  /* Intégrée directement dans .offre__header (même bloc que le
+     titre/texte) au lieu d'un wrapper séparé avec sa propre largeur :
+     elle hérite automatiquement de la même largeur que le texte à
+     chaque palier, plus rien à resynchroniser entre les deux. */
+  margin-top: 1.25rem;
   display: flex;
   flex-wrap: wrap;
-  /* Colonnes resserrées : l'espace entre elles n'a plus besoin de
-     laisser respirer un fond décoratif. */
-  gap: 0rem;
+  /* Colonnes resserrées, rapprochées l'une de l'autre via le gap
+     plutôt qu'un margin-left individuel sur chaque colonne. */
+  gap: 0.4rem 1.5rem;
 }
 
 .offre__checklist-col {
   list-style: none;
-  margin-left: 4.5%;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  flex: 1 1 260px;
+  flex: 1 1 220px;
   /* Remontée ici (plutôt que sur le span) : la puce ci-dessous est en
      em, donc calée sur cette même taille — puce et texte évoluent
      ensemble à chaque palier, jusqu'au dernier format tablette,
      sans valeur à resynchroniser séparément. */
-  font-size: clamp(1.1rem, 1.05vw, 1.3rem);
+  font-size: clamp(1.05rem, 1.05vw, 1.3rem);
 }
 
 .offre__checklist-col li {
@@ -147,12 +138,16 @@
 .offre__price-block {
   position: relative;
   z-index: 1;
-  margin-top: 4.8rem;
-  /* Centré par rapport aux colonnes de la checklist (même largeur/
-     retrait que .offre__checklist-wrap), au lieu de l'alignement à
-     gauche calé sur le titre. Même comportement partout hors mobile. */
-  margin-left: -5%;
-  width: 72%;
+  margin-top: 2.5rem;
+  /* width:fit-content (plutôt qu'un bloc qui remplit toute la largeur
+     du header) : la boîte se cale sur son contenu le plus large — en
+     pratique "A partir de ... / intervention", le premier item, plus
+     large que la promo ou le CTA. Elle reste donc alignée à gauche
+     avec le texte au-dessus (comportement par défaut d'un bloc, pas
+     de centrage du bloc lui-même), tandis que align-items:center
+     centre la promo et le CTA par rapport à CETTE largeur précise,
+     et non plus par rapport à toute la largeur du header. */
+  width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -218,7 +213,7 @@
      grand que max-height, donc min-height gagnait toujours et les
      deux autres ne servaient à rien) — remplacé par une seule
      valeur claire. */
-  height: 60px;
+  height: 54px;
   width: 100%;
   max-width: 410px;
   border-radius: 6px;
@@ -236,6 +231,7 @@
 }
 
 .offre__arrow {
+  display: none;
   position: absolute;
   left: 4%;
   top: 69%;
@@ -258,12 +254,6 @@
   height: auto;
 }
 
-.offre__photo--secondary {
-  left: 58%;
-  top: 53%;
-  width: 32%;
-  height: auto;
-}
 
 /* ============================================================
    TABLETTE PORTRAIT — jusqu'à 834px, ZONE ISOLÉE
@@ -312,13 +302,14 @@
     transform: translateX(-50%) scale(1);
   }
 
-  /* Deux colonnes garanties (au lieu du flex qui repassait en une
-     seule colonne faute de place à cette largeur). Le reste (fond,
-     largeur du cadre, centrage du bloc prix/promo/CTA) reste celui
-     du bloc de base : même comportement partout hors mobile. */
+  /* Une seule colonne : sous 1100px, la liste passe déjà en une
+     colonne (voir la sous-zone 835-1100px plus bas) — en dessous de
+     835px, on reste sur ce même comportement au lieu de revenir à
+     deux colonnes, pour que la bascule soit définitive une fois
+     passée, jusqu'au mobile. */
   .offre__checklist {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .offre__checklist-col {
@@ -384,6 +375,20 @@
 
   .offre__checklist-col {
     align-items: left;
+  }
+}
+
+/* Sous-zone de la tablette paysage : en dessous de 1100px, le cadre
+   90% devient trop étroit pour garder deux colonnes lisibles à côté
+   de la photo. On repasse la liste en une seule colonne et on élargit
+   un peu le bloc texte pour compenser. */
+@media (min-width: 835px) and (max-width: 1100px) {
+  .offre__header {
+    max-width: 79%;
+  }
+
+  .offre__checklist {
+    grid-template-columns: 1fr;
   }
 }
 

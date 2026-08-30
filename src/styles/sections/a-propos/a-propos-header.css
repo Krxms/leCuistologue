@@ -43,21 +43,28 @@
 }
 
 .a-propos-header__title-accent {
+  position: relative;
   font-weight: 900;
   font-size: clamp(2.3rem, 5vw, 4.6875rem);
   color: #c26665;
 }
 
+/* Ancrée sur le mot "Cuistologue" lui-même (position:relative
+   ci-dessus), pas sur .title-wrap : ce dernier s'étire sur toute la
+   largeur du titre (donc sur la largeur de la ligne la plus longue),
+   comme le corrigé sur Formules/Avance immédiate/FAQ — un span inline
+   comme l'accent se limite exactement à la largeur réelle du mot, donc
+   plus de dérive horizontale ni verticale au responsive. */
 .a-propos-header__arrow {
   position: absolute;
-  left: 108%;
-  top: 23%;
-  margin-left: -2rem;
+  left: 100%;
+  top: 165%;
+  margin-left: 2rem;
   width: 16rem;
   max-width: 20vw;
   z-index: 2;
   pointer-events: none;
-  transform: rotate(-5deg);
+  transform: translateY(-50%) rotate(-5deg);
 }
 
 .a-propos-header__deco {
@@ -101,12 +108,6 @@
   margin-left: -13rem;
   margin-top: 23rem;
   padding: 2.5rem 1.5rem 0;
-}
-
-@media (max-width: 834px) {
-  .a-propos-header__arrow {
-    left: 115%;
-  }
 }
 
 @media (max-width: 767px) {

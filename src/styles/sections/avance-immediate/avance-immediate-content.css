@@ -154,15 +154,36 @@
   transform: rotate(-4deg);
 }
 
+/* Flèche + image regroupées dans un même conteneur transformé
+   (.avance-content__comment-visual) : la flèche est positionnée en %
+   PAR RAPPORT À CE CONTENEUR, dont la taille/l'échelle est portée par
+   le wrapper et non plus par l'image seule. Comme transform:scale
+   s'applique à tout le sous-arbre d'un coup, flèche et image
+   grandissent/rétrécissent toujours ensemble, en gardant exactement
+   la même position relative l'une par rapport à l'autre — plus de
+   recalage séparé à chaque palier. */
+/* z-index posé ICI (et pas seulement sur la flèche) : transform crée
+   son propre contexte d'empilement, donc le z-index de la flèche à
+   l'intérieur restait piégé dedans et ne comptait que par rapport à
+   ses propres frères — jamais face à .avance-questions (qui a son
+   z-index:0 à elle) plus bas dans la page. En posant le z-index sur
+   le conteneur transformé lui-même, tout le bloc (flèche comprise)
+   se compare directement à .avance-questions et passe devant. */
+.avance-content__comment-visual {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  margin: 12rem auto 0;
+  transform: scale(1.4);
+}
+
 .avance-content__comment-arrow {
   position: absolute;
   display: block;
-  margin: 1rem auto;
-  width: 55%;
-  top: 25rem;
-  left: -10rem;
-    z-index: 1;
-
+  top: 52%;
+  left: -8%;
+  width: 44%;
 }
 
 /* ===== Image desktop : visible par défaut ===== */
@@ -170,12 +191,9 @@
 .avance-content__comment-image--desktop {
   display: block;
   width: 100%;
-  max-width: 900px;
   height: auto;
-  margin: 12rem auto 0;
   border-radius: 16px;
   /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);*/
-  transform: scale(1.4);
 }
 
 /* ===== Image mobile : masquée par défaut, prend le relais sous 767px ===== */
@@ -205,16 +223,6 @@
 
   .avance-content__grid {
     gap: 2rem;
-  }
-
-  .avance-content__comment-image--desktop {
-    margin: 6rem auto 6rem;
-    transform: scale(1.15);
-  }
-
-  .avance-content__comment-arrow {
-    top: 14rem;
-    left: -1rem;
   }
 
   .avance-content__left {
@@ -398,11 +406,7 @@
     transform: rotate(0deg);
   }
 
-  .avance-content__comment-arrow {
-    display: none;
-  }
-
-  .avance-content__comment-image--desktop {
+  .avance-content__comment-visual {
     display: none;
   }
 

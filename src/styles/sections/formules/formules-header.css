@@ -36,24 +36,35 @@
   color: var(--color-ink);
 }
 
-.formules-header__title-line:last-child .formules-header__title-accent,
-.formules-header__title-line:first-child .formules-header__title-accent {
+/* Ciblait auparavant .title-line:first-child/:last-child — cassé
+   depuis que la flèche est devenue le dernier enfant du <h1> (elle
+   n'est plus dans un .title-line, donc plus aucune ligne n'était
+   "last-child"). "besoin" perdait la grande taille de "formules".
+   On cible directement l'accent, qui doit de toute façon toujours
+   avoir cette taille sur les deux lignes. */
+.formules-header__title-accent {
+  position: relative;
   font-weight: 900;
   font-size: clamp(2.3rem, 5vw, 4.6875rem);
-}
-
-.formules-header__title-accent {
   color: #bc843c;
 }
 
+/* Ancrée sur le mot "besoin" lui-même (position:relative ci-dessus),
+   pas sur toute la ligne ni sur le <h1> : ces deux-là s'étirent en
+   display:block sur toute la largeur du titre (donc sur la largeur de
+   la ligne la plus longue), alors qu'un span inline comme l'accent se
+   limite exactement à la largeur réelle du mot. left:100% tombe donc
+   pile à la fin du mot, quel que soit le format — plus de dérive
+   horizontale ni verticale au responsive. */
 .formules-header__arrow {
   position: absolute;
-  left: 57%;
-  top: 32%;
-  width: 14%;
+  left: 100%;
+  top: 170%;
+  margin-left: 0.5rem;
+  width: 14vw;
   z-index: 2;
   pointer-events: none;
-  transform: scaleX(-1) rotate(-5deg);
+  transform: translateY(-50%) scaleX(-1) rotate(-5deg);
 }
 
 .formules-header__deco {
@@ -85,20 +96,6 @@
   left: 80%;
   top: 40%;
   width: 9%;
-}
-
-@media (min-width: 1024px) and (max-width: 1210px) {
-  .formules-header__arrow {
-    left: 59%;
-    top: 32%;
-  }
-}
-
-@media (max-width: 834px) {
-  .formules-header__arrow {
-    left: 61%;
-    top: 33%;
-  }
 }
 
 @media (max-width: 767px) {

@@ -365,10 +365,17 @@
    rester le même sur tout le format tablette. Formule calée sur une
    hauteur d'écran de référence de 768px (résolution laptop courante)
    pour rejoindre en douceur la valeur desktop, sans changer les
-   valeurs exactes à 1211px (déjà au plancher tablette) et 1280px. */
+   valeurs exactes à 1211px (déjà au plancher tablette) et 1280px.
+   min-height (pas height) : une hauteur fixe ne grandit jamais si le
+   contenu (titre + description + CTA + le padding-bottom de
+   .hero__content) dépasse la valeur du bas de la formule (30rem tout
+   juste à 1211px) — avec overflow:visible sur .hero, le surplus
+   débordait alors visiblement sous la hero, à cheval sur la photo de
+   Présentation entre 1210 et ~1265px. En plancher, la boîte grandit
+   au besoin comme partout ailleurs dans cette zone tablette. */
 @media (min-width: 1211px) and (max-width: 1279px) {
   .hero {
-    height: clamp(30rem, calc(-320.13rem + 462.667vw), 50rem);
+    min-height: clamp(30rem, calc(-320.13rem + 462.667vw), 50rem);
   }
 }
 
