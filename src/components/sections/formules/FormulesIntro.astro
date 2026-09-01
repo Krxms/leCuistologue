@@ -11,14 +11,32 @@ import nettoyage from "../../../assets/formules/toujours-inclus/nettoyage.svg";
 // Bloc « Ce qui est toujours inclus » : 6 prestations communes à toutes
 // les formules, chacune illustrée (dessins au trait fournis avec la
 // maquette). L'ordre suit la maquette, de gauche à droite.
+//
+// Chaque dessin se règle INDÉPENDAMMENT ici, via 4 champs optionnels
+// (repris tels quels en variables CSS sur le <li>) :
+//   h   → hauteur du dessin en px (desktop ; réduite au prorata en mobile)
+//   rot → rotation (ex. "-4deg")
+//   dx  → décalage horizontal fin (ex. "-3px")
+//   dy  → décalage vertical fin (ex. "4px", positif = vers le bas)
+// Tout champ omis retombe sur la valeur par défaut définie dans le CSS.
 const toujoursInclus = [
-  { img: legumes, label: "Menus personnalisé" },
-  { img: panier, label: "Liste de course préparée" },
-  { img: faitout, label: "Repas cuisinés à domicile" },
-  { img: frigo, label: "Réfrigérateur organisé" },
-  { img: parfait, label: "Conseils & conservation" },
-  { img: nettoyage, label: "Cuisine propre et rangée" },
+  { img: legumes,   label: "Menus personnalisé",        h: 52, rot: "-4deg",   dx: "0px", dy: "0px" },
+  { img: panier,    label: "Liste de course préparée",  h: 60, rot: "3deg",    dx: "0px", dy: "0px" },
+  { img: faitout,   label: "Repas cuisinés à domicile", h: 58, rot: "-2.5deg", dx: "0px", dy: "0px" },
+  { img: frigo,     label: "Réfrigérateur organisé",    h: 78, rot: "3.5deg",  dx: "0px", dy: "0px" },
+  { img: parfait,   label: "Conseils & conservation",   h: 86, rot: "-3deg",   dx: "0px", dy: "0px" },
+  { img: nettoyage, label: "Cuisine propre et rangée",  h: 64, rot: "2deg",    dx: "0px", dy: "0px" },
 ];
+
+const itemVars = (i: (typeof toujoursInclus)[number]) =>
+  [
+    i.h !== undefined && `--pic-h:${i.h}px`,
+    i.rot !== undefined && `--pic-rot:${i.rot}`,
+    i.dx !== undefined && `--pic-dx:${i.dx}`,
+    i.dy !== undefined && `--pic-dy:${i.dy}`,
+  ]
+    .filter(Boolean)
+    .join(";");
 ---
 
 <section class="formules-intro">
@@ -41,7 +59,7 @@ const toujoursInclus = [
       </div>
       <ul class="formules-intro__box-grid">
         {toujoursInclus.map((item) => (
-          <li class="formules-intro__item">
+          <li class="formules-intro__item" style={itemVars(item)}>
             <span class="formules-intro__item-media">
               <img src={item.img.src} alt="" aria-hidden="true" />
             </span>

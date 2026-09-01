@@ -144,29 +144,51 @@
   align-items: center;
 }
 
+.formules-intro__item:nth-child(6) .formules-intro__item-media img {
+  transform: rotate(-15deg);
+}
+
+.formules-intro__item:nth-child(5) .formules-intro__item-media img {
+  transform: rotate(-3deg);
+}
+
+.formules-intro__item:nth-child(3) .formules-intro__item-media img {
+  transform: rotate(-9.5deg);
+  width: 72%;
+}
+
+.formules-intro__item:nth-child(2) .formules-intro__item-media img {
+  transform: rotate(14deg);
+  width: 83%;
+}
+
+.formules-intro__item:first-child .formules-intro__item-media img {
+  transform: rotate(-4deg);
+  width: 78%;
+}
+
+/* Boîte média de hauteur fixe : les dessins s'y calent par le bas
+   (align-items: flex-end) → base commune et libellés alignés, quelle
+   que soit la hauteur propre de chaque dessin. */
 .formules-intro__item-media {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  height: 72px;
+  height: 92px;
 }
 
+/* Taille, rotation et décalage fin PILOTÉS PAR ITEM via les variables
+   --pic-* posées en inline sur le <li> (cf. FormulesIntro.astro).
+   Les valeurs de repli ci-dessous servent quand un champ est omis.
+   `--pic-h` est le vrai levier de taille : garder des valeurs
+   raisonnables (< largeur de colonne) pour ne pas écraser le ratio. */
 .formules-intro__item-media img {
   display: block;
   width: auto;
-  height: auto;
-  max-width: 90%;
-  max-height: 100%;
+  height: var(--pic-h, 60px);
+  max-width: 100%;
+  transform: translate(var(--pic-dx, 0px), var(--pic-dy, 0px)) rotate(var(--pic-rot, 0deg));
 }
-
-/* Légère rotation propre à chaque dessin — valeurs volontairement
-   discrètes et alternées, à ajuster ensuite au cas par cas. */
-.formules-intro__item:nth-child(1) .formules-intro__item-media img { transform: rotate(-4deg); }
-.formules-intro__item:nth-child(2) .formules-intro__item-media img { transform: rotate(3deg); }
-.formules-intro__item:nth-child(3) .formules-intro__item-media img { transform: rotate(-2.5deg); }
-.formules-intro__item:nth-child(4) .formules-intro__item-media img { transform: rotate(3.5deg); }
-.formules-intro__item:nth-child(5) .formules-intro__item-media img { transform: rotate(-3deg); }
-.formules-intro__item:nth-child(6) .formules-intro__item-media img { transform: rotate(2deg); }
 
 .formules-intro__item-label {
   margin-top: 0.9rem;
@@ -220,7 +242,12 @@
   }
 
   .formules-intro__item-media {
-    height: 46px;
+    height: 62px;
+  }
+
+  /* Mobile : mêmes réglages par item, hauteurs réduites au prorata. */
+  .formules-intro__item-media img {
+    height: calc(var(--pic-h, 60px) * 0.68);
   }
 
   .formules-intro__item-label {
