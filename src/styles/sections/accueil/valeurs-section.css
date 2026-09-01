@@ -20,6 +20,33 @@
   opacity: 0.8;
 }
 
+/* Grands écrans (21"+, 2K/4K...) : 110vw continuait de grandir avec
+   la fenêtre sans plafond — l'image (déjà recadrée via object-fit)
+   finissait démesurément large. Gelée à sa taille réelle à 1920px ;
+   .valeurs__grid, elle, est déjà auto-limitée (cartes plafonnées à
+   360px, justify-content:center), pas besoin d'y toucher. */
+@media (min-width: 1921px) {
+  .valeurs__bg {
+    width: calc(1.1 * var(--content-cap));
+  }
+}
+
+/* Le poivron/la passoire (dessinés en haut/bas de l'image) sont
+   rognés par object-fit:cover à partir de 1780px de large (constaté,
+   pas de rapport avec le plafond ci-dessus qui ne démarre qu'à
+   1921px) : le ratio de la boîte à cette largeur découvre moins
+   d'image en haut/bas que ce que top/bottom/height prévoyaient.
+   Rallongé (2rem/5rem -> 4rem/10rem) à partir de ce seuil précis —
+   purement visuel (position:absolute), sans effet sur la hauteur ni
+   la position de la section dans la page. */
+@media (min-width: 1780px) {
+  .valeurs__bg {
+    top: -4rem;
+    bottom: -6rem;
+    height: calc(100% + 10rem);
+  }
+}
+
 .valeurs__content {
   position: relative;
   z-index: 1;
@@ -168,18 +195,25 @@
 
 @media (max-width: 767px) {
   .valeurs {
-    margin-block: 6.5rem;
-    padding: 0rem 1.5rem;
-    margin-top: 6rem;
+    /* Un peu d'air rendu au-dessus du titre et sous la dernière
+       carte (3rem/2rem -> 4rem/3rem), après le remontage précédent
+       qui avait un peu trop serré. */
+    margin-block: 4rem;
+    /* padding-block (0 -> 2.5rem) : allonge la zone colorée elle-même
+       (contrairement au margin-block ci-dessus, qui n'est que l'écart
+       avant/après, hors de l'aplat). */
+    padding: 5.5rem 1.5rem;
+    margin-top: 3rem;
+    /* Remplace l'image (voir échange) : un aplat de couleur s'adapte
+       à n'importe quelle hauteur de contenu sans jamais risquer de
+       couper une carte, contrairement à une image à ratio fixe. */
+    background-color: #D9E5E4;
   }
 
+  /* L'image ne convient plus au mobile (ratio ~3:1 pensé pour le
+     desktop) — remplacée par un aplat de couleur ci-dessus. */
   .valeurs__bg {
-    top: -1rem;
-    bottom: -1rem;
-    height: calc(100% + 2rem);
-    object-fit: cover;
-    transform: translateX(-50%) scale(1.45);
-    opacity: 1;
+    display: none;
   }
 
   .valeurs__grid {
@@ -189,8 +223,8 @@
   }
 
   .valeurs__card {
-    width: 90%;
-    max-width: 340px;
+    width: 95%;
+    max-width: 380px;
   }
 
   .valeurs__card-text {

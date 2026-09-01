@@ -41,6 +41,19 @@
   }
 }
 
+/* Grands écrans (21"+, 2K/4K...) : .hero__content occupe 8 des 12
+   colonnes de la grille, une largeur en fr qui continue de grandir
+   avec la fenêtre — au-delà d'une largeur desktop normale, le bloc
+   titre/texte/CTA devenait démesurément large (lignes de texte trop
+   longues). Plafonné à sa largeur réelle à 1920px (8 colonnes + leurs
+   7 espacements internes), sans toucher au fond (qui, lui, doit
+   continuer à couvrir toute la largeur de l'écran). */
+@media (min-width: 1921px) {
+  .hero__content {
+    max-width: 1200px;
+  }
+}
+
 .hero__bg-wrapper {
   position: absolute;
   inset: 0;
@@ -115,19 +128,6 @@
   }
 }
 
-
-@media (max-width: 767px) {
-  .hero__decor--brocoli {
-    left: 8%;
-    bottom: 60px;
-    width: 15vw;
-    max-width: 78px;
-  }
-
-  .hero__decor--potato {
-    display: none;
-  }
-}
 
 .hero__content {
   position: relative;
@@ -390,7 +390,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 40.5rem;
+    /* Réduit (40.5rem -> 34rem) : la hero laissait beaucoup de vide
+       sous les CTA, notamment à cause du padding-bottom hérité de
+       .hero__content (voir ci-dessous, annulé ici). */
+    min-height: 34rem;
     padding: 5rem 1.5rem;
     background-color: #F8E0CF;
   }
@@ -415,6 +418,15 @@
 
   .hero__content {
     max-width: 28rem;
+    /* padding-left:2rem (hérité de la base, pensé pour la grille 12
+       colonnes du desktop) décalait tout le texte vers la droite à
+       l'intérieur du bloc pourtant centré (align-items:center sur
+       .hero) — annulé ici. padding-bottom:6.8rem (pensé pour dégager
+       les CTA du bas de l'image de fond, absente en mobile via
+       .hero__bg-wrapper{display:none}) laissait un vide inutile sous
+       les CTA — annulé aussi. */
+    padding-left: 0;
+    padding-bottom: 0;
   }
 
   .hero__actions {
@@ -430,17 +442,26 @@
     width: 85%;
   }
 
-  .hero__decor--brocoli {
-    left: 0%;
-    bottom: 483px;
-    width: 23vw;
-    max-width: 78px;
+  /* bottom:483px (fixe) et max-width:78px pénalisaient la potato/le
+     brocoli : sur la quasi-totalité des téléphones réels, 23vw
+     dépasse déjà 78px, donc le plafond s'appliquait presque toujours
+     et le brocoli restait à une taille fixe quelle que soit la
+     largeur d'écran — pas de croissance proportionnelle. Position en
+     % (comme la potato, qui elle scalait déjà correctement en
+     largeur) plutôt qu'en px fixe, pour rester ancré au même endroit
+     relatif au titre à mesure que l'écran s'élargit. */
+   .hero__decor--brocoli {
+    display: flex;
+    left: 3%;
+    top: 33.5%;
+    width: 19%;
+    max-width: 130px;
   }
 
   .hero__decor--potato {
     display: flex;
-    top: 2%;
-    width: 21%;
-    left: 67%;
+    top: -1%;
+    width: 20%;
+    left: 82%;
   }
 }

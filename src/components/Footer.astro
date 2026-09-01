@@ -27,8 +27,9 @@ const annee = new Date().getFullYear();
 
 <footer class="footer">
   <div class="footer__top">
+    <img src={logo.src} alt="Le Cuistologue" class="footer__logo" />
+
     <div class="footer__brand">
-      <img src={logo.src} alt="Le Cuistologue" class="footer__logo" />
       <h2 class="footer__tagline">Le goût du lien</h2>
       <p class="footer__description">
         Des repas préparés directement chez vous, par un professionnel, pour retrouver le plaisir de bien manger sans passer vos soirées en cuisine.
@@ -43,7 +44,7 @@ const annee = new Date().getFullYear();
       </div>
     </div>
 
-    <nav class="footer__col">
+    <nav class="footer__col footer__col--nav">
       <h3 class="footer__col-title">Navigation</h3>
       <ul>
         {navigation.map((item) => (
@@ -52,7 +53,7 @@ const annee = new Date().getFullYear();
       </ul>
     </nav>
 
-    <nav class="footer__col">
+    <nav class="footer__col footer__col--conditions">
       <h3 class="footer__col-title">Conditions</h3>
       <ul>
         {conditions.map((item) => (
@@ -62,7 +63,7 @@ const annee = new Date().getFullYear();
       </ul>
     </nav>
 
-    <div class="footer__col">
+    <div class="footer__col footer__col--contact">
       <h3 class="footer__col-title">Contact</h3>
       <ul>
         <li><a href="tel:0612776264">06 12 77 62 64</a></li>

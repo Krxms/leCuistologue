@@ -6,6 +6,22 @@
   align-items: center;
 }
 
+/* Grands écrans (21"+, 2K/4K...) : min-height (vw) et la flèche
+   (vw) continuaient de grandir avec la fenêtre sans plafond, gelés
+   à leur valeur réelle à 1920px. .formules-header__bg est déjà en %,
+   donc automatiquement gelé par le plafond posé sur le conteneur. */
+@media (min-width: 1921px) {
+  .formules-header {
+    max-width: var(--content-cap);
+    margin-inline: auto;
+    min-height: calc(0.354 * var(--content-cap));
+  }
+
+  .formules-header__arrow {
+    width: calc(0.14 * var(--content-cap));
+  }
+}
+
 .formules-header__bg {
   position: absolute;
   inset: 0;
@@ -30,7 +46,7 @@
 
 .formules-header__title-line {
   display: block;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.02em;
   font-size: clamp(1.8rem, 3.2vw, 4.6875rem);
   color: var(--color-ink);
@@ -117,6 +133,12 @@
     margin-top: -6%;
     text-align: center;
     transform: rotate(-0deg);
+    /* Réserve la hauteur du pire cas (3 lignes, quand "adaptées à
+       chaque besoin" retombe à la ligne) : sans ça, chaque page
+       finit à une hauteur de header différente selon que son titre
+       tienne sur 2 ou 3 lignes à cette largeur, donc le contenu qui
+       suit ne démarre plus au même niveau d'une page à l'autre. */
+    min-height: 8rem;
   }
 
   .formules-header__deco {

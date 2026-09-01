@@ -12,6 +12,18 @@
   transition: height 0.45s ease;
 }
 
+/* Grand écran (21"+, 2K/4K...) : sans plafond, le logo et les liens
+   s'écartaient toujours plus l'un de l'autre (justify-content:
+   space-between sur toute la largeur de l'écran). Le fond (couleur
+   unie, identique à celui de la page) reste invisible même
+   plafonné. */
+@media (min-width: 1921px) {
+  .navbar {
+    max-width: var(--content-cap);
+    margin-inline: auto;
+  }
+}
+
 .navbar__brand {
   display: flex;
   align-items: center;

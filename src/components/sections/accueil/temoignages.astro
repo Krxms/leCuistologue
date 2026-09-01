@@ -21,22 +21,67 @@ const avis = await fetchGoogleReviews();
     </h2>
   </div>
 
-  <div class="commentaires__grid">
-    {
-      avis.map((item) => (
-        <div class="commentaires__card">
-          <div class="commentaires__stars">
-            {[...Array(item.note)].map(() => (
-              <img src={star.src} alt="" aria-hidden="true" />
-            ))}
+  <div class="commentaires__carousel">
+    <div class="commentaires__grid" id="commentaires-grid">
+      {
+        avis.map((item) => (
+          <div class="commentaires__card">
+            <div class="commentaires__stars">
+              {[...Array(item.note)].map(() => (
+                <img src={star.src} alt="" aria-hidden="true" />
+              ))}
+            </div>
+            <p class="commentaires__text">{item.texte}</p>
+            <div class="commentaires__meta">
+              <p class="commentaires__name">{item.nom}</p>
+              {item.role && <p class="commentaires__role">{item.role}</p>}
+            </div>
           </div>
-          <p class="commentaires__text">{item.texte}</p>
-          <div class="commentaires__meta">
-            <p class="commentaires__name">{item.nom}</p>
-            {item.role && <p class="commentaires__role">{item.role}</p>}
-          </div>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
+
+    <div class="commentaires__dots" id="commentaires-dots">
+      {
+        avis.map((_, i) => (
+          <button type="button" class="commentaires__dot" aria-label={`Aller à l'avis ${i + 1}`} />
+        ))
+      }
+    </div>
   </div>
 </section>
+
+<script>
+  const grid = document.getElementById("commentaires-grid");
+  const dotsWrap = document.getElementById("commentaires-dots");
+
+  if (grid && dotsWrap) {
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>(".commentaires__card"));
+    const dots = Array.from(dotsWrap.querySelectorAll<HTMLElement>(".commentaires__dot"));
+
+    function setActive(i: number) {
+      dots.forEach((d, idx) => d.classList.toggle("commentaires__dot--active", idx === i));
+    }
+
+    function scrollToIndex(i: number) {
+      cards[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+
+    dots.forEach((d, i) => d.addEventListener("click", () => scrollToIndex(i)));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+            const idx = cards.indexOf(entry.target as HTMLElement);
+            if (idx !== -1) setActive(idx);
+          }
+        });
+      },
+      { root: grid, threshold: [0.6] }
+    );
+    cards.forEach((c) => observer.observe(c));
+
+    setActive(0);
+  }
+</script>

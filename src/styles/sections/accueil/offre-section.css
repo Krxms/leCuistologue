@@ -35,6 +35,28 @@
   padding-top: 5vw;
 }
 
+/* Grands écrans (21"+, 2K/4K...) : min-height/.offre__bg/padding-top
+   en vw continuaient de grandir avec la fenêtre sans plafond — la
+   section devenait démesurément haute, la photo et le fond
+   démesurément grands. Tout gelé à sa valeur réelle à 1920px, et le
+   conteneur lui-même plafonné pour que le texte (58%) et la photo
+   (56%) arrêtent de s'écarter l'un de l'autre au-delà. */
+@media (min-width: 1921px) {
+  .offre__desktop {
+    max-width: var(--content-cap);
+    margin-inline: auto;
+    min-height: calc(0.71 * var(--content-cap));
+  }
+
+  .offre__bg {
+    width: calc(1.06 * var(--content-cap));
+  }
+
+  .offre__header {
+    padding-top: calc(0.05 * var(--content-cap));
+  }
+}
+
 .offre__title-row {
   position: relative;
 }
@@ -396,144 +418,165 @@
    MOBILE (base) — masquée par défaut, activée sous 834px
    ============================================================ */
 
+/* Aplat de couleur (comme .valeurs) au lieu d'une image à ratio
+   fixe : s'adapte à n'importe quelle hauteur de contenu, jamais de
+   découpe. Couleur reprise de l'ancien fond image. */
 .offre-m {
   display: none;
-}
-
-.offre-m__bg {
-  position: absolute;
-  left: 50%;
-  top: 0%;
-  width: 100vw;
-  height: 100%;
-  transform: translateX(-50%);
-  object-fit: cover;
-  z-index: 0;
+  background-color: #FFDBDB;
 }
 
 .offre-m__title-row {
   position: relative;
   z-index: 1;
-  padding-top: 9%;
+  padding-top: 3rem;
   padding-inline: 8%;
-  text-align: left;
+  text-align: center;
 }
 
 .offre-m__title {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(1.7rem, 7vw, 2.4rem);
-  line-height: 1.16;
+  line-height: 1.25;
   color: var(--color-ink);
-  margin-top: 13%;
 }
 
 .offre-m__titleAccent {
   color: #DAA35B;
 }
 
-.offre-m__title-icon {
-  display: none;
-  /*position: absolute;
-  right: 11%;
-  top: 31%;
-  width: 14%;
-  transform: rotate(-18deg);*/
-}
-
 .offre-m__description {
   position: relative;
   z-index: 1;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   padding-inline: 8%;
-  text-align: left;
+  text-align: center;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: var(--color-ink);
 }
 
-.offre-m__include-label {
+/* Étiquette centrée flanquée de deux traits, comme un séparateur de
+   section classique ("---- Inclus dans chaque formule ----"). */
+.offre-m__divider-label {
   position: relative;
   z-index: 1;
-  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
   padding-inline: 8%;
-  text-align: left;
+}
+
+.offre-m__divider-label::before,
+.offre-m__divider-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: rgba(44, 44, 44, 0.2);
+}
+
+.offre-m__divider-label span {
   font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--color-ink);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
 }
 
 .offre-m__checklist-wrap {
   position: relative;
   z-index: 1;
-  margin: 2rem auto 0;
+  margin: 1.25rem auto 0;
   width: 85%;
-  background-color: var(--color-cream);
-  border-radius: 20% 20% 20% 20%/20% 20% 20% 20%;
+  background-color: #fdfbfa;
+  border-radius: 20px;
 }
 
 .offre-m__checklist {
-  padding: 2.5rem 10%;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  padding-inline: 1.5rem;
 }
 
 .offre-m__checklist-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1rem;
+  padding-block: 1.1rem;
 }
 
-.offre-m__checklist-item img {
-  width: 14px;
+.offre-m__checklist-item:not(:last-child) {
+  border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+}
+
+/* Emplacement réservé pour le pictogramme de chaque ligne, à intégrer
+   plus tard — taille/gap déjà calés pour les recevoir sans reprendre
+   la mise en page. */
+.offre-m__checklist-icon {
   flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background-color: rgba(44, 44, 44, 0.08);
 }
 
-.offre-m__checklist-item span {
+.offre-m__checklist-item span:last-child {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--color-ink);
-}
-
-.offre-m__arrow {
-  display: none;
-  margin: -5rem auto -1.4rem;
-  left: 26%;
-  width: 15%;
-  min-width: 24px;
-  position: relative;
-  z-index: 0;
 }
 
 .offre-m__price {
   position: relative;
   z-index: 1;
-  margin: 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 2rem 0 0;
   text-align: center;
   font-family: var(--font-display);
 }
 
+/* Prix et "/ intervention" sur la même ligne, "A partir de" garde sa
+   propre ligne au-dessus. */
+.offre-m__price-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
 .offre-m__price-label {
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--color-ink);
 }
 
 .offre-m__price-value {
   font-weight: 800;
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #bc843c;
-  margin-inline: 0.3rem;
 }
 
+/* Même bandeau illustré que le desktop (.offre__promo-bg), redimensionné
+   pour rester lisible sur mobile : object-fit:fill épouse exactement
+   la taille du texte (voir .offre-m__promo, sizing par le contenu). */
 .offre-m__promo {
   position: relative;
   z-index: 1;
-  margin: 1rem auto 0;
+  /* Rapproché du prix (1.25rem -> 0.75rem -> 0.25rem). */
+  margin: 0.25rem auto 0;
+  /* fit-content (pas de max-width) : le texte reste nowrap, donc la
+     boîte doit toujours pouvoir prendre exactement sa largeur réelle
+     — un max-width plus étroit forcerait un débordement visuel. */
   width: fit-content;
+  display: block;
 }
 
 .offre-m__promo-bg {
@@ -542,17 +585,25 @@
   width: 100%;
   height: 100%;
   z-index: 0;
+  object-fit: fill;
+  pointer-events: none;
 }
 
 .offre-m__promo-text {
   position: relative;
   z-index: 1;
   margin: 0;
-  padding: 0.8rem 1.5rem;
+  /* Agrandi (0.9rem/1.2rem -> 1.2rem/1.8rem, texte 0.7rem -> 0.78rem) :
+     la boîte grandit, et .offre-m__promo-bg (object-fit:fill) avec
+     elle. */
+  padding: 1.2rem 1.8rem;
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--color-ink);
+  /* nowrap : le fond (object-fit:fill) épouse exactement la boîte du
+     texte — si le texte passait à la ligne, l'image s'étirerait
+     verticalement et perdrait ses proportions de bandeau. */
+  font-size: 0.78rem;
   white-space: nowrap;
+  color: var(--color-ink);
 }
 
 .offre-m__cta {
@@ -561,27 +612,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.6rem;
   width: 85%;
   max-width: 410px;
-  height: 46px;
-  margin: 2.5rem auto 0;
+  height: 50px;
+  /* Décroché de la promo juste au-dessus (2rem -> 2.75rem). */
+  margin: 2.75rem auto 0;
   text-align: center;
   border-radius: 6px;
   background-color: var(--color-ink-soft);
   color: #fdfbfa;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1.125rem;
-  letter-spacing: 0.05em;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
   transition: background-color 0.2s ease;
 }
 
 .offre-m__cta:hover {
   background-color: #1a2b35;
-}
-
-.offre-m__photo {
-  display: none;
 }
 
 /* ============================================================
@@ -593,17 +642,9 @@
     display: none;
   }
 
-  .offre-m__checklist-wrap {
-    border-radius: 6%;
-  }
-
   .offre-m {
     display: block;
     position: relative;
-    padding-bottom: 10%;
-  }
-
-  .offre-m__promo-text {
-    padding: 0.8rem 1.2rem;
+    padding-bottom: 3rem;
   }
 }

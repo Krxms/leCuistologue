@@ -4,10 +4,8 @@ import "../../../styles/sections/accueil/offre-section.css";
 import bgPink from "../../../assets/accueil/service/serviceBG.png";
 import photoMain from "../../../assets/accueil/service/serviceBigPicsAll.png";
 import titleIcon from "../../../assets/accueil/service/titlewow.svg";
-import checkmark from "../../../assets/accueil/service/checkmark.svg";
 import arrow from "../../../assets/accueil/service/arrow.svg";
 import serviceInfoBg from "../../../assets/accueil/service/serviceInfoBG.svg";
-import bgPinkMobile from "../../../assets/accueil/service/serviceBGmobile.png";
 import { Image } from "astro:assets";
 
 const colonneGauche = [
@@ -25,6 +23,7 @@ const colonneDroite = [
   "Réserve gourmande",
   "Popotes à emporter",
 ];
+
 ---
 
 <section class="offre">
@@ -50,7 +49,7 @@ const colonneDroite = [
         de repas que vous souhaitez déléguer.<br><br>
         Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
       </p>
-      <p class="offre__include-label">Chaque intervention peut inclure :</p>
+      <p class="offre__include-label">Chaque intervention est composée de :</p>
 
       <div class="offre__checklist">
         <ul class="offre__checklist-col">
@@ -75,7 +74,7 @@ const colonneDroite = [
 
       <div class="offre__price-block">
         <p class="offre__price">
-          <span class="offre__price-label">A partir de</span>
+          <span class="offre__price-label">À partir de</span>
           <span class="offre__price-value">74,50 €</span>
           <span class="offre__price-label">/ intervention</span>
         </p>
@@ -105,18 +104,10 @@ const colonneDroite = [
 
   <!-- ===== Mobile / tablette (≤1210px) ===== -->
   <div class="offre-m">
-    <img src={bgPinkMobile.src} alt="" class="offre-m__bg" aria-hidden="true" />
-
     <div class="offre-m__title-row">
       <h2 class="offre-m__title">
         Des solutions culinaires pensées pour vous et <span class="offre-m__titleAccent">avec vous.</span>
       </h2>
-      <img
-        src={titleIcon.src}
-        alt=""
-        class="offre-m__title-icon"
-        aria-hidden="true"
-      />
     </div>
     <p class="offre-m__description">
       <b>Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine.</b><br /><br />
@@ -124,14 +115,17 @@ const colonneDroite = [
       de repas que vous souhaitez déléguer.<br><br>
       Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
     </p>
-    <p class="offre-m__include-label"><b>Chaque intervention peut inclure :</b></p>
+
+    <div class="offre-m__divider-label">
+      <span>Chaque intervention est composée de :</span>
+    </div>
 
     <div class="offre-m__checklist-wrap">
       <div class="offre-m__checklist">
         {
           [...colonneGauche, ...colonneDroite].map((item) => (
             <div class="offre-m__checklist-item">
-              <img src={checkmark.src} alt="" aria-hidden="true" />
+              <span class="offre-m__checklist-icon" aria-hidden="true" />
               <span>{item}</span>
             </div>
           ))
@@ -139,13 +133,14 @@ const colonneDroite = [
       </div>
     </div>
 
-    <img src={arrow.src} alt="" class="offre-m__arrow" aria-hidden="true" />
-
     <p class="offre-m__price">
-      <span class="offre-m__price-label">A partir de</span>
-      <span class="offre-m__price-value">74,50 €</span>
-      <span class="offre-m__price-label">/ intervention</span>
+      <span class="offre-m__price-label">À partir de</span>
+      <span class="offre-m__price-line">
+        <span class="offre-m__price-value">74,50 €</span>
+        <span class="offre-m__price-label">/ intervention</span>
+      </span>
     </p>
+
     <div class="offre-m__promo">
       <img
         src={serviceInfoBg.src}
@@ -157,12 +152,9 @@ const colonneDroite = [
         Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
       </p>
     </div>
-    <a href="/formules" class="offre-m__cta">Je découvre les formules !</a>
 
-    <Image
-      src={photoMain}
-      alt="Plats préparés par Le Cuistologue, prêts à emporter"
-      class="offre-m__photo"
-    />
+    <a href="/formules" class="offre-m__cta">
+      Je découvre les formules !
+    </a>
   </div>
 </section>

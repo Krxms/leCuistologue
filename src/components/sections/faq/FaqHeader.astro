@@ -2,6 +2,7 @@
 import "../../../styles/sections/faq/faq-header.css";
 import { Image } from "astro:assets";
 
+import bg from "../../../assets/faq/header/bg.svg";
 import broccoli from "../../../assets/faq/header/brocoli.svg";
 import mushroom from "../../../assets/faq/header/mushroom.svg";
 import onion from "../../../assets/faq/header/onion.svg";
@@ -9,7 +10,7 @@ import arrowConnector from "../../../assets/faq/header/arrow-connector.svg";
 ---
 
 <section class="faq-header">
-  <div class="faq-header__bg"></div>
+  <img src={bg.src} alt="" class="faq-header__bg" aria-hidden="true" />
 
   <Image src={broccoli} alt="" class="faq-header__deco faq-header__deco--broccoli" aria-hidden="true" />
   <Image src={mushroom} alt="" class="faq-header__deco faq-header__deco--mushroom" aria-hidden="true" />

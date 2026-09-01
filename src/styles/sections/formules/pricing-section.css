@@ -1,25 +1,3 @@
-.pricing-title {
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: clamp(1.4rem, 2.4vw, 2.75rem);
-  line-height: 1.4;
-  color: #2c2c2c;
-  margin-top: -12rem;
-  padding: 2.5rem 1.5rem 0;
-}
-
-.pricing-intro {
-  margin: 1rem auto 0;
-  max-width: 40rem;
-  text-align: center;
-  font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
-  line-height: 1.5;
-  color: var(--color-ink-soft);
-  padding-inline: 1.5rem;
-}
-
 .pricing {
   display: flex;
   justify-content: center;
@@ -30,6 +8,19 @@
   gap: 2rem;
   padding: 4rem 3.3% 4rem;
   flex-wrap: wrap;
+}
+
+/* Grand écran (21"+, 2K/4K...) : .pricing-card (width:30%, sans
+   plafond) devenait démesurément grande sur un écran large. Plutôt
+   que deviner sa taille exacte compte tenu du padding %, on plafonne
+   directement le conteneur (comme .offre__desktop, .presentation...)
+   — 30% d'une largeur désormais gelée reste automatiquement gelé
+   aussi, sans calcul à refaire ici. */
+@media (min-width: 1921px) {
+  .pricing {
+    max-width: var(--content-cap);
+    margin-inline: auto;
+  }
 }
 
 .pricing-card {
@@ -113,131 +104,6 @@
   text-align: center;
   color: var(--color-ink);
   min-height: 2.6rem;
-}
-
-.pricing-card__features-box {
-  position: relative;
-  border-radius: 14px;
-  padding: 1.2rem 1.3rem;
-  background-color: #fbf2e2;
-}
-
-.pricing-card--mise-en-avant .pricing-card__features-box {
-  background-color: #ffffff;
-}
-
-.pricing-card__comprend {
-  margin: 0 0 0.8rem;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #6b665f;
-}
-
-.pricing-card__features {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.pricing-card__features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-}
-
-.pricing-card__features img {
-  width: 15px;
-  margin-top: 0.2rem;
-  flex-shrink: 0;
-}
-
-.pricing-card__features span {
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  line-height: 1.45;
-  color: var(--color-ink-soft);
-}
-
-/* Carte raccourcie : seules les 3 premières prestations sont
-   visibles d'emblée, le reste se déplie au clic (même technique
-   que l'accordéon FAQ). */
-.pricing-card__features-more {
-  margin-top: 0.7rem;
-}
-
-.pricing-card__features-more summary {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
-  /* Zone cliquable généreuse (pas juste la hauteur du texte) : plus
-     facile à viser à la souris. */
-  padding: 0.5rem 0.5rem;
-  margin: -0.5rem -0.2rem;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.8rem;
-  color: #bc843c;
-  transition: background-color 0.15s ease;
-}
-
-.pricing-card__features-more summary:hover {
-  background-color: rgba(188, 132, 60, 0.08);
-}
-
-.pricing-card__features-more summary::-webkit-details-marker {
-  display: none;
-}
-
-.pricing-card__features-more-icon {
-  flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid #bc843c;
-  border-bottom: 2px solid #bc843c;
-  transform: rotate(45deg);
-  transition: transform 0.2s ease;
-}
-
-/* Une fois ouvert : plus aucun artefact au milieu de la liste — le
-   résumé entier sort du flux et devient un vrai bouton rond (32px,
-   pas juste le trait visible du "moins") dans le coin haut-droit de
-   l'encart, pour refermer proprement sans avoir à viser un pixel. */
-.pricing-card__features-more[open] summary {
-  position: absolute;
-  top: 0.85rem;
-  right: 1rem;
-  width: 32px;
-  height: 32px;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-  border-radius: 50%;
-}
-
-.pricing-card__features-more[open] .pricing-card__features-more-label {
-  display: none;
-}
-
-.pricing-card__features-more[open] .pricing-card__features-more-icon {
-  width: 10px;
-  height: 2px;
-  border: none;
-  background-color: #bc843c;
-  transform: none;
-}
-
-.pricing-card__features-more .pricing-card__features {
-  margin-top: 0.7rem;
 }
 
 .pricing-card__tags {
@@ -441,26 +307,70 @@
   transform: scale(1.4);
 }
 
-/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
-   sans changer les valeurs exactes à 1280px et 1210px. */
-@media (min-width: 1211px) and (max-width: 1280px) {
-  .pricing-title {
-    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+/* ============================================================
+   Encart crédit d'impôt — sous les cartes (plus au-dessus) :
+   icône + titre à gauche, description à droite, séparés par un
+   filet vertical, dans une carte bordée cohérente avec
+   .pricing-card / .formules-intro__box.
+   ============================================================ */
+
+.pricing-credit {
+  position: relative;
+  margin: 3rem 3.3% 4rem;
+  padding: 1.75rem 2.25rem;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  background-color: #fdfbfa;
+  border: 1px solid rgba(37, 61, 74, 0.1);
+  border-radius: 20px;
+}
+
+@media (min-width: 1921px) {
+  .pricing-credit {
+    max-width: var(--content-cap);
+    margin-inline: auto;
   }
+}
+
+.pricing-credit__lead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 0 0 auto;
+}
+
+.pricing-credit__icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: auto;
+}
+
+.pricing-credit__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+.pricing-credit__desc {
+  margin: 0;
+  padding-left: 2.5rem;
+  border-left: 1px solid rgba(37, 61, 74, 0.12);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
 }
 
 /* ============================================================
    TABLETTE — 768px à 1210px (paysage et portrait partagent le
-   même carrousel de cartes ; seul le décalage du titre varie,
-   lissé ci-dessous plutôt que dupliqué par palier)
+   même carrousel de cartes)
    ============================================================ */
 
 @media (min-width: 768px) and (max-width: 1210px) {
-  .pricing-title {
-    margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
-    font-size: clamp(1.4rem, 3vw, 2rem);
-  }
-
   .pricing {
     position: relative;
     /* Assez haut pour la carte dépliée (liste complète + tarifs +
@@ -518,30 +428,6 @@
     padding: 0.3rem 0.7rem;
   }
 
-  .pricing-card__features-box {
-    margin-top: 0.8rem;
-    padding: 0.9rem 1rem;
-    min-height: 0;
-  }
-
-  .pricing-card__comprend {
-    font-size: 0.74rem;
-    margin: 0 0 0.55rem;
-  }
-
-  .pricing-card__features {
-    gap: 0.45rem;
-  }
-
-  .pricing-card__features span {
-    font-size: 0.78rem;
-    line-height: 1.32;
-  }
-
-  .pricing-card__features-more summary {
-    font-size: 0.72rem;
-  }
-
   .pricing-card__price-option {
     padding: 0.7rem 0.85rem;
   }
@@ -566,6 +452,17 @@
     font-size: 0.85rem;
     margin-top: 1rem;
     padding-block: 0.7rem;
+  }
+
+  .pricing-credit {
+    margin: 2rem 1.5rem 3rem;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .pricing-credit__desc {
+    padding-left: 1.5rem;
+    font-size: 0.82rem;
   }
 }
 
@@ -596,11 +493,6 @@
     padding: 3rem 1.5rem;
   }
 
-  .pricing-title {
-    margin-top: -5rem;
-    font-size: clamp(1.3rem, 4vw, 2rem);
-  }
-
   .pricing-nav,
   .pricing-dots {
     display: none;
@@ -626,15 +518,30 @@
     transition: none;
   }
 
-  /* Réduite pour que les prestations les plus courtes tiennent sur
-     une seule ligne à cette largeur (les plus longues continueront
-     de passer à la ligne, ça reste une question de longueur de
-     texte, pas seulement de taille de police). */
-  .pricing-card__features span {
-    font-size: 0.8rem;
-  }
-
   .pricing-card--mise-en-avant {
     order: 0;
+  }
+
+  .pricing-credit {
+    flex-direction: column;
+    text-align: center;
+    margin: 0 1.5rem 3rem;
+    padding: 1.5rem 1.5rem 1.75rem;
+    gap: 1rem;
+  }
+
+  .pricing-credit__lead {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .pricing-credit__title {
+    font-size: 1.05rem;
+  }
+
+  .pricing-credit__desc {
+    padding-left: 0;
+    border-left: none;
+    font-size: 0.85rem;
   }
 }

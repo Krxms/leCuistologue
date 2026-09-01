@@ -6,6 +6,18 @@
   align-items: center;
 }
 
+/* Grands écrans (21"+, 2K/4K...) : min-height (vw) continuait de
+   grandir avec la fenêtre sans plafond, gelée à sa valeur réelle à
+   1920px. La flèche (width:16rem; max-width:20vw) est déjà
+   auto-limitée à 256px à cette largeur, rien à figer côté flèche. */
+@media (min-width: 1921px) {
+  .a-propos-header {
+    max-width: var(--content-cap);
+    margin-inline: auto;
+    min-height: calc(0.354 * var(--content-cap));
+  }
+}
+
 .a-propos-header__bg {
   position: absolute;
   inset: 0;
@@ -36,7 +48,7 @@
 }
 
 .a-propos-header__title-base {
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.02em;
   font-size: clamp(1.8rem, 3.2vw, 4.6875rem);
   color: var(--color-ink);
@@ -116,7 +128,7 @@
     flex-direction: column;
     align-items: center;
     min-height: auto;
-    padding: 3rem 1.4rem;
+    padding: 1.4rem 1.4rem;
   }
 
   .a-propos-header__bg {
@@ -131,8 +143,15 @@
   .a-propos-header__title {
     padding-left: 0;
     margin-top: -6%;
+    padding-top: 1.4rem;
     text-align: center;
     transform: rotate(0deg);
+    /* Même hauteur réservée que sur Formules (référence) : "À propos
+       / du Cuistologue" tient sur 2 lignes courtes à cette largeur —
+       sans ce plancher, le header finirait plus court que les pages
+       dont le titre retombe sur 3 lignes (Formules, Avance
+       immédiate). */
+    min-height: 8rem;
   }
 
   .a-propos-header__deco,

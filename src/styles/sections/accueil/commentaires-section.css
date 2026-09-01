@@ -50,6 +50,10 @@
   pointer-events: none;
 }
 
+.commentaires__carousel {
+  position: relative;
+}
+
 .commentaires__grid {
   margin-top: 4rem;
   display: grid;
@@ -57,6 +61,13 @@
   gap: 1.5rem;
   max-width: 90rem;
   margin-inline: auto;
+}
+
+/* Puces : uniquement pour le carrousel mobile (voir
+   @media max-width:767px), masquées partout ailleurs où
+   .commentaires__grid reste une grille classique. */
+.commentaires__dots {
+  display: none;
 }
 
 .commentaires__card {
@@ -160,18 +171,87 @@
 
 @media (max-width: 767px) {
   .commentaires {
-    padding: 4rem 2.3rem;
+    padding: 4rem 0;
   }
 
   .commentaires__arrow {
     display: none;
   }
 
+  .commentaires__header {
+    padding-inline: 2rem;
+  }
+
+  /* Carrousel à une carte visible à la fois : scroll natif + snap
+     (pas de logique de drag maison, le navigateur gère le geste),
+     comme pricing-stage sur Formules mais en plus simple, une seule
+     carte n'ayant pas besoin de l'empilement 3D des formules. */
   .commentaires__grid {
-    grid-template-columns: 1fr;
+    margin-top: 2.5rem;
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 2rem;
+    gap: 1rem;
+    padding-inline: 2rem;
+    max-width: 100%;
+    /* Masque la barre de défilement (Firefox/Chrome/Safari) : le
+       défilement reste utilisable, juste pas affiché comme une
+       scrollbar classique — cohérent avec les puces en dessous qui
+       jouent déjà ce rôle d'indicateur. */
+    scrollbar-width: none;
+  }
+
+  .commentaires__grid::-webkit-scrollbar {
+    display: none;
   }
 
   .commentaires__card {
-    padding: 1rem;
+    flex: 0 0 calc(100% - 4rem);
+    scroll-snap-align: center;
+    padding: 1.5rem;
+  }
+
+  .commentaires__text {
+    text-align: center;
+    font-style: italic;
+  }
+
+  .commentaires__text::before {
+    content: "\201C";
+  }
+
+  .commentaires__text::after {
+    content: "\201D";
+  }
+
+  .commentaires__stars {
+    justify-content: center;
+  }
+
+  .commentaires__meta {
+    align-items: center;
+  }
+
+  .commentaires__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .commentaires__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(44, 44, 44, 0.2);
+    cursor: pointer;
+  }
+
+  .commentaires__dot--active {
+    background-color: #bc843c;
   }
 }

@@ -3,27 +3,59 @@
   padding: 3.1rem 7.3% 0;
 }
 
+/* Le logo a sa propre ligne de grille ("logo"), au-dessus de la
+   ligne partagée par le slogan et les titres de colonnes ("brand nav
+   conditions contact") : comme ces éléments démarrent tous sur la
+   MÊME ligne de grille, ils s'alignent automatiquement, quelle que
+   soit la hauteur réelle du logo — plus besoin de deviner un
+   margin-top qui imite cette hauteur (fragile, cassait dès que le
+   logo changeait de taille à un palier). */
 .footer__top {
   display: grid;
   grid-template-columns: 1.7fr 1fr 1fr 1fr;
-  gap: 2rem;
+  grid-template-areas:
+    "logo   .    .          .       "
+    "brand  nav  conditions contact";
+  column-gap: 2rem;
+  /* row-gap:0 partout (voir chaque palier ci-dessous) : l'écart
+     logo->slogan est piloté uniquement par .footer__tagline
+     margin-top (15px fixe, à tous les paliers) — pas par row-gap, qui
+     s'appliquerait aussi aux autres lignes de la grille en tablette/
+     mobile et grandirait cet écart au-delà de 15px. */
+  row-gap: 0;
   padding-bottom: 2rem;
 }
 
-.footer__brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Grand écran (21"+, 2K/4K...) : sans plafond, les 4 colonnes (grid
+   en fr) s'écartaient toujours plus les unes des autres. Posé sur
+   .footer__top (pas .footer, dont le fond pêche doit continuer à
+   couvrir toute la largeur de l'écran). */
+@media (min-width: 1921px) {
+  .footer__top {
+    max-width: var(--content-cap);
+    margin-inline: auto;
+  }
 }
 
 .footer__logo {
+  grid-area: logo;
+  justify-self: center;
   width: 100%;
   max-width: 400px;
   height: auto;
 }
 
+.footer__brand {
+  grid-area: brand;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer__tagline {
-  margin-top: 1rem;
+  /* Écart logo -> slogan, fixe à tous les paliers (voir commentaire
+     sur .footer__top). */
+  margin-top: 15px;
   font-family: var(--font-display);
   line-height: 1.2;
   font-weight: 800;
@@ -53,8 +85,16 @@
   height: 46px;
 }
 
-.footer__col {
-  margin-top: clamp(2.2rem, 1rem + 3vw, 5.2rem);
+.footer__col--nav {
+  grid-area: nav;
+}
+
+.footer__col--conditions {
+  grid-area: conditions;
+}
+
+.footer__col--contact {
+  grid-area: contact;
 }
 
 .footer__col-title {
@@ -117,14 +157,31 @@
   color: var(--color-ink-soft);
 }
 
+/* ============================================================
+   835px à 1023px — le slogan (logo + brand) passe sur sa propre
+   ligne pleine largeur : plus aucune colonne ne partage sa ligne,
+   donc l'alignement titre/slogan ne s'applique plus ici (comme
+   demandé — seules les colonnes qui restent sur la même ligne que
+   le slogan doivent s'y aligner).
+   ============================================================ */
+
 @media (max-width: 1023px) {
   .footer__top {
     grid-template-columns: 1fr 1fr;
-    row-gap: 2.5rem;
+    grid-template-areas:
+      "logo       logo"
+      "brand      brand"
+      "nav        conditions"
+      "contact    contact";
+    row-gap: 0;
   }
 
-  .footer__brand {
-    grid-column: 1 / -1;
+  /* Remplace l'ancien row-gap uniforme : nav/conditions/contact
+     démarrent chacune une nouvelle ligne de grille ici, donc chacune
+     a besoin de son propre margin-top pour l'écart (row-gap
+     s'appliquerait aussi, à tort, entre logo et slogan). */
+  .footer__col {
+    margin-top: 2.5rem;
   }
 }
 
@@ -136,14 +193,20 @@
   }
 }
 
+/* ============================================================
+   jusqu'à 834px — retour à une ligne partagée logo/brand + les 3
+   colonnes (comme le desktop, juste plus étroite) : l'alignement
+   titre/slogan s'applique de nouveau.
+   ============================================================ */
+
 @media (max-width: 834px) {
   .footer__top {
     grid-template-columns: 1.4fr 1fr 1fr 1fr;
-    gap: 0.75rem;
-  }
-
-  .footer__brand {
-    grid-column: auto;
+    grid-template-areas:
+      "logo   .    .          .       "
+      "brand  nav  conditions contact";
+    column-gap: 0.75rem;
+    row-gap: 0;
   }
 
   .footer__logo {
@@ -152,6 +215,13 @@
 
   .footer__tagline {
     font-size: clamp(1rem, 2vw, 1.4rem);
+  }
+
+  /* nav/conditions/contact repartagent la ligne du slogan ici (comme
+     le desktop) : le margin-top ajouté à ≤1023px ne doit plus
+     s'appliquer, sinon elles redescendraient inutilement. */
+  .footer__col {
+    margin-top: 0;
   }
 }
 
@@ -168,31 +238,72 @@
     text-align: center;
   }
 
-  .footer__brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
+  /* Deux colonnes directement (pas d'empilement à une colonne) :
+     logo + slogan gardent leur propre ligne pleine largeur en haut,
+     puis Navigation/Conditions/Contact se répartissent sur 2
+     colonnes. Textes réduits pour que chaque colonne reste lisible
+     à cette largeur. */
   .footer__top {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "logo  logo"
+      "brand brand"
+      "nav   conditions"
+      "contact contact";
+    column-gap: 1.25rem;
+    row-gap: 0;
+  }
+
+  /* Même logique qu'à 1023px : nav/conditions/contact démarrent
+     chacune une nouvelle ligne, donc chacune porte son propre
+     margin-top (remplace le row-gap uniforme, qui aurait aussi
+     élargi l'écart logo->slogan au-delà des 15px fixes). */
+  .footer__col {
+    margin-top: 1.75rem;
+    /* Centré, y compris Contact qui passe seule sur la ligne du
+       dessous — même traitement pour les 3 colonnes. */
+    text-align: center;
+  }
+
+  .footer__col ul {
+    align-items: center;
+  }
+
+  .footer__logo {
+    max-width: 220px;
+  }
+
+  .footer__tagline {
+    font-size: 1.1rem;
+  }
+
+  .footer__description {
+    font-size: 0.8rem;
+  }
+
+  .footer__col-title {
+    font-size: 0.85rem;
+    margin: 0 0 0.6rem;
+  }
+
+  .footer__col ul {
+    gap: 0.1rem;
+  }
+
+  .footer__col a {
+    font-size: 0.8rem;
+  }
+
+  .footer__zone {
+    font-size: 0.75rem;
+  }
+
+  .footer__services-icon {
+    width: 70px;
   }
 
   .footer__bottom {
     flex-direction: column;
     text-align: center;
-  }
-
-  .footer__col {
-    margin-top: -1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    gap: 0rem;
-  }
-
-  .footer__col-title {
-    margin: 1rem 0 0;
   }
 }

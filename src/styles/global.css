@@ -2,6 +2,14 @@
 
 @theme {
   --header-height: 107px;
+  /* Largeur de référence du "desktop actuel" : au-delà (grands
+     écrans, 21"+, 2K/4K), les sections qui n'avaient aucun plafond
+     (vw/% non bornés) continuaient de s'étirer indéfiniment au lieu
+     de garder les proportions travaillées sur desktop — d'où des
+     éléments qui se décalaient. Utilisée uniquement dans des zones
+     @media(min-width:1921px), donc rien ne change à 1920px et
+     en dessous. */
+  --content-cap: 1920px;
   --color-cream: #FBF8F7;
   --color-peach: #F4D8B8;
   --color-peach-light: #F8E7CE;

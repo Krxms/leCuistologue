@@ -1,8 +1,13 @@
 .avance-content {
   max-width: 1200px;
   margin-inline: auto;
-  padding: 4rem 3.3% 5rem;
-  margin-top: -12.8%;
+  /* padding-top:2.5rem (au lieu de 4rem) + margin-top:-12rem, comme
+     .pricing-title sur Formules (page de référence) — remplace
+     l'ancien -12.8% (un % vertical, calculé sur la largeur du
+     conteneur, ne correspondait à aucune des autres pages), et
+     réduit le padding-top qui ajoutait 1.5rem d'écart en trop. */
+  padding: 2.5rem 3.3% 5rem;
+  margin-top: -12rem;
 }
 
 .avance-content__intro-title {
@@ -84,43 +89,37 @@
 
 .avance-content__card {
   position: relative;
-  border-radius: 16px;
-  /*overflow: hidden;*/
 }
 
+/* Fond en CSS pur (fill + bordure), plutôt qu'une image : les exports
+   SVG "à main levée" depuis Figma pour cet effet ne sortent pas avec
+   de vraies propriétés SVG exploitables (le filtre ne s'exporte pas
+   correctement), les PNG basse résolution utilisés avant pixellisaient
+   au-delà de leur résolution source, et les PNG haute résolution
+   testés ensuite n'ont pas donné un rendu satisfaisant. Ce fond CSS ne
+   pixellise jamais, à aucune taille d'écran. border-radius uniforme
+   (pas d'ondulation le long des bords — impossible en CSS pur,
+   border-radius n'agit que sur les coins). */
 .avance-content__card--small {
-  /* Ratio exact du fichier (1998 x 543) : l'ancienne valeur
-     (658/173) ne correspondait pas tout à fait à l'image réelle,
-     ce qui faisait rogner ~3,3% sur les côtés via object-fit:cover. */
+  /* Ratio exact du fichier d'origine, conservé pour que le
+     dimensionnement de la carte ne change pas. */
   aspect-ratio: 1998 / 543;
+  background-color: #D9E5E4;
+  border: 3px solid #bbd1cf97;
+  border-radius: 8px;
 }
 
 .avance-content__card--large {
   aspect-ratio: 1994 / 1805;
-}
-
-.avance-content__card-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-/* Trois fonds par carte : celui du dessus (photo/desktop) et deux
-   variantes sur mesure, une pour le palier tablette portrait
-   (≤834px) et une pour mobile (≤767px, voir plus bas), à la
-   manière de .avance-content__comment-image--desktop/--mobile. */
-.avance-content__card-bg--834,
-.avance-content__card-bg--mobile {
-  display: none;
+  background-color: #F7E4D5;
+  border: 3px solid #f6dec0c6;
+  border-radius: 8px;
 }
 
 .avance-content__card-bulb {
   position: absolute;
   top: -3rem;
-  left: 25rem;
+  left: 24.2rem;
   width: 86px;
   height: auto;
   z-index: 2;
@@ -216,11 +215,22 @@
    par rapport à leur texte)
    ============================================================ */
 
-@media (max-width: 1210px) {
+/* Même courbe que la page Formules (référence pour l'alignement du
+   titre entre pages) : desktop -12rem, lissée jusqu'à -9rem à
+   1211-1280px, puis -9rem à -7rem en continu sur toute la tablette. */
+@media (min-width: 1211px) and (max-width: 1280px) {
   .avance-content {
-    margin-top: -10.5rem;
+    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
   }
+}
 
+@media (min-width: 768px) and (max-width: 1210px) {
+  .avance-content {
+    margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
+  }
+}
+
+@media (max-width: 1210px) {
   .avance-content__grid {
     gap: 2rem;
   }
@@ -253,8 +263,7 @@
   .avance-content {
     max-width: 760px;
     margin-inline: auto;
-    padding: 4rem 3.3% 5rem;
-    margin-top: -8.2rem;
+    padding: 2.5rem 3.3% 5rem;
   }
 
   /* En dessous de 834px, le texte et sa carte associée sont
@@ -310,23 +319,6 @@
     width: 100%;
   }
 
-  /* Bascule vers les fonds dessinés pour ce palier plutôt que les
-     photos desktop recadrées. */
-  .avance-content__card-bg--default {
-    display: none;
-  }
-
-  /* Ni le petit ni le grand encart n'ont exactement la quantité de
-     texte prévue par les dimensions du SVG (grand trop court, petit
-     trop haut) : plutôt que forcer un ratio fixe qui rogne ou laisse
-     du vide, la hauteur suit le texte (aucun ratio imposé sur la
-     carte) et ce fond vectoriel — une simple forme, pas une photo —
-     s'étire pour la remplir exactement. */
-  .avance-content__card-bg--834 {
-    display: block;
-    object-fit: fill;
-  }
-
   .avance-content__card-text {
     padding: 2.3rem 1.75rem;
     line-height: 1.4;
@@ -337,16 +329,19 @@
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .avance-content {
-    padding-top: clamp(3rem, calc(-8.4478rem + 1.4925vw), 4rem);
     padding-bottom: clamp(4rem, calc(-7.4478rem + 1.4925vw), 5rem);
   }
 }
 
 @media (max-width: 767px) {
+  /* Même valeur que .pricing-title sur Formules (référence) pour un
+     écart identique entre pages en mobile aussi — remplace l'ancien
+     -16.8% (un % vertical, variable sur toute la plage mobile elle-
+     même : -3.94rem à 375px de large contre -8.05rem à 767px). */
   .avance-content {
     max-width: 1200px;
-    padding: 3rem 1.5rem 4rem;
-    margin-top: -16.8%;
+    padding: 2.5rem 1.5rem 4rem;
+    margin-top: -5rem;
   }
 
   .avance-content__intro-title {
@@ -382,19 +377,6 @@
 
   .avance-content__card-bulb {
     display: none;
-  }
-
-  /* Sous 767px, le fond dessiné pour la tablette portrait (--834,
-     conçu pour ~712px de large) cède la place à une variante
-     dessinée pour la largeur mobile (~335px) : le texte s'y insère
-     désormais correctement sans avoir à étirer un fond trop large. */
-  .avance-content__card-bg--834 {
-    display: none;
-  }
-
-  .avance-content__card-bg--mobile {
-    display: block;
-    object-fit: fill;
   }
 
   .avance-content__card-text {

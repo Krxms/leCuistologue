@@ -1,17 +1,8 @@
 ---
 import "../../../styles/sections/formules/pricing-section.css";
-import checkmark from "../../../assets/formules/cards/checkmark.svg";
+import creditIcon from "../../../assets/formules/cards/checkmark-circle.svg";
 import { formules } from "../../../lib/formules-data";
 ---
-
-<h2 class="pricing-title">
-  Bénéficiez de 50% de crédit d'impôt<br />
-  avec avance immédiate
-</h2>
-<p class="pricing-intro">
-  Choisissez votre formule selon votre appétit, vos habitudes et le nombre de repas souhaités
-  <br />(le nombre de mangeurs indiqué est simplement un repère).
-</p>
 
 <div class="pricing-stage" id="pricing-stage">
   <button type="button" class="pricing-nav pricing-nav--prev" id="pricing-prev" aria-label="Formule précédente">‹</button>
@@ -27,35 +18,6 @@ import { formules } from "../../../lib/formules-data";
           <div class="pricing-card__tags">
             <span class="pricing-card__tag">{formule.ideal}</span>
             <span class="pricing-card__tag">{formule.duree}</span>
-          </div>
-
-          <div class="pricing-card__features-box">
-            <p class="pricing-card__comprend">Comprend :</p>
-            <ul class="pricing-card__features">
-              {formule.fonctionnalites.slice(0, 3).map((item) => (
-                <li>
-                  <img src={checkmark.src} alt="" aria-hidden="true" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            {formule.fonctionnalites.length > 3 && (
-              <details class="pricing-card__features-more">
-                <summary>
-                  <span class="pricing-card__features-more-label">Voir les {formule.fonctionnalites.length} prestations incluses</span>
-                  <span class="pricing-card__features-more-icon" aria-hidden="true"></span>
-                </summary>
-                <ul class="pricing-card__features">
-                  {formule.fonctionnalites.slice(3).map((item) => (
-                    <li>
-                      <img src={checkmark.src} alt="" aria-hidden="true" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            )}
           </div>
 
           <div class="pricing-card__pricing">
@@ -86,6 +48,19 @@ import { formules } from "../../../lib/formules-data";
   <button type="button" class="pricing-nav pricing-nav--next" id="pricing-next" aria-label="Formule suivante">›</button>
 
   <div class="pricing-dots" id="pricing-dots"></div>
+</div>
+
+<div class="pricing-credit">
+  <div class="pricing-credit__lead">
+    <img src={creditIcon.src} alt="" class="pricing-credit__icon" aria-hidden="true" />
+    <p class="pricing-credit__title">
+      Bénéficiez de 50% de crédit d'impôt<br />
+      avec avance immédiate
+    </p>
+  </div>
+  <p class="pricing-credit__desc">
+    Vous ne payez que la moitié du montant de la facture : le crédit d'impôt est déduit automatiquement, sans avance de votre part.
+  </p>
 </div>
 
 <script>

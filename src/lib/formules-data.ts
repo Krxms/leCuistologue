@@ -15,7 +15,7 @@ export interface Formule {
   misEnAvant?: boolean;
 }
 
-const fonctionnalitesCommunes = [
+export const fonctionnalitesCommunes = [
   "Échange préalable sur vos habitudes",
   "Élaboration du menu de la semaine",
   "Confection de la liste des courses",

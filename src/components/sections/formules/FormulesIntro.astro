@@ -1,0 +1,45 @@
+---
+import "../../../styles/sections/formules/formules-intro.css";
+import decorTitle from "../../../assets/formules/decor-title.png";
+import encartFrame from "../../../assets/formules/encart-info-formules.svg";
+
+// Pictogrammes ajoutés plus tard : pour l'instant seuls les intitulés
+// sont affichés, un par un comme sur la maquette fournie.
+const dansToutesLesFormules = [
+  "Menus personnalisés",
+  "Liste de courses préparée",
+  "Repas cuisinés à domicile",
+  "Réfrigérateur organisé",
+  "Conseils de conservation",
+  "Cuisine propre et rangée",
+];
+---
+
+<section class="formules-intro">
+  <h2 class="formules-intro__title">
+    Une cuisine à domicile,
+    <span class="formules-intro__title-accent">adaptée aux volumes dont <span class="formules-intro__title-accent-you">vous</span> avez besoin.</span>
+  </h2>
+
+  <p class="formules-intro__text">
+    Quelle que soit la formule choisie, <b>Le Cuistologue</b> prépare vos repas chez vous, organise votre réfrigérateur et laisse la cuisine propre.<br />
+    Seul le volume de préparation s'adapte à votre foyer.
+  </p>
+
+  <div class="formules-intro__box">
+    <img src={encartFrame.src} alt="" class="formules-intro__box-frame" aria-hidden="true" />
+
+    <div class="formules-intro__box-content">
+      <div class="formules-intro__box-title-row">
+        <img src={decorTitle.src} alt="" class="formules-intro__box-icon formules-intro__box-icon--left" aria-hidden="true" />
+        <p class="formules-intro__box-title">Dans toutes les formules</p>
+        <img src={decorTitle.src} alt="" class="formules-intro__box-icon formules-intro__box-icon--right" aria-hidden="true" />
+      </div>
+      <ul class="formules-intro__box-list">
+        {dansToutesLesFormules.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

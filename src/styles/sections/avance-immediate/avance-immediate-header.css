@@ -6,6 +6,21 @@
   align-items: center;
 }
 
+/* Grands écrans (21"+, 2K/4K...) : min-height et la flèche (vw)
+   continuaient de grandir avec la fenêtre sans plafond, gelés à leur
+   valeur réelle à 1920px. */
+@media (min-width: 1921px) {
+  .avance-header {
+    max-width: var(--content-cap);
+    margin-inline: auto;
+    min-height: calc(0.354 * var(--content-cap));
+  }
+
+  .avance-header__arrow {
+    width: calc(0.15 * var(--content-cap));
+  }
+}
+
 .avance-header__bg {
   position: absolute;
   inset: 0;
@@ -33,9 +48,9 @@
 }
 
 .avance-header__title-base {
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.02em;
-  font-size: clamp(1.8rem, 3.2vw, 4.6875rem);
+  font-size: clamp(2rem, 3.2vw, 4.6875rem);
   color: #2c2c28;
 }
 
@@ -114,6 +129,12 @@
     margin-top: -6%;
     text-align: center;
     transform: rotate(0deg);
+    /* Même hauteur réservée que sur Formules (référence) : "L'avance
+       immédiate" retombe sur 2 lignes à lui seul à cette largeur,
+       donnant 3 lignes au total — sans ce plancher, le header finit
+       plus haut ou plus bas que les autres pages selon le nombre de
+       lignes réel. */
+    min-height: 8rem;
   }
 
   .avance-header__deco,

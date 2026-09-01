@@ -1,8 +1,12 @@
 .faq-accordion {
   max-width: 1200px;
   margin-inline: auto;
-  padding: 4rem 1.5rem 5rem;
-  margin-top: -10rem;
+  /* padding-top:2.5rem (au lieu de 4rem) + margin-top:-12rem, comme
+     .pricing-title sur Formules : le margin-top seul ne suffit pas à
+     aligner le contenu entre pages, il faut aussi la même
+     compensation de padding (1.5rem d'écart en trop avec 4rem). */
+  padding: 2.5rem 1.5rem 5rem;
+  margin-top: -12rem;
   margin-bottom: 8rem;
 }
 
@@ -142,17 +146,25 @@
   color: var(--color-gold);
 }
 
-/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
-   sans changer les valeurs exactes à 1280px et 1210px. */
+/* Même courbe que la page Formules (référence pour l'alignement du
+   titre entre pages) : desktop -12rem, lissée jusqu'à -9rem à
+   1211-1280px, puis -9rem à -7rem en continu sur toute la tablette
+   (768-1210px, une seule zone — plus plusieurs paliers déconnectés
+   avec un trou de couverture entre 835 et 1022px). */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .faq-accordion {
-    margin-top: clamp(-10rem, calc(0.9714rem + -0.8571vw), -9.4rem);
+    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1210px) {
+  .faq-accordion {
+    margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
   }
 }
 
 @media (min-width: 1023px) and (max-width: 1210px) {
   .faq-accordion {
-    margin-top: -9.4rem;
     max-width: 1000px;
     margin-bottom: 2rem;
   }
@@ -165,11 +177,10 @@
 
 /* Comble un trou de couverture existant : entre 835px et 1022px,
    ni le bloc "1023-1210" ni le bloc "834" ne s'appliquaient, et la
-   section retombait sur les valeurs desktop (max-width, margin-top).
-   On relie les deux valeurs déjà définies au lieu de casser. */
+   section retombait sur les valeurs desktop (max-width). On relie
+   les deux valeurs déjà définies au lieu de casser. */
 @media (min-width: 835px) and (max-width: 1022px) {
   .faq-accordion {
-    margin-top: clamp(-9.4rem, calc(3.5905rem + -1.2698vw), -7rem);
     max-width: clamp(720px, calc(-515.5556px + 148.1481vw), 1000px);
     margin-bottom: 2rem;
   }
@@ -177,14 +188,13 @@
 
 @media (max-width: 834px) {
   .faq-accordion {
-    margin-top: -7rem;
     max-width: 720px;
     margin-bottom: 2rem;
   }
 
   .faq-accordion__title {
-    font-size: clamp(1.4rem, 2.4vw, 2.75rem);
-    font-weight: 700;
+    font-size: clamp(1rem, 2.4vw, 2.75rem);
+    font-weight: 500;
   }
 
   .faq-accordion__grid {
@@ -201,16 +211,19 @@
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .faq-accordion {
-    margin-top: clamp(-7rem, calc(30.3433rem + -4.4776vw), -7rem);
     margin-bottom: clamp(0rem, calc(-22.8955rem + 2.9851vw), 2rem);
   }
 }
 
 @media (max-width: 767px) {
   .faq-accordion__answer {
-    padding-left: 1.4rem;
+    padding-left: 1.2rem;
+    font-size: 0.81rem;
+    font-weight: 500;
   }
 
+  /* Même valeur que .pricing-title sur Formules (référence) pour un
+     écart identique entre pages en mobile aussi. */
   .faq-accordion {
     margin-top: -4rem;
     margin-bottom: 0rem;
@@ -227,7 +240,7 @@
 
   .faq-accordion__question-text {
     white-space: normal;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .faq-accordion__col {

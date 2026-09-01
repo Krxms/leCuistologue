@@ -1,7 +1,11 @@
 .a-propos-content {
   max-width: 1100px;
   margin-inline: auto;
-  padding: 0rem 3.3% 5rem;
+  /* padding-top:2.5rem, comme .pricing-title sur Formules : le
+     margin-top négatif seul ne suffit pas à aligner le contenu entre
+     pages, il faut aussi la même compensation de padding (avant,
+     0rem ici contre 2.5rem sur Formules — 2.5rem d'écart en trop). */
+  padding: 2.5rem 3.3% 5rem;
   margin-top: -12rem;
 }
 
@@ -152,19 +156,22 @@
   color: #c26665;
 }
 
-/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
-   sans changer les valeurs exactes à 1280px et 1210px. */
+/* Même courbe que la page Formules (référence pour l'alignement du
+   titre entre pages) : desktop -12rem, lissée jusqu'à -9rem à
+   1211-1280px, puis -9rem à -7rem en continu sur toute la tablette. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .a-propos-content {
-    margin-top: clamp(-12rem, calc(116.0000rem + -10.0000vw), -5rem);
+    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1210px) {
+  .a-propos-content {
+    margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
   }
 }
 
 @media (max-width: 1210px) {
-  .a-propos-content {
-    margin-top: -5rem;
-  }
-
   .a-propos-content__recap-tags {
     flex-wrap: wrap;
     gap: 0.8rem;
@@ -213,14 +220,20 @@
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .a-propos-content {
-    padding-top: clamp(0rem, calc(37.3433rem + -4.4776vw), 3rem);
     padding-bottom: clamp(4rem, calc(-7.4478rem + 1.4925vw), 5rem);
   }
 }
 
 @media (max-width: 767px) {
+  /* padding-top (2.5rem) hérité de la base, margin-top ajouté ici :
+     jusque-là aucun des deux n'était redéfini pour le mobile, donc le
+     contenu retombait sur le margin-top desktop (-12rem, bien trop
+     fort pour un header mobile beaucoup plus court) et remontait sous
+     le header. Même valeur que .pricing-title sur Formules
+     (référence) pour un écart identique entre pages en mobile aussi. */
   .a-propos-content {
-    padding: 3rem 1.5rem 4rem;
+    padding: 2.5rem 1.5rem 4rem;
+    margin-top: -5rem;
   }
 
   .a-propos-content__intro {
