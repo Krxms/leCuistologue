@@ -65,6 +65,10 @@ import { formules } from "../../../lib/formules-data";
 
 <script>
   const mq = window.matchMedia("(min-width: 768px) and (max-width: 1210px)");
+  // Mobile : carrousel à défilement natif + snap (cf. .commentaires),
+  // aucun transform JS — le navigateur gère le geste, on ne fait que
+  // suivre la carte centrée pour la puce active.
+  const mobileMq = window.matchMedia("(max-width: 767px)");
   const stage = document.getElementById("pricing-stage") as HTMLElement | null;
   const deck = document.getElementById("pricing-deck") as HTMLElement | null;
   const dotsWrap = document.getElementById("pricing-dots") as HTMLElement | null;
@@ -97,7 +101,13 @@ import { formules } from "../../../lib/formules-data";
       b.className = "pricing-dot";
       b.type = "button";
       b.setAttribute("aria-label", "Aller à la formule " + (i + 1));
-      b.addEventListener("click", () => go(i));
+      b.addEventListener("click", () => {
+        if (mobileMq.matches) {
+          cards[i].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        } else {
+          go(i);
+        }
+      });
       dotsWrap.appendChild(b);
       return b;
     });
@@ -209,5 +219,57 @@ import { formules } from "../../../lib/formules-data";
     window.addEventListener("resize", () => {
       if (actif) render();
     });
+
+    // ---- Carrousel mobile (< 768px) : défilement natif + snap, une
+    // carte à la fois, mêmes mécanismes que .commentaires (accueil) :
+    // le navigateur gère le geste, un IntersectionObserver suit la
+    // carte centrée pour activer la bonne puce, les puces défilent
+    // vers la carte via scrollIntoView.
+    const obsMobile = new IntersectionObserver(
+      (entries) => {
+        if (!mobileMq.matches) return;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+            const i = cards.indexOf(entry.target as HTMLElement);
+            if (i !== -1) {
+              dots.forEach((d, idx) => d.classList.toggle("pricing-dot--active", idx === i));
+            }
+          }
+        });
+      },
+      { root: deck, threshold: [0.6] }
+    );
+
+    // La 1re carte présentée est la formule mise en avant : on centre
+    // le conteneur dessus (scroll du carrousel seul, jamais de la
+    // page). Tant que l'utilisateur n'a pas touché le carrousel — et
+    // seulement en mobile.
+    let carrouselTouche = false;
+    deck.addEventListener("pointerdown", () => (carrouselTouche = true));
+
+    function centrerSurEmphase() {
+      if (!mobileMq.matches || carrouselTouche) return;
+      const cr = cards[index].getBoundingClientRect();
+      const dr = deck.getBoundingClientRect();
+      deck.scrollLeft += cr.left + cr.width / 2 - (dr.left + dr.width / 2);
+      dots.forEach((d, i) => d.classList.toggle("pricing-dot--active", i === index));
+    }
+
+    function syncMobile() {
+      if (mobileMq.matches) {
+        cards.forEach((c) => obsMobile.observe(c));
+        setTimeout(centrerSurEmphase, 0);
+        dots.forEach((d, i) => d.classList.toggle("pricing-dot--active", i === index));
+      } else {
+        cards.forEach((c) => obsMobile.unobserve(c));
+      }
+    }
+
+    syncMobile();
+    mobileMq.addEventListener("change", syncMobile);
+    // Rejoué après le reflow des polices web (les cartes changent de
+    // largeur à l'arrivée de Poppins/Inter) et après load.
+    document.fonts?.ready.then(centrerSurEmphase);
+    window.addEventListener("load", centrerSurEmphase);
   }
 </script>

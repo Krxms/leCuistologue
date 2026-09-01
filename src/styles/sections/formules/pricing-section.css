@@ -6,7 +6,9 @@
      défaut de stretch) et décale les encarts de prix des autres. */
   align-items: flex-start;
   gap: 2rem;
-  padding: 4rem 3.3% 4rem;
+  /* padding-top réduit (4rem -> 2.5rem) : resserre l'écart avec
+     l'encart « Ce qui est toujours inclus » au-dessus. */
+  padding: 2.5rem 3.3% 4rem;
   flex-wrap: wrap;
 }
 
@@ -314,23 +316,23 @@
    .pricing-card / .formules-intro__box.
    ============================================================ */
 
+/* Toujours plus étroit que la rangée des 3 cartes au-dessus (et non
+   calé sur la largeur de contenu comme .pricing) : 80% de la largeur
+   dispo, centré, plafonné à 0.78 × --content-cap pour rester en retrait
+   même sur très grand écran (là où .pricing est figé à --content-cap).
+   Ce retrait est conservé à tous les paliers SAUF mobile (< 768px), où
+   l'encart repasse pleine largeur et en colonne. */
 .pricing-credit {
   position: relative;
-  margin: 3rem 3.3% 4rem;
-  padding: 1.75rem 2.25rem;
+  margin: 0rem auto 4rem;
+  width: min(60%, calc(var(--content-cap) * 0.78));
+  padding: 2.75rem 2.25rem;
   display: flex;
   align-items: center;
   gap: 2.5rem;
   background-color: #fdfbfa;
   border: 1px solid rgba(37, 61, 74, 0.1);
   border-radius: 20px;
-}
-
-@media (min-width: 1921px) {
-  .pricing-credit {
-    max-width: var(--content-cap);
-    margin-inline: auto;
-  }
 }
 
 .pricing-credit__lead {
@@ -344,6 +346,7 @@
   flex-shrink: 0;
   width: 34px;
   height: auto;
+  color: #bc843c;
 }
 
 .pricing-credit__title {
@@ -351,7 +354,7 @@
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(1rem, 1.4vw, 1.25rem);
-  line-height: 1.35;
+  line-height: 1.5;
   color: var(--color-ink);
 }
 
@@ -454,8 +457,11 @@
     padding-block: 0.7rem;
   }
 
+  /* Carrousel : les cartes se déploient en éventail quasi pleine
+     largeur — l'encart reste nettement en retrait, centré. */
   .pricing-credit {
-    margin: 2rem 1.5rem 3rem;
+    width: min(90%, 680px);
+    margin: 2rem auto 3rem;
     padding: 1.5rem;
     gap: 1.5rem;
   }
@@ -490,39 +496,119 @@
 
 @media (max-width: 767px) {
   .pricing-stage {
-    padding: 3rem 1.5rem;
+    /* padding-inline 0 : le conteneur scrollable va bord à bord, ses
+       propres padding-inline / scroll-padding créent les gouttières et
+       le léger débord de la carte voisine (même montage que
+       .commentaires en bas de l'accueil). padding-top réduit pour
+       resserrer l'écart avec l'encart au-dessus. */
+    padding: 1.25rem 0 0;
   }
 
-  .pricing-nav,
-  .pricing-dots {
+  .pricing-nav {
     display: none;
   }
 
+  /* Carrousel à défilement natif + snap, une carte visible à la fois —
+     calqué sur .commentaires__grid (avis, bas de l'accueil). Divise le
+     scroll vertical par ~3 : au lieu des 3 cartes empilées, une seule
+     est visible et on passe d'une formule à l'autre en glissant
+     horizontalement ; les puces en dessous indiquent la position. */
   .pricing {
     position: static;
     height: auto;
-    overflow: visible;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    padding: 0;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* flex-start impératif : justify-content:center (règle de base) sur
+       un conteneur scrollable rend tout le débord GAUCHE inatteignable
+       (scrollLeft ne peut pas être négatif) — la 1re carte reste
+       coupée et le scroll est bloqué. */
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 1rem;
+    /* padding-block 0 en haut : l'écart avec l'encart est déjà donné
+       par .pricing-stage ; un peu de marge en bas avant les puces. */
+    padding: 0 1.5rem 1rem;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    /* Barre de défilement masquée : le geste reste dispo, les puces
+       jouent le rôle d'indicateur. */
+    scrollbar-width: none;
+  }
+
+  .pricing::-webkit-scrollbar {
+    display: none;
   }
 
   .pricing-card {
     position: static;
-    order: 1;
-    width: 100%;
-    max-width: 400px;
-    margin-top: 0 !important;
+    flex: 0 0 calc(100% - 1.75rem);
+    /* min-width: 320px de la règle de base collerait la carte bord à
+       bord (aucun débord de la voisine) et déborderait sous ~344px. */
+    min-width: 0;
+    max-width: none;
+    margin: 0 !important;
     transform: none !important;
     transition: none;
+    scroll-snap-align: center;
   }
 
-  .pricing-card--mise-en-avant {
-    order: 0;
+  .pricing-card__content {
+    padding: 1.25rem 1.5rem 1.75rem;
   }
 
+  /* Une carte à la fois : les min-height qui alignaient les 3 cartes
+     côte à côte ne servent plus et ne font qu'allonger la carte.
+     Espacements resserrés dans le même but — réduire le scroll. */
+  .pricing-card__title {
+    min-height: 0;
+    margin-bottom: 0.8rem;
+  }
+
+  .pricing-card__portions {
+    min-height: 0;
+    margin-bottom: 0.9rem;
+  }
+
+  /* Les deux tags (mangeurs / durée) tiennent toujours sur une seule
+     ligne : nowrap + police et padding resserrés pour que la paire la
+     plus longue (« Jusqu'à 4 mangeurs » + « Environ 3 heures ») entre
+     dans la largeur de la carte. */
+  .pricing-card__tags {
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+  }
+
+  .pricing-card__tag {
+    white-space: nowrap;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.55rem;
+  }
+
+  .pricing-card__pricing {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+
+  .pricing-card__price-option {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .pricing-card__cta {
+    margin-top: 1rem;
+  }
+
+  .pricing-dots {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+
+  /* Mobile : exception — l'encart repasse pleine largeur (dans les
+     marges de page) et en colonne. */
   .pricing-credit {
+    width: auto;
     flex-direction: column;
     text-align: center;
     margin: 0 1.5rem 3rem;

@@ -20,7 +20,7 @@
      hauteur du contenu ni de la largeur d'écran, donc plus aucune
      cassure possible à une frontière de breakpoint. */
   min-height: 40rem;
-  margin-top: -11rem;
+  margin-top: -5rem;
   padding-top: 12.5rem;
   padding-bottom: 6rem;
   /* space-between colle le dernier item (la photo) pile au bord
@@ -234,6 +234,27 @@
   transform: rotate(-80deg);
 }
 
+/* Image à gauche, texte à droite sur toute la plage non-mobile
+   (desktop + tablette) : simple inversion de l'ordre des deux blocs
+   flex, rien d'autre ne bouge. Le mobile (< 768px) repasse en
+   display:block empilé (voir tout en bas) et n'est donc pas concerné.
+   Gouttières de bord permutées pour rester identiques à avant : la
+   photo prend les 4.5% que le texte avait à droite, le texte prend
+   les 7.19% que la photo avait à gauche. Placé après les règles de
+   base de .presentation__content pour bien les surcharger. */
+@media (min-width: 768px) {
+  .presentation {
+    flex-direction: row-reverse;
+    padding-right: 0;
+    padding-left: 4.5%;
+  }
+
+  .presentation__content {
+    padding-left: 0;
+    padding-right: 7.19%;
+  }
+}
+
 /* ============================================================
    TABLETTE PAYSAGE — 1023px à 1210px
    ============================================================ */
@@ -435,6 +456,7 @@
      parts égales des deux côtés. */
   .presentation__photo {
     margin-inline: auto;
+    margin-top: 2rem;
   }
 
   .presentation__photo-decor,
@@ -444,7 +466,7 @@
 
 
   .presentation__courgette {
-    display: block;
+    display: none;
     position: absolute;
     left: auto;
     right: 6%;
@@ -455,7 +477,7 @@
   }
 
   .presentation__photo-decor--aubergine {
-    display: block;
+    display: none;
     left: auto;
     right: -10%;
     top: auto;

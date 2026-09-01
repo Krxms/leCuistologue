@@ -21,6 +21,9 @@ import { Image } from "astro:assets";
     <h1 class="hero__title">
       <span>Une façon <span class="hero__title_colorspan">simple</span></span>
       <span>de bien<br> manger</span>
+      {/* Le <br> ci-dessus n'agit qu'en mobile : masqué dès 768px
+          (voir hero.css) pour obtenir « de bien manger » sur une
+          seule ligne sur desktop/tablette. */}
     </h1>
 
     <p class="hero__description">
@@ -37,7 +40,7 @@ import { Image } from "astro:assets";
         Cuisinier à domicile dans l'Oise, le Val-d'Oise et les Yvelines
       </p>
     </div>
-  </div>
 
-  <img src={heroArrow.src} alt="" class="hero__arrow" aria-hidden="true" />
+    <img src={heroArrow.src} alt="" class="hero__arrow" aria-hidden="true" />
+  </div>
 </section>

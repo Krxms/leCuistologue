@@ -44,6 +44,9 @@
 }
 
 .navbar__link {
+  /* Accent partagé entre survol et page courante : une seule source,
+     les deux états ne peuvent pas diverger. */
+  --navbar-link-accent: #a0780a;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 1.1rem;
@@ -55,21 +58,16 @@
 }
 
 .navbar__link:hover {
-  color: #a0780a;
+  color: var(--navbar-link-accent);
 }
 
+/* Page courante : même jaune que le survol, mais permanent, + graisse
+   +100 (500 → 600) pour bien détacher l'onglet actif du reste. */
 .navbar__link[aria-current="page"],
 .navbar__link.is-active {
-  color: #936C00;
+  color: var(--navbar-link-accent);
   font-weight: 600;
-  /*border-bottom-color: #936C00;*/
 }
-
-/*.navbar__link:first-child {
-  color: #936C00;
-  font-weight: 600;
-  border-bottom: 1px solid #936C00;
-}*/
 
 .navbar__cta {
   display: inline-flex;

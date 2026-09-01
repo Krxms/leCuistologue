@@ -74,13 +74,13 @@
    horizontale ni verticale au responsive. */
 .formules-header__arrow {
   position: absolute;
-  left: 100%;
-  top: 170%;
+  left: 87%;
+  top: 192%;
   margin-left: 0.5rem;
   width: 14vw;
   z-index: 2;
   pointer-events: none;
-  transform: translateY(-50%) scaleX(-1) rotate(-5deg);
+  transform: translateY(-50%) scaleX(-1) rotate(-20deg);
 }
 
 .formules-header__deco {

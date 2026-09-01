@@ -27,10 +27,6 @@
   padding-bottom: 6.8rem;
 }
 
-.hero__arrow {
-  top: 40rem;
-}
-
 @media (min-width: 1280px) {
   .hero {
     /* 107 -> 118dvh : le haut de la hero reste au même endroit (juste
@@ -143,19 +139,63 @@
   font-family: var(--font-display);
   font-weight: 900;
   text-transform: uppercase;
+  /* Base = mobile (< 768px), inchangée. Desktop et tablette
+     redéfinissent la taille plus bas, calées pour que la ligne la plus
+     longue (« UNE FAÇON SIMPLE ») ne dépasse jamais la colonne de
+     contenu (8/12) — donc jamais sur l'image à droite. */
   font-size: clamp(2.9rem, 5vw, 5rem);
   line-height: 1.2;
   color: var(--color-ink);
 }
 
-.hero__title span {
+/* Uniquement les deux spans de premier niveau (les lignes du titre) —
+   pas le .hero__title_colorspan imbriqué, dont l'affichage est géré
+   séparément juste en dessous. */
+.hero__title > span {
   display: block;
   white-space: nowrap;
 }
 
 .hero__title_colorspan {
   color: #DAA35B;
+  /* Mobile (< 768px) : « simple » sur sa propre ligne, plus gros —
+     inchangé. */
+  display: block;
   font-size: clamp(4.9rem, 5vw, 5rem);
+}
+
+/* Desktop + tablette : « simple » repasse dans le fil du titre (accent
+   jaune en ligne, plus sur sa propre ligne), le <br> de « de bien /
+   manger » est neutralisé, et sa taille devient relative pour suivre
+   le clamp du titre. Résultat : deux lignes,
+   « Une façon simple » / « de bien manger ». */
+@media (min-width: 768px) {
+  .hero__title_colorspan {
+    display: inline;
+    font-size: 1.06em;
+  }
+
+  .hero__title br {
+    display: none;
+  }
+}
+
+/* À partir de 1510px, le sujet de HeroBG.png (à droite) occupe plus de
+   surface : « simple » repasse sur sa propre ligne pour raccourcir la
+   ligne 1 (« Une façon ») et laisser le champ libre à l'image. Titre
+   alors sur trois lignes : « Une façon » / « simple » / « de bien
+   manger ». Reste : taille et couleur inchangées (héritées du bloc
+   >= 768px). */
+@media (min-width: 1510px) {
+  .hero__title_colorspan {
+    display: block;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero__title {
+    font-size: clamp(4.2rem, 5.2vw, 4.55rem);
+  }
 }
 
 .offre-m__title-icon {
@@ -278,12 +318,27 @@
   }
 }
 
+/* Ancrée au bloc de contenu (.hero__content, position: relative), pas
+   à la section : la hauteur de .hero varie avec la fenêtre
+   (calc(118dvh - header) au-delà de 1280px), donc toute position
+   calée sur .hero — un `top` fixe comme sur un `bottom` — faisait
+   dériver la flèche (jusque sur la section Présentation sur les
+   fenêtres basses, très haut vers le titre sur les fenêtres hautes).
+   Calée sur .hero__content, elle garde le même écart sous les CTA
+   quelle que soit la taille d'écran. Masquée en tablette et mobile
+   par les media queries plus bas (visible seulement >= 1280px).
+
+   left: 76.5% (et non 50%) : .hero__content ne fait que 8 colonnes
+   sur 12, donc son centre est nettement à gauche du centre de la
+   hero. 76,5% de la boîte de contenu retombe sur l'axe central de la
+   hero à ~+/-5px près sur toute la plage desktop (1280px -> ultra-
+   large) — la flèche est donc centrée à l'écran. */
 .hero__arrow {
   position: absolute;
   z-index: 2;
-  left: 50%;
-  bottom: 5.6rem;
-  transform: translateX(-30%);
+  left: 76.5%;
+  bottom: 2.2rem;
+  transform: translateX(-50%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -305,7 +360,7 @@
 }
 
 @media (max-width: 480px) {
-  .hero__title span {
+  .hero__title > span {
     white-space: normal;
   }
 }
@@ -330,8 +385,11 @@
     align-self: start;
   }
 
+  /* Suit la largeur de la colonne de contenu (8/12) : « UNE FAÇON
+     SIMPLE » reste dans la boîte de 768px à 1279px, donc jamais sur
+     l'image. ~2,3rem à 768px → ~4,2rem à 1279px, en continu. */
   .hero__title {
-    font-size: clamp(4.2rem, calc(-0.0588rem + 0.2941vw), 3.5rem);
+    font-size: clamp(2.3rem, calc(6.2vw - 0.75rem), 4.4rem);
     letter-spacing: -0.008em;
   }
 

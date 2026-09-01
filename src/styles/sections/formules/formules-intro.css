@@ -69,7 +69,9 @@
    crème du titre, qui masque le segment de bordure derrière elle. */
 .formules-intro__box {
   position: relative;
-  margin: 6.75rem auto 3rem;
+  /* Bas resserré (3rem -> 1.5rem) : écart réduit avec la rangée des
+     formules juste en dessous (mobile : encore plus, voir plus bas). */
+  margin: 8.75rem auto 1.5rem;
   width: 100%;
   max-width: 1180px;
   background-color: var(--color-cream);
@@ -80,7 +82,7 @@
 .formules-intro__box-content {
   position: relative;
   z-index: 1;
-  padding: 3rem 2.75rem 2.75rem;
+  padding: 0.75rem 2.75rem 2.75rem;
 }
 
 /* Titre posé à cheval sur le bord haut de la boîte : la pastille (fond
@@ -102,27 +104,28 @@
 }
 
 .formules-intro__box-icon {
-  width: 22px;
+  display: none;
+  width: 35px;
   height: auto;
   flex-shrink: 0;
 }
 
-.formules-intro__box-icon--right {
+/*.formules-intro__box-icon--right {
   transform: scaleX(-1);
-}
+}*/
 
 .formules-intro__box-title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  font-weight: 900;
+  font-size: clamp(2rem, 1.6vw, 1.4rem);
   letter-spacing: 0;
   text-transform: none;
   color: var(--color-ink);
 }
 
 .formules-intro__box-title span {
-  color: var(--color-ink-soft);
+  color: #bc843c;
 }
 
 /* Grille des 6 prestations : une colonne par intitulé, illustrations
@@ -214,15 +217,19 @@
   .formules-intro__text {
     margin-top: 1.1rem;
     font-size: 0.9rem;
+    margin-bottom: 4rem;
   }
 
   .formules-intro__box {
     margin-top: 2rem;
+    /* Resserre l'écart avec la rangée des formules en dessous
+       (3rem -> 1rem). */
+    margin-bottom: 1rem;
     width: 100%;
   }
 
   .formules-intro__box-content {
-    padding: 2.75rem 1.25rem 1.75rem;
+    padding: 0.75rem 1.25rem 1.75rem;
   }
 
   .formules-intro__box-title-row {
@@ -234,6 +241,26 @@
     width: 16px;
   }
 
+   .pricing-stage {
+    padding: 0rem 0;
+  }
+
+  .pricing {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 0rem 3.3% 4rem;
+  }
+
+  /* Mobile : titre de l'encart plus petit (2rem débordait largement
+     de la boîte, texte en nowrap) et moins gras (-100 : 900 -> 800). */
+  .formules-intro__box-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+
+  }
+
   /* Mobile : 3 colonnes, 2 rangées — illustrations réduites, libellés
      compacts sous chaque dessin (même logique qu'en desktop). */
   .formules-intro__box-grid {
@@ -242,12 +269,13 @@
   }
 
   .formules-intro__item-media {
-    height: 62px;
+    height: 56px;
   }
 
-  /* Mobile : mêmes réglages par item, hauteurs réduites au prorata. */
+  /* Mobile : mêmes réglages par item, hauteurs réduites au prorata —
+     un cran plus petit (0.68 -> 0.6) pour accompagner le titre. */
   .formules-intro__item-media img {
-    height: calc(var(--pic-h, 60px) * 0.68);
+    height: calc(var(--pic-h, 60px) * 0.6);
   }
 
   .formules-intro__item-label {
