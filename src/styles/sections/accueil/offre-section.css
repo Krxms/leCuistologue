@@ -494,42 +494,39 @@
   z-index: 1;
   margin: 1.25rem auto 0;
   width: 85%;
-  background-color: #fdfbfa;
+  /* Fond de la liste à 30% d'opacité. */
+  background-color: rgba(253, 251, 250, 0.3);
   border-radius: 20px;
 }
 
+/* Simple liste à puces : plus de pictogrammes ni de séparateurs entre
+   les lignes, juste une puce ronde (même style que la version
+   desktop). */
 .offre-m__checklist {
+  list-style: none;
+  margin: 0;
+  padding: 1.4rem 1.5rem;
   display: flex;
   flex-direction: column;
-  padding-inline: 1.5rem;
+  gap: 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-ink);
 }
 
 .offre-m__checklist-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding-block: 1.1rem;
+  gap: 0.7rem;
 }
 
-.offre-m__checklist-item:not(:last-child) {
-  border-bottom: 1px solid rgba(44, 44, 44, 0.1);
-}
-
-/* Emplacement réservé pour le pictogramme de chaque ligne, à intégrer
-   plus tard — taille/gap déjà calés pour les recevoir sans reprendre
-   la mise en page. */
-.offre-m__checklist-icon {
+.offre-m__checklist-item::before {
+  content: "";
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background-color: rgba(44, 44, 44, 0.08);
-}
-
-.offre-m__checklist-item span:last-child {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--color-ink);
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background-color: var(--color-ink-soft);
 }
 
 .offre-m__price {

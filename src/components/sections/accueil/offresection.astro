@@ -121,16 +121,13 @@ const colonneDroite = [
     </div>
 
     <div class="offre-m__checklist-wrap">
-      <div class="offre-m__checklist">
+      <ul class="offre-m__checklist">
         {
           [...colonneGauche, ...colonneDroite].map((item) => (
-            <div class="offre-m__checklist-item">
-              <span class="offre-m__checklist-icon" aria-hidden="true" />
-              <span>{item}</span>
-            </div>
+            <li class="offre-m__checklist-item">{item}</li>
           ))
         }
-      </div>
+      </ul>
     </div>
 
     <p class="offre-m__price">
