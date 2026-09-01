@@ -60,45 +60,45 @@
   color: var(--color-ink-soft);
 }
 
-/* Boîte "Dans toutes les formules" : un peu moins large que la
-   rangée des 3 formules juste en dessous (.pricing, non plafonnée en
-   dehors du palier 21"+), plutôt que la largeur resserrée du titre/
-   texte au-dessus. Le cadre (EncartInfoFormules.svg — deux traits
-   "dessinés à la main", ouverts au centre du bas) remplace la
-   bordure CSS plate : il est posé en image derrière le contenu
-   plutôt qu'en border-image, pour garder son tracé irrégulier intact
-   sans essai de découpage en 9 tranches. */
+/* Boîte "Ce qui est toujours inclus" : plus large que le titre/texte
+   au-dessus, quasi alignée sur la rangée des 3 formules en dessous.
+   Le cadre est une simple bordure CSS (arrondie) — l'ancien tracé SVG
+   posé en image (encart-info-formules.svg, object-fit: fill) se
+   déformait au rétrécissement et n'encadrait plus proprement le
+   contenu. L'ouverture en haut au centre est obtenue par la pastille
+   crème du titre, qui masque le segment de bordure derrière elle. */
 .formules-intro__box {
   position: relative;
   margin: 6.75rem auto 3rem;
-  width: 92%;
-  max-width: 1100px;
-  background-color: #fdfbfa;
-  border-radius: 20px;
-}
-
-.formules-intro__box-frame {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: fill;
-  z-index: 0;
-  pointer-events: none;
+  max-width: 1180px;
+  background-color: var(--color-cream);
+  border: 2px solid var(--color-peach-light);
+  border-radius: 20px;
 }
 
 .formules-intro__box-content {
   position: relative;
   z-index: 1;
-  padding: 1.75rem 2.25rem 2rem;
+  padding: 3rem 2.75rem 2.75rem;
 }
 
+/* Titre posé à cheval sur le bord haut de la boîte : la pastille (fond
+   crème + retrait latéral) recouvre le trait de bordure derrière le
+   texte et les deux marques, ménageant l'ouverture du cadre. */
 .formules-intro__box-title-row {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin: 0 0 1.5rem;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0.15rem 1.1rem;
+  background-color: var(--color-cream);
+  white-space: nowrap;
 }
 
 .formules-intro__box-icon {
@@ -113,38 +113,70 @@
 
 .formules-intro__box-title {
   margin: 0;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--color-ink);
 }
 
-/* Desktop/tablette : pas de pastilles — les intitulés se lisent comme
-   du texte courant, séparés par un point médian, sur une ligne puis
-   deux si besoin (retour à la ligne naturel, rien de forcé). */
-.formules-intro__box-list {
-  display: block;
-  text-align: center;
+.formules-intro__box-title span {
+  color: var(--color-ink-soft);
+}
+
+/* Grille des 6 prestations : une colonne par intitulé, illustrations
+   alignées sur une base commune (align-items: end), libellé sur deux
+   lignes en dessous. */
+.formules-intro__box-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: end;
+  gap: 1.5rem 0.75rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.formules-intro__box-list li {
-  display: inline;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--color-ink-soft);
+.formules-intro__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.formules-intro__box-list li:not(:last-child)::after {
-  content: "•";
-  display: inline-block;
-  margin: 0 0.65em;
-  color: rgba(37, 61, 74, 0.3);
+.formules-intro__item-media {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 72px;
+}
+
+.formules-intro__item-media img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 100%;
+}
+
+/* Légère rotation propre à chaque dessin — valeurs volontairement
+   discrètes et alternées, à ajuster ensuite au cas par cas. */
+.formules-intro__item:nth-child(1) .formules-intro__item-media img { transform: rotate(-4deg); }
+.formules-intro__item:nth-child(2) .formules-intro__item-media img { transform: rotate(3deg); }
+.formules-intro__item:nth-child(3) .formules-intro__item-media img { transform: rotate(-2.5deg); }
+.formules-intro__item:nth-child(4) .formules-intro__item-media img { transform: rotate(3.5deg); }
+.formules-intro__item:nth-child(5) .formules-intro__item-media img { transform: rotate(-3deg); }
+.formules-intro__item:nth-child(6) .formules-intro__item-media img { transform: rotate(2deg); }
+
+.formules-intro__item-label {
+  margin-top: 0.9rem;
+  max-width: 13ch;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--color-ink-soft);
 }
 
 @media (max-width: 767px) {
@@ -165,36 +197,36 @@
   .formules-intro__box {
     margin-top: 2rem;
     width: 100%;
-    padding: 1.5rem 1.25rem 1.75rem;
+  }
+
+  .formules-intro__box-content {
+    padding: 2.75rem 1.25rem 1.75rem;
   }
 
   .formules-intro__box-title-row {
-    margin-bottom: 1.1rem;
+    gap: 0.6rem;
+    padding: 0 0.75rem;
   }
 
-  .formules-intro__box-title {
-    font-size: 1rem;
+  .formules-intro__box-icon {
+    width: 16px;
   }
 
-  /* Mobile : on retrouve des pastilles (plus lisible sur une largeur
-     étroite qu'un long paragraphe centré avec points médians). */
-  .formules-intro__box-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
+  /* Mobile : 3 colonnes, 2 rangées — illustrations réduites, libellés
+     compacts sous chaque dessin (même logique qu'en desktop). */
+  .formules-intro__box-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem 0.5rem;
   }
 
-  .formules-intro__box-list li {
-    display: inline-block;
-    font-size: 0.8rem;
-    color: var(--color-ink-soft);
-    background-color: #f8f4ef;
-    border-radius: 999px;
-    padding: 0.45rem 0.9rem;
+  .formules-intro__item-media {
+    height: 46px;
   }
 
-  .formules-intro__box-list li:not(:last-child)::after {
-    content: none;
+  .formules-intro__item-label {
+    margin-top: 0.55rem;
+    max-width: none;
+    font-size: 0.72rem;
+    line-height: 1.25;
   }
 }

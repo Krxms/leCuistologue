@@ -1,17 +1,23 @@
 ---
 import "../../../styles/sections/formules/formules-intro.css";
 import decorTitle from "../../../assets/formules/decor-title.png";
-import encartFrame from "../../../assets/formules/encart-info-formules.svg";
+import legumes from "../../../assets/formules/toujours-inclus/legumes.svg";
+import panier from "../../../assets/formules/toujours-inclus/panier.svg";
+import faitout from "../../../assets/formules/toujours-inclus/faitout.svg";
+import frigo from "../../../assets/formules/toujours-inclus/frigo.svg";
+import parfait from "../../../assets/formules/toujours-inclus/parfait.svg";
+import nettoyage from "../../../assets/formules/toujours-inclus/nettoyage.svg";
 
-// Pictogrammes ajoutés plus tard : pour l'instant seuls les intitulés
-// sont affichés, un par un comme sur la maquette fournie.
-const dansToutesLesFormules = [
-  "Menus personnalisés",
-  "Liste de courses préparée",
-  "Repas cuisinés à domicile",
-  "Réfrigérateur organisé",
-  "Conseils de conservation",
-  "Cuisine propre et rangée",
+// Bloc « Ce qui est toujours inclus » : 6 prestations communes à toutes
+// les formules, chacune illustrée (dessins au trait fournis avec la
+// maquette). L'ordre suit la maquette, de gauche à droite.
+const toujoursInclus = [
+  { img: legumes, label: "Menus personnalisé" },
+  { img: panier, label: "Liste de course préparée" },
+  { img: faitout, label: "Repas cuisinés à domicile" },
+  { img: frigo, label: "Réfrigérateur organisé" },
+  { img: parfait, label: "Conseils & conservation" },
+  { img: nettoyage, label: "Cuisine propre et rangée" },
 ];
 ---
 
@@ -27,17 +33,20 @@ const dansToutesLesFormules = [
   </p>
 
   <div class="formules-intro__box">
-    <img src={encartFrame.src} alt="" class="formules-intro__box-frame" aria-hidden="true" />
-
     <div class="formules-intro__box-content">
       <div class="formules-intro__box-title-row">
         <img src={decorTitle.src} alt="" class="formules-intro__box-icon formules-intro__box-icon--left" aria-hidden="true" />
-        <p class="formules-intro__box-title">Dans toutes les formules</p>
+        <p class="formules-intro__box-title">Ce qui est <span>toujours inclus</span></p>
         <img src={decorTitle.src} alt="" class="formules-intro__box-icon formules-intro__box-icon--right" aria-hidden="true" />
       </div>
-      <ul class="formules-intro__box-list">
-        {dansToutesLesFormules.map((item) => (
-          <li>{item}</li>
+      <ul class="formules-intro__box-grid">
+        {toujoursInclus.map((item) => (
+          <li class="formules-intro__item">
+            <span class="formules-intro__item-media">
+              <img src={item.img.src} alt="" aria-hidden="true" />
+            </span>
+            <span class="formules-intro__item-label">{item.label}</span>
+          </li>
         ))}
       </ul>
     </div>
