@@ -393,10 +393,12 @@
 @media (max-width: 767px) {
   .presentation {
     position: relative;
-    /* Empilé (comme avant), pas côte à côte comme sur desktop/
-       tablette : sans ça, le display:flex de base mettrait texte et
-       photo sur la même ligne même ici. */
-    display: block;
+    /* Empilé : TEXTE en premier, PHOTO en dernier. Ordre verrouillé
+       explicitement (flex colonne + order) — la photo ne peut jamais
+       remonter au-dessus du titre, quel que soit l'ordre du DOM ou un
+       éventuel effondrement de flux. */
+    display: flex;
+    flex-direction: column;
     min-height: auto;
     overflow: visible;
     padding: 1rem 1.75rem 1.3rem;
@@ -404,6 +406,7 @@
   }
 
   .presentation__content {
+    order: 0;
     max-width: 100%;
     flex-basis: auto;
     padding-left: 0;
@@ -441,6 +444,7 @@
   }
 
   .presentation__photo-wrap {
+    order: 1;
     position: relative;
     left: auto;
     top: auto;
