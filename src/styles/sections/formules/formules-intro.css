@@ -3,26 +3,30 @@
   text-align: center;
   max-width: 1200px;
   margin-inline: auto;
-  /* Même courbe que .avance-content / .faq-accordion / .a-propos-content
-     (Formules — ex .pricing-title, disparu depuis — est la page de
-     référence de cet alignement de titre entre pages) : remet ce
-     titre au même niveau que les autres, collé au bas du header. */
+  /* Même mécanique d'alignement que .avance-content / .faq-accordion /
+     .a-propos-content (padding-top: 2.5rem + margin-top négatif qui
+     remonte le contenu contre le bas du header). Sur ces pages, le
+     premier enfant est le titre lui-même ; ici c'est .formules-intro__box,
+     qui porte en plus son propre margin-top (4.5rem desktop). On ajoute
+     donc -3rem partout par rapport à la valeur commune (-12rem -> -15rem)
+     pour que le titre de l'encart « Ce qui est toujours inclus » retombe
+     à la même hauteur que les titres des autres pages. */
   padding: 2.5rem 3.3% 0;
-  margin-top: -12rem;
+  margin-top: -15rem;
 }
 
-/* Même courbe que la page Formules (référence historique) : desktop
-   -12rem, lissée jusqu'à -9rem à 1211-1280px, puis -9rem à -7rem en
-   continu sur toute la tablette. */
+/* Même dégradé que les autres pages, décalé de -3rem : de -15rem
+   (desktop) à -12rem sur 1211-1280px, puis -12rem à -10rem en continu
+   sur toute la tablette. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .formules-intro {
-    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+    margin-top: clamp(-15rem, calc(39.8571rem + -4.2857vw), -12rem);
   }
 }
 
 @media (min-width: 768px) and (max-width: 1210px) {
   .formules-intro {
-    margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
+    margin-top: clamp(-12rem, calc(-6.525rem - 0.4525vw), -10rem);
   }
 }
 
@@ -69,7 +73,7 @@
    crème du titre, qui masque le segment de bordure derrière elle. */
 .formules-intro__box {
   position: relative;
-  margin: 8.75rem auto 3rem;
+  margin: 4.5rem auto 3rem;
   width: 100%;
   max-width: 1180px;
   background-color: var(--color-cream);
@@ -80,7 +84,7 @@
 .formules-intro__box-content {
   position: relative;
   z-index: 1;
-  padding: 0.75rem 2.75rem 2.75rem;
+  padding: 1.75rem 2.75rem 2.75rem;
 }
 
 /* Titre posé à cheval sur le bord haut de la boîte : la pastille (fond
@@ -115,8 +119,8 @@
 .formules-intro__box-title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2rem, 1.6vw, 1.4rem);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 1.6vw, 1.4rem);
   letter-spacing: 0;
   text-transform: none;
   color: var(--color-ink);
@@ -205,7 +209,7 @@
 @media (max-width: 767px) {
   .formules-intro {
     padding: 2.5rem 1.5rem 0;
-    margin-top: -5rem;
+    margin-top: -8rem;
   }
 
   .formules-intro__title {

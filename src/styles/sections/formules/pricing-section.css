@@ -325,7 +325,7 @@
 .pricing-credit {
   position: relative;
   margin: 0rem auto 4rem;
-  width: min(60%, calc(var(--content-cap) * 0.78));
+  width: min(80%, calc(var(--content-cap) * 0.78));
   padding: 2.75rem 2.25rem;
   display: flex;
   align-items: center;
@@ -380,7 +380,7 @@
        CTA) sans rien couper — la scène clippe (overflow:hidden) tout
        ce qui dépasse, donc mieux vaut prévoir large ici plutôt que
        de plafonner la carte elle-même. */
-    height: 900px;
+    height: 645px;
     overflow: hidden;
     flex-wrap: nowrap;
     padding: 0;

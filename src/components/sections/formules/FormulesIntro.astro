@@ -20,12 +20,12 @@ import nettoyage from "../../../assets/formules/toujours-inclus/nettoyage.svg";
 //   dy  → décalage vertical fin (ex. "4px", positif = vers le bas)
 // Tout champ omis retombe sur la valeur par défaut définie dans le CSS.
 const toujoursInclus = [
-  { img: legumes,   label: "Menus personnalisé",        h: 52, rot: "-4deg",   dx: "0px", dy: "0px" },
+  { img: legumes,   label: "Menus personnalisés",        h: 52, rot: "-4deg",   dx: "0px", dy: "0px" },
   { img: panier,    label: "Liste de course préparée",  h: 60, rot: "3deg",    dx: "0px", dy: "0px" },
   { img: faitout,   label: "Repas cuisinés à domicile", h: 58, rot: "-2.5deg", dx: "0px", dy: "0px" },
   { img: frigo,     label: "Réfrigérateur organisé",    h: 78, rot: "3.5deg",  dx: "0px", dy: "0px" },
-  { img: parfait,   label: "Conseils & conservation",   h: 86, rot: "-3deg",   dx: "0px", dy: "0px" },
-  { img: nettoyage, label: "Cuisine propre et rangée",  h: 64, rot: "2deg",    dx: "0px", dy: "0px" },
+  { img: parfait,   label: "Conseils & conservation",   h: 65, rot: "-3deg",   dx: "0px", dy: "0px" },
+  { img: nettoyage, label: "Cuisine propre et rangée",  h: 60, rot: "2deg",    dx: "0px", dy: "0px" },
 ];
 
 const itemVars = (i: (typeof toujoursInclus)[number]) =>
@@ -40,12 +40,12 @@ const itemVars = (i: (typeof toujoursInclus)[number]) =>
 ---
 
 <section class="formules-intro">
-  <h2 class="formules-intro__title">
+   <!--<h2 class="formules-intro__title">
     Une cuisine à domicile,<br>
     adaptée aux volumes dont <span class="formules-intro__title-accent-you">vous</span> avez besoin.
   </h2>
 
-  <!-- <p class="formules-intro__text">
+  <p class="formules-intro__text">
     Quelle que soit la formule choisie, <b>Le Cuistologue</b> prépare vos repas chez vous, organise votre réfrigérateur et laisse la cuisine propre.<br />
     Seul le volume de préparation s'adapte à votre foyer.
   </p> -->
