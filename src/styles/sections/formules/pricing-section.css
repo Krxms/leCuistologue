@@ -527,7 +527,7 @@
     gap: 1rem;
     /* padding-block 0 en haut : l'écart avec l'encart est déjà donné
        par .pricing-stage ; un peu de marge en bas avant les puces. */
-    padding: 0 1.5rem 1rem;
+    padding: 0 1.5rem 2rem;
     overflow-x: auto;
     overflow-y: visible;
     scroll-snap-type: x mandatory;

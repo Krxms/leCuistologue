@@ -69,9 +69,7 @@
    crème du titre, qui masque le segment de bordure derrière elle. */
 .formules-intro__box {
   position: relative;
-  /* Bas resserré (3rem -> 1.5rem) : écart réduit avec la rangée des
-     formules juste en dessous (mobile : encore plus, voir plus bas). */
-  margin: 8.75rem auto 1.5rem;
+  margin: 8.75rem auto 3rem;
   width: 100%;
   max-width: 1180px;
   background-color: var(--color-cream);
@@ -221,7 +219,7 @@
   }
 
   .formules-intro__box {
-    margin-top: 2rem;
+    margin-top: 4rem;
     /* Resserre l'écart avec la rangée des formules en dessous
        (3rem -> 1rem). */
     margin-bottom: 1rem;
@@ -243,6 +241,7 @@
 
    .pricing-stage {
     padding: 0rem 0;
+    margin-bottom: 1rem;
   }
 
   .pricing {
@@ -252,13 +251,21 @@
   gap: 2rem;
   padding: 0rem 3.3% 4rem;
   }
+  
+    .pricing-credit {
+    width: auto;
+    flex-direction: column;
+    text-align: center;
+    margin: 0rem 1.5rem 3rem;
+    padding: 1.5rem 1.5rem 1.75rem;
+    gap: 1rem;
+  }
 
   /* Mobile : titre de l'encart plus petit (2rem débordait largement
      de la boîte, texte en nowrap) et moins gras (-100 : 900 -> 800). */
-  .formules-intro__box-title {
-    font-size: 1.4rem;
-    font-weight: 800;
-
+   .formules-intro__box-title {
+    font-size: 1rem;
+    font-weight: 700;
   }
 
   /* Mobile : 3 colonnes, 2 rangées — illustrations réduites, libellés
