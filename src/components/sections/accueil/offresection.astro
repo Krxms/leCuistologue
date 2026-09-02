@@ -1,7 +1,6 @@
 ---
 import "../../../styles/sections/accueil/offre-section.css";
 
-import bgPink from "../../../assets/accueil/service/serviceBG.png";
 import photoMain from "../../../assets/accueil/service/serviceBigPicsAll.png";
 import titleIcon from "../../../assets/accueil/service/titlewow.svg";
 import arrow from "../../../assets/accueil/service/arrow.svg";
@@ -29,8 +28,8 @@ const colonneDroite = [
 <section class="offre">
   <!-- ===== Desktop / tablette (≥1211px) ===== -->
   <div class="offre__desktop">
-    <img src={bgPink.src} alt="" class="offre__bg" aria-hidden="true" />
-
+    {/* Le fond rose (ancien serviceBG.png) est dessiné en CSS :
+        .offre__desktop::before — aplat + courbe du bord haut. */}
     <div class="offre__header">
       <div class="offre__title-row">
         <h2 class="offre__title">

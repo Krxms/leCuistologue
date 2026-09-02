@@ -164,31 +164,24 @@
   font-size: clamp(4.9rem, 5vw, 5rem);
 }
 
-/* Desktop + tablette : « simple » repasse dans le fil du titre (accent
-   jaune en ligne, plus sur sa propre ligne), le <br> de « de bien /
-   manger » est neutralisé, et sa taille devient relative pour suivre
-   le clamp du titre. Résultat : deux lignes,
-   « Une façon simple » / « de bien manger ». */
+/* Desktop + tablette : le <br> de « de bien / manger » est neutralisé
+   (« de bien manger » sur une seule ligne) et « simple » prend sa
+   taille relative (1.06em) pour suivre le clamp du titre. « simple »
+   garde sa propre ligne (display: block) sur toute la plage >= 768px :
+   le titre est donc TOUJOURS sur trois lignes (« Une façon » /
+   « simple » / « de bien manger »), sans bascule 2 <-> 3 lignes en
+   cours de redimensionnement (elle se produisait auparavant à ~1510px).
+   La ligne la plus longue (« DE BIEN MANGER ») est identique à la
+   version deux lignes, donc aucun risque de débordement sur l'image
+   à droite. */
 @media (min-width: 768px) {
   .hero__title_colorspan {
-    display: inline;
+    display: block;
     font-size: 1.06em;
   }
 
   .hero__title br {
     display: none;
-  }
-}
-
-/* À partir de 1510px, le sujet de HeroBG.png (à droite) occupe plus de
-   surface : « simple » repasse sur sa propre ligne pour raccourcir la
-   ligne 1 (« Une façon ») et laisser le champ libre à l'image. Titre
-   alors sur trois lignes : « Une façon » / « simple » / « de bien
-   manger ». Reste : taille et couleur inchangées (héritées du bloc
-   >= 768px). */
-@media (min-width: 1510px) {
-  .hero__title_colorspan {
-    display: block;
   }
 }
 

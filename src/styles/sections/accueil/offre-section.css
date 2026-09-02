@@ -1,5 +1,17 @@
 .offre {
   position: relative;
+  /* Rose de la section — ancien fill du PNG serviceBG.png. Centralisé
+     ici, partagé par le fond desktop (.offre__desktop::before) et le
+     fond mobile (.offre-m). */
+  --offre-pink: #FFDBDB;
+  /* Masque de la courbe du bord supérieur du fond desktop. Le SVG
+     (viewBox 0-100) est étiré à la boîte via preserveAspectRatio:none,
+     donc la courbe épouse n'importe quelle largeur/hauteur de section,
+     à tous les paliers responsive. Tracé calqué sur celui du PNG
+     d'origine : bord à ~1,2% de haut à gauche, qui descend vers ~4% à
+     droite (creux à ~5,6% vers les deux tiers). La texture « papier
+     déchiré » du PNG n'est pas reprise, seulement la courbe. */
+  --offre-curve: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 1.2C33 1.2 62 5.6 100 4L100 100L0 100Z' fill='black'/%3E%3C/svg%3E");
 }
 
 /* ============================================================
@@ -15,15 +27,24 @@
   padding: 4rem 0rem 6rem;
 }
 
-.offre__bg {
+/* Fond rose de la section, ex-image serviceBG.png redessinée en CSS :
+   aplat --offre-pink + masque --offre-curve qui découpe la courbe du
+   bord supérieur (plus haut à gauche, plus bas à droite).
+   inset: 0 → suit exactement .offre__desktop (qui porte déjà le
+   margin-block négatif et, au-delà de 1920px, le plafond de largeur),
+   donc plus aucune dimension à resynchroniser par palier. */
+.offre__desktop::before {
+  content: "";
   position: absolute;
-  left: 50%;
-  top: -1%;
-  width: 106vw;
-  height: 102%;
-  transform: translateX(-50%);
-  object-fit: cover;
+  inset: 0;
   z-index: 0;
+  background-color: var(--offre-pink);
+  -webkit-mask-image: var(--offre-curve);
+  mask-image: var(--offre-curve);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   pointer-events: none;
 }
 
@@ -35,21 +56,18 @@
   padding-top: 5vw;
 }
 
-/* Grands écrans (21"+, 2K/4K...) : min-height/.offre__bg/padding-top
-   en vw continuaient de grandir avec la fenêtre sans plafond — la
-   section devenait démesurément haute, la photo et le fond
-   démesurément grands. Tout gelé à sa valeur réelle à 1920px, et le
-   conteneur lui-même plafonné pour que le texte (58%) et la photo
-   (56%) arrêtent de s'écarter l'un de l'autre au-delà. */
+/* Grands écrans (21"+, 2K/4K...) : min-height/padding-top en vw
+   continuaient de grandir avec la fenêtre sans plafond — la section
+   devenait démesurément haute, la photo démesurément grande. Tout gelé
+   à sa valeur réelle à 1920px, et le conteneur lui-même plafonné pour
+   que le texte (58%) et la photo (56%) arrêtent de s'écarter l'un de
+   l'autre au-delà. Le fond (.offre__desktop::before, inset:0) suit ce
+   plafond tout seul, plus rien à borner ici. */
 @media (min-width: 1921px) {
   .offre__desktop {
     max-width: var(--content-cap);
     margin-inline: auto;
     min-height: calc(0.71 * var(--content-cap));
-  }
-
-  .offre__bg {
-    width: calc(1.06 * var(--content-cap));
   }
 
   .offre__header {
@@ -316,14 +334,6 @@
     width: 7.8%;
   }
 
-  .offre__bg {
-    padding-top: 0rem;
-    bottom: -1rem;
-    height: calc(100% + 2rem);
-    object-fit: cover;
-    transform: translateX(-50%) scale(1);
-  }
-
   /* Une seule colonne : sous 1100px, la liste passe déjà en une
      colonne (voir la sous-zone 835-1100px plus bas) — en dessous de
      835px, on reste sur ce même comportement au lieu de revenir à
@@ -378,14 +388,6 @@
     width: 7.8%;
   }
 
-  .offre__bg {
-    padding-top: 0rem;
-    bottom: -1rem;
-    height: calc(100% + 2rem);
-    object-fit: cover;
-    transform: translateX(-50%) scale(1);
-  }
-
   /* Deux colonnes garanties (au lieu du flex qui repassait en une
      seule colonne faute de place à cette largeur). Le reste (fond,
      largeur du cadre, centrage du bloc prix/promo/CTA) reste celui
@@ -423,7 +425,7 @@
    découpe. Couleur reprise de l'ancien fond image. */
 .offre-m {
   display: none;
-  background-color: #FFDBDB;
+  background-color: var(--offre-pink);
 }
 
 .offre-m__title-row {
