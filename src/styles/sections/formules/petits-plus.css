@@ -139,7 +139,7 @@
    un cran plus serrée que Popote (1 phrase) pour tenir dans la carte. */
 .petits-plus-content--course .petits-plus-content__description,
 .petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.78rem, 0.9vw, 0.86rem);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
   line-height: 1.2;
 }
 
@@ -149,7 +149,7 @@
 @media (min-width: 1211px) and (max-width: 1440px) {
   .petits-plus-content--course .petits-plus-content__description,
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.66rem, 0.82vw, 0.82rem);
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
     line-height: 1.14;
   }
 }
