@@ -51,13 +51,13 @@ const localBusiness = {
   priceRange: site.priceRange,
   description:
     "Cuisinier à domicile spécialiste de la cuisine du quotidien. Le Cuistologue prépare vos repas de la semaine directement chez vous, dans le Vexin — Oise, Val-d'Oise, Yvelines et Eure.",
+  // Service à domicile : pas d'adresse précise publique — ville + zone
+  // desservie suffisent (et évitent d'exposer le domicile privé).
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    postalCode: site.address.postalCode,
-    addressLocality: site.address.city,
-    addressRegion: site.address.region,
-    addressCountry: site.address.countryCode,
+    addressLocality: site.location.city,
+    addressRegion: site.location.region,
+    addressCountry: site.location.countryCode,
   },
   areaServed: site.areas.map((a) => ({ "@type": "AdministrativeArea", name: a.name })),
   founder: { "@type": "Person", name: site.founder },
@@ -76,8 +76,8 @@ const schemas = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
 
     <title>{pageTitle}</title>

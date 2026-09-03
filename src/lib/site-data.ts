@@ -25,10 +25,14 @@ export const site = {
     e164: "+33612776264",
   },
 
-  /** Adresse légale (mentions légales / CGV). Sert de PostalAddress au schema. */
-  address: {
-    street: "5 rue de la Mairie",
-    postalCode: "60240",
+  /**
+   * Localisation AFFICHÉE PUBLIQUEMENT (footer, schema).
+   * Service à domicile = le client ne vient jamais ici : on expose la
+   * ville et la zone, PAS l'adresse précise (qui est le domicile privé
+   * de Bruno). L'adresse complète reste uniquement sur les pages
+   * légales, où elle est obligatoire (entreprise individuelle).
+   */
+  location: {
     city: "Serans",
     region: "Oise",
     countryCode: "FR",
@@ -57,10 +61,10 @@ export const site = {
   social: [] as { label: string; url: string }[],
 
   /**
-   * Image de partage OpenGraph (dans /public). À remplacer par un vrai
-   * visuel 1200×630 (logo + baseline sur fond crème). Tant qu'il n'existe
-   * pas, on retombe sur le favicon — un partage sans belle image ne nuit
-   * pas au référencement, seulement au taux de clic sur les réseaux.
+   * Image de partage OpenGraph (dans /public). favicon.png fait
+   * 1200×1158 : correct comme visuel de partage. Un vrai 1200×630
+   * (ratio paysage) serait mieux cadré sur Facebook / X / LinkedIn,
+   * qui recadrent au centre — le logo doit rester centré.
    */
   ogImage: "/favicon.png",
 

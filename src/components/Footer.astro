@@ -73,10 +73,9 @@ const annee = new Date().getFullYear();
         <li><a href={site.phone.href}>{site.phone.display}</a></li>
         <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
       </ul>
-      <address class="footer__address">
-        {site.address.street}<br />
-        {site.address.postalCode} {site.address.city}
-      </address>
+      <p class="footer__address">
+        Basé à {site.location.city} ({site.location.region})
+      </p>
       <p class="footer__zone">
         Zone d'intervention<br />
         {site.areas.map((a) => a.name).join(" · ")}
