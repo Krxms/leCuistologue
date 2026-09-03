@@ -20,22 +20,31 @@
 .petits-plus__grid {
   display: flex;
   justify-content: center;
-  /* Cartes de hauteurs un peu différentes (ratios SVG différents) :
-     alignées par le BAS → les feuilles, qui touchent quasiment le bas
-     de chaque carte, se retrouvent au même niveau. */
   align-items: flex-end;
   gap: 3rem;
   flex-wrap: wrap;
 }
 
-/* ===== Carte — base partagée (forme) ===============================
-   Ratio = viewBox EXACT de chaque SVG (Course 2150x1484, Popote
-   2240x1484, Gourmande 2357x1484). Ratio carte = ratio SVG →
-   object-fit ne rogne ni ne déforme jamais le fond : chaque feuille +
-   illustration s'affiche ENTIÈRE. Toutes les cartes ont la même
-   largeur ; leur hauteur suit leur ratio (Popote/Gourmande, plus
-   larges à cause du débord d'illustration à droite, sont un peu moins
-   hautes).
+/* ===== Carte — gabarit UNIQUE, partagé par les 3 =====================
+   Même largeur, même ratio : celui de Courses (la référence). Les 3
+   cartes occupent donc exactement la même place.
+
+   Les 3 SVG ont des viewBox un peu différents — Popote et Gourmande
+   sont plus larges à cause de la pointe d'illustration qui déborde à
+   droite. object-fit: cover + object-position: left bottom cale chaque
+   fond par son bord GAUCHE et son bord BAS : la feuille s'affiche en
+   entier et alignée pour les 3, seule la pointe qui dépasse à droite
+   peut être rognée (c'est du décor, prévu pour saigner).
+
+   optionGourmande.svg a été recadré 2357x1680 (via un <g translate>,
+   sans toucher au dessin) pour lui donner le même ratio vertical que
+   Course/Popote — sinon sa carte serait plus plate que les autres.
+
+   Le ratio 2260/1680 est un poil plus large que le viewBox de Courses
+   (2159) : ça laisse à la feuille de Gourmande (SVG le plus large) une
+   marge à droite comparable aux deux autres au lieu d'être coupée au
+   ras. Courses (SVG le plus étroit) ne perd qu'une bande de vide en
+   haut, la feuille reste entière.
    ================================================================== */
 
 .petits-plus-card {
@@ -43,85 +52,70 @@
   width: 30%;
   min-width: 304px;
   max-width: 520px;
+  aspect-ratio: 2260 / 1680; /* gabarit UNIQUE des 3 cartes (base Courses, ajusté) */
   border-radius: 16px;
   overflow: hidden;
 }
 
-.petits-plus-card--course    { aspect-ratio: 2150 / 1484; }
-.petits-plus-card--popote    { aspect-ratio: 2240 / 1500; }
-.petits-plus-card--gourmande { aspect-ratio: 2357 / 1584; }
-
-/* ===== Fond — hook de réglage fin par carte ========================
-   Variables optionnelles posées sur .petits-plus-card--<nom> :
-     --bg-x / --bg-y : décalage fin
-     --bg-scale      : zoom (>1 rogne, <1 décolle des bords)
-   Neutres par défaut. Ratio carte = ratio SVG → object-fit ne rogne
-   ni ne déforme rien.
-   ================================================================== */
-
+/* Hooks de réglage fin par carte (posés sur .petits-plus-card--<nom>) :
+     --bg-x / --bg-y : décalage    --bg-scale : zoom
+   Neutres par défaut. */
 .petits-plus-card__bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: left bottom;
   transform:
     translate(var(--bg-x, 0), var(--bg-y, 0))
     scale(var(--bg-scale, 1));
-  transform-origin: center;
+  transform-origin: left bottom;
   z-index: 0;
 }
 
 /* ===== Contenu ======================================================
-   Tailles de texte + position VERTICALE : communes (calées sur
-   Courses). Position HORIZONTALE (left / width) : par carte, parce que
-   la feuille ne commence pas au même endroit dans les 3 SVG (Course
-   ~1,5 % du viewBox, Popote ~5 %, Gourmande ~7,8 %). Les valeurs
+   Cartes de gabarit identique → une seule position VERTICALE (top)
+   suffit pour que les 3 titres soient alignés.
+
+   Position HORIZONTALE (left / width) par carte : la feuille ne
+   commence pas au même endroit dans les 3 SVG (bord gauche : Course
+   ~1,5 %, Popote ~5 %, Gourmande ~8 % du viewBox). Les valeurs
    Popote/Gourmande décalent le texte pour qu'il ait le MÊME écart à la
-   feuille (et le même bloc en pixels) que sur Courses.
+   feuille — à gauche comme à droite — que sur Courses.
    ==================================================================== */
 
 .petits-plus-content {
   position: absolute;
-  left: 7.6%;   /* Courses (référence) */
-  top: 32%;
-  width: 81%;
+  left: 7.6%;   /* Courses = référence */
+  top: 25.5%;
+  width: 78%;   /* s'arrête un peu avant le bord droit (feuille asymétrique) */
   z-index: 1;
 }
 
 .petits-plus-content--popote {
   left: 11%;
-  width: 78%;
+  width: 75.5%;
 }
 
 .petits-plus-content--gourmande {
-  left: 13.5%;
-  width: 74%;
-}
-
-/* Gourmande : SVG le plus large (2357) → carte la moins haute, et sa
-   description est longue (2 paragraphes) — un cran plus petit / plus
-   serré pour tenir sans déborder. (Raccourcir le texte serait plus
-   propre si tu préfères garder la même taille partout.) */
-.petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.6rem, 0.72vw, 0.78rem);
-  line-height: 1.2;
+  left: 14%;
+  width: 75%;
 }
 
 .petits-plus-content__title {
-  margin: 0;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
   color: #2c2c2c;
 }
 
 .petits-plus-content__price {
-  margin: 0rem 0 0;
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.85rem, 1.15vw, 1.3rem);
+  font-size: clamp(0.95rem, 1.25vw, 1.4rem);
   color: var(--color-ink-soft);
 }
 
@@ -129,25 +123,42 @@
   margin-left: 0.6rem;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.6em;
+  font-size: 0.62em;
 }
 
 .petits-plus-content__description {
-  margin-top: 0.8rem;
+  margin-top: 0.7rem;
   font-family: var(--font-body);
-  font-size: clamp(0.6rem, 0.72vw, 0.78rem);
-  line-height: 1.25;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.3;
   color: var(--color-ink-soft);
-  width: 90%;
+  width: 100%;
+}
+
+/* Courses et Gourmande : description en 2 paragraphes (plus longue) —
+   un cran plus serrée que Popote (1 phrase) pour tenir dans la carte. */
+.petits-plus-content--course .petits-plus-content__description,
+.petits-plus-content--gourmande .petits-plus-content__description {
+  font-size: clamp(0.78rem, 0.9vw, 0.86rem);
+  line-height: 1.2;
+}
+
+/* Bas du desktop (1211-1440px) : 3 cartes en ligne mais encore petites
+   → les descriptions longues (Courses / Gourmande) débordent la feuille.
+   On les resserre le temps que les cartes reprennent de la hauteur. */
+@media (min-width: 1211px) and (max-width: 1440px) {
+  .petits-plus-content--course .petits-plus-content__description,
+  .petits-plus-content--gourmande .petits-plus-content__description {
+    font-size: clamp(0.66rem, 0.82vw, 0.82rem);
+    line-height: 1.14;
+  }
 }
 
 /* ============================================================
    TABLETTE PAYSAGE — 1023px à 1210px
    ============================================================ */
 
-@media (min-width: 1023px) and (max-width: 1210px) {
-  /* Zone intermédiaire : lisse le passage desktop -> tablette
-     sans changer les valeurs exactes à 1210px et 1023px. */
+@media (min-width: 1023px) and (max-width: 1210.98px) {
   .petits-plus__title {
     margin-bottom: clamp(5.5rem, calc(-10.9118rem + 1.6043vw), 8.5rem);
   }
@@ -156,18 +167,14 @@
     width: 45%;
   }
 
-  .petits-plus-content {
-    width: 66%;
-  }
-
   .petits-plus-content__price {
-    font-size: clamp(1.2rem, 1.15vw, 1.3rem);
+    font-size: clamp(1.15rem, 1.3vw, 1.45rem);
   }
 
   .petits-plus-content__description {
-    margin-top: 0.3rem;
-    font-size: clamp(0.75rem, 0.85vw, 0.85rem);
-    line-height: 1.25;
+    margin-top: 0.4rem;
+    font-size: clamp(0.85rem, 0.95vw, 1rem);
+    line-height: 1.3;
   }
 }
 
@@ -175,13 +182,20 @@
    TABLETTE PORTRAIT — 768px à 1022px
    ============================================================ */
 
-@media (min-width: 768px) and (max-width: 1022px) {
+@media (min-width: 768px) and (max-width: 1022.98px) {
   .petits-plus-card {
     width: 45%;
   }
 
   .petits-plus-content__description {
     margin-top: 0.3rem;
+  }
+
+  /* Cartes 45% encore courtes ici → descriptions longues resserrées. */
+  .petits-plus-content--course .petits-plus-content__description,
+  .petits-plus-content--gourmande .petits-plus-content__description {
+    font-size: clamp(0.66rem, 1.15vw, 0.8rem);
+    line-height: 1.14;
   }
 
   .petits-plus__title {
@@ -191,14 +205,14 @@
 
 /* Zone intermédiaire : lisse le passage tablette -> mobile
    sans changer les valeurs exactes à 834px et 767px. */
-@media (min-width: 768px) and (max-width: 834px) {
+@media (min-width: 768px) and (max-width: 834.98px) {
   .petits-plus {
     padding-top: clamp(2.5rem, calc(8.7239rem + -0.7463vw), 3rem);
     padding-bottom: clamp(3rem, calc(-100.0299rem + 13.4328vw), 12rem);
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .petits-plus {
     padding: 3rem 1.5rem;
   }
@@ -219,13 +233,19 @@
     margin: 0 0 1rem;
   }
 
-  .petits-plus-content__description {
-    margin-top: 0.3rem;
+  .petits-plus-content {
+    top: 24%;
   }
 
-  /* Texte légèrement remonté en mobile (30 % au lieu de 32 %),
-     identique pour les 3 cartes. */
-  .petits-plus-content {
-    top: 30%;
+  .petits-plus-content__description {
+    margin-top: 0.4rem;
+    font-size: clamp(0.72rem, 3vw, 0.82rem);
+    line-height: 1.35;
+  }
+
+  .petits-plus-content--course .petits-plus-content__description,
+  .petits-plus-content--gourmande .petits-plus-content__description {
+    font-size: clamp(0.72rem, 3vw, 0.82rem);
+    line-height: 1.16;
   }
 }
