@@ -1,8 +1,11 @@
 ---
 import "../../../styles/sections/formules/petits-plus.css";
+import { optionsPetitsPlus } from "../../../lib/formules-data";
 import bgCourse from "../../../assets/formules/petits-plus/optionCourse.svg";
 import bgPopote from "../../../assets/formules/petits-plus/optionPopote.svg";
 import bgGourmande from "../../../assets/formules/petits-plus/optionGourmande.svg";
+
+const fonds = { course: bgCourse, popote: bgPopote, gourmande: bgGourmande };
 ---
 
 <section class="petits-plus">
@@ -11,50 +14,21 @@ import bgGourmande from "../../../assets/formules/petits-plus/optionGourmande.sv
   </h2>
 
   <div class="petits-plus__grid">
-
-    <div class="petits-plus-card petits-plus-card--course">
-      <img src={bgCourse.src} alt="" class="petits-plus-card__bg" aria-hidden="true" />
-      <div class="petits-plus-content petits-plus-content--course">
-        <h3 class="petits-plus-content__title">Courses</h3>
-        <p class="petits-plus-content__price">
-          20 €
-          <span class="petits-plus-content__note">(soit 10 € après crédit d'impôt)</span>
-        </p>
-        <p class="petits-plus-content__description">
-          Je sélectionne et achète pour vous les produits nécessaires à vos menus auprès des commerces et producteurs adaptés, puis je les apporte directement à votre domicile.<br><br>
-          <i>Le tarif de 20 € rémunère uniquement ce service : le montant des produits achetés reste à votre charge.</i>
-        </p>
+    {optionsPetitsPlus.map((opt) => (
+      <div class={`petits-plus-card petits-plus-card--${opt.carte}`}>
+        <img src={fonds[opt.carte].src} alt="" class="petits-plus-card__bg" aria-hidden="true" />
+        <div class={`petits-plus-content petits-plus-content--${opt.carte}`}>
+          <h3 class="petits-plus-content__title">{opt.titre}</h3>
+          <p class="petits-plus-content__price">
+            {opt.prix}
+            <span class="petits-plus-content__note">(soit {opt.prixReduit} après crédit d'impôt)</span>
+          </p>
+          <p
+            class="petits-plus-content__description"
+            set:html={opt.precision ? `${opt.corps}<br><br><i>${opt.precision}</i>` : opt.corps}
+          />
+        </div>
       </div>
-    </div>
-
-    <div class="petits-plus-card petits-plus-card--popote">
-      <img src={bgPopote.src} alt="" class="petits-plus-card__bg" aria-hidden="true" />
-      <div class="petits-plus-content petits-plus-content--popote">
-        <h3 class="petits-plus-content__title">Popotes à emporter</h3>
-        <p class="petits-plus-content__price">
-          4 €
-          <span class="petits-plus-content__note">(soit 2 € après crédit d'impôt)</span>
-        </p>
-        <p class="petits-plus-content__description">
-          Des repas maison prêts à être emportés au travail, à l’école ou ailleurs…
-        </p>
-      </div>
-    </div>
-
-    <div class="petits-plus-card petits-plus-card--gourmande">
-      <img src={bgGourmande.src} alt="" class="petits-plus-card__bg" aria-hidden="true" />
-      <div class="petits-plus-content petits-plus-content--gourmande">
-        <h3 class="petits-plus-content__title">Réserve gourmande</h3>
-        <p class="petits-plus-content__price">
-          10 €
-          <span class="petits-plus-content__note">(soit 5 € après crédit d'impôt)</span>
-        </p>
-        <p class="petits-plus-content__description">
-          Une préparation maison supplémentaire ou plusieurs petites préparations que l’on sélectionne ensemble.<br><br>
-          Pour les goûters, petits-déjeuners ou petites faims : <b>granola, compotes, gâteaux, biscuits, tartinades, etc.</b>
-        </p>
-      </div>
-    </div>
-
+    ))}
   </div>
 </section>

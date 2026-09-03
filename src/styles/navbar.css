@@ -111,14 +111,6 @@
   }
 }
 
-.navbar:has(.navbar__mobile-menu.is-open) {
-  height: var(--header-height) !important;
-}
-
-.navbar:has(.navbar__mobile-menu.is-open) .navbar__logo {
-  height: 89px !important;
-}
-
 .navbar__burger {
   display: none;
   flex-direction: column;
@@ -215,6 +207,19 @@
 
   .navbar__burger {
     display: flex;
+  }
+
+  /* Navbar mobile : hauteur FIXE, un poil plus haute que sur desktop.
+     Ni le scroll ni l'ouverture / fermeture du menu ne la font varier
+     (le menu s'ouvre en dessous, en position absolue). */
+  .navbar,
+  .navbar--scrolling {
+    height: 76px;
+  }
+
+  .navbar__logo,
+  .navbar--scrolling .navbar__logo {
+    height: 52px;
   }
 }
 

@@ -1,7 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/reserver.css";
-import { formules } from "../lib/formules-data";
+import { formules, optionsPetitsPlus } from "../lib/formules-data";
+
+// `corps` peut contenir <br>/<b>/<i> (utile sur la carte "petits plus") :
+// dans l'infobulle on le veut en texte simple.
+const texteBrut = (html: string) =>
+  html
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]+>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 ---
 
 <BaseLayout title="Réserver une formule">
@@ -132,38 +141,22 @@ import { formules } from "../lib/formules-data";
           <fieldset class="reserver-form__preference">
             <legend>Souhaitez-vous ajouter des options ? (facultatif)</legend>
             <div class="reserver-form__checkbox-group">
-              <div class="reserver-form__checkbox-row">
-                <label class="reserver-form__checkbox">
-                  <input type="checkbox" name="options" value="courses" />
-                  Courses réalisées pour vous
-                </label>
-                <button type="button" class="reserver-form__info" data-info-target="info-courses" aria-expanded="false" aria-label="Détails de l'option Courses réalisées pour vous">i</button>
-                <span class="reserver-form__tooltip" id="info-courses" role="tooltip" hidden>
-                  Contenu et tarif à préciser.
-                </span>
-              </div>
-
-              <div class="reserver-form__checkbox-row">
-                <label class="reserver-form__checkbox">
-                  <input type="checkbox" name="options" value="popotes" />
-                  Popotes à emporter
-                </label>
-                <button type="button" class="reserver-form__info" data-info-target="info-popotes" aria-expanded="false" aria-label="Détails de l'option Popotes à emporter">i</button>
-                <span class="reserver-form__tooltip" id="info-popotes" role="tooltip" hidden>
-                  Contenu et tarif à préciser.
-                </span>
-              </div>
-
-              <div class="reserver-form__checkbox-row">
-                <label class="reserver-form__checkbox">
-                  <input type="checkbox" name="options" value="reserve-gourmande" />
-                  Réserve gourmande
-                </label>
-                <button type="button" class="reserver-form__info" data-info-target="info-reserve-gourmande" aria-expanded="false" aria-label="Détails de l'option Réserve gourmande">i</button>
-                <span class="reserver-form__tooltip" id="info-reserve-gourmande" role="tooltip" hidden>
-                  Contenu et tarif à préciser.
-                </span>
-              </div>
+              {optionsPetitsPlus.map((opt) => (
+                <div class="reserver-form__checkbox-row">
+                  <label class="reserver-form__checkbox">
+                    <input type="checkbox" name="options" value={opt.slug} />
+                    {opt.labelFormulaire}
+                  </label>
+                  <button type="button" class="reserver-form__info" data-info-target={`info-${opt.slug}`} aria-expanded="false" aria-label={`Détails de l'option ${opt.labelFormulaire}`}>i</button>
+                  <span class="reserver-form__tooltip" id={`info-${opt.slug}`} role="tooltip" hidden>
+                    <span class="reserver-form__tooltip-price">
+                      {opt.prix} <span>· {opt.prixReduit} après crédit d'impôt</span>
+                    </span>
+                    {texteBrut(opt.corps)}
+                    {opt.precision && <em class="reserver-form__tooltip-note">{opt.precision}</em>}
+                  </span>
+                </div>
+              ))}
             </div>
           </fieldset>
 

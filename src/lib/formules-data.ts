@@ -62,3 +62,69 @@ export const formules: Formule[] = [
 export function getFormule(slug: string): Formule | undefined {
   return formules.find((f) => f.slug === slug);
 }
+
+/* ===== Options « Les petits plus » ==================================
+   Source unique pour les 3 options :
+     - la section "petits plus" de la page Formules (composant
+       PetitsPlus.astro) : titre, prix, `corps` rendu tel quel (HTML) ;
+     - les infobulles du formulaire /reserver (où l'on coche les
+       options) : `labelFormulaire`, prix, `corps` en texte brut.
+   `slug`  = valeur de la case à cocher côté formulaire.
+   `carte` = suffixe des classes CSS (.petits-plus-card--<carte>) et
+             clé du fond SVG dans PetitsPlus.astro.
+   ================================================================== */
+
+export interface OptionPetitPlus {
+  slug: string;
+  carte: "course" | "popote" | "gourmande";
+  titre: string;
+  /** Libellé de la case à cocher sur /reserver (plus explicite). */
+  labelFormulaire: string;
+  /** Tarif de l'option, ex. "20 €". */
+  prix: string;
+  /** Tarif après crédit d'impôt, ex. "10 €". */
+  prixReduit: string;
+  /**
+   * Corps de la description. Peut contenir <br>, <b>, <i> : rendu tel
+   * quel sur la carte "petits plus", réduit en texte brut dans
+   * l'infobulle /reserver.
+   */
+  corps: string;
+  /** Précision éventuelle : mise en <i> sur la carte, en note dans l'infobulle. */
+  precision?: string;
+}
+
+export const optionsPetitsPlus: OptionPetitPlus[] = [
+  {
+    slug: "courses",
+    carte: "course",
+    titre: "Courses",
+    labelFormulaire: "Courses réalisées pour vous",
+    prix: "20 €",
+    prixReduit: "10 €",
+    corps:
+      "Je sélectionne et achète pour vous les produits nécessaires à vos menus auprès des commerces et producteurs adaptés, puis je les apporte directement à votre domicile.",
+    precision:
+      "Le tarif de 20 € rémunère uniquement ce service : le montant des produits achetés reste à votre charge.",
+  },
+  {
+    slug: "popotes",
+    carte: "popote",
+    titre: "Popotes à emporter",
+    labelFormulaire: "Popotes à emporter",
+    prix: "4 €",
+    prixReduit: "2 €",
+    corps:
+      "Des repas maison prêts à être emportés au travail, à l’école ou ailleurs…",
+  },
+  {
+    slug: "reserve-gourmande",
+    carte: "gourmande",
+    titre: "Réserve gourmande",
+    labelFormulaire: "Réserve gourmande",
+    prix: "10 €",
+    prixReduit: "5 €",
+    corps:
+      "Une préparation maison supplémentaire ou plusieurs petites préparations que l’on sélectionne ensemble.<br><br>Pour les goûters, petits-déjeuners ou petites faims : <b>granola, compotes, gâteaux, biscuits, tartinades, etc.</b>",
+  },
+];

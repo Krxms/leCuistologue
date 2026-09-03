@@ -353,6 +353,24 @@
   display: none;
 }
 
+.reserver-form__tooltip-price {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.reserver-form__tooltip-price span {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.reserver-form__tooltip-note {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.92em;
+  opacity: 0.85;
+}
+
 .reserver-form__submit {
   margin-top: 0.5rem;
   height: 54px;
