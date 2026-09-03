@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import "../../styles/sections/journal/journal.css";
+
+const posts = (await getCollection("journal", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const dateFmt = new Intl.DateTimeFormat("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<BaseLayout
+  title="Journal"
+  seoTitle="Journal — cuisine du quotidien, batch cooking, crédit d'impôt | Le Cuistologue"
+  description="Conseils et coulisses du Cuistologue : organiser ses repas de la semaine, batch cooking, crédit d'impôt services à la personne, produits de saison dans le Vexin."
+  noindex={posts.length === 0}
+>
+  <section class="journal">
+    <div class="journal__inner">
+      <h1 class="journal__title">Journal</h1>
+      <p class="journal__intro">
+        Conseils pratiques et coulisses : organiser sa semaine, cuisiner de saison,
+        comprendre le crédit d'impôt.
+      </p>
+
+      {posts.length === 0 ? (
+        <p class="journal__empty">Les premiers articles arrivent bientôt.</p>
+      ) : (
+        <ul class="journal__list">
+          {posts.map((post) => (
+            <li class="journal__item">
+              <a href={`/journal/${post.id}`} class="journal__link">
+                <h2 class="journal__item-title">{post.data.title}</h2>
+                <p class="journal__item-desc">{post.data.description}</p>
+                <time class="journal__item-date" datetime={post.data.date.toISOString()}>
+                  {dateFmt.format(post.data.date)}
+                </time>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</BaseLayout>

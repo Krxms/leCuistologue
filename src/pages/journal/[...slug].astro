@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import { site } from "../../lib/site-data";
+import "../../styles/sections/journal/journal-post.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("journal", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const url = `${site.url}/journal/${post.id}`;
+const dateFmt = new Intl.DateTimeFormat("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  ...(post.data.updated ? { dateModified: post.data.updated.toISOString() } : {}),
+  author: { "@type": "Person", name: site.founder },
+  publisher: { "@id": `${site.url}/#business` },
+  mainEntityOfPage: url,
+  inLanguage: "fr-FR",
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Journal", item: `${site.url}/journal` },
+    { "@type": "ListItem", position: 3, name: post.data.title, item: url },
+  ],
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  seoTitle={`${post.data.title} | Le Cuistologue`}
+  description={post.data.description}
+  jsonLd={[articleJsonLd, breadcrumbJsonLd]}
+>
+  <article class="journal-post">
+    <div class="journal-post__inner">
+      <nav class="journal-post__breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a>
+        <span aria-hidden="true">›</span>
+        <a href="/journal">Journal</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">{post.data.title}</span>
+      </nav>
+
+      <h1 class="journal-post__title">{post.data.title}</h1>
+      <time class="journal-post__date" datetime={post.data.date.toISOString()}>
+        {dateFmt.format(post.data.date)}
+      </time>
+
+      <div class="journal-post__body">
+        <Content />
+      </div>
+
+      <a href="/journal" class="journal-post__back">← Tous les articles</a>
+    </div>
+  </article>
+</BaseLayout>

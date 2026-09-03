@@ -8,6 +8,32 @@
   margin-inline: auto;
 }
 
+.cuisinier-oise__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.cuisinier-oise__breadcrumb a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.cuisinier-oise__breadcrumb a:hover {
+  color: var(--color-gold);
+}
+
+.cuisinier-oise__breadcrumb [aria-current="page"] {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
 .cuisinier-oise__title {
   font-family: var(--font-display);
   font-weight: 900;

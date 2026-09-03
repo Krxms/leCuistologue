@@ -55,6 +55,24 @@ export const site = {
    * pointer vers instagram.com / facebook.com génériques).
    */
   social: [] as { label: string; url: string }[],
+
+  /**
+   * Image de partage OpenGraph (dans /public). À remplacer par un vrai
+   * visuel 1200×630 (logo + baseline sur fond crème). Tant qu'il n'existe
+   * pas, on retombe sur le favicon — un partage sans belle image ne nuit
+   * pas au référencement, seulement au taux de clic sur les réseaux.
+   */
+  ogImage: "/favicon.png",
+
+  /**
+   * Codes de vérification des outils pour webmasters. Coller ici la
+   * valeur `content` de la balise fournie par chaque service (voir la
+   * marche à suivre transmise séparément). Vide = balise non rendue.
+   */
+  verification: {
+    google: "", // Google Search Console — <meta name="google-site-verification" content="…">
+    bing: "", // Bing Webmaster Tools — <meta name="msvalidate.01" content="…">
+  },
 };
 
 /** "Oise, le Val-d'Oise, les Yvelines et l'Eure" — pour les phrases meta. */

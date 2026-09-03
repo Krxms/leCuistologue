@@ -5,11 +5,31 @@ import FormulesIntro from "../components/sections/formules/FormulesIntro.astro";
 import PricingSection from "../components/sections/formules/PricingSection.astro";
 import PetitsPlus from "../components/sections/formules/PetitsPlus.astro";
 import UneQuestion from "../components/sections/formules/UneQuestion.astro";
+import { formules } from "../lib/formules-data";
+import { site } from "../lib/site-data";
+
+// Un schema Service par formule, rattaché à l'entité LocalBusiness.
+const servicesJsonLd = formules.map((f) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: f.titre,
+  serviceType: "Préparation de repas à domicile",
+  provider: { "@id": `${site.url}/#business` },
+  areaServed: site.areas.map((a) => ({ "@type": "AdministrativeArea", name: a.name })),
+  description: f.portions,
+  offers: {
+    "@type": "Offer",
+    price: f.ponctuelle.prixPlein.replace(/[^\d]/g, ""),
+    priceCurrency: "EUR",
+    url: `${site.url}/reserver?formule=${f.slug}`,
+  },
+}));
 ---
 <BaseLayout
   title="Nos formules"
   seoTitle="Formules et tarifs du cuisinier à domicile | Le Cuistologue"
   description="Trois formules de préparation de repas à domicile, de 149 à 259 € (la moitié après crédit d'impôt). Options courses, popotes à emporter et réserve gourmande."
+  jsonLd={servicesJsonLd}
 >
   <FormulesHeader />
   <FormulesIntro />

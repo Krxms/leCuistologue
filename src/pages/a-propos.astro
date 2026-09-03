@@ -3,12 +3,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import AProposHeader from "../components/sections/a-propos/AProposHeader.astro";
 import AProposContent from "../components/sections/a-propos/AProposContent.astro";
 import AProposCta from "../components/sections/a-propos/AProposCta.astro";
+import { site } from "../lib/site-data";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.founder,
+  jobTitle: "Cuisinier à domicile",
+  worksFor: { "@id": `${site.url}/#business` },
+  url: `${site.url}/a-propos`,
+  description:
+    "Bruno Pereira Vaz, cuisinier à domicile dans le Vexin. CAP Cuisine, master en sciences sociales, parcours en agriculture paysanne et restauration traditionnelle.",
+  knowsAbout: [
+    "Cuisine du quotidien",
+    "Batch cooking",
+    "Cuisine à domicile",
+    "Agriculture paysanne",
+  ],
+};
 ---
 
 <BaseLayout
   title="À propos du Cuistologue"
   seoTitle="À propos — Bruno Pereira Vaz, cuisinier à domicile | Le Cuistologue"
   description="Bruno Pereira Vaz, cuisinier à domicile dans le Vexin : un parcours entre cuisine, sciences sociales et agriculture paysanne, au service d'une cuisine du quotidien."
+  jsonLd={personJsonLd}
 >
   <AProposHeader />
   <AProposContent />

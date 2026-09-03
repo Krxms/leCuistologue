@@ -1,16 +1,6 @@
 ---
 import "../../../styles/sections/faq/faq-accordion.css";
-import { questions } from "../../../lib/faq-data";
-
-const emailRegex = /[\w.+-]+@[\w-]+\.[\w.-]+/g;
-
-function linkifyEmail(texte: string) {
-  const echappe = texte
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-  return echappe.replace(emailRegex, (email) => `<a href="mailto:${email}">${email}</a>`);
-}
+import { questions, answerToHtml } from "../../../lib/faq-data";
 
 const milieu = Math.ceil(questions.length / 2);
 const colonneGauche = questions.slice(0, milieu);
@@ -33,7 +23,7 @@ const colonneDroite = questions.slice(milieu);
           </summary>
           <div class="faq-accordion__answer">
             {item.r.split("\n\n").map((paragraphe) => (
-              <p set:html={linkifyEmail(paragraphe)} />
+              <p set:html={answerToHtml(paragraphe)} />
             ))}
           </div>
         </details>
@@ -50,7 +40,7 @@ const colonneDroite = questions.slice(milieu);
           </summary>
           <div class="faq-accordion__answer">
             {item.r.split("\n\n").map((paragraphe) => (
-              <p set:html={linkifyEmail(paragraphe)} />
+              <p set:html={answerToHtml(paragraphe)} />
             ))}
           </div>
         </details>

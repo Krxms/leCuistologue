@@ -2,11 +2,35 @@
    Consommé par le composant FaqAccordion (affichage) ET par la page
    /faq (données structurées FAQPage). Une seule liste : l'accordéon
    et le schema ne peuvent pas diverger.
+
+   Les réponses acceptent une mini-syntaxe de lien interne
+   `[texte](/chemin)` : rendue en <a> à l'affichage, réduite au seul
+   `texte` dans le schema FAQPage.
    ================================================================== */
 
 export interface FaqEntry {
   q: string;
   r: string;
+}
+
+/** Un paragraphe de réponse → HTML sûr : échappe, puis lie les e-mails
+    et les liens internes `[texte](/chemin)`. */
+export function answerToHtml(paragraphe: string): string {
+  const escaped = paragraphe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  return escaped
+    .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, (email) => `<a href="mailto:${email}">${email}</a>`)
+    .replace(/\[([^\]]+)\]\((\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
+}
+
+/** Même texte, sans balisage — pour `acceptedAnswer.text` du schema. */
+function answerToPlain(r: string): string {
+  return r
+    .replace(/\[([^\]]+)\]\(\/[^\s)]+\)/g, "$1")
+    .replace(/\s*\n+\s*/g, " ")
+    .trim();
 }
 
 export const questions: FaqEntry[] = [
@@ -44,7 +68,7 @@ Lorsque cela est possible, je privilégie les produits de saison et les productr
     q: "Combien de repas sont préparés ?",
     r: `Le nombre de repas dépend du temps prévu, du nombre de personnes, des recettes choisies, de la taille des portions et du niveau de préparation souhaité.
 
-Les formules indiquent un nombre de repas à titre indicatif. Selon les situations, une intervention peut permettre de préparer des repas complets, des recettes, mais aussi des préparations complémentaires ou des bases culinaires à utiliser au fil de la semaine.
+Les [formules](/formules) indiquent un nombre de repas à titre indicatif. Selon les situations, une intervention peut permettre de préparer des repas complets, des recettes, mais aussi des préparations complémentaires ou des bases culinaires à utiliser au fil de la semaine.
 
 L’objectif est toujours le même : vous préparer suffisamment de choses pour rendre votre quotidien plus simple.`,
   },
@@ -110,7 +134,7 @@ Nous définissons ensemble les modalités pratiques avant l'intervention.`,
   },
   {
     q: "Dans quelle zone géographique intervenez-vous ?",
-    r: `Le Cuistologue intervient principalement dans le Vexin et les départements voisins :
+    r: `Le Cuistologue intervient principalement dans le [Vexin et les départements voisins](/cuisinier-a-domicile-oise) :
 – les Yvelines (78) ;
 – le Val-d'Oise (95) ;
 – l'Oise (60) ;
@@ -124,7 +148,7 @@ Vous avez un doute ? Indiquez-moi simplement votre commune et je vous dirai si j
     q: "Les formules présentées sur le site sont-elles les seules possibilités ?",
     r: `Non.
 
-Les formules Le petit panier, La belle tablée et La grande récolte, donnent un cadre simple pour vous aider à choisir.
+Les [formules](/formules) Le petit panier, La belle tablée et La grande récolte donnent un cadre simple pour vous aider à choisir.
 
 Mais chaque foyer est différent. Il est donc tout à fait possible de construire ensemble une prestation à la carte, ponctuelle ou régulière, en fonction de vos besoins, de votre budget et de votre organisation.
 
@@ -140,11 +164,11 @@ Des ateliers dédiés seront prochainement proposés sur le site. Ce sera l'occa
   },
   {
     q: "Combien coûte une intervention ?",
-    r: `Les tarifs des différentes formules sont présentés directement sur le site.
+    r: `Les tarifs des différentes [formules](/formules) sont présentés directement sur le site.
 
 Le prix dépend notamment du temps consacré à la préparation, du nombre de personnes, du volume de cuisine souhaité et des éventuels achats réalisés pour votre compte.
 
-Lorsque les conditions réglementaires sont réunies, une prestation éligible peut ouvrir droit à l'avantage fiscal applicable aux services à la personne. Les modalités et le montant correspondant sont précisés dans les documents remis avant la prestation.`,
+Lorsque les conditions réglementaires sont réunies, une prestation éligible peut ouvrir droit au [crédit d'impôt services à la personne](/avanceimmediate). Les modalités et le montant correspondant sont précisés dans les documents remis avant la prestation.`,
   },
   {
     q: "Je ne sais pas quelle formule choisir. Que faire ?",
@@ -168,7 +192,7 @@ Si vous ne savez pas quelle formule choisir ou si votre besoin ne correspond pas
   },
 ];
 
-/** Schema.org FAQPage à partir de la liste ci-dessus (texte aplati en une chaîne). */
+/** Schema.org FAQPage à partir de la liste ci-dessus (texte aplati, sans balisage). */
 export function faqJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -178,7 +202,7 @@ export function faqJsonLd() {
       name: q,
       acceptedAnswer: {
         "@type": "Answer",
-        text: r.replace(/\s*\n+\s*/g, " ").trim(),
+        text: answerToPlain(r),
       },
     })),
   };

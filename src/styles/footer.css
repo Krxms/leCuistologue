@@ -160,7 +160,7 @@
 
 .footer__bottom p {
   margin: 0;
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   letter-spacing: 0.04em;
   color: var(--color-ink-soft);

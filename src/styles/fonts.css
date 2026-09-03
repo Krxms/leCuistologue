@@ -1,0 +1,60 @@
+/* ===== Polices auto-hébergées ======================================
+   Poppins (titres, --font-display) + Inter (corps, --font-body),
+   sous-ensemble latin uniquement (couvre tout le français : accents,
+   œ, guillemets « », €, tirets, apostrophe typographique…).
+   Fichiers dans /public/fonts, récupérés depuis Google Fonts puis
+   servis en propre : plus d'appel à fonts.googleapis.com /
+   fonts.gstatic.com (LCP + RGPD).
+   Inter est variable : un seul fichier couvre 400 → 700.
+   ================================================================== */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/poppins-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/poppins-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/poppins-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/poppins-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/poppins-800.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fonts/poppins-900.woff2") format("woff2");
+}

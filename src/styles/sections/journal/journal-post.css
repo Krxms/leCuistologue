@@ -1,0 +1,120 @@
+.journal-post {
+  padding: 6rem 1.5rem 5rem;
+  background-color: var(--color-cream);
+}
+
+.journal-post__inner {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.journal-post__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.journal-post__breadcrumb a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.journal-post__breadcrumb a:hover {
+  color: var(--color-gold);
+}
+
+.journal-post__breadcrumb [aria-current="page"] {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.journal-post__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.journal-post__date {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  color: #9a9a92;
+}
+
+.journal-post__body {
+  margin-top: 2.5rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+.journal-post__body h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-ink);
+}
+
+.journal-post__body h3 {
+  margin: 2rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--color-ink);
+}
+
+.journal-post__body p {
+  margin: 0 0 1.15rem;
+}
+
+.journal-post__body ul,
+.journal-post__body ol {
+  margin: 0 0 1.15rem;
+  padding-left: 1.4rem;
+}
+
+.journal-post__body li {
+  margin-bottom: 0.4rem;
+}
+
+.journal-post__body a {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.journal-post__body a:hover {
+  color: var(--color-gold);
+}
+
+.journal-post__back {
+  display: inline-block;
+  margin-top: 3rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  .journal-post {
+    padding: 4.5rem 1.25rem 3.5rem;
+  }
+
+  .journal-post__body {
+    font-size: 1rem;
+  }
+}
