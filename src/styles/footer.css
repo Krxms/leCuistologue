@@ -126,6 +126,15 @@
   text-decoration: underline;
 }
 
+.footer__address {
+  margin-top: 1rem;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
 .footer__zone {
   margin-top: 1rem;
   font-family: var(--font-body);
@@ -294,6 +303,7 @@
     font-size: 0.8rem;
   }
 
+  .footer__address,
   .footer__zone {
     font-size: 0.75rem;
   }

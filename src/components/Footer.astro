@@ -2,17 +2,17 @@
 import "../styles/footer.css";
 
 import logo from "../assets/footer/logo.svg";
-import instagram from "../assets/footer/instagram.svg";
-import facebook from "../assets/footer/facebook.svg";
 import servicesIcon from "../assets/footer/services-a-la-personne.png";
 import { Image } from "astro:assets";
+import { site } from "../lib/site-data";
 
 const navigation = [
   { label: "Accueil", href: "/" },
   { label: "Comment ça marche ?", href: "/#comment-ca-marche" },
   { label: "Formules", href: "/formules" },
   { label: "À propos", href: "/a-propos" },
-  { label: "Avance immédiate", href: "/avance-immediate" },
+  { label: "Avance immédiate", href: "/avanceimmediate" },
+  { label: "Zone d'intervention", href: "/cuisinier-a-domicile-oise" },
   { label: "FAQ", href: "/faq" },
 ];
 
@@ -34,14 +34,17 @@ const annee = new Date().getFullYear();
       <p class="footer__description">
         Des repas préparés directement chez vous, par un professionnel, pour retrouver le plaisir de bien manger sans passer vos soirées en cuisine.
       </p>
-      <div class="footer__social">
-        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-          <img src={instagram.src} alt="" aria-hidden="true" />
-        </a>
-        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-          <img src={facebook.src} alt="" aria-hidden="true" />
-        </a>
-      </div>
+      {site.social.length > 0 && (
+        <div class="footer__social">
+          {site.social.map((reseau) => (
+            <a href={reseau.url} aria-label={reseau.label} target="_blank" rel="noopener noreferrer">
+              {reseau.label}
+            </a>
+          ))}
+        </div>
+      )}
+      {/* Réseaux sociaux masqués tant que les vraies URL ne sont pas
+          renseignées dans site.social (src/lib/site-data.ts). */}
     </div>
 
     <nav class="footer__col footer__col--nav">
@@ -66,12 +69,16 @@ const annee = new Date().getFullYear();
     <div class="footer__col footer__col--contact">
       <h3 class="footer__col-title">Contact</h3>
       <ul>
-        <li><a href="tel:0612776264">06 12 77 62 64</a></li>
-        <li><a href="mailto:contact@lecuistologue.fr">contact@lecuistologue.fr</a></li>
+        <li><a href={site.phone.href}>{site.phone.display}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
       </ul>
+      <address class="footer__address">
+        {site.address.street}<br />
+        {site.address.postalCode} {site.address.city}
+      </address>
       <p class="footer__zone">
         Zone d'intervention<br />
-        Oise · Val-d'Oise · Yvelines
+        {site.areas.map((a) => a.name).join(" · ")}
       </p>
       <Image src={servicesIcon} alt="Services à la personne" class="footer__services-icon" />
     </div>

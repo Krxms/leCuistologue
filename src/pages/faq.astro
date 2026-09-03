@@ -3,9 +3,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import FaqHeader from "../components/sections/faq/FaqHeader.astro";
 import FaqAccordion from "../components/sections/faq/FaqAccordion.astro";
 import FaqCta from "../components/sections/faq/FaqCta.astro";
+import { faqJsonLd } from "../lib/faq-data";
 ---
 
-<BaseLayout title="Questions fréquentes">
+<BaseLayout
+  title="Questions fréquentes"
+  seoTitle="FAQ — cuisinier à domicile dans le Vexin | Le Cuistologue"
+  description="Fonctionnement, zone d'intervention (Oise, Val-d'Oise, Yvelines, Eure), tarifs, crédit d'impôt : les réponses aux questions les plus fréquentes sur Le Cuistologue."
+  jsonLd={faqJsonLd()}
+>
   <FaqHeader />
   <FaqAccordion />
   <FaqCta />

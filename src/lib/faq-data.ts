@@ -1,0 +1,185 @@
+/* ===== FAQ — SOURCE UNIQUE =========================================
+   Consommé par le composant FaqAccordion (affichage) ET par la page
+   /faq (données structurées FAQPage). Une seule liste : l'accordéon
+   et le schema ne peuvent pas diverger.
+   ================================================================== */
+
+export interface FaqEntry {
+  q: string;
+  r: string;
+}
+
+export const questions: FaqEntry[] = [
+  {
+    q: "Comment fonctionne Le Cuistologue ?",
+    r: `Je viens cuisiner directement dans votre cuisine.
+
+Avant chaque intervention, nous échangeons sur vos habitudes, vos goûts, vos envies, vos contraintes et votre quotidien. Je vous propose ensuite une organisation et des préparations adaptées à votre foyer.
+
+Pendant l'intervention, je prépare plusieurs repas ou bases culinaires à l'avance. Les préparations sont ensuite rangées dans votre réfrigérateur, avec les indications nécessaires, et je laisse votre cuisine propre.
+
+Lorsque cela est nécessaire ou plus pratique, je peux également venir avec une partie de mon petit matériel professionnel.
+
+Vous retrouvez ainsi le plaisir de manger maison, sans avoir à tout préparer vous-même.`,
+  },
+  {
+    q: "Que prépare Le Cuistologue ?",
+    r: `Je prépare une cuisine simple, bien exécutée et pensée pour votre quotidien.
+
+Le menu est défini avec vous selon vos goûts, vos habitudes, votre rythme de vie et vos envies. Je peux vous proposer des idées et des recettes, mais rien n’est imposé : nous construisons ensemble ce qui trouvera sa place dans votre réfrigérateur.
+
+Selon vos besoins, je peux préparer des repas complets, des recettes, ou des bases culinaires à assembler au fil de la semaine : légumes cuisinés, soupes, céréales, légumineuses, sauces, tartes, gratins ou préparations à congeler.
+
+Mon rôle est d’apporter mon savoir-faire de cuisinier, mes idées et mon expérience pour transformer vos envies en une cuisine variée, pratique et savoureuse.`,
+  },
+  {
+    q: "Est-ce du batch cooking ?",
+    r: `Le batch cooking consiste à préparer plusieurs repas ou préparations à l'avance afin de gagner du temps pendant la semaine.
+
+Le Cuistologue peut s'inscrire dans cette logique, mais son approche va plus loin. Pour moi, bien manger ne consiste pas seulement à avoir des plats prêts dans le réfrigérateur. C'est aussi choisir ce que l'on met dans son assiette, prendre en compte son quotidien, créer du lien, savoir d'où viennent les produits et valoriser le travail de celles et ceux qui les produisent.
+
+Lorsque cela est possible, je privilégie les produits de saison et les productrices et producteurs engagés dans une agriculture paysanne, biologique ou respectueuse de l'environnement.`,
+  },
+  {
+    q: "Combien de repas sont préparés ?",
+    r: `Le nombre de repas dépend du temps prévu, du nombre de personnes, des recettes choisies, de la taille des portions et du niveau de préparation souhaité.
+
+Les formules indiquent un nombre de repas à titre indicatif. Selon les situations, une intervention peut permettre de préparer des repas complets, des recettes, mais aussi des préparations complémentaires ou des bases culinaires à utiliser au fil de la semaine.
+
+L’objectif est toujours le même : vous préparer suffisamment de choses pour rendre votre quotidien plus simple.`,
+  },
+  {
+    q: "Qui fait les courses ?",
+    r: `Vous pouvez faire les courses vous-même à partir d'une liste que je prépare en fonction du menu défini ensemble.
+
+Si vous préférez, nous pouvons également convenir que je m'en charge. Les achats sont alors réalisés selon ce que nous avons prévu, dans le respect du budget défini avec vous.
+
+Et si vous avez déjà des produits à utiliser, nous pouvons bien sûr partir de ce que vous avez chez vous.`,
+  },
+  {
+    q: "D'où viennent les produits ?",
+    r: `Lorsque les courses me sont confiées, je privilégie autant que possible les produits de saison et les circuits courts.
+
+Et quand votre budget et les possibilités locales le permettent, je m’approvisionne de préférence auprès de productrices et producteurs engagés dans une agriculture paysanne, biologique ou respectueuse de l’environnement.
+
+L’idée est de faire vivre, autant que possible, une cuisine qui ait du sens, du producteur jusqu’à l’assiette.`,
+  },
+  {
+    q: "Le Cuistologue peut-il s'adapter à mes habitudes alimentaires ?",
+    r: `Oui. Nous évoquons ensemble vos habitudes, vos préférences, les aliments que vous n’aimez pas et vos éventuelles contraintes alimentaires.
+
+Le menu peut être adapté à une alimentation végétarienne ou à toutes autres habitudes particulières. Si vous avez une allergie ou une intolérance, il est important de me le signaler avant l’intervention afin que nous puissions organiser les préparations dans les meilleures conditions.
+
+Dans une cuisine domestique, les conditions ne sont toutefois pas toujours celles d’un laboratoire dédié à l’absence totale d’allergènes. Les modalités doivent donc être évoquées précisément avant toute prestation concernée.`,
+  },
+  {
+    q: "Comment les repas sont-ils conservés ?",
+    r: `Les préparations sont rangées directement dans votre réfrigérateur et organisées pour faciliter votre quotidien.
+
+Je recommande de disposer de contenants adaptés à la conservation et, lorsque cela est nécessaire, au réchauffage au four ou au micro-ondes. Les contenants en verre peuvent notamment permettre de passer plus facilement du stockage au réchauffage, sans multiplier les manipulations.
+
+Vous avez déjà vos contenants ? Parfait, je fais avec ce que vous avez.
+
+Vous n'en avez pas ou vous ne savez pas lesquels choisir ? Je peux vous conseiller sur les modèles adaptés à vos besoins et, si vous le souhaitez, acheter les contenants nécessaires pour vous, sur remboursement des frais engagés.
+
+Les préparations sont identifiées et accompagnées, lorsque cela est nécessaire, de conseils simples concernant leur conservation, leur réchauffage ou leur congélation.`,
+  },
+  {
+    q: "Et si j'ai une question après votre passage ?",
+    r: `Je ne disparais pas une fois la porte refermée.
+
+Si vous avez un doute sur la conservation, une question sur la manière de réchauffer un plat ou simplement besoin d'un conseil pour profiter au mieux des préparations, vous pouvez me contacter après l'intervention.
+
+L'idée est de vous accompagner dans la durée, pas simplement de cuisiner puis de repartir.`,
+  },
+  {
+    q: "Comment l'hygiène est-elle assurée pendant l'intervention ?",
+    r: `L'hygiène fait partie intégrante du métier de cuisinier et de chaque intervention.
+
+Je veille à appliquer les bonnes pratiques tout au long de la préparation : lavage des mains, nettoyage des surfaces, organisation du poste de travail, respect de la chaîne du froid, séparation des aliments lorsque cela est nécessaire et rangement adapté des préparations.
+
+Je prends également le temps de nettoyer votre espace de travail avant de partir.`,
+  },
+  {
+    q: "Dois-je être présent pendant que vous cuisinez ?",
+    r: `Non, pas forcément.
+
+Vous pouvez rester avec moi, continuer à travailler, vous occuper des enfants ou simplement vaquer à vos occupations. Je m'adapte à votre maison et à votre rythme.
+
+Nous définissons ensemble les modalités pratiques avant l'intervention.`,
+  },
+  {
+    q: "Dans quelle zone géographique intervenez-vous ?",
+    r: `Le Cuistologue intervient principalement dans le Vexin et les départements voisins :
+– les Yvelines (78) ;
+– le Val-d'Oise (95) ;
+– l'Oise (60) ;
+– l'Eure (27).
+
+La zone d'intervention peut varier selon votre commune, la distance à parcourir et le type de prestation souhaité.
+
+Vous avez un doute ? Indiquez-moi simplement votre commune et je vous dirai si je peux intervenir chez vous.`,
+  },
+  {
+    q: "Les formules présentées sur le site sont-elles les seules possibilités ?",
+    r: `Non.
+
+Les formules Le petit panier, La belle tablée et La grande récolte, donnent un cadre simple pour vous aider à choisir.
+
+Mais chaque foyer est différent. Il est donc tout à fait possible de construire ensemble une prestation à la carte, ponctuelle ou régulière, en fonction de vos besoins, de votre budget et de votre organisation.
+
+Vous avez une idée qui ne correspond à aucune formule ? Parlons-en.`,
+  },
+  {
+    q: "Le Cuistologue propose-t-il aussi des ateliers ?",
+    r: `Oui, c'est une partie du projet qui prendra progressivement sa place.
+
+Je propose déjà ponctuellement des temps de transmission, de cuisine et de rencontre autour de l'agriculture paysanne et de l'alimentation, notamment dans une dimension intergénérationnelle.
+
+Des ateliers dédiés seront prochainement proposés sur le site. Ce sera l'occasion de cuisiner ensemble, de transmettre des savoir-faire, de parler de ce que nous mangeons et de celles et ceux qui le produisent.`,
+  },
+  {
+    q: "Combien coûte une intervention ?",
+    r: `Les tarifs des différentes formules sont présentés directement sur le site.
+
+Le prix dépend notamment du temps consacré à la préparation, du nombre de personnes, du volume de cuisine souhaité et des éventuels achats réalisés pour votre compte.
+
+Lorsque les conditions réglementaires sont réunies, une prestation éligible peut ouvrir droit à l'avantage fiscal applicable aux services à la personne. Les modalités et le montant correspondant sont précisés dans les documents remis avant la prestation.`,
+  },
+  {
+    q: "Je ne sais pas quelle formule choisir. Que faire ?",
+    r: `Ne vous prenez pas la tête.
+
+Écrivez-moi ou appelez-moi en m'expliquant simplement combien vous êtes à la maison, ce que vous aimeriez améliorer et à quoi ressemble votre semaine.
+
+Nous verrons ensemble ce qui peut vous correspondre le mieux. Et si aucune formule ne convient exactement à votre situation, nous construirons une prestation adaptée.`,
+  },
+  {
+    q: "Qui a construit ce site ?",
+    r: `Ce site a été imaginé et construit par Antoine Bruneau, qui a su traduire l'esprit du Cuistologue en mots, en images et en lignes de code.
+
+Vous avez un projet de site, une envie de refaire le vôtre ou simplement une question ? Vous pouvez contacter Antoine Bruneau à l'adresse suivante : antoine.bruneau@protonmail.com`,
+  },
+  {
+    q: "Une dernière question ?",
+    r: `Chaque foyer a ses habitudes, ses envies et son propre rythme.
+
+Si vous ne savez pas quelle formule choisir ou si votre besoin ne correspond pas exactement à ce qui est présenté sur le site, contactez-moi. Nous verrons ensemble ce qui peut vous convenir.`,
+  },
+];
+
+/** Schema.org FAQPage à partir de la liste ci-dessus (texte aplati en une chaîne). */
+export function faqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map(({ q, r }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: r.replace(/\s*\n+\s*/g, " ").trim(),
+      },
+    })),
+  };
+}

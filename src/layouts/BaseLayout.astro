@@ -5,16 +5,70 @@ import "../styles/cookie-consent.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import { site } from "../lib/site-data";
 
 interface Props {
+  /** Titre court (nom de la page). Fallback : « <title> — Le Cuistologue ». */
   title: string;
+  /** Balise <title> complète, prioritaire sur `title` (pour un titre SEO sur mesure). */
+  seoTitle?: string;
+  /** Meta description — viser < ~160 caractères, phrase forte en tête. */
   description?: string;
+  /** Chemin d'une image de partage (OpenGraph) ; rendue absolue via `site.url`. */
+  image?: string;
+  /** true → <meta robots noindex> (404, pages sans intérêt de référencement). */
+  noindex?: boolean;
+  /** Données structurées JSON-LD propres à la page (objet ou tableau d'objets). */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title,
-  description = "Le Cuistologue — une cuisine maison qui simplifie vraiment votre quotidien.",
+  seoTitle,
+  description = site.tagline,
+  // TODO : remplacer par une vraie image de partage 1200×630 dans /public.
+  image = "/favicon.png",
+  noindex = false,
+  jsonLd,
 } = Astro.props;
+
+const pageTitle = seoTitle ?? `${title} — ${site.name}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+
+/* Schema principal, présent sur toutes les pages : établit l'entité
+   locale (nom, adresse, téléphone, zone desservie) auprès de Google. */
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${site.url}/#business`,
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  image: ogImage,
+  telephone: site.phone.e164,
+  email: site.email,
+  priceRange: site.priceRange,
+  description:
+    "Cuisinier à domicile spécialiste de la cuisine du quotidien. Le Cuistologue prépare vos repas de la semaine directement chez vous, dans le Vexin — Oise, Val-d'Oise, Yvelines et Eure.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    addressCountry: site.address.countryCode,
+  },
+  areaServed: site.areas.map((a) => ({ "@type": "AdministrativeArea", name: a.name })),
+  founder: { "@type": "Person", name: site.founder },
+  knowsLanguage: "fr-FR",
+  ...(site.social.length ? { sameAs: site.social.map((s) => s.url) } : {}),
+};
+
+const schemas = [
+  localBusiness,
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+];
 ---
 
 <!doctype html>
@@ -25,8 +79,23 @@ const {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <title>{title} — Le Cuistologue</title>
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,20 +104,9 @@ const {
       rel="stylesheet"
     />
 
-    <script type="application/ld+json" is:inline set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Le Cuistologue",
-      "url": "https://lecuistologue.fr",
-      "telephone": "+33619957409",
-      "email": "contact@lecuistologue.fr",
-      "description": "Cuisinier à domicile spécialiste du batch cooking, préparation de repas maison directement chez vous.",
-      "areaServed": [
-        { "@type": "AdministrativeArea", "name": "Oise" },
-        { "@type": "AdministrativeArea", "name": "Val-d'Oise" },
-        { "@type": "AdministrativeArea", "name": "Yvelines" }
-      ]
-    })} />
+    {schemas.map((schema) => (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    ))}
   </head>
   <body class="bg-cream text-ink">
     <Header />
