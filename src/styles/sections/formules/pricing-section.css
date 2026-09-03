@@ -335,6 +335,10 @@
   border-radius: 20px;
 }
 
+.pricing-credit__highlight {
+  color: #bc843c;
+}
+
 .pricing-credit__lead {
   display: flex;
   align-items: center;
@@ -353,19 +357,48 @@
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
   line-height: 1.5;
   color: var(--color-ink);
 }
 
-.pricing-credit__desc {
-  margin: 0;
+/* Colonne de droite : le filet vertical séparateur et son retrait
+   sont portés ici (et non plus directement sur le <p>) depuis l'ajout
+   du lien « En savoir plus » sous la description. */
+.pricing-credit__body {
   padding-left: 2.5rem;
   border-left: 1px solid rgba(37, 61, 74, 0.12);
+}
+
+.pricing-credit__desc {
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.55;
   color: var(--color-ink-soft);
+}
+
+/* Lien de renvoi vers la page Crédit d'impôt (/avanceimmediate, même
+   cible que l'entrée de nav « Crédit d'impôt ») : le sujet est
+   seulement résumé ici, la page dédiée le détaille. */
+.pricing-credit__more {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #bc843c;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.pricing-credit__more::after {
+  content: "\00a0\2192";
+}
+
+.pricing-credit__more:hover {
+  color: #9a6a2f;
 }
 
 /* ============================================================
@@ -466,9 +499,16 @@
     gap: 1.5rem;
   }
 
-  .pricing-credit__desc {
+  .pricing-credit__body {
     padding-left: 1.5rem;
-    font-size: 0.82rem;
+  }
+
+  .pricing-credit__desc {
+    font-size: 0.9rem;
+  }
+
+  .pricing-credit__more {
+    font-size: 0.88rem;
   }
 }
 
@@ -622,12 +662,15 @@
   }
 
   .pricing-credit__title {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
+  }
+
+  .pricing-credit__body {
+    padding-left: 0;
+    border-left: none;
   }
 
   .pricing-credit__desc {
-    padding-left: 0;
-    border-left: none;
-    font-size: 0.85rem;
+    font-size: 0.92rem;
   }
 }

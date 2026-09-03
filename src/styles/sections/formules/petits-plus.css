@@ -25,13 +25,17 @@
   flex-wrap: wrap;
 }
 
-/* ===== Carte — base partagée (forme, recadrage du fond) ===== */
+/* ===== Carte — base partagée (forme, fond) ===== */
 
 .petits-plus-card {
   position: relative;
-  width: 29.6%;
+  width: 30%;
   min-width: 304px;
   max-width: 520px;
+  /* Les 3 SVG ont désormais le même viewBox (2150x1484), sheet à la
+     même place dedans → un seul ratio commun, les 3 cartes sont
+     strictement identiques. */
+  aspect-ratio: 2150 / 1484;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -41,25 +45,9 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  /* ratio carte = ratio SVG → cover ne rogne ni ne déforme rien. */
   object-fit: cover;
   z-index: 0;
-  transform: scale(1);
-}
-
-/* Chaque carte gère sa propre taille ici, indépendamment des deux autres */
-.petits-plus-card--course {
-  aspect-ratio: 600 / 402;
-  transform: scale(1.2);
-}
-
-.petits-plus-card--popote {
-  aspect-ratio: 600 / 402;
-  transform: scale(1.25);
-}
-
-.petits-plus-card--gourmande {
-  aspect-ratio: 600 / 402;
-  transform: scale(1.1);
 }
 
 /* ===== Contenu — base partagée (empilement au-dessus du fond) ===== */
@@ -67,7 +55,6 @@
 .petits-plus-content {
   position: absolute;
   z-index: 1;
-  transform: rotate(-2deg);
 }
 
 .petits-plus-content__title {
@@ -131,7 +118,6 @@
   left: 15%;
   top: 32%;
   width: 81%;
-  transform: rotate(2deg);
 }
 
 .petits-plus-content--popote .petits-plus-content__title {
@@ -266,7 +252,7 @@
   }
 
   .petits-plus__title {
-    margin: 0 0 5rem;
+    margin: 0 0 1rem;
   }
 
   .petits-plus-content__description {
@@ -279,13 +265,10 @@
     width: 81%;
   }
 
-  .petits-plus-card--course {
-    margin-left: 1rem;
-  }
-
-  .petits-plus-card--gourmande {
-    margin-left: -0.5rem;
-  }
+  /* Les décalages margin-left (course +1rem, gourmande -0,5rem) qui
+     recentraient approximativement l'ancien fond rogné ne servent plus :
+     les 3 SVG ont le même viewBox, les 3 cartes empilées sont donc
+     simplement centrées et alignées. */
 
   .petits-plus-content--gourmande .petits-plus-content__title {
     font-size: clamp(0.9rem, 1.4vw, 0.9rem);

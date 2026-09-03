@@ -410,9 +410,11 @@
     flex-basis: auto;
     padding-left: 0;
     padding-top: 0;
-    /* Centré comme la section Offre en mobile (titre, phonétique,
-       texte). */
-    text-align: center;
+    /* Texte ferré à gauche (titre, phonétique, paragraphes) : un bloc
+       de texte courant centré a un bord gauche irrégulier qui gêne la
+       lecture et l'accessibilité. Le CTA en dessous reste centré via
+       son propre margin-inline:auto. */
+    text-align: left;
   }
 
   .presentation__title-icon {
@@ -431,7 +433,7 @@
 
   .presentation__cta {
     display: flex;
-    width: 85%;
+    width: 100%;
     /* padding-inline:55px (hérité de la base) laissait trop peu de
        place au texte sur une largeur mobile réduite, le forçant sur
        deux lignes malgré le nowrap. Réduit pour que "Découvrir sa

@@ -94,10 +94,6 @@
   color: #DAA35B;
 }
 
-.offre__titleAccent {
-  color: #DAA35B;
-}
-
 .offre__title-icon {
   display: none;
   position: absolute;
@@ -433,7 +429,10 @@
   z-index: 1;
   padding-top: 3rem;
   padding-inline: 8%;
-  text-align: center;
+  /* Ferré à gauche : le titre retombe sur ~3 lignes en mobile, centré
+     il aurait les deux bords irréguliers. Aligné avec la description
+     juste en dessous. */
+  text-align: left;
 }
 
 .offre-m__title {
@@ -453,7 +452,9 @@
   z-index: 1;
   margin-top: 1rem;
   padding-inline: 8%;
-  text-align: center;
+  /* Paragraphe de 3 phrases : ferré à gauche pour la lisibilité
+     (bord gauche régulier), plutôt que centré. */
+  text-align: left;
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 0.95rem;

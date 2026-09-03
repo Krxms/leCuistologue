@@ -54,13 +54,16 @@ import { formules } from "../../../lib/formules-data";
   <div class="pricing-credit__lead">
     <img src={creditIcon.src} alt="" class="pricing-credit__icon" aria-hidden="true" />
     <p class="pricing-credit__title">
-      Bénéficiez de 50% de crédit d'impôt<br />
+      Bénéficiez de <span class="pricing-credit__highlight">50%</span> de crédit d'impôt<br />
       avec avance immédiate
     </p>
   </div>
-  <p class="pricing-credit__desc">
-    Vous ne payez que la moitié du montant de la facture : le crédit d'impôt est déduit automatiquement, sans avance de votre part.
-  </p>
+  <div class="pricing-credit__body">
+    <p class="pricing-credit__desc">
+      Vous ne payez que la moitié du montant de la facture : le crédit d'impôt est déduit automatiquement, sans avance de votre part.
+    </p>
+    <a href="/avanceimmediate" class="pricing-credit__more">En savoir plus</a>
+  </div>
 </div>
 
 <script>
@@ -250,8 +253,8 @@ import { formules } from "../../../lib/formules-data";
     function centrerSurEmphase() {
       if (!mobileMq.matches || carrouselTouche) return;
       const cr = cards[index].getBoundingClientRect();
-      const dr = deck.getBoundingClientRect();
-      deck.scrollLeft += cr.left + cr.width / 2 - (dr.left + dr.width / 2);
+      const dr = deck!.getBoundingClientRect();
+      deck!.scrollLeft += cr.left + cr.width / 2 - (dr.left + dr.width / 2);
       dots.forEach((d, i) => d.classList.toggle("pricing-dot--active", i === index));
     }
 
