@@ -49,7 +49,9 @@ export const site = {
    *   slug     : URL /cuisinier-a-domicile-<slug>
    *   prep     : article contracté pour « dans … » (dans l'Oise, dans le Val-d'Oise…)
    *   de       : forme génitive (les villes de l'Oise, du Val-d'Oise, des Yvelines…)
-   *   communes : villes repères (préfectures, sous-préfectures, communes connues)
+   *   secteur  : micro-région réellement couverte (nom usuel, ex. Vexin-Thelle, Mantois)
+   *   communes : liste précise transmise par le client — ne pas compléter
+   *              ni remplacer par d'autres villes sans validation de sa part
    *   intro    : phrase d'accroche PROPRE à chaque page département (visible)
    *   metaDesc : meta description PROPRE à chaque page (< ~160 caractères)
    */
@@ -60,11 +62,12 @@ export const site = {
       slug: "oise",
       prep: "l'Oise",
       de: "de l'Oise",
-      communes: ["Beauvais", "Compiègne", "Creil", "Chantilly", "Senlis", "Méru", "Chaumont-en-Vexin"],
+      secteur: "Vexin-Thelle",
+      communes: ["Beauvais", "Chaumont-en-Vexin", "Méru", "Trie-Château", "Auneuil", "Noailles"],
       intro:
-        "L'Oise, c'est le département d'attache du Cuistologue : il est installé à Serans, dans le Vexin, et intervient sur l'ensemble du territoire — de Beauvais à Compiègne, en passant par Chantilly, Senlis, Creil ou Méru.",
+        "Le Cuistologue est installé à Serans, dans l'Oise, et intervient sur le secteur du Vexin-Thelle : Beauvais, Chaumont-en-Vexin, Méru, Trie-Château, Auneuil, Noailles et les communes voisines.",
       metaDesc:
-        "Cuisinier à domicile dans l'Oise : Le Cuistologue prépare vos repas de la semaine chez vous, de Beauvais à Compiègne, Chantilly, Senlis ou Creil.",
+        "Cuisinier à domicile dans l'Oise, secteur Vexin-Thelle : Beauvais, Chaumont-en-Vexin, Méru, Trie-Château, Auneuil, Noailles. Repas préparés chez vous.",
     },
     {
       name: "Val-d'Oise",
@@ -72,11 +75,12 @@ export const site = {
       slug: "val-doise",
       prep: "le Val-d'Oise",
       de: "du Val-d'Oise",
-      communes: ["Cergy", "Pontoise", "Argenteuil", "L'Isle-Adam", "Franconville", "Ermont", "Magny-en-Vexin"],
+      secteur: "Vexin français et vallée de l'Oise",
+      communes: ["Cergy", "Pontoise", "Magny-en-Vexin", "Marines", "Vigny", "Chars", "L'Isle-Adam", "Persan", "Beaumont-sur-Oise"],
       intro:
-        "Le Cuistologue se déplace dans tout le Val-d'Oise, de l'agglomération de Cergy-Pontoise au Vexin français, en passant par L'Isle-Adam, Franconville ou Ermont.",
+        "Dans le Val-d'Oise, Le Cuistologue intervient sur le Vexin français et la vallée de l'Oise : Cergy, Pontoise, Magny-en-Vexin, Marines, Vigny, Chars, L'Isle-Adam, Persan, Beaumont-sur-Oise.",
       metaDesc:
-        "Cuisinier à domicile dans le Val-d'Oise : repas maison préparés chez vous, de Cergy-Pontoise au Vexin français, L'Isle-Adam, Franconville ou Ermont.",
+        "Cuisinier à domicile dans le Val-d'Oise : Cergy, Pontoise, Magny-en-Vexin, Marines, Vigny, Chars, L'Isle-Adam, Persan, Beaumont-sur-Oise.",
     },
     {
       name: "Yvelines",
@@ -84,11 +88,12 @@ export const site = {
       slug: "yvelines",
       prep: "les Yvelines",
       de: "des Yvelines",
-      communes: ["Versailles", "Saint-Germain-en-Laye", "Poissy", "Sartrouville", "Les Mureaux", "Mantes-la-Jolie", "Rambouillet"],
+      secteur: "Mantois",
+      communes: ["Mantes-la-Jolie", "Mantes-la-Ville", "Limay", "Houdan", "Septeuil", "Bonnières-sur-Seine"],
       intro:
-        "Dans les Yvelines, Le Cuistologue intervient de Mantes-la-Jolie à Saint-Germain-en-Laye, en passant par Poissy, Les Mureaux, Sartrouville ou Versailles.",
+        "Dans les Yvelines, Le Cuistologue intervient sur le Mantois : Mantes-la-Jolie, Mantes-la-Ville, Limay, Houdan, Septeuil, Bonnières-sur-Seine.",
       metaDesc:
-        "Cuisinier à domicile dans les Yvelines : repas de la semaine préparés chez vous, de Mantes-la-Jolie à Saint-Germain-en-Laye, Poissy ou Versailles.",
+        "Cuisinier à domicile dans les Yvelines, secteur du Mantois : Mantes-la-Jolie, Mantes-la-Ville, Limay, Houdan, Septeuil, Bonnières-sur-Seine.",
     },
     {
       name: "Eure",
@@ -96,11 +101,12 @@ export const site = {
       slug: "eure",
       prep: "l'Eure",
       de: "de l'Eure",
-      communes: ["Évreux", "Vernon", "Les Andelys", "Gisors", "Louviers", "Gaillon", "Pont-de-l'Arche"],
+      secteur: "Vexin normand",
+      communes: ["Vernon", "Gisors", "Étrépagny", "Les Andelys", "Écos", "Gasny"],
       intro:
-        "Le Cuistologue traverse la limite normande pour intervenir dans l'Eure, du Vexin normand autour de Gisors jusqu'à Vernon, Les Andelys, Louviers ou Évreux.",
+        "Dans l'Eure, Le Cuistologue intervient sur le Vexin normand : Vernon, Gisors, Étrépagny, Les Andelys, Écos, Gasny.",
       metaDesc:
-        "Cuisinier à domicile dans l'Eure : repas maison préparés chez vous, du Vexin normand autour de Gisors jusqu'à Vernon, Les Andelys ou Évreux.",
+        "Cuisinier à domicile dans l'Eure, secteur du Vexin normand : Vernon, Gisors, Étrépagny, Les Andelys, Écos, Gasny.",
     },
   ],
 
