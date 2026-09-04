@@ -61,12 +61,11 @@ export const site = {
   social: [] as { label: string; url: string }[],
 
   /**
-   * Image de partage OpenGraph (dans /public). favicon.png fait
-   * 1200×1158 : correct comme visuel de partage. Un vrai 1200×630
-   * (ratio paysage) serait mieux cadré sur Facebook / X / LinkedIn,
-   * qui recadrent au centre — le logo doit rester centré.
+   * Image de partage OpenGraph (dans /public). og-image.png fait
+   * 1200×1158 (le logo). Un vrai 1200×630 (ratio paysage) serait mieux
+   * cadré sur Facebook / X / LinkedIn, qui recadrent au centre.
    */
-  ogImage: "/favicon.png",
+  ogImage: "/og-image.png",
 
   /**
    * Codes de vérification des outils pour webmasters. Coller ici la
