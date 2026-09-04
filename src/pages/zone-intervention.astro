@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ZoneHub from "../components/sections/zone/ZoneHub.astro";
+import { site } from "../lib/site-data";
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: `${site.url}/` },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Zone d'intervention",
+      item: `${site.url}/zone-intervention`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Zone d'intervention"
+  seoTitle="Zone d'intervention — Oise, Val-d'Oise, Yvelines, Eure | Le Cuistologue"
+  description="Le Cuistologue, cuisinier à domicile, intervient sur l'ensemble de l'Oise, du Val-d'Oise, des Yvelines et de l'Eure. Une page dédiée par département."
+  jsonLd={breadcrumb}
+>
+  <ZoneHub />
+</BaseLayout>

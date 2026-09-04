@@ -1,0 +1,52 @@
+---
+import "../../../styles/sections/zone/zone.css";
+import { site } from "../../../lib/site-data";
+---
+
+<section class="zone">
+  <div class="zone__content">
+    <nav class="zone__breadcrumb" aria-label="Fil d'Ariane">
+      <a href="/">Accueil</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Zone d'intervention</span>
+    </nav>
+
+    <h1 class="zone__title">Zone d'intervention du Cuistologue</h1>
+
+    <p class="zone__text">
+      Le Cuistologue est un cuisinier à domicile installé à Serans, dans l'Oise, au cœur du Vexin.
+      Il se déplace chez vous sur <strong>l'ensemble de quatre départements</strong> — l'Oise, le
+      Val-d'Oise, les Yvelines et l'Eure — pour préparer, en une seule intervention, des repas
+      maison adaptés à votre quotidien, à partir de votre réfrigérateur et de produits de saison.
+    </p>
+
+    <p class="zone__text">
+      Chaque intervention est pensée sur-mesure : échange préalable sur vos habitudes et vos envies,
+      courses réalisées pour vous si vous le souhaitez, préparation directement dans votre cuisine,
+      puis organisation d'une routine culinaire qui vous simplifie la vie.<br /><br />
+      Le détail des <a href="/formules">formules et tarifs</a> est sur la page dédiée, et chaque
+      prestation éligible ouvre droit au <a href="/avanceimmediate">crédit d'impôt services à la personne</a>.
+    </p>
+
+    <h2 class="zone__subtitle">Choisissez votre département</h2>
+    <ul class="zone__links">
+      {site.areas.map((a) => (
+        <li>
+          <a href={`/cuisinier-a-domicile-${a.slug}`}>
+            {a.name} ({a.code})
+            <span>Cuisinier à domicile dans {a.prep}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <p class="zone__note">
+      Certaines communes ou situations particulières se règlent au cas par cas, entre vous et
+      Le Cuistologue. Et même en dehors de cette zone habituelle, une intervention reste possible
+      après échange. <a href="/contact">Contactez-moi</a> ou appelez le
+      <a href={site.phone.href}>{site.phone.display}</a>.
+    </p>
+
+    <a href="/contact" class="zone__cta">Demander un devis</a>
+  </div>
+</section>

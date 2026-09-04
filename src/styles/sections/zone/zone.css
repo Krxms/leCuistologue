@@ -1,14 +1,19 @@
-.cuisinier-oise {
+/* ===== Pages « Zone d'intervention » ===============================
+   Hub (/zone-intervention) + 4 pages département
+   (/cuisinier-a-domicile-<slug>). Même gabarit typographique.
+   ================================================================== */
+
+.zone {
   padding: 8rem 2rem 6rem;
   background-color: var(--color-cream);
 }
 
-.cuisinier-oise__content {
+.zone__content {
   max-width: 44rem;
   margin-inline: auto;
 }
 
-.cuisinier-oise__breadcrumb {
+.zone__breadcrumb {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -19,31 +24,31 @@
   color: var(--color-ink-soft);
 }
 
-.cuisinier-oise__breadcrumb a {
+.zone__breadcrumb a {
   color: var(--color-ink-soft);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
-.cuisinier-oise__breadcrumb a:hover {
+.zone__breadcrumb a:hover {
   color: var(--color-gold);
 }
 
-.cuisinier-oise__breadcrumb [aria-current="page"] {
+.zone__breadcrumb [aria-current="page"] {
   color: var(--color-ink);
   font-weight: 600;
 }
 
-.cuisinier-oise__title {
+.zone__title {
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(2rem, 3.4vw, 3rem);
   line-height: 1.2;
   color: var(--color-ink);
-  margin: 0;
 }
 
-.cuisinier-oise__text {
+.zone__text {
   margin-top: 1.5rem;
   font-family: var(--font-body);
   font-size: clamp(1.05rem, 1.2vw, 1.25rem);
@@ -51,17 +56,17 @@
   color: var(--color-ink);
 }
 
-.cuisinier-oise__text a {
+.zone__text a {
   color: var(--color-ink-soft);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
-.cuisinier-oise__text a:hover {
+.zone__text a:hover {
   color: var(--color-gold);
 }
 
-.cuisinier-oise__subtitle {
+.zone__subtitle {
   margin-top: 3rem;
   font-family: var(--font-display);
   font-weight: 700;
@@ -69,7 +74,8 @@
   color: var(--color-ink);
 }
 
-.cuisinier-oise__zones {
+/* Puces de communes / départements (texte simple) */
+.zone__chips {
   margin: 1.5rem 0 0;
   padding: 0;
   list-style: none;
@@ -78,7 +84,7 @@
   gap: 0.75rem;
 }
 
-.cuisinier-oise__zones li {
+.zone__chips li {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
@@ -89,7 +95,45 @@
   padding: 0.55rem 1.4rem;
 }
 
-.cuisinier-oise__note {
+/* Cartes-liens vers les pages département (hub) ou entre départements */
+.zone__links {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+.zone__links a {
+  display: block;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-peach);
+  border-radius: 12px;
+  background-color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.zone__links a:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.zone__links a span {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.zone__note {
   margin-top: 1.75rem;
   font-family: var(--font-body);
   font-size: 1rem;
@@ -97,17 +141,17 @@
   color: var(--color-ink-soft);
 }
 
-.cuisinier-oise__note a {
+.zone__note a {
   color: var(--color-ink-soft);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
-.cuisinier-oise__note a:hover {
+.zone__note a:hover {
   color: var(--color-gold);
 }
 
-.cuisinier-oise__cta {
+.zone__cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -124,16 +168,20 @@
   transition: background-color 0.2s ease;
 }
 
-.cuisinier-oise__cta:hover {
+.zone__cta:hover {
   background-color: #1a2b35;
 }
 
 @media (max-width: 767px) {
-  .cuisinier-oise {
+  .zone {
     padding: 5rem 1.5rem 4rem;
   }
 
-  .cuisinier-oise__cta {
+  .zone__links {
+    grid-template-columns: 1fr;
+  }
+
+  .zone__cta {
     width: 100%;
   }
 }

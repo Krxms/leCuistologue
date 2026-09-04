@@ -134,7 +134,7 @@ Nous définissons ensemble les modalités pratiques avant l'intervention.`,
   },
   {
     q: "Dans quelle zone géographique intervenez-vous ?",
-    r: `Le Cuistologue intervient principalement dans le [Vexin et les départements voisins](/cuisinier-a-domicile-vexin) :
+    r: `Le Cuistologue intervient sur [quatre départements](/zone-intervention) :
 – les Yvelines (78) ;
 – le Val-d'Oise (95) ;
 – l'Oise (60) ;

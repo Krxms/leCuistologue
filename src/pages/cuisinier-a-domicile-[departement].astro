@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ZoneDepartement from "../components/sections/zone/ZoneDepartement.astro";
+import { site } from "../lib/site-data";
+
+export function getStaticPaths() {
+  return site.areas.map((area) => ({
+    params: { departement: area.slug },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props;
+const url = `${site.url}/cuisinier-a-domicile-${area.slug}`;
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `Cuisinier à domicile dans ${area.prep}`,
+  serviceType: "Préparation de repas à domicile",
+  provider: { "@id": `${site.url}/#business` },
+  areaServed: { "@type": "AdministrativeArea", name: area.name },
+  url,
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Zone d'intervention", item: `${site.url}/zone-intervention` },
+    { "@type": "ListItem", position: 3, name: area.name, item: url },
+  ],
+};
+---
+
+<BaseLayout
+  title={`Cuisinier à domicile dans ${area.prep}`}
+  seoTitle={`Cuisinier à domicile dans ${area.prep} (${area.code}) | Le Cuistologue`}
+  description={area.metaDesc}
+  jsonLd={[serviceJsonLd, breadcrumbJsonLd]}
+>
+  <ZoneDepartement area={area} />
+</BaseLayout>

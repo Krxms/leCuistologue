@@ -42,12 +42,66 @@ export const site = {
   siret: "10163002800013",
   siren: "101 630 028",
 
-  /** Zone d'intervention — 4 départements autour du Vexin. Ordre = ordre d'affichage. */
+  /**
+   * Zone d'intervention — 4 départements. Bruno couvre l'ensemble du
+   * territoire de chacun (exceptions au cas par cas, et interventions
+   * possibles au-delà après échange).
+   *   slug     : URL /cuisinier-a-domicile-<slug>
+   *   prep     : article contracté pour « dans … » (dans l'Oise, dans le Val-d'Oise…)
+   *   de       : forme génitive (les villes de l'Oise, du Val-d'Oise, des Yvelines…)
+   *   communes : villes repères (préfectures, sous-préfectures, communes connues)
+   *   intro    : phrase d'accroche PROPRE à chaque page département (visible)
+   *   metaDesc : meta description PROPRE à chaque page (< ~160 caractères)
+   */
   areas: [
-    { name: "Oise", code: "60" },
-    { name: "Val-d'Oise", code: "95" },
-    { name: "Yvelines", code: "78" },
-    { name: "Eure", code: "27" },
+    {
+      name: "Oise",
+      code: "60",
+      slug: "oise",
+      prep: "l'Oise",
+      de: "de l'Oise",
+      communes: ["Beauvais", "Compiègne", "Creil", "Chantilly", "Senlis", "Méru", "Chaumont-en-Vexin"],
+      intro:
+        "L'Oise, c'est le département d'attache du Cuistologue : il est installé à Serans, dans le Vexin, et intervient sur l'ensemble du territoire — de Beauvais à Compiègne, en passant par Chantilly, Senlis, Creil ou Méru.",
+      metaDesc:
+        "Cuisinier à domicile dans l'Oise : Le Cuistologue prépare vos repas de la semaine chez vous, de Beauvais à Compiègne, Chantilly, Senlis ou Creil.",
+    },
+    {
+      name: "Val-d'Oise",
+      code: "95",
+      slug: "val-doise",
+      prep: "le Val-d'Oise",
+      de: "du Val-d'Oise",
+      communes: ["Cergy", "Pontoise", "Argenteuil", "L'Isle-Adam", "Franconville", "Ermont", "Magny-en-Vexin"],
+      intro:
+        "Le Cuistologue se déplace dans tout le Val-d'Oise, de l'agglomération de Cergy-Pontoise au Vexin français, en passant par L'Isle-Adam, Franconville ou Ermont.",
+      metaDesc:
+        "Cuisinier à domicile dans le Val-d'Oise : repas maison préparés chez vous, de Cergy-Pontoise au Vexin français, L'Isle-Adam, Franconville ou Ermont.",
+    },
+    {
+      name: "Yvelines",
+      code: "78",
+      slug: "yvelines",
+      prep: "les Yvelines",
+      de: "des Yvelines",
+      communes: ["Versailles", "Saint-Germain-en-Laye", "Poissy", "Sartrouville", "Les Mureaux", "Mantes-la-Jolie", "Rambouillet"],
+      intro:
+        "Dans les Yvelines, Le Cuistologue intervient de Mantes-la-Jolie à Saint-Germain-en-Laye, en passant par Poissy, Les Mureaux, Sartrouville ou Versailles.",
+      metaDesc:
+        "Cuisinier à domicile dans les Yvelines : repas de la semaine préparés chez vous, de Mantes-la-Jolie à Saint-Germain-en-Laye, Poissy ou Versailles.",
+    },
+    {
+      name: "Eure",
+      code: "27",
+      slug: "eure",
+      prep: "l'Eure",
+      de: "de l'Eure",
+      communes: ["Évreux", "Vernon", "Les Andelys", "Gisors", "Louviers", "Gaillon", "Pont-de-l'Arche"],
+      intro:
+        "Le Cuistologue traverse la limite normande pour intervenir dans l'Eure, du Vexin normand autour de Gisors jusqu'à Vernon, Les Andelys, Louviers ou Évreux.",
+      metaDesc:
+        "Cuisinier à domicile dans l'Eure : repas maison préparés chez vous, du Vexin normand autour de Gisors jusqu'à Vernon, Les Andelys ou Évreux.",
+    },
   ],
 
   /** Fourchette de prix (formules 149 € – 259 €). */

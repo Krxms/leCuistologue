@@ -1,0 +1,63 @@
+---
+import "../../../styles/sections/zone/zone.css";
+import { site } from "../../../lib/site-data";
+
+interface Props {
+  area: (typeof site.areas)[number];
+}
+const { area } = Astro.props;
+const autres = site.areas.filter((a) => a.slug !== area.slug);
+---
+
+<section class="zone">
+  <div class="zone__content">
+    <nav class="zone__breadcrumb" aria-label="Fil d'Ariane">
+      <a href="/">Accueil</a>
+      <span aria-hidden="true">›</span>
+      <a href="/zone-intervention">Zone d'intervention</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{area.name}</span>
+    </nav>
+
+    <h1 class="zone__title">Cuisinier à domicile dans {area.prep} ({area.code})</h1>
+
+    <p class="zone__text">{area.intro}</p>
+
+    <p class="zone__text">
+      Le principe : une seule intervention pour préparer plusieurs repas de la semaine, directement
+      dans votre cuisine. Échange préalable sur vos habitudes, courses réalisées pour vous si besoin,
+      préparation, rangement du réfrigérateur, puis remise au propre.<br /><br />
+      Le détail des <a href="/formules">formules et tarifs</a> est sur la page dédiée, et chaque
+      prestation éligible ouvre droit au <a href="/avanceimmediate">crédit d'impôt services à la personne</a>.
+    </p>
+
+    <h2 class="zone__subtitle">Communes desservies dans {area.prep}</h2>
+    <ul class="zone__chips">
+      {area.communes.map((c) => (
+        <li>{c}</li>
+      ))}
+      <li>… et les communes voisines</li>
+    </ul>
+
+    <p class="zone__note">
+      Votre commune n'est pas dans la liste&nbsp;? Elle est très probablement couverte quand même —
+      certaines zones se règlent au cas par cas, et une intervention reste possible au-delà après
+      échange. <a href="/contact">Contactez-moi</a> ou appelez le
+      <a href={site.phone.href}>{site.phone.display}</a>.
+    </p>
+
+    <a href="/contact" class="zone__cta">Demander un devis</a>
+
+    <h2 class="zone__subtitle">Les autres départements</h2>
+    <ul class="zone__links">
+      {autres.map((a) => (
+        <li>
+          <a href={`/cuisinier-a-domicile-${a.slug}`}>
+            {a.name} ({a.code})
+            <span>Cuisinier à domicile dans {a.prep}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
