@@ -1,0 +1,4 @@
+# Redirections 301 — servies par Cloudflare (assets statiques).
+# Ancienne URL de la page zone (trop centrée « Oise ») -> nouvelle URL.
+/cuisinier-a-domicile-oise      /cuisinier-a-domicile-vexin   301
+/cuisinier-a-domicile-oise/     /cuisinier-a-domicile-vexin   301
