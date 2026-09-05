@@ -9,6 +9,14 @@ import bgSocial from "../../../assets/a-propos/a-propos-content/bulle-4-social.s
 import bgTransmission from "../../../assets/a-propos/a-propos-content/bulle-5-transmission.svg";
 import photo from "../../../assets/a-propos/a-propos-content/Bruno.png";
 
+/* ⚠️ CHANTIER EN COURS — la composition « Voie C » (5 blobs SVG + photo,
+   calée sur Group 714.png) est encore en cours d'ajustement en local.
+   En attendant, on affiche un placeholder discret sur le site.
+   POUR RÉACTIVER : passer EN_CHANTIER à false (ou supprimer le flag et
+   le bloc placeholder). Tout le reste — data + composition + CSS — est
+   déjà en place. */
+const EN_CHANTIER = true;
+
 const bulles = [
   {
     n: "01",
@@ -28,10 +36,11 @@ const bulles = [
     titre: "La terre",
     bg: bgTerre,
     paras: [
-      "Je défends une cuisine exigeante, qui respecte les produits bruts pour mieux les révéler.",
+      "Mes choix commencent bien avant la cuisine, auprès de celles et ceux qui produisent notre alimentation.",
+      "Je privilégie donc les producteurs locaux et porte une attention particulière à l'agriculture paysanne.",
     ],
     accent:
-      "Parce que de bons produits méritent mieux qu'un simple assemblage : ils demandent du temps, de l'attention et les bons gestes.",
+      "C'est une manière pour moi de valoriser les territoires mais aussi de défendre un modèle alimentaire qui donne une place centrale à celles et ceux qui nous nourrissent.",
   },
   {
     n: "03",
@@ -39,10 +48,11 @@ const bulles = [
     titre: "La créativité",
     bg: bgCreativite,
     paras: [
-      "Il existe autant de façons de bien manger que de personnes autour d'une table. Convictions, habitudes familiales, allergies, intolérances ou régime recommandé par un professionnel de santé : chaque cuisine raconte une histoire différente.",
+      "Chaque alimentation est singulière, avec ses goûts, ses habitudes, ses convictions, ses allergies ou ses intolérances.",
+      "Ma cuisine s'adapte à chacun sans renoncer au plaisir ni à l'exigence.",
     ],
     accent:
-      "Mon rôle n'est pas de vous dire quoi manger, mais de cuisiner avec vos choix et vos contraintes. Le reste est une affaire d'organisation, de créativité et de précision.",
+      "Mon rôle n'est pas de vous dire ce que vous devriez manger, mais de mettre mon savoir-faire et ma créativité au service de vos choix.",
   },
   {
     n: "04",
@@ -50,10 +60,10 @@ const bulles = [
     titre: "Le lien social",
     bg: bgSocial,
     paras: [
-      "Le bien-manger ne se limite pas à ce qu'il y a dans l'assiette. Il se nourrit aussi du temps que l'on prend, des échanges que l'on partage et des liens que l'on tisse.",
+      "Bien manger ne se limite pas à ce qu'il y a dans l'assiette. Cela tient aussi au temps que l'on prend, aux échanges que l'on partage et aux liens que l'on tisse. Cuisiner chez vous est donc un engagement social autant que culinaire.",
     ],
     accent:
-      "Cuisiner chez vous est donc un engagement social autant que culinaire : à l'heure où nos relations se dématérialisent, chaque intervention est aussi l'occasion d'une présence, d'une conversation et d'un moment de convivialité.",
+      "À l'heure où nos relations se dématérialisent, chaque intervention est aussi l'occasion d'une présence, d'une conversation et d'un moment de convivialité.",
   },
   {
     n: "05",
@@ -61,39 +71,46 @@ const bulles = [
     titre: "La transmission",
     bg: bgTransmission,
     paras: [
-      "Il existe autant de façons de bien manger que de personnes autour d'une table.",
+      "Cuisiner, c'est aussi apprendre et transmettre. J'aime partager des gestes, des recettes et des connaissances sur les produits et les saisons, pour éveiller la curiosité et enrichir le rapport de chacun à son alimentation.",
     ],
     accent:
-      "Convictions, habitudes familiales, allergies, intolérances ou régime recommandé par un professionnel de santé : chaque cuisine raconte une histoire différente.",
+      "À travers mes interventions et mes ateliers, je souhaite ainsi faire vivre et circuler une véritable culture du bien-manger.",
   },
 ];
 ---
 
-<section class="a-propos-content">
-  <h2 class="a-propos-content__title">Le goût du lien</h2>
+{EN_CHANTIER ? (
+  <section class="a-propos-content a-propos-content--chantier">
+    <h2 class="a-propos-content__title">Le goût du lien</h2>
+    <p class="a-propos-content__chantier">Section en cours de finalisation</p>
+  </section>
+) : (
+  <section class="a-propos-content">
+    <h2 class="a-propos-content__title">Le goût du lien</h2>
 
-  <div class="ap-stage">
-    {bulles.map((b) => (
-      <div class={`ap-bubble ap-bubble--${b.slug}`}>
-        <img class="ap-bubble__bg" src={b.bg.src} alt="" aria-hidden="true" />
-        <div class="ap-bubble__txt">
-          <span class="ap-bubble__num">{b.n}</span>
-          <h3 class="ap-bubble__title">{b.titre}</h3>
-          {b.paras.map((p) => (
-            <p class="ap-bubble__p">{p}</p>
-          ))}
-          <p class="ap-bubble__p ap-bubble__p--accent">{b.accent}</p>
+    <div class="ap-stage">
+      {bulles.map((b) => (
+        <div class={`ap-bubble ap-bubble--${b.slug}`}>
+          <img class="ap-bubble__bg" src={b.bg.src} alt="" aria-hidden="true" />
+          <div class="ap-bubble__txt">
+            <span class="ap-bubble__num">{b.n}</span>
+            <h3 class="ap-bubble__title">{b.titre}</h3>
+            {b.paras.map((p) => (
+              <p class="ap-bubble__p">{p}</p>
+            ))}
+            <p class="ap-bubble__p ap-bubble__p--accent">{b.accent}</p>
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
 
-    <Image
-      class="ap-stage__photo"
-      src={photo}
-      alt="Bruno Pereira Vaz, le Cuistologue, en pleine préparation dans une cuisine."
-      widths={[420, 620, 840]}
-      sizes="(max-width: 767px) 60vw, 37vw"
-      loading="eager"
-    />
-  </div>
-</section>
+      <Image
+        class="ap-stage__photo"
+        src={photo}
+        alt="Bruno Pereira Vaz, le Cuistologue, en pleine préparation dans une cuisine."
+        widths={[420, 620, 840]}
+        sizes="(max-width: 767px) 60vw, 37vw"
+        loading="eager"
+      />
+    </div>
+  </section>
+)}
