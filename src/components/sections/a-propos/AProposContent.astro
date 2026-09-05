@@ -1,117 +1,16 @@
 ---
 import "../../../styles/sections/a-propos/a-propos-content.css";
-import photo from "../../../assets/a-propos/a-propos-content/Bruno.png";
-import fondRecap from "../../../assets/a-propos/a-propos-content/fond-recap.png";
 import { Image } from "astro:assets";
+import visual from "../../../assets/a-propos/a-propos-content-visual.png";
 ---
 
 <section class="a-propos-content">
-  <div class="a-propos-content__intro">
-    <Image
-      src={photo}
-      alt="Bruno Pereira Vaz, cuisinier à domicile dans le Vexin"
-      class="a-propos-content__photo"
-    />
+  <h2 class="a-propos-content__title">Le goût du lien</h2>
 
-    <div class="a-propos-content__recap">
-      <img
-        src={fondRecap.src}
-        alt=""
-        class="a-propos-content__recap-bg"
-        aria-hidden="true"
-      />
-      <div class="a-propos-content__recap-text">
-        <h2 class="a-propos-content__recap-title">
-          En <span class="a-propos-content__recap-title-accent">Bref</span>
-        </h2>
-        <p class="a-propos-content__recap-item">
-          <strong>Bruno Pereira Vaz</strong>
-        </p>
-        <p
-          class="a-propos-content__recap-item a-propos-content__recap-item--italic"
-        >
-          Cuisinier à domicile
-        </p>
-        <blockquote class="a-propos-content__recap-quote">
-          « cultiver le goût du lien »
-        </blockquote>
-
-        <h3 class="a-propos-content__recap-subtitle">
-          Un parcours entre cuisine et engagement
-        </h3>
-        <div class="a-propos-content__recap-tags">
-          <span class="a-propos-content__recap-tag">CAP Cuisine</span>
-          <span class="a-propos-content__recap-tag"
-            >Master Sciences Sociales</span
-          >
-          <span class="a-propos-content__recap-tag">Agriculture paysanne</span>
-          <span class="a-propos-content__recap-tag"
-            >Restauration traditionnelle</span
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="a-propos-content__block">
-    <h2 class="a-propos-content__title">
-      Ma conception du <span class="a-propos-content__title-accent"
-        >bien-manger</span
-      >
-    </h2>
-    <div class="a-propos-content__text">
-      <p>
-        <b>Pour moi, le bien-manger commence bien avant la cuisine.</b><br /><br
-        />
-        Il prend racine dans les champs, les fermes et le travail de celles et ceux
-        qui nous nourrissent. C'est pourquoi je privilégie, lorsque les courses me
-        sont confiées, les produits de saison issus d'une agriculture paysanne et
-        de producteurs et productrices engagé·es.
-      </p>
-      <p>
-        Parce que de bons produits méritent mieux qu'un simple assemblage, je
-        défends une cuisine exigeante, <b
-          >fondée sur un savoir-faire patiemment appris, qui respecte les
-          produits bruts pour mieux les révéler.
-        </b>
-      </p>
-      <p>
-        Il existe autant de façons de bien manger que de personnes autour d'une
-        table.<br />
-        Convictions, habitudes familiales, allergies, intolérances ou régime recommandé
-        par un professionnel de santé : chaque cuisine raconte une histoire différente.<br
-        /><br />
-        <b>
-          Mon rôle n'est pas de vous dire quoi manger, mais de cuisiner avec vos
-          choix et vos contraintes.</b
-        ><br />
-        Le reste est une affaire d'organisation et de créativité.
-      </p>
-      <p>
-        Enfin, le bien-manger ne se limite pas à ce qu'il y a dans l'assiette.
-        Il se nourrit aussi du temps que l'on prend, des échanges que l'on
-        partage et des liens que l'on tisse.<br /><br />
-        Cuisiner chez vous est donc un engagement social autant que culinaire. À l'heure
-        où nos relations se dématérialisent, chaque intervention est aussi l'occasion
-        d'une présence, d'une conversation et d'un moment de convivialité.
-      </p>
-    </div>
-  </div>
-
-  <div class="a-propos-content__block a-propos-content__block--closing">
-    <h2 class="a-propos-content__title">
-      Dans la <span class="a-propos-content__title-accent">vraie vie</span>
-    </h2>
-    <div class="a-propos-content__text">
-      <p>
-        Je suis aussi un jeune papa qui connaît les journées qui passent trop
-        vite et les repas improvisés. <br />
-        C'est cette réalité qui m'a convaincu de créer <b>Le Cuistologue</b> : <i
-          >un service qui simplifie le quotidien, sans renoncer au plaisir de
-          bien manger.</i
-        >
-      </p>
-    </div>
-    <!-- <p class="a-propos-content__closing-question">Alors ... Vous essayez ?</p> -->
-  </div>
+  <Image
+    src={visual}
+    width={1600}
+    alt="Les 5 valeurs du Cuistologue : le métier, la terre, la créativité, le lien social et la transmission, illustrées autour d'une photo du chef en pleine préparation."
+    class="a-propos-content__visual"
+  />
 </section>

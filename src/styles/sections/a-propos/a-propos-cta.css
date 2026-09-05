@@ -25,25 +25,8 @@
   padding-left: 7.3%;
 }
 
-.a-propos-cta__title-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.a-propos-cta__icon {
-  width: 5.8vw;
-  max-width: 111.7px;
-  position: absolute;
-  margin-left: 65%;
-  margin-top: -18%;
-  transform: rotate(45deg);
-  flex-shrink: 0;
-}
-
 .a-propos-cta__title {
-  margin: 0;
+  margin: 1rem 0 0;
   font-family: var(--font-display);
   font-weight: 900;
   letter-spacing: 0.02em;
@@ -51,10 +34,14 @@
   color: #2c2c28;
 }
 
+.a-propos-cta__title-accent {
+  color: var(--color-gold);
+}
+
 .a-propos-cta__text {
   margin-top: 1.2rem;
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 600;
   font-size: clamp(1rem, 1.25vw, 1.5rem);
   line-height: 1.5;
   color: #2c2c28;
@@ -186,17 +173,7 @@
   }
 
   .a-propos-cta__text {
-    font-weight: 500;
-  }
-
-    .a-propos-cta__icon {
-    width: 8.8vw;
-    margin-left: 96%;
-    margin-top: -22%;
-  }
-
-  .a-propos-cta__title-row {
-    justify-content: center;
+    font-weight: 400;
   }
 
   .a-propos-cta__actions {
