@@ -2,6 +2,7 @@
 import "../../../styles/sections/a-propos/a-propos-cta.css";
 import { Image } from "astro:assets";
 
+import iconRotate from "../../../assets/a-propos/cta/icon-rotate.svg";
 import arrow from "../../../assets/a-propos/cta/arrow.svg";
 // Même photo que la section Offre de l'accueil et que Une question (Formules)
 import photo from "../../../assets/accueil/service/serviceBigPics.png";
@@ -22,9 +23,10 @@ import photo from "../../../assets/accueil/service/serviceBigPics.png";
   </svg>
 
   <div class="a-propos-cta__content">
-    <h2 class="a-propos-cta__title">
-      Prêt à <span class="a-propos-cta__title-accent">simplifier</span> vos semaines ?
-    </h2>
+    <div class="a-propos-cta__title-row">
+      <h2 class="a-propos-cta__title">Prêt à simplifier vos semaines ?</h2>
+      <img src={iconRotate.src} alt="" class="a-propos-cta__icon" aria-hidden="true" />
+    </div>
     <p class="a-propos-cta__text">
       Ne laissez plus le manque de temps dicter votre alimentation. Découvrez la solution qui vous convient le mieux.
     </p>

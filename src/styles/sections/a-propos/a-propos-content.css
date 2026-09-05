@@ -3,26 +3,157 @@
   margin-inline: auto;
   /* padding-top:2.5rem, comme .pricing-title sur Formules : le
      margin-top négatif seul ne suffit pas à aligner le contenu entre
-     pages, il faut aussi la même compensation de padding. */
+     pages, il faut aussi la même compensation de padding (avant,
+     0rem ici contre 2.5rem sur Formules — 2.5rem d'écart en trop). */
   padding: 2.5rem 3.3% 5rem;
   margin-top: -12rem;
-  text-align: center;
+}
+
+.a-propos-content__intro {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.a-propos-content__photo {
+  flex: 0 0 34%;
+  max-width: 428px;
+  object-fit: cover;
+  margin-top: 5rem;
+}
+
+.a-propos-content__recap {
+  position: relative;
+  flex: 1 1 auto;
+  aspect-ratio: 2917 / 2561;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.a-propos-content__recap-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.a-propos-content__recap-text {
+  position: relative;
+  z-index: 1;
+  padding: 0% 15.2%;
+  margin-top: 3.7rem;
+}
+
+.a-propos-content__recap-title {
+  margin: 0rem 0 2.2rem;
+  padding: 0 0 0 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  color: #2c2c28;
+  transform: rotate(-10deg);
+}
+
+.a-propos-content__recap-title-accent {
+  color: #8a9a5c;
+}
+
+.a-propos-content__recap-item {
+  margin: 0 0 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+
+.a-propos-content__recap-item--italic {
+  font-style: italic;
+}
+
+.a-propos-content__recap-quote {
+  margin: 0.8rem 0 0;
+  padding-left: 1rem;
+  border-left: 3px solid #8a9a5c;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+
+.a-propos-content__recap-subtitle {
+  margin: 1.3rem 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+}
+
+.a-propos-content__recap-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-start;
+}
+
+.a-propos-content__recap-tag {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+  background-color: rgba(37, 61, 74, 0.08);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  white-space: nowrap;
+}
+
+.a-propos-content__block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 3.5rem;
 }
 
 .a-propos-content__title {
-  margin: 0 0 2.5rem;
+  margin: 0;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.8rem, 2.6vw, 2.75rem);
-  color: #2c2c28;
+  font-weight: 900;
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+  line-height: 1.3;
+  color: #2c2c2c;
 }
 
-/* Visuel unique (5 bulles + photo), livré prêt à l'emploi : pas de
-   grille CSS à reproduire ici, juste le mettre à l'échelle. */
-.a-propos-content__visual {
-  display: block;
-  width: 100%;
-  height: auto;
+.a-propos-content__title-accent {
+  color: #c26665;
+}
+
+.a-propos-content__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.a-propos-content__text p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--color-ink);
+}
+
+.a-propos-content__block--closing {
+  padding-top: 0.8rem;
+  padding-bottom: 2rem;
+}
+
+.a-propos-content__closing-question {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: #c26665;
 }
 
 /* Même courbe que la page Formules (référence pour l'alignement du
@@ -40,6 +171,51 @@
   }
 }
 
+@media (max-width: 1210px) {
+  .a-propos-content__recap-tags {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 834px) {
+  .a-propos-content__intro {
+    gap: 1.8rem;
+  }
+
+  .a-propos-content {
+    max-width: 736px;
+  }
+
+  .a-propos-content__photo {
+    flex: 0 0 40%;
+    max-width: 236px;
+  }
+
+  .a-propos-content__recap-subtitle {
+    display: none;
+  }
+
+  .a-propos-content__recap-text {
+    margin-top: 3.75rem;
+  }
+
+  .a-propos-content__recap-tags {
+    flex-direction: row;
+    margin-top: 1.5rem;
+  }
+
+  .a-propos-content__recap-tag {
+    font-size: 0.66rem;
+    padding: 0.4rem 0.4rem;
+    white-space: wrap;
+  }
+
+  .a-propos-content__recap-title {
+    margin: 0rem 0 1.4rem;
+  }
+}
+
 /* Zone intermédiaire : lisse le passage tablette -> mobile
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
@@ -48,12 +224,66 @@
   }
 }
 
-/* En dessous de 768px : le visuel continue de s'afficher (mis à
-   l'échelle) en attendant les fonds par bulle dédiés au mobile — à
-   remplacer par la mise en page finale une fois ces fonds fournis. */
 @media (max-width: 767px) {
+  /* padding-top (2.5rem) hérité de la base, margin-top ajouté ici :
+     jusque-là aucun des deux n'était redéfini pour le mobile, donc le
+     contenu retombait sur le margin-top desktop (-12rem, bien trop
+     fort pour un header mobile beaucoup plus court) et remontait sous
+     le header. Même valeur que .pricing-title sur Formules
+     (référence) pour un écart identique entre pages en mobile aussi. */
   .a-propos-content {
     padding: 2.5rem 1.5rem 4rem;
     margin-top: -5rem;
   }
+
+  .a-propos-content__intro {
+    flex-direction: column;
+    align-items: center;
+    margin-top: -2rem;
+  }
+
+  .a-propos-content__photo {
+    flex: none;
+    max-width: 320px;
+  }
+
+  .a-propos-content__recap {
+    width: 123%;
+  }
+
+  .a-propos-content__recap-title {
+    margin: 0rem 0 2rem;
+  }
+
+  .a-propos-content__recap-quote {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .a-propos-content__recap-item {
+    font-size: 0.875rem;
+  }
+
+  .a-propos-content__recap-tag {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    gap: 0.3rem;
+  }
+
+  .a-propos-content__block {
+    margin-top: 2.5rem;
+  }
+
+  .a-propos-content__title {
+    font-size: clamp(1.2rem, 2vw, 1.875rem);
+  }
+
+  .a-propos-content__block--closing {
+  padding-top: 0;
+}
+
+.a-propos-content__text p {
+  font-size: 1rem;
+}
 }
