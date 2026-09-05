@@ -1,17 +1,13 @@
 .a-propos-content {
-  max-width: 1400px;
+  max-width: 1600px;
   margin-inline: auto;
-  /* padding-top:2.5rem + margin-top négatif : même mécanique que
-     .pricing-title sur Formules, pour que le titre tombe à la même
-     hauteur que sur les autres pages. */
   padding: 2.5rem 3.3% 5rem;
   margin-top: -12rem;
   text-align: center;
 }
 
 /* Titre : même style que les titres de section des autres pages
-   (.une-question__title, .faq-cta__title, .a-propos-cta__title) —
-   pas d'emphase colorée. */
+   (.une-question__title, .faq-cta__title…), sans emphase colorée. */
 .a-propos-content__title {
   margin: 0;
   font-family: var(--font-display);
@@ -21,49 +17,198 @@
   color: #2c2c28;
 }
 
-/* Visuel unique (5 bulles + photo), livré prêt à l'emploi : centré,
-   agrandi mais pas plein cadre pour garder de l'air sur les côtés. */
-.a-propos-content__visual {
+/* ===== Scène : 5 bulles + photo, positionnées au % d'un cadre au
+   ratio de la maquette (1909 x 1730). container-type -> les tailles
+   de texte en cqi suivent la largeur de la scène : toute la
+   composition se met à l'échelle d'un bloc, du desktop à la tablette.
+   Les positions sont calées sur la boîte du blob dans « Group 714 » :
+   coin haut-gauche + largeur du blob figés sur la maquette, la
+   feuille déborde librement, comme dans le fichier source.
+   ================================================================ */
+.ap-stage {
+  position: relative;
+  width: min(1520px, 100%);
+  aspect-ratio: 1909 / 1730;
+  margin: 3rem auto 0;
+  container-type: inline-size;
+}
+
+/* Pas de z-index ici : la bulle ne crée pas de contexte d'empilement,
+   pour que ses enfants (fond / texte) se rangent directement autour de
+   la photo -> fonds < photo < texte, comme dans la maquette. */
+.ap-bubble {
+  position: absolute;
+}
+
+/* object-fit: fill -> chaque SVG est calé exactement sur la boîte du
+   blob de la maquette (les 4 coins), la feuille suit la même échelle. */
+.ap-bubble__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: block;
-  width: min(1180px, 90vw);
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.ap-bubble__txt {
+  position: absolute;
+  z-index: 5;
+  text-align: left;
+}
+
+/* Tailles calées sur la maquette : cqi = % de la largeur de la scène,
+   donc tout le bloc de texte garde exactement ses proportions. */
+.ap-bubble__num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 5.2cqi;
+  line-height: 0.8;
+  letter-spacing: 0.01em;
+}
+
+.ap-bubble__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.95cqi;
+  line-height: 1.1;
+  color: #2c2c2c;
+}
+
+.ap-bubble__p {
+  margin: 1cqi 0 0;
+  font-family: var(--font-body);
+  font-size: 1.05cqi;
+  line-height: 1.4;
+  color: #2c2c2c;
+}
+
+.ap-bubble__p--accent {
+  margin-top: 2cqi;
+  font-weight: 700;
+}
+
+/* --- Chaque bulle : left/top/width/height = boîte du blob de la
+   maquette (% de la scène). Le bloc de texte : % de la bulle,
+   calculé depuis les ancres absolues de la maquette. --- */
+.ap-bubble--metier { left: 4.49%; top: 16.27%; width: 38.04%; height: 28.80%; }
+.ap-bubble--metier .ap-bubble__txt { left: 12.28%; top: -1.39%; width: 66.96%; }
+.ap-bubble--metier .ap-bubble__num { margin-left: -3.4cqi; color: #8ba47e; }
+.ap-bubble--metier .ap-bubble__p--accent { color: #546d48; }
+
+.ap-bubble--terre { left: 50.02%; top: 15.40%; width: 38.27%; height: 26.07%; }
+.ap-bubble--terre .ap-bubble__txt { left: 21.61%; top: 9.60%; width: 60.18%; }
+.ap-bubble--terre .ap-bubble__num { color: #bd7f30; }
+.ap-bubble--terre .ap-bubble__p--accent { color: #905509; }
+
+.ap-bubble--creativite { left: 2.10%; top: 47.79%; width: 33.18%; height: 28.54%; }
+.ap-bubble--creativite .ap-bubble__txt { left: 10.82%; top: 0.39%; width: 71.59%; }
+.ap-bubble--creativite .ap-bubble__num { color: #709791; }
+.ap-bubble--creativite .ap-bubble__p--accent { color: #486d67; }
+
+.ap-bubble--social { left: 65.27%; top: 47.13%; width: 31.98%; height: 26.47%; }
+.ap-bubble--social .ap-bubble__txt { left: 10.13%; top: -1.30%; width: 79.77%; }
+.ap-bubble--social .ap-bubble__num { color: #d47373; }
+.ap-bubble--social .ap-bubble__p--accent { color: #a54d4c; }
+
+.ap-bubble--transmission { left: 32.23%; top: 77.29%; width: 37.51%; height: 22.48%; }
+.ap-bubble--transmission .ap-bubble__txt { left: 17.09%; top: -2.18%; width: 70.92%; }
+.ap-bubble--transmission .ap-bubble__num { color: #9a7e97; }
+.ap-bubble--transmission .ap-bubble__p--accent { color: #755973; }
+
+/* Photo centrale : au-dessus des blobs, sous le texte. */
+.ap-stage__photo {
+  position: absolute;
+  left: 30.6%;
+  top: 38.1%;
+  width: 36.7%;
   height: auto;
-  margin: 3.5rem auto 0;
+  z-index: 3;
 }
 
-/* Même courbe que la page Formules (référence pour l'alignement du
-   titre entre pages) : desktop -12rem, lissée jusqu'à -9rem à
-   1211-1280px, puis -9rem à -7rem en continu sur toute la tablette. */
-@media (min-width: 1211px) and (max-width: 1280px) {
+/* Bande 1200-1320 px : le titre remonte progressivement sous la
+   diagonale du hero pour retrouver la même hauteur qu'ailleurs. */
+@media (min-width: 1200px) and (max-width: 1320px) {
   .a-propos-content {
-    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+    margin-top: clamp(-12rem, calc(32rem - 53.333vw), -8rem);
   }
 }
 
-@media (min-width: 768px) and (max-width: 1210px) {
-  .a-propos-content {
-    margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
-  }
-}
-
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px. */
-@media (min-width: 768px) and (max-width: 834px) {
-  .a-propos-content {
-    padding-bottom: clamp(4rem, calc(-7.4478rem + 1.4925vw), 5rem);
-  }
-}
-
-/* < 768px : intégration mobile dédiée à venir (un fond par bulle +
-   texte HTML par-dessus, comme les cartes petits-plus). Pour l'instant
-   le visuel se met simplement à l'échelle. */
-@media (max-width: 767px) {
+/* ===== < 1200 px (tablette + mobile) : la composition libre de la
+   maquette est un format large ; en dessous son texte deviendrait
+   illisible et les bulles se chevaucheraient. On empile donc les
+   bulles en cartes, chacune reprenant l'aplat pastel de son blob.
+   ================================================================ */
+@media (max-width: 1199.98px) {
   .a-propos-content {
     padding: 2.5rem 1.5rem 4rem;
-    margin-top: -5rem;
+    margin-top: -6rem;
   }
 
-  .a-propos-content__visual {
+  .ap-stage {
+    position: static;
     width: 100%;
-    margin-top: 2.5rem;
+    max-width: 560px;
+    aspect-ratio: auto;
+    margin: 2.5rem auto 0;
+    container-type: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
+
+  .ap-bubble {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 26px;
+    padding: clamp(1.75rem, 6%, 2.5rem);
+  }
+
+  .ap-bubble__bg { display: none; }
+
+  .ap-bubble__txt {
+    position: static;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+  }
+
+  .ap-bubble__num { font-size: 2.6rem; line-height: 1; margin-left: 0 !important; }
+  .ap-bubble__title { font-size: 1.25rem; margin-top: 0.15rem; }
+  .ap-bubble__p { font-size: 1rem; line-height: 1.55; margin-top: 0.9rem; }
+  .ap-bubble__p--accent { margin-top: 1.1rem; }
+
+  .ap-bubble--metier { background-color: #e3e6dd; }
+  .ap-bubble--terre { background-color: #eedecc; }
+  .ap-bubble--creativite { background-color: #e0e7e5; }
+  .ap-bubble--social { background-color: #f7e4e1; }
+  .ap-bubble--transmission { background-color: #e2dde0; }
+
+  .ap-bubble--metier .ap-bubble__num { color: #6f8a62; }
+  .ap-bubble--terre .ap-bubble__num { color: #bd7f30; }
+  .ap-bubble--creativite .ap-bubble__num { color: #5c8882; }
+  .ap-bubble--social .ap-bubble__num { color: #cc6a6a; }
+  .ap-bubble--transmission .ap-bubble__num { color: #8a6f87; }
+
+  .ap-stage__photo {
+    position: static;
+    left: auto;
+    top: auto;
+    width: min(62%, 260px);
+    margin: 0 auto 0.5rem;
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .ap-bubble { padding: 1.6rem 1.4rem; }
+  .ap-bubble__num { font-size: 2.15rem; }
+  .ap-bubble__title { font-size: 1.1rem; }
+  .ap-bubble__p { font-size: 0.95rem; }
 }

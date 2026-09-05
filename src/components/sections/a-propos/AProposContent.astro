@@ -1,15 +1,99 @@
 ---
 import "../../../styles/sections/a-propos/a-propos-content.css";
 import { Image } from "astro:assets";
-import visual from "../../../assets/a-propos/a-propos-content-visual.webp";
+
+import bgMetier from "../../../assets/a-propos/a-propos-content/bulle-1-metier.svg";
+import bgTerre from "../../../assets/a-propos/a-propos-content/bulle-2-terre.svg";
+import bgCreativite from "../../../assets/a-propos/a-propos-content/bulle-3-creativite.svg";
+import bgSocial from "../../../assets/a-propos/a-propos-content/bulle-4-social.svg";
+import bgTransmission from "../../../assets/a-propos/a-propos-content/bulle-5-transmission.svg";
+import photo from "../../../assets/a-propos/a-propos-content/Bruno.png";
+
+const bulles = [
+  {
+    n: "01",
+    slug: "metier",
+    titre: "Le métier",
+    bg: bgMetier,
+    paras: [
+      "Le fait maison est pour moi une manière de pratiquer sérieusement le métier de cuisinier.",
+      "Cela passe par la connaissance des produits, la maîtrise des gestes, le respect des cuissons et, surtout, le temps que l'on accepte de consacrer au travail bien fait.",
+    ],
+    accent:
+      "Je défends une cuisine artisanale, simple mais exigeante, où le savoir-faire retrouve toute sa place face à la standardisation.",
+  },
+  {
+    n: "02",
+    slug: "terre",
+    titre: "La terre",
+    bg: bgTerre,
+    paras: [
+      "Je défends une cuisine exigeante, qui respecte les produits bruts pour mieux les révéler.",
+    ],
+    accent:
+      "Parce que de bons produits méritent mieux qu'un simple assemblage : ils demandent du temps, de l'attention et les bons gestes.",
+  },
+  {
+    n: "03",
+    slug: "creativite",
+    titre: "La créativité",
+    bg: bgCreativite,
+    paras: [
+      "Il existe autant de façons de bien manger que de personnes autour d'une table. Convictions, habitudes familiales, allergies, intolérances ou régime recommandé par un professionnel de santé : chaque cuisine raconte une histoire différente.",
+    ],
+    accent:
+      "Mon rôle n'est pas de vous dire quoi manger, mais de cuisiner avec vos choix et vos contraintes. Le reste est une affaire d'organisation, de créativité et de précision.",
+  },
+  {
+    n: "04",
+    slug: "social",
+    titre: "Le lien social",
+    bg: bgSocial,
+    paras: [
+      "Le bien-manger ne se limite pas à ce qu'il y a dans l'assiette. Il se nourrit aussi du temps que l'on prend, des échanges que l'on partage et des liens que l'on tisse.",
+    ],
+    accent:
+      "Cuisiner chez vous est donc un engagement social autant que culinaire : à l'heure où nos relations se dématérialisent, chaque intervention est aussi l'occasion d'une présence, d'une conversation et d'un moment de convivialité.",
+  },
+  {
+    n: "05",
+    slug: "transmission",
+    titre: "La transmission",
+    bg: bgTransmission,
+    paras: [
+      "Il existe autant de façons de bien manger que de personnes autour d'une table.",
+    ],
+    accent:
+      "Convictions, habitudes familiales, allergies, intolérances ou régime recommandé par un professionnel de santé : chaque cuisine raconte une histoire différente.",
+  },
+];
 ---
 
 <section class="a-propos-content">
   <h2 class="a-propos-content__title">Le goût du lien</h2>
 
-  <Image
-    src={visual}
-    alt="Les 5 valeurs du Cuistologue — le métier, la terre, la créativité, le lien social et la transmission — illustrées autour d'une photo du chef en pleine préparation."
-    class="a-propos-content__visual"
-  />
+  <div class="ap-stage">
+    {bulles.map((b) => (
+      <div class={`ap-bubble ap-bubble--${b.slug}`}>
+        <img class="ap-bubble__bg" src={b.bg.src} alt="" aria-hidden="true" />
+        <div class="ap-bubble__txt">
+          <span class="ap-bubble__num">{b.n}</span>
+          <h3 class="ap-bubble__title">{b.titre}</h3>
+          {b.paras.map((p) => (
+            <p class="ap-bubble__p">{p}</p>
+          ))}
+          <p class="ap-bubble__p ap-bubble__p--accent">{b.accent}</p>
+        </div>
+      </div>
+    ))}
+
+    <Image
+      class="ap-stage__photo"
+      src={photo}
+      alt="Bruno Pereira Vaz, le Cuistologue, en pleine préparation dans une cuisine."
+      widths={[420, 620, 840]}
+      sizes="(max-width: 767px) 60vw, 37vw"
+      loading="eager"
+    />
+  </div>
 </section>
