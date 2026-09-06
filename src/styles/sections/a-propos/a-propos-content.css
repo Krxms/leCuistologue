@@ -11,9 +11,19 @@
 .a-propos-content__title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.02em;
   font-size: clamp(1.8rem, 2.9vw, 3.4375rem);
+  color: #2c2c28;
+}
+
+/* Sous-titre : même logique que .howto__subtitle sur l'Accueil
+   (titre en gras + sous-titre plus léger juste en dessous). */
+.a-propos-content__subtitle {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.4vw, 1.375rem);
   color: #2c2c28;
 }
 
@@ -26,7 +36,7 @@
 
 .a-propos-content__chantier {
   display: inline-block;
-  margin: 1.4rem 0 0;
+  margin: -7rem 0 0;
   padding-top: 1.1rem;
   border-top: 1px dashed #c9c4ba;
   font-family: var(--font-body);
@@ -49,7 +59,7 @@
   position: relative;
   width: min(1520px, 100%);
   aspect-ratio: 1866 / 1781;
-  margin: 3rem auto 0;
+  margin: -8rem auto 0;
   container-type: inline-size;
 }
 
@@ -64,13 +74,18 @@
   width: 100%;
   height: 100%;
   object-fit: fill;
+  transform: scale(1.2);
+}
+
+.ap-bubble--transmission .ap-bubble__bg {
+  transform: scale(1.3);
 }
 
 .ap-bubble__txt {
   position: relative;
   z-index: 5;
   text-align: left;
-  padding: 1% 5% 2.5% 12%;
+  padding: 2% 6% 3.5% 9%;
 }
 
 /* Tailles calées sur la maquette : cqi = % de la largeur de la scène,
@@ -118,26 +133,26 @@
 .ap-bubble--metier .ap-bubble__num { color: #8ba47e; }
 .ap-bubble--metier .ap-bubble__p--accent { color: #546d48; }
 
-.ap-bubble--terre { left: 50%; top: 13.5%; width: 36%; }
+.ap-bubble--terre { left: 56%; top: 13.5%; width: 36%; }
 .ap-bubble--terre .ap-bubble__num { color: #bd7f30; }
 .ap-bubble--terre .ap-bubble__p--accent { color: #905509; }
 
-.ap-bubble--creativite { left: 1.5%; top: 51%; width: 40.5%; }
+.ap-bubble--creativite { left: -2.5%; top: 51%; width: 40.5%; }
 .ap-bubble--creativite .ap-bubble__num { color: #709791; }
 .ap-bubble--creativite .ap-bubble__p--accent { color: #486d67; }
 
-.ap-bubble--social { left: 64%; top: 43.5%; width: 34.5%; }
+.ap-bubble--social { left: 68%; top: 43.5%; width: 34.5%; }
 .ap-bubble--social .ap-bubble__num { color: #d47373; }
 .ap-bubble--social .ap-bubble__p--accent { color: #a54d4c; }
 
-.ap-bubble--transmission { left: 40%; top: 75.8%; width: 40%; }
+.ap-bubble--transmission { left: 40%; top: 77.8%; width: 40%; }
 .ap-bubble--transmission .ap-bubble__num { color: #9a7e97; }
 .ap-bubble--transmission .ap-bubble__p--accent { color: #755973; }
 
 /* Photo centrale : au-dessus des blobs, sous le texte. */
 .ap-stage__photo {
   position: absolute;
-  left: 35.5%;
+  left: 36.5%;
   top: 38.5%;
   width: 28.5%;
   height: auto;

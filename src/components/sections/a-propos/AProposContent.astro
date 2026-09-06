@@ -15,7 +15,7 @@ import photo from "../../../assets/a-propos/a-propos-content/Bruno.png";
    POUR RÉACTIVER : passer EN_CHANTIER à false (ou supprimer le flag et
    le bloc placeholder). Tout le reste — data + composition + CSS — est
    déjà en place. */
-const EN_CHANTIER = true;
+const EN_CHANTIER = false;
 
 const bulles = [
   {
@@ -86,7 +86,8 @@ const bulles = [
   </section>
 ) : (
   <section class="a-propos-content">
-    <h2 class="a-propos-content__title">Le goût du lien</h2>
+    <h2 class="a-propos-content__title">Bruno Pereira Vaz</h2>
+    <p class="a-propos-content__subtitle">le goût du lien</p>
 
     <div class="ap-stage">
       {bulles.map((b) => (
