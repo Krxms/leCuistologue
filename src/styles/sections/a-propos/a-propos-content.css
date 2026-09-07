@@ -1,7 +1,8 @@
 .a-propos-content {
   /* Distance sous-titre -> scène de bulles (desktop). Négatif = la
-     scène remonte vers le sous-titre. C'est LE réglage à ajuster ici. */
-  --stage-gap: -8rem;
+     scène remonte vers le sous-titre. Réglé pour retrouver ~7rem
+     d'écart visible (comme .faq-accordion__header sur la FAQ). */
+  --stage-gap: -9.75rem;
 
   max-width: 1600px;
   margin-inline: auto;
@@ -148,11 +149,24 @@
   z-index: 3;
 }
 
-/* Bande 1200-1320 px : le titre remonte progressivement sous la
-   diagonale du hero pour retrouver la même hauteur qu'ailleurs. */
-@media (min-width: 1200px) and (max-width: 1320px) {
+/* Alignement vertical du bloc titre/sous-titre sur les autres pages
+   (FAQ, Avance immédiate…) : exactement la même cascade de margin-top
+   -> le titre tombe à la même hauteur à toutes les largeurs. */
+@media (min-width: 1211px) and (max-width: 1280px) {
   .a-propos-content {
-    margin-top: clamp(-12rem, calc(32rem - 53.333vw), -8rem);
+    margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1210px) {
+  .a-propos-content {
+    margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .a-propos-content {
+    margin-top: -4rem;
   }
 }
 
@@ -164,7 +178,13 @@
 @media (max-width: 1199.98px) {
   .a-propos-content {
     padding: 2.5rem 1.5rem 4rem;
-    margin-top: -6rem;
+  }
+
+  /* En pile : l'écart desktop sous le sous-titre n'a plus lieu d'être ;
+     l'air au-dessus de la photo vient de la marge de .ap-stage, et on
+     l'équilibre avec l'espace photo -> première carte en dessous. */
+  .a-propos-content__subtitle {
+    margin-bottom: 0;
   }
 
   .ap-stage {
@@ -210,7 +230,7 @@
     left: auto;
     top: auto;
     width: min(62%, 260px);
-    margin: 0 auto 0.5rem;
+    margin: 0 auto 1rem;
     order: -1;
   }
 }
