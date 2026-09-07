@@ -19,7 +19,6 @@ const EN_CHANTIER = false;
 
 const bulles = [
   {
-    n: "01",
     slug: "metier",
     titre: "Le métier",
     bg: bgMetier,
@@ -31,7 +30,6 @@ const bulles = [
       "Je défends une cuisine artisanale, simple mais exigeante, où le savoir-faire retrouve toute sa place face à la standardisation.",
   },
   {
-    n: "02",
     slug: "terre",
     titre: "La terre",
     bg: bgTerre,
@@ -43,7 +41,6 @@ const bulles = [
       "C'est une manière pour moi de valoriser les territoires mais aussi de défendre un modèle alimentaire qui donne une place centrale à celles et ceux qui nous nourrissent.",
   },
   {
-    n: "03",
     slug: "creativite",
     titre: "La créativité",
     bg: bgCreativite,
@@ -55,7 +52,6 @@ const bulles = [
       "Mon rôle n'est pas de vous dire ce que vous devriez manger, mais de mettre mon savoir-faire et ma créativité au service de vos choix.",
   },
   {
-    n: "04",
     slug: "social",
     titre: "Le lien social",
     bg: bgSocial,
@@ -66,7 +62,6 @@ const bulles = [
       "À l'heure où nos relations se dématérialisent, chaque intervention est aussi l'occasion d'une présence, d'une conversation et d'un moment de convivialité.",
   },
   {
-    n: "05",
     slug: "transmission",
     titre: "La transmission",
     bg: bgTransmission,
@@ -87,14 +82,13 @@ const bulles = [
 ) : (
   <section class="a-propos-content">
     <h2 class="a-propos-content__title">Bruno Pereira Vaz</h2>
-    <p class="a-propos-content__subtitle">le goût du lien</p>
+    <p class="a-propos-content__subtitle">" le goût du lien "</p>
 
     <div class="ap-stage">
       {bulles.map((b) => (
         <div class={`ap-bubble ap-bubble--${b.slug}`}>
           <img class="ap-bubble__bg" src={b.bg.src} alt="" aria-hidden="true" />
           <div class="ap-bubble__txt">
-            <span class="ap-bubble__num">{b.n}</span>
             <h3 class="ap-bubble__title">{b.titre}</h3>
             {b.paras.map((p) => (
               <p class="ap-bubble__p">{p}</p>
