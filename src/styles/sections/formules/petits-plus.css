@@ -240,27 +240,30 @@
 
   /* Mobile : bloc texte centré dans la carte, écart symétrique gauche/
      droite — pas de décalage par carte comme en desktop. Redescendu
-     pour ne pas remonter dans l'illustration. */
+     pour ne pas remonter dans l'illustration. Texte centré : les
+     descriptions courtes (Popote) ne « collent » plus à gauche du
+     panneau, les 3 cartes sont visuellement alignées comme Courses. */
   .petits-plus-content,
   .petits-plus-content--popote,
   .petits-plus-content--gourmande {
     left: 8%;
     width: 84%;
     top: 25%;
+    text-align: center;
   }
 
   .petits-plus-content__description {
-    margin-top: 0.35rem;
-    font-size: clamp(0.9rem, 3.5vw, 1rem);
-    line-height: 1.3;
+    margin-top: 0.3rem;
+    font-size: clamp(0.82rem, 3.2vw, 0.95rem);
+    line-height: 1.26;
   }
 
-  /* Courses / Gourmande : descriptions longues. Si les 2-3 dernières
-     lignes dépassent le blob (décoratif), elles se poursuivent
-     proprement en dessous — préférable à rogner le fond. */
+  /* Courses / Gourmande : descriptions longues (2 paragraphes) — encore
+     un cran plus serré, texte réduit pour tenir dans la carte sur les
+     petits écrans sans déborder sous le blob. */
   .petits-plus-content--course .petits-plus-content__description,
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.86rem, 3.3vw, 0.94rem);
-    line-height: 1.22;
+    font-size: clamp(0.72rem, 3vw, 0.86rem);
+    line-height: 1.16;
   }
 }
