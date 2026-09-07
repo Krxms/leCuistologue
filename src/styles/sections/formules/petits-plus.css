@@ -212,58 +212,67 @@
   }
 }
 
+/* ============================================================
+   MOBILE — < 768px
+   Version d'origine (avant le chantier « cartes plus grandes /
+   texte plus gros »). Le desktop et la tablette ont évolué depuis :
+   ce bloc réaffirme donc explicitement les valeurs mobiles d'alors
+   (gabarit carte, écarts, tailles titre/prix) pour rester découplé
+   de la base desktop qui a changé.
+   ============================================================ */
+
 @media (max-width: 767.98px) {
   .petits-plus {
-    padding: 3rem 1.25rem;
+    padding: 3rem 1.5rem;
   }
 
   .petits-plus__grid {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    gap: 3rem;
   }
 
   .petits-plus-card {
-    /* Carte quasi bord à bord (le léger débord est rogné par
-       overflow-x: clip sur <main>), ratio conservé pour ne pas rogner
-       le fond. */
-    width: 103%;
-    max-width: 566px;
+    width: 100%;
+    min-width: 304px;
+    max-width: 400px;
     margin-inline: auto;
-    overflow: visible;
-    aspect-ratio: 2260 / 1690;
+    aspect-ratio: 2260 / 1680;
   }
 
   .petits-plus__title {
     margin: 0 0 1rem;
   }
 
-  /* Mobile : bloc texte centré dans la carte, écart symétrique gauche/
-     droite — pas de décalage par carte comme en desktop. Redescendu
-     pour ne pas remonter dans l'illustration. Texte centré : les
-     descriptions courtes (Popote) ne « collent » plus à gauche du
-     panneau, les 3 cartes sont visuellement alignées comme Courses. */
-  .petits-plus-content,
-  .petits-plus-content--popote,
-  .petits-plus-content--gourmande {
-    left: 8%;
-    width: 84%;
-    top: 25%;
-    text-align: center;
+  /* Positions horizontales par carte = base d'origine (Courses 7.6% /
+     Popote 11% / Gourmande 14%), alignement vertical commun. */
+  .petits-plus-content {
+    top: 24%;
+  }
+
+  .petits-plus-content__title {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  }
+
+  .petits-plus-content__price {
+    font-size: clamp(0.95rem, 1.25vw, 1.4rem);
+  }
+
+  .petits-plus-content__note {
+    font-size: 0.62em;
   }
 
   .petits-plus-content__description {
-    margin-top: 0.3rem;
-    font-size: clamp(0.82rem, 3.2vw, 0.95rem);
-    line-height: 1.26;
+    margin-top: 0.4rem;
+    font-size: clamp(0.72rem, 3vw, 0.82rem);
+    line-height: 1.35;
   }
 
-  /* Courses / Gourmande : descriptions longues (2 paragraphes) — encore
-     un cran plus serré, texte réduit pour tenir dans la carte sur les
-     petits écrans sans déborder sous le blob. */
   .petits-plus-content--course .petits-plus-content__description,
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.72rem, 3vw, 0.86rem);
+    font-size: clamp(0.72rem, 3vw, 0.82rem);
     line-height: 1.16;
   }
 }
