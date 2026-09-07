@@ -1,4 +1,8 @@
 .a-propos-content {
+  /* Distance sous-titre -> scène de bulles (desktop). Négatif = la
+     scène remonte vers le sous-titre. C'est LE réglage à ajuster ici. */
+  --stage-gap: -8rem;
+
   max-width: 1600px;
   margin-inline: auto;
   padding: 2.5rem 3.3% 5rem;
@@ -9,12 +13,12 @@
 /* Titre : même style que les titres de section des autres pages
    (.une-question__title, .faq-cta__title…), sans emphase colorée. */
 .a-propos-content__title {
-  margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: 0.02em;
-  font-size: clamp(1.8rem, 2.9vw, 3.4375rem);
-  color: #2c2c28;
+  font-size: clamp(1.4rem, 2.4vw, 2.75rem);
+  line-height: 1.3;
+  color: var(--color-ink);
+  margin: 0;
 }
 
 /* Sous-titre : même logique que .howto__subtitle sur l'Accueil
@@ -59,7 +63,7 @@
   position: relative;
   width: min(1520px, 100%);
   aspect-ratio: 1866 / 1781;
-  margin: -8rem auto 0;
+  margin: var(--stage-gap) auto 0;
   container-type: inline-size;
 }
 
