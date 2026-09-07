@@ -1,50 +1,27 @@
 ---
 import "../../../styles/sections/faq/faq-accordion.css";
 import { questions, answerToHtml } from "../../../lib/faq-data";
-
-const milieu = Math.ceil(questions.length / 2);
-const colonneGauche = questions.slice(0, milieu);
-const colonneDroite = questions.slice(milieu);
 ---
 
 <section class="faq-accordion">
   <div class="faq-accordion__header">
-    <h2 class="faq-accordion__title">Les réponses aux questions les plus fréquentes. Et si vous ne trouvez pas l'information recherchée, <a href="/contact">contactez-moi</a>.</h2>
+    <h2 class="faq-accordion__title">Les réponses aux questions les plus fréquentes.</h2>
+    <p class="faq-accordion__subtitle">Et si vous ne trouvez pas l'information recherchée, <a href="/contact">contactez-moi</a>.</p>
   </div>
 
   <div class="faq-accordion__grid">
-    <div class="faq-accordion__col">
-      {colonneGauche.map((item, i) => (
-        <details class="faq-accordion__item" name="faq">
-          <summary class="faq-accordion__question">
-            <span class="faq-accordion__number">{String(i + 1).padStart(2, "0")}</span>
-            <span class="faq-accordion__question-text">{item.q}</span>
-            <span class="faq-accordion__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="faq-accordion__answer">
-            {item.r.split("\n\n").map((paragraphe) => (
-              <p set:html={answerToHtml(paragraphe)} />
-            ))}
-          </div>
-        </details>
-      ))}
-    </div>
-
-    <div class="faq-accordion__col">
-      {colonneDroite.map((item, i) => (
-        <details class="faq-accordion__item" name="faq">
-          <summary class="faq-accordion__question">
-            <span class="faq-accordion__number">{String(i + milieu + 1).padStart(2, "0")}</span>
-            <span class="faq-accordion__question-text">{item.q}</span>
-            <span class="faq-accordion__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="faq-accordion__answer">
-            {item.r.split("\n\n").map((paragraphe) => (
-              <p set:html={answerToHtml(paragraphe)} />
-            ))}
-          </div>
-        </details>
-      ))}
-    </div>
+    {questions.map((item) => (
+      <details class="faq-accordion__item" name="faq">
+        <summary class="faq-accordion__question">
+          <span class="faq-accordion__question-text">{item.q}</span>
+          <span class="faq-accordion__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-accordion__answer">
+          {item.r.split("\n\n").map((paragraphe) => (
+            <p set:html={answerToHtml(paragraphe)} />
+          ))}
+        </div>
+      </details>
+    ))}
   </div>
 </section>

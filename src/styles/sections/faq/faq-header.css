@@ -79,12 +79,12 @@
 .faq-header__arrow {
   position: absolute;
   left: 105%;
-  top: 180%;
+  top: 154%;
   margin-left: 0.5rem;
   width: 15vw;
   z-index: 2;
   pointer-events: none;
-  transform: translateY(-50%) scaleX(1) rotate(-3deg);
+  transform: translateY(-50%) scaleX(1) rotate(-10deg);
 }
 
 .faq-header__deco {

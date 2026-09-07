@@ -1,5 +1,8 @@
 .faq-accordion {
-  max-width: 1200px;
+  /* Autorise la transition de block-size vers `auto` sur
+     ::details-content (ouverture / fermeture douce des questions). */
+  interpolate-size: allow-keywords;
+  max-width: 760px;
   margin-inline: auto;
   /* padding-top:2.5rem (au lieu de 4rem) + margin-top:-12rem, comme
      .pricing-title sur Formules : le margin-top seul ne suffit pas à
@@ -12,7 +15,7 @@
 
 .faq-accordion__header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 7rem;
 }
 
 .faq-accordion__title {
@@ -24,6 +27,21 @@
   margin: 0;
 }
 
+.faq-accordion__subtitle {
+  margin: 1rem 0 0;
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.1vw, 1.125rem);
+  line-height: 1.5;
+  color: var(--color-ink-soft);
+}
+
+.faq-accordion__subtitle a {
+  color: #617854;
+  text-decoration: underline;
+}
+
+/* .faq-accordion__hint / .faq-accordion__intro : classes définies mais
+   pas rendues actuellement — conservées pour un usage éventuel. */
 .faq-accordion__hint {
   margin-top: 0.6rem;
   margin-bottom: 4rem;
@@ -46,30 +64,41 @@
   font-weight: 600;
 }
 
+/* Colonne unique de cartes, style épuré. */
 .faq-accordion__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 0 2.5rem;
-  align-items: start;
-}
-
-.faq-accordion__col {
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 0.85rem;
 }
 
 .faq-accordion__item {
-  border: 1px solid rgba(37, 61, 74, 0.12);
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
+  background-color: #f0ece6;
+  transition: background-color 0.15s ease;
 }
 
-.faq-accordion__item[open] {
-  border-color: #617854;
+.faq-accordion__item:hover {
+  background-color: #ece7df;
 }
 
-.faq-accordion__question::marker {
+/* Ouverture / fermeture douce : block-size 0 -> auto animé sur
+   ::details-content (technique standard, avec interpolate-size sur
+   .faq-accordion). Repli propre en accordéon natif si non supporté. */
+.faq-accordion__item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    content-visibility 0.5s allow-discrete;
+}
+
+.faq-accordion__item[open]::details-content {
+  block-size: auto;
+}
+
+.faq-accordion__question::marker,
+.faq-accordion__question::-webkit-details-marker {
   content: "";
   display: none;
 }
@@ -80,41 +109,26 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.1rem 1.4rem;
+  padding: 1.35rem 1.75rem;
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.05rem;
   color: var(--color-ink);
-}
-
-.faq-accordion__question::-webkit-details-marker {
-  display: none;
-}
-
-.faq-accordion__number {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.9rem;
-  color: #617854;
-  flex-shrink: 0;
 }
 
 .faq-accordion__question-text {
   flex: 1;
   min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .faq-accordion__icon {
   flex-shrink: 0;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-right: 2px solid var(--color-ink-soft);
   border-bottom: 2px solid var(--color-ink-soft);
   transform: rotate(45deg);
-  transition: transform 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .faq-accordion__item[open] .faq-accordion__icon {
@@ -122,7 +136,7 @@
 }
 
 .faq-accordion__answer {
-  padding: 0 1.4rem 1.4rem 3.1rem;
+  padding: 0 1.75rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
@@ -132,7 +146,7 @@
   margin: 0;
   font-family: var(--font-body);
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--color-ink-soft);
 }
 
@@ -146,11 +160,9 @@
   color: var(--color-gold);
 }
 
-/* Même courbe que la page Formules (référence pour l'alignement du
-   titre entre pages) : desktop -12rem, lissée jusqu'à -9rem à
-   1211-1280px, puis -9rem à -7rem en continu sur toute la tablette
-   (768-1210px, une seule zone — plus plusieurs paliers déconnectés
-   avec un trou de couverture entre 835 et 1022px). */
+/* Alignement vertical du titre entre pages (même courbe que
+   .pricing-title sur Formules) : desktop -12rem, lissée jusqu'à -9rem
+   entre 1211 et 1280px, puis -9rem -> -7rem sur toute la tablette. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .faq-accordion {
     margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
@@ -160,55 +172,18 @@
 @media (min-width: 768px) and (max-width: 1210px) {
   .faq-accordion {
     margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
-  }
-}
-
-@media (min-width: 1023px) and (max-width: 1210px) {
-  .faq-accordion {
-    max-width: 1000px;
-    margin-bottom: 2rem;
-  }
-
-  .faq-accordion__title {
-    margin-top: 1rem;
-    font-size: clamp(1.4rem, 2.4vw, 2.75rem);
-  }
-}
-
-/* Comble un trou de couverture existant : entre 835px et 1022px,
-   ni le bloc "1023-1210" ni le bloc "834" ne s'appliquaient, et la
-   section retombait sur les valeurs desktop (max-width). On relie
-   les deux valeurs déjà définies au lieu de casser. */
-@media (min-width: 835px) and (max-width: 1022px) {
-  .faq-accordion {
-    max-width: clamp(720px, calc(-515.5556px + 148.1481vw), 1000px);
     margin-bottom: 2rem;
   }
 }
 
 @media (max-width: 834px) {
-  .faq-accordion {
-    max-width: 720px;
-    margin-bottom: 2rem;
-  }
-
   .faq-accordion__title {
     font-size: clamp(1rem, 2.4vw, 2.75rem);
     font-weight: 500;
   }
-
-  .faq-accordion__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .faq-accordion__col {
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
 }
 
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px. */
+/* Lisse la transition de margin-bottom tablette -> mobile. */
 @media (min-width: 768px) and (max-width: 834px) {
   .faq-accordion {
     margin-bottom: clamp(0rem, calc(-22.8955rem + 2.9851vw), 2rem);
@@ -216,35 +191,25 @@
 }
 
 @media (max-width: 767px) {
-  .faq-accordion__answer {
-    padding-left: 1.2rem;
-    font-size: 0.81rem;
-    font-weight: 500;
-  }
-
-  /* Même valeur que .pricing-title sur Formules (référence) pour un
-     écart identique entre pages en mobile aussi. */
   .faq-accordion {
     margin-top: -4rem;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
   }
 
-  .faq-accordion__hint {
-    margin-top: 1.2rem;
-    font-size: 0.9rem;
+  .faq-accordion__header {
+    margin-bottom: 3rem;
   }
 
-  .faq-accordion__intro {
-    font-weight: 600;
+  .faq-accordion__question {
+    padding: 1.1rem 1.25rem;
+    font-size: 0.95rem;
   }
 
-  .faq-accordion__question-text {
-    white-space: normal;
-    font-size: 0.8rem;
+  .faq-accordion__answer {
+    padding: 0 1.25rem 1.25rem;
   }
 
-  .faq-accordion__col {
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+  .faq-accordion__answer p {
+    font-size: 0.85rem;
   }
 }
