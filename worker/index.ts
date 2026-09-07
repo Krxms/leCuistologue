@@ -1,5 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
+import { site } from "../src/lib/site-data";
+
 interface Env {
   RESEND_API_KEY: string;
   ASSETS: Fetcher;
@@ -67,7 +69,7 @@ function habillerEmail(titre: string, contenuHtml: string): string {
               <p style="margin:0 0 4px;">Le Cuistologue — Cuisine à domicile</p>
               <p style="margin:0;">
                 <a href="mailto:contact@lecuistologue.fr" style="color:#bc843c; text-decoration:none;">contact@lecuistologue.fr</a>
-                &nbsp;·&nbsp; 06 19 95 74 09
+                &nbsp;·&nbsp; ${site.phone.display}
               </p>
             </td>
           </tr>
