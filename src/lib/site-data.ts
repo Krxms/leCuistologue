@@ -65,7 +65,7 @@ export const site = {
       secteur: "Vexin-Thelle",
       communes: ["Beauvais", "Chaumont-en-Vexin", "Méru", "Trie-Château", "Auneuil", "Noailles"],
       intro:
-        "Le Cuistologue est installé à Serans, dans l'Oise, et intervient sur le secteur du Vexin-Thelle : Beauvais, Chaumont-en-Vexin, Méru, Trie-Château, Auneuil, Noailles et les communes voisines.",
+        "Le Cuistologue est installé dans l'Oise et intervient sur le secteur du Vexin-Thelle : Beauvais, Chaumont-en-Vexin, Méru, Trie-Château, Auneuil, Noailles et les communes voisines.",
       metaDesc:
         "Cuisinier à domicile dans l'Oise, secteur Vexin-Thelle : Beauvais, Chaumont-en-Vexin, Méru, Trie-Château, Auneuil, Noailles. Repas préparés chez vous.",
     },
