@@ -103,9 +103,9 @@ export const optionsPetitsPlus: OptionPetitPlus[] = [
     prix: "20 €",
     prixReduit: "10 €",
     corps:
-      "Je sélectionne et achète pour vous les produits nécessaires à vos menus auprès des commerces et producteurs adaptés, puis je les apporte directement à votre domicile.",
+      "Après avoir choisi ensemble les menus, je me charge de sélectionner les produits auprès des commerces et producteurs adaptés et les livre chez vous.",
     precision:
-      "Le tarif de 20 € rémunère uniquement ce service : le montant des produits achetés reste à votre charge.",
+      "Ce tarif comprend le service de courses et la livraison. Les frais d’achat des produits sont à votre charge.",
   },
   {
     slug: "popotes",

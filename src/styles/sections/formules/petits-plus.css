@@ -1,7 +1,7 @@
 /* ===== Groupe — réglages communs à l'ensemble des 3 cartes ===== */
 
 .petits-plus {
-  padding: 2.5rem 3.3% 12rem;
+  padding: 2.5rem 2.5% 12rem;
 }
 
 .petits-plus__title {
@@ -21,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 3rem;
+  gap: 2rem;
   flex-wrap: wrap;
 }
 
@@ -49,12 +49,24 @@
 
 .petits-plus-card {
   position: relative;
-  width: 30%;
-  min-width: 304px;
-  max-width: 520px;
-  aspect-ratio: 2260 / 1680; /* gabarit UNIQUE des 3 cartes (base Courses, ajusté) */
+  /* 2 colonnes par défaut (tablette + desktop courant) : cartes larges,
+     texte lisible. 3 colonnes seulement sur grand écran (>=1550px), là
+     où les 3 cartes restent assez grandes. */
+  width: 46%;
+  min-width: 320px;
+  max-width: 500px;
+  /* Ratio = celui des SVG (~1.3) pour que object-fit: cover ne rogne
+     quasiment pas le fond. Les cartes sont assez larges (2 colonnes)
+     pour que le texte agrandi tienne à ce ratio. */
+  aspect-ratio: 2260 / 1690;
   border-radius: 16px;
   overflow: hidden;
+}
+
+@media (min-width: 1550px) {
+  .petits-plus-card {
+    width: 31%;
+  }
 }
 
 /* Hooks de réglage fin par carte (posés sur .petits-plus-card--<nom>) :
@@ -88,7 +100,7 @@
 .petits-plus-content {
   position: absolute;
   left: 7.6%;   /* Courses = référence */
-  top: 25.5%;
+  top: 23%;
   width: 78%;   /* s'arrête un peu avant le bord droit (feuille asymétrique) */
   z-index: 1;
 }
@@ -104,10 +116,10 @@
 }
 
 .petits-plus-content__title {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.35rem;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
   color: #2c2c2c;
 }
 
@@ -115,7 +127,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.95rem, 1.25vw, 1.4rem);
+  font-size: clamp(1.05rem, 1.35vw, 1.5rem);
   color: var(--color-ink-soft);
 }
 
@@ -123,13 +135,13 @@
   margin-left: 0.6rem;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.62em;
+  font-size: 0.6em;
 }
 
 .petits-plus-content__description {
-  margin-top: 0.7rem;
+  margin-top: 0.5rem;
   font-family: var(--font-body);
-  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  font-size: clamp(0.92rem, 1.12vw, 1.08rem);
   line-height: 1.3;
   color: var(--color-ink-soft);
   width: 100%;
@@ -139,42 +151,27 @@
    un cran plus serrée que Popote (1 phrase) pour tenir dans la carte. */
 .petits-plus-content--course .petits-plus-content__description,
 .petits-plus-content--gourmande .petits-plus-content__description {
-  font-size: clamp(0.85rem, 1vw, 0.95rem);
-  line-height: 1.2;
-}
-
-/* Bas du desktop (1211-1440px) : 3 cartes en ligne mais encore petites
-   → les descriptions longues (Courses / Gourmande) débordent la feuille.
-   On les resserre le temps que les cartes reprennent de la hauteur. */
-@media (min-width: 1211px) and (max-width: 1440px) {
-  .petits-plus-content--course .petits-plus-content__description,
-  .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.85rem, 1vw, 0.95rem);
-    line-height: 1.14;
-  }
+  font-size: clamp(0.95rem, 1.08vw, 1.04rem);
+  line-height: 1.26;
 }
 
 /* ============================================================
-   TABLETTE PAYSAGE — 1023px à 1210px
+   2 colonnes — 1023px à 1360px (laptop étroit + tablette paysage)
    ============================================================ */
 
-@media (min-width: 1023px) and (max-width: 1210.98px) {
+@media (min-width: 1023px) and (max-width: 1360px) {
   .petits-plus__title {
     margin-bottom: clamp(5.5rem, calc(-10.9118rem + 1.6043vw), 8.5rem);
   }
 
-  .petits-plus-card {
-    width: 45%;
-  }
-
   .petits-plus-content__price {
-    font-size: clamp(1.15rem, 1.3vw, 1.45rem);
+    font-size: clamp(1.1rem, 1.3vw, 1.42rem);
   }
 
   .petits-plus-content__description {
     margin-top: 0.4rem;
-    font-size: clamp(0.85rem, 0.95vw, 1rem);
-    line-height: 1.3;
+    font-size: clamp(0.92rem, 1.08vw, 1.04rem);
+    line-height: 1.28;
   }
 }
 
@@ -183,19 +180,22 @@
    ============================================================ */
 
 @media (min-width: 768px) and (max-width: 1022.98px) {
-  .petits-plus-card {
-    width: 45%;
+  /* Cartes 2 col plus courtes : on redescend un peu le bloc texte pour
+     qu'il ne remonte pas dans l'illustration quand l'écran se réduit. */
+  .petits-plus-content {
+    top: 25%;
   }
 
   .petits-plus-content__description {
-    margin-top: 0.3rem;
+    margin-top: 0.35rem;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    line-height: 1.24;
   }
 
-  /* Cartes 45% encore courtes ici → descriptions longues resserrées. */
   .petits-plus-content--course .petits-plus-content__description,
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.66rem, 1.15vw, 0.8rem);
-    line-height: 1.14;
+    font-size: clamp(0.86rem, 1.4vw, 0.94rem);
+    line-height: 1.18;
   }
 
   .petits-plus__title {
@@ -214,7 +214,7 @@
 
 @media (max-width: 767.98px) {
   .petits-plus {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.25rem;
   }
 
   .petits-plus__grid {
@@ -224,28 +224,43 @@
   }
 
   .petits-plus-card {
-    width: 100%;
-    max-width: 400px;
+    /* Carte quasi bord à bord (le léger débord est rogné par
+       overflow-x: clip sur <main>), ratio conservé pour ne pas rogner
+       le fond. */
+    width: 103%;
+    max-width: 566px;
     margin-inline: auto;
+    overflow: visible;
+    aspect-ratio: 2260 / 1690;
   }
 
   .petits-plus__title {
     margin: 0 0 1rem;
   }
 
-  .petits-plus-content {
-    top: 24%;
+  /* Mobile : bloc texte centré dans la carte, écart symétrique gauche/
+     droite — pas de décalage par carte comme en desktop. Redescendu
+     pour ne pas remonter dans l'illustration. */
+  .petits-plus-content,
+  .petits-plus-content--popote,
+  .petits-plus-content--gourmande {
+    left: 8%;
+    width: 84%;
+    top: 25%;
   }
 
   .petits-plus-content__description {
-    margin-top: 0.4rem;
-    font-size: clamp(0.72rem, 3vw, 0.82rem);
-    line-height: 1.35;
+    margin-top: 0.35rem;
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+    line-height: 1.3;
   }
 
+  /* Courses / Gourmande : descriptions longues. Si les 2-3 dernières
+     lignes dépassent le blob (décoratif), elles se poursuivent
+     proprement en dessous — préférable à rogner le fond. */
   .petits-plus-content--course .petits-plus-content__description,
   .petits-plus-content--gourmande .petits-plus-content__description {
-    font-size: clamp(0.72rem, 3vw, 0.82rem);
-    line-height: 1.16;
+    font-size: clamp(0.86rem, 3.3vw, 0.94rem);
+    line-height: 1.22;
   }
 }
