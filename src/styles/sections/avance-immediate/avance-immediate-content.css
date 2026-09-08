@@ -91,29 +91,29 @@
   position: relative;
 }
 
-/* Fond en CSS pur (fill + bordure), plutôt qu'une image : les exports
+/* Fond en CSS pur (aplat pastel), plutôt qu'une image : les exports
    SVG "à main levée" depuis Figma pour cet effet ne sortent pas avec
    de vraies propriétés SVG exploitables (le filtre ne s'exporte pas
    correctement), les PNG basse résolution utilisés avant pixellisaient
    au-delà de leur résolution source, et les PNG haute résolution
    testés ensuite n'ont pas donné un rendu satisfaisant. Ce fond CSS ne
-   pixellise jamais, à aucune taille d'écran. border-radius uniforme
-   (pas d'ondulation le long des bords — impossible en CSS pur,
-   border-radius n'agit que sur les coins). */
+   pixellise jamais, à aucune taille d'écran.
+
+   Traitement calqué sur les cartes de la page À propos en pile
+   (.ap-bubble, format mobile/tablette) : aplat plein, pas de bordure,
+   grand border-radius uniforme (26px). */
 .avance-content__card--small {
   /* Ratio exact du fichier d'origine, conservé pour que le
      dimensionnement de la carte ne change pas. */
   aspect-ratio: 1998 / 543;
   background-color: #D9E5E4;
-  border: 3px solid #bbd1cf97;
-  border-radius: 8px;
+  border-radius: 26px;
 }
 
 .avance-content__card--large {
   aspect-ratio: 1994 / 1805;
   background-color: #F7E4D5;
-  border: 3px solid #f6dec0c6;
-  border-radius: 8px;
+  border-radius: 26px;
 }
 
 .avance-content__card-bulb {
