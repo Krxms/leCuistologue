@@ -93,7 +93,10 @@
   margin: 0 0 1.5rem;
 }
 
-.presentation__text strong {
+/* Phrase d'accroche en gras via CSS plutôt qu'un <strong> englobant
+   toute la phrase (le <strong> est réservé à l'emphase de courts
+   segments — cf. rapport SEO « bold tags too long »). */
+.presentation__text-lead {
   font-weight: 700;
 }
 

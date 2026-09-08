@@ -13,6 +13,7 @@ const etapes = [
     titre: ["On échange"],
     texte: "Vos habitudes guident chaque intervention.",
     image: step1,
+    alt: "Échange autour de vos habitudes et de vos envies",
     ratio: "380 / 322",
   },
   {
@@ -20,6 +21,7 @@ const etapes = [
     titre: ["Je cuisine chez vous"],
     texte: "Des repas maison préparés directement dans votre cuisine.",
     image: step2,
+    alt: "Le Cuistologue prépare des plats maison dans votre cuisine",
     ratio: "357 / 302",
   },
   {
@@ -27,6 +29,7 @@ const etapes = [
     titre: ["Vous profitez"],
     texte: "Des plats prêts, un frigo organisé et une cuisine impeccable.",
     image: step3,
+    alt: "Des plats prêts rangés dans un réfrigérateur organisé",
     ratio: "375 / 277",
   },
 ];
@@ -48,10 +51,9 @@ const etapes = [
           <div class="howto__step">
             <img
               src={etape.image.src}
-              alt=""
+              alt={etape.alt}
               class="howto__step-illustration"
               style={`aspect-ratio:${etape.ratio}`}
-              aria-hidden="true"
             />
             <div class="howto__step-heading">
               <span class="howto__step-number">{etape.numero}</span>
