@@ -41,6 +41,7 @@
   margin-top: -15%;
   transform: rotate(45deg);
   flex-shrink: 0;
+  display : none;
 }
 
 .une-question__title {
