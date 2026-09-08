@@ -1,24 +1,24 @@
 .offre {
   position: relative;
-  /* Rose de la section — ancien fill du PNG serviceBG.png. Centralisé
-     ici, partagé par le fond desktop (.offre__desktop::before) et le
-     fond mobile (.offre-m). */
+  /* Rose de la section — ancien fill du PNG serviceBG.png. Partagé par
+     le fond desktop (.offre__inner::before) et l'aplat mobile. */
   --offre-pink: #FFDBDB;
   /* Masque de la courbe du bord supérieur du fond desktop. Le SVG
      (viewBox 0-100) est étiré à la boîte via preserveAspectRatio:none,
      donc la courbe épouse n'importe quelle largeur/hauteur de section,
      à tous les paliers responsive. Tracé calqué sur celui du PNG
      d'origine : bord à ~1,2% de haut à gauche, qui descend vers ~4% à
-     droite (creux à ~5,6% vers les deux tiers). La texture « papier
-     déchiré » du PNG n'est pas reprise, seulement la courbe. */
+     droite (creux à ~5,6% vers les deux tiers). */
   --offre-curve: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 1.2C33 1.2 62 5.6 100 4L100 100L0 100Z' fill='black'/%3E%3C/svg%3E");
 }
 
 /* ============================================================
-   DESKTOP (base) — s'applique à partir de 1211px
+   DESKTOP + TABLETTE (base) — s'applique à partir de 834px
+   Sous 834px, tout est ré-habillé par le bloc @media (max-width: 833px)
+   en bas de fichier (même markup, layout empilé).
    ============================================================ */
 
-.offre__desktop {
+.offre__inner {
   position: relative;
   overflow: clip;
   min-height: 71vw;
@@ -29,11 +29,8 @@
 
 /* Fond rose de la section, ex-image serviceBG.png redessinée en CSS :
    aplat --offre-pink + masque --offre-curve qui découpe la courbe du
-   bord supérieur (plus haut à gauche, plus bas à droite).
-   inset: 0 → suit exactement .offre__desktop (qui porte déjà le
-   margin-block négatif et, au-delà de 1920px, le plafond de largeur),
-   donc plus aucune dimension à resynchroniser par palier. */
-.offre__desktop::before {
+   bord supérieur (plus haut à gauche, plus bas à droite). */
+.offre__inner::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -57,14 +54,10 @@
 }
 
 /* Grands écrans (21"+, 2K/4K...) : min-height/padding-top en vw
-   continuaient de grandir avec la fenêtre sans plafond — la section
-   devenait démesurément haute, la photo démesurément grande. Tout gelé
-   à sa valeur réelle à 1920px, et le conteneur lui-même plafonné pour
-   que le texte (58%) et la photo (56%) arrêtent de s'écarter l'un de
-   l'autre au-delà. Le fond (.offre__desktop::before, inset:0) suit ce
-   plafond tout seul, plus rien à borner ici. */
+   continuaient de grandir avec la fenêtre sans plafond. Tout gelé à sa
+   valeur réelle à 1920px, et le conteneur lui-même plafonné. */
 @media (min-width: 1921px) {
-  .offre__desktop {
+  .offre__inner {
     max-width: var(--content-cap);
     margin-inline: auto;
     min-height: calc(0.71 * var(--content-cap));
@@ -121,42 +114,35 @@
   color: var(--color-ink);
 }
 
-.offre__checklist {
-  /* Intégrée directement dans .offre__header (même bloc que le
-     titre/texte) au lieu d'un wrapper séparé avec sa propre largeur :
-     elle hérite automatiquement de la même largeur que le texte à
-     chaque palier, plus rien à resynchroniser entre les deux. */
+/* Wrapper neutre en desktop/tablette (le fond arrondi n'existe qu'en
+   mobile). */
+.offre__checklist-wrap {
   margin-top: 1.25rem;
-  display: flex;
-  flex-wrap: wrap;
-  /* Colonnes resserrées, rapprochées l'une de l'autre via le gap
-     plutôt qu'un margin-left individuel sur chaque colonne. */
-  gap: 0.4rem 1.5rem;
 }
 
-.offre__checklist-col {
+/* Liste unique rendue en 2 colonnes : 5 lignes, remplissage par colonne
+   (items 1-5 à gauche, 6-10 à droite) — équivalent des deux <ul>
+   d'origine, mais en un seul markup. */
+.offre__checklist {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex: 1 1 220px;
-  /* Remontée ici (plutôt que sur le span) : la puce ci-dessous est en
-     em, donc calée sur cette même taille — puce et texte évoluent
-     ensemble à chaque palier, jusqu'au dernier format tablette,
-     sans valeur à resynchroniser séparément. */
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  column-gap: 1.5rem;
+  row-gap: 0.5rem;
   font-size: clamp(1.05rem, 1.05vw, 1.3rem);
 }
 
-.offre__checklist-col li {
+.offre__checklist-item {
   display: flex;
   align-items: center;
   gap: 0.7rem;
 }
 
 /* Puce ronde à la place du checkmark image, même bleu que le CTA. */
-.offre__checklist-col li::before {
+.offre__checklist-item::before {
   content: "";
   display: inline-block;
   width: 0.4em;
@@ -166,7 +152,7 @@
   flex-shrink: 0;
 }
 
-.offre__checklist-col span {
+.offre__checklist-item span {
   font-family: var(--font-body);
   color: var(--color-ink);
 }
@@ -175,14 +161,9 @@
   position: relative;
   z-index: 1;
   margin-top: 2.5rem;
-  /* width:fit-content (plutôt qu'un bloc qui remplit toute la largeur
-     du header) : la boîte se cale sur son contenu le plus large — en
-     pratique "A partir de ... / intervention", le premier item, plus
-     large que la promo ou le CTA. Elle reste donc alignée à gauche
-     avec le texte au-dessus (comportement par défaut d'un bloc, pas
-     de centrage du bloc lui-même), tandis que align-items:center
-     centre la promo et le CTA par rapport à CETTE largeur précise,
-     et non plus par rapport à toute la largeur du header. */
+  /* width:fit-content : la boîte se cale sur son contenu le plus large,
+     reste alignée à gauche avec le texte, et align-items:center centre
+     la promo et le CTA par rapport à CETTE largeur. */
   width: fit-content;
   display: flex;
   flex-direction: column;
@@ -193,6 +174,13 @@
   margin: 0;
   font-family: var(--font-display);
   text-align: center;
+}
+
+/* Desktop : "74,50 € / intervention" reste dans le flux de la ligne,
+   à la suite de "À partir de". En mobile, ce span passe sur sa propre
+   ligne (voir le bloc @media max-width:833px). */
+.offre__price-line {
+  display: inline;
 }
 
 .offre__price-label {
@@ -244,11 +232,6 @@
   justify-content: center;
   align-self: center;
   margin-top: 2rem;
-  /* Hauteur réduite un peu (66px -> 60px) ; l'ancien trio
-     height/max-height/min-height était incohérent (min-height plus
-     grand que max-height, donc min-height gagnait toujours et les
-     deux autres ne servaient à rien) — remplacé par une seule
-     valeur claire. */
   height: 54px;
   width: 100%;
   max-width: 410px;
@@ -290,22 +273,15 @@
   height: auto;
 }
 
-
 /* ============================================================
-   TABLETTE PORTRAIT — jusqu'à 834px, ZONE ISOLÉE
-   Tout ce que vous écrivez ici ne s'applique QUE dans cette plage,
-   et QUE sur les éléments de .offre__desktop (jamais .offre-m).
-   Modifiez librement ce bloc sans risque pour le mobile, le desktop
-   ou la zone paysage ci-dessous.
+   TABLETTE — 834px à 1210px (portrait et paysage)
+   Cadre resserré à côté de la photo, photo repositionnée, hauteur
+   recalculée sur les dimensions réelles de la photo pour ne jamais
+   être rognée par overflow:clip.
    ============================================================ */
 
-@media (max-width: 834px) {
-
-  /* Recalculée à partir des dimensions réelles de la photo (85% de
-     large, ratio ~1.047) pour qu'elle ne soit jamais rognée par
-     l'overflow:clip de la section, même une fois la checklist
-     raccourcie par le passage en deux colonnes ci-dessous. */
-  .offre__desktop {
+@media (min-width: 834px) and (max-width: 1210px) {
+  .offre__inner {
     min-height: calc(88vw - 56px);
   }
 
@@ -314,60 +290,6 @@
   }
 
   .offre__photo--main {
-    left: 64.9%;
-    top: 5%;
-    width: 59%;
-    height: auto;
-  }
-
-  .offre__description {
-    width: 74%;
-  }
-
-  .offre__arrow {
-    left: 74.7%;
-    top: 62%;
-    width: 7.8%;
-  }
-
-  /* Une seule colonne : sous 1100px, la liste passe déjà en une
-     colonne (voir la sous-zone 835-1100px plus bas) — en dessous de
-     835px, on reste sur ce même comportement au lieu de revenir à
-     deux colonnes, pour que la bascule soit définitive une fois
-     passée, jusqu'au mobile. */
-  .offre__checklist {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .offre__checklist-col {
-    align-items: left;
-  }
-}
-
-/* ============================================================
-   TABLETTE PAYSAGE — 835px à 1210px, ZONE ISOLÉE
-   Tout ce que vous écrivez ici ne s'applique QUE dans cette plage,
-   et QUE sur les éléments de .offre__desktop (jamais .offre-m).
-   Modifiez librement ce bloc sans risque pour le mobile, le desktop
-   ou la zone portrait ci-dessus.
-   ============================================================ */
-
-@media (min-width: 835px) and (max-width: 1210px) {
-
-  /* Recalculée à partir des dimensions réelles de la photo (85% de
-     large, ratio ~1.047) pour qu'elle ne soit jamais rognée par
-     l'overflow:clip de la section, même une fois la checklist
-     raccourcie par le passage en deux colonnes ci-dessous. */
-  .offre__desktop {
-    min-height: calc(88vw - 56px);
-  }
-
-  .offre__header {
-    max-width: 90%;
-  }
-
-   .offre__photo--main {
     left: 67.9%;
     top: 9%;
     width: 66%;
@@ -383,268 +305,187 @@
     top: 62%;
     width: 7.8%;
   }
-
-  /* Deux colonnes garanties (au lieu du flex qui repassait en une
-     seule colonne faute de place à cette largeur). Le reste (fond,
-     largeur du cadre, centrage du bloc prix/promo/CTA) reste celui
-     du bloc de base : même comportement partout hors mobile. */
-  .offre__checklist {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .offre__checklist-col {
-    align-items: left;
-  }
 }
 
-/* Sous-zone de la tablette paysage : en dessous de 1100px, le cadre
-   90% devient trop étroit pour garder deux colonnes lisibles à côté
-   de la photo. On repasse la liste en une seule colonne et on élargit
-   un peu le bloc texte pour compenser. */
-@media (min-width: 835px) and (max-width: 1100px) {
+/* Sous 1100px, le cadre 90% devient trop étroit pour deux colonnes
+   lisibles à côté de la photo : liste en une seule colonne, bloc texte
+   un peu élargi. */
+@media (min-width: 834px) and (max-width: 1100px) {
   .offre__header {
     max-width: 79%;
   }
 
   .offre__checklist {
-    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+}
+
+/* 1101-1210px : la liste reste en 2 colonnes, mais le cadre à 90% la
+   laissait s'étaler jusque sous la photo (colonnes auto étirées par le
+   justify-content:normal de la grille). On cale les colonnes à leur
+   largeur de contenu (justify-content: start), on resserre l'écart et
+   on borne la largeur pour qu'elles restent à gauche de la photo
+   (qui commence à ~68% de .offre__inner). */
+@media (min-width: 1101px) and (max-width: 1210px) {
+  .offre__checklist {
+    justify-content: start;
+    column-gap: 0.75rem;
+    max-width: 72%;
   }
 }
 
 /* ============================================================
-   MOBILE (base) — masquée par défaut, activée sous 834px
-   ============================================================ */
-
-/* Aplat de couleur (comme .valeurs) au lieu d'une image à ratio
-   fixe : s'adapte à n'importe quelle hauteur de contenu, jamais de
-   découpe. Couleur reprise de l'ancien fond image. */
-.offre-m {
-  display: none;
-  background-color: var(--offre-pink);
-}
-
-.offre-m__title-row {
-  position: relative;
-  z-index: 1;
-  padding-top: 3rem;
-  padding-inline: 8%;
-  /* Ferré à gauche : le titre retombe sur ~3 lignes en mobile, centré
-     il aurait les deux bords irréguliers. Aligné avec la description
-     juste en dessous. */
-  text-align: left;
-}
-
-.offre-m__title {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(1.7rem, 7vw, 2.4rem);
-  line-height: 1.25;
-  color: var(--color-ink);
-}
-
-.offre-m__titleAccent {
-  color: #DAA35B;
-}
-
-.offre-m__description {
-  position: relative;
-  z-index: 1;
-  margin-top: 1rem;
-  padding-inline: 8%;
-  /* Paragraphe de 3 phrases : ferré à gauche pour la lisibilité
-     (bord gauche régulier), plutôt que centré. */
-  text-align: left;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--color-ink);
-}
-
-/* Étiquette centrée flanquée de deux traits, comme un séparateur de
-   section classique ("---- Inclus dans chaque formule ----"). */
-.offre-m__divider-label {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 2.25rem;
-  padding-inline: 8%;
-}
-
-.offre-m__divider-label::before,
-.offre-m__divider-label::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background-color: rgba(44, 44, 44, 0.2);
-}
-
-.offre-m__divider-label span {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ink-soft);
-  white-space: nowrap;
-}
-
-.offre-m__checklist-wrap {
-  position: relative;
-  z-index: 1;
-  margin: 1.25rem auto 0;
-  width: 85%;
-  /* Fond de la liste à 30% d'opacité. */
-  background-color: rgba(253, 251, 250, 0.3);
-  border-radius: 20px;
-}
-
-/* Simple liste à puces : plus de pictogrammes ni de séparateurs entre
-   les lignes, juste une puce ronde (même style que la version
-   desktop). */
-.offre-m__checklist {
-  list-style: none;
-  margin: 0;
-  padding: 1.4rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--color-ink);
-}
-
-.offre-m__checklist-item {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
-.offre-m__checklist-item::before {
-  content: "";
-  flex-shrink: 0;
-  width: 0.4em;
-  height: 0.4em;
-  border-radius: 50%;
-  background-color: var(--color-ink-soft);
-}
-
-.offre-m__price {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-  margin: 2rem 0 0;
-  text-align: center;
-  font-family: var(--font-display);
-}
-
-/* Prix et "/ intervention" sur la même ligne, "A partir de" garde sa
-   propre ligne au-dessus. */
-.offre-m__price-line {
-  display: flex;
-  align-items: baseline;
-  gap: 0.35rem;
-}
-
-.offre-m__price-label {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--color-ink);
-}
-
-.offre-m__price-value {
-  font-weight: 800;
-  font-size: 2rem;
-  color: #bc843c;
-}
-
-/* Même bandeau illustré que le desktop (.offre__promo-bg), redimensionné
-   pour rester lisible sur mobile : object-fit:fill épouse exactement
-   la taille du texte (voir .offre-m__promo, sizing par le contenu). */
-.offre-m__promo {
-  position: relative;
-  z-index: 1;
-  /* Rapproché du prix (1.25rem -> 0.75rem -> 0.25rem). */
-  margin: 0.25rem auto 0;
-  /* fit-content (pas de max-width) : le texte reste nowrap, donc la
-     boîte doit toujours pouvoir prendre exactement sa largeur réelle
-     — un max-width plus étroit forcerait un débordement visuel. */
-  width: fit-content;
-  display: block;
-}
-
-.offre-m__promo-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  object-fit: fill;
-  pointer-events: none;
-}
-
-.offre-m__promo-text {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  /* Agrandi (0.9rem/1.2rem -> 1.2rem/1.8rem, texte 0.7rem -> 0.78rem) :
-     la boîte grandit, et .offre-m__promo-bg (object-fit:fill) avec
-     elle. */
-  padding: 1.2rem 1.8rem;
-  font-family: var(--font-body);
-  /* nowrap : le fond (object-fit:fill) épouse exactement la boîte du
-     texte — si le texte passait à la ligne, l'image s'étirerait
-     verticalement et perdrait ses proportions de bandeau. */
-  font-size: 0.78rem;
-  white-space: nowrap;
-  color: var(--color-ink);
-}
-
-.offre-m__cta {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  width: 85%;
-  max-width: 410px;
-  height: 50px;
-  /* Décroché de la promo juste au-dessus (2rem -> 2.75rem). */
-  margin: 2.75rem auto 0;
-  text-align: center;
-  border-radius: 6px;
-  background-color: var(--color-ink-soft);
-  color: #fdfbfa;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: 0.03em;
-  transition: background-color 0.2s ease;
-}
-
-.offre-m__cta:hover {
-  background-color: #1a2b35;
-}
-
-/* ============================================================
-   BASCULE — .offre-m ne s'affiche qu'en dessous de 834px
+   MOBILE — jusqu'à 833px
+   Même markup, layout entièrement empilé : plus de photo ni de flèche,
+   fond en aplat plein (pas de courbe), liste en carte translucide.
    ============================================================ */
 
 @media (max-width: 833px) {
-  .offre__desktop {
+  .offre__inner {
+    position: relative;
+    overflow: visible;
+    min-height: 0;
+    margin-block: 0;
+    padding: 0 0 3rem;
+    background-color: var(--offre-pink);
+  }
+
+  .offre__inner::before {
     display: none;
   }
 
-  .offre-m {
-    display: block;
+  .offre__title-icon,
+  .offre__arrow,
+  .offre__photo {
+    display: none;
+  }
+
+  .offre__title-br {
+    display: none;
+  }
+
+  .offre__header {
+    max-width: none;
+    padding: 0;
+  }
+
+  .offre__title-row {
+    z-index: 1;
+    padding-top: 3rem;
+    padding-inline: 8%;
+    /* Ferré à gauche : le titre retombe sur ~3 lignes en mobile. */
+    text-align: left;
+  }
+
+  .offre__title {
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
+    line-height: 1.25;
+    padding-right: 0;
+  }
+
+  .offre__description {
+    z-index: 1;
+    margin-top: 1rem;
+    padding-inline: 8%;
+    width: auto;
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Étiquette centrée flanquée de deux traits, comme un séparateur de
+     section ("──── CHAQUE INTERVENTION… ────"). */
+  .offre__include-label {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+    padding-inline: 8%;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .offre__include-label::before,
+  .offre__include-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: rgba(44, 44, 44, 0.2);
+  }
+
+  .offre__checklist-wrap {
     position: relative;
-    padding-bottom: 3rem;
+    z-index: 1;
+    margin: 1.25rem auto 0;
+    width: 85%;
+    background-color: rgba(253, 251, 250, 0.3);
+    border-radius: 20px;
+  }
+
+  .offre__checklist {
+    grid-template-rows: none;
+    grid-auto-flow: row;
+    row-gap: 0.55rem;
+    padding: 1.4rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .offre__price-block {
+    width: auto;
+    align-items: center;
+    margin: 2rem 0 0;
+  }
+
+  .offre__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  /* Prix et "/ intervention" sur la même ligne, "À partir de" garde sa
+     propre ligne au-dessus. */
+  .offre__price-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+
+  .offre__price-label {
+    font-size: 1rem;
+  }
+
+  .offre__price-value {
+    font-size: 2rem;
+    margin-inline: 0;
+  }
+
+  .offre__promo {
+    margin: 0.25rem auto 0;
+    width: fit-content;
+    display: block;
+  }
+
+  .offre__promo-bg {
+    margin-top: 0;
+    transform: none;
+  }
+
+  .offre__promo-text {
+    padding: 1.2rem 1.8rem;
+    font-size: 0.78rem;
+  }
+
+  .offre__cta {
+    width: 85%;
+    height: 50px;
+    margin: 2.75rem auto 0;
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
   }
 }

@@ -7,63 +7,49 @@ import arrow from "../../../assets/accueil/service/arrow.svg";
 import serviceInfoBg from "../../../assets/accueil/service/serviceInfoBG.svg";
 import { Image } from "astro:assets";
 
-const colonneGauche = [
+/* Une seule liste : rendue en 2 colonnes (grille) sur desktop/tablette,
+   en 1 colonne sur mobile. Plus de dédoublement desktop/mobile du
+   contenu — cf. rapport SEO (headings/texte/CTA dupliqués). */
+const prestations = [
   "Échange préalable sur vos habitudes et vos envies",
   "Menus personnalisés",
   "Courses réalisées pour vous",
   "Cuisine à domicile",
   "Organisation du réfrigérateur",
-];
-
-const colonneDroite = [
   "Remise au propre de la cuisine",
   "Conseils de conservation",
   "Organisation d’une routine culinaire",
   "Réserve gourmande",
   "Popotes à emporter",
 ];
-
 ---
 
 <section class="offre">
-  <!-- ===== Desktop / tablette (≥1211px) ===== -->
-  <div class="offre__desktop">
-    {/* Le fond rose (ancien serviceBG.png) est dessiné en CSS :
-        .offre__desktop::before — aplat + courbe du bord haut. */}
+  <div class="offre__inner">
+    {/* Fond rose + courbe du bord haut : .offre__inner::before (desktop /
+        tablette). Sous 834px, .offre__inner devient un simple aplat. */}
     <div class="offre__header">
       <div class="offre__title-row">
         <h2 class="offre__title">
-          Des solutions culinaires pensées pour vous et <br><span class="offre__titleAccent">avec vous.</span>
+          Des solutions culinaires pensées pour vous et <br class="offre__title-br" /><span class="offre__titleAccent">avec vous.</span>
         </h2>
-        <img
-          src={titleIcon.src}
-          alt=""
-          class="offre__title-icon"
-          aria-hidden="true"
-        />
+        <img src={titleIcon.src} alt="" class="offre__title-icon" aria-hidden="true" />
       </div>
+
       <p class="offre__description">
-        <b>Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine.</b><br />
+        <b>Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine.</b><br /><br />
         Choisissez votre formule selon votre appétit, vos habitudes et la quantité
-        de repas que vous souhaitez déléguer.<br><br>
+        de repas que vous souhaitez déléguer.<br /><br />
         Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
       </p>
+
       <p class="offre__include-label">Chaque intervention est composée de :</p>
 
-      <div class="offre__checklist">
-        <ul class="offre__checklist-col">
+      <div class="offre__checklist-wrap">
+        <ul class="offre__checklist">
           {
-            colonneGauche.map((item) => (
-              <li>
-                <span>{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-        <ul class="offre__checklist-col">
-          {
-            colonneDroite.map((item) => (
-              <li>
+            prestations.map((item) => (
+              <li class="offre__checklist-item">
                 <span>{item}</span>
               </li>
             ))
@@ -74,20 +60,19 @@ const colonneDroite = [
       <div class="offre__price-block">
         <p class="offre__price">
           <span class="offre__price-label">À partir de</span>
-          <span class="offre__price-value">74,50 €</span>
-          <span class="offre__price-label">/ intervention</span>
+          <span class="offre__price-line">
+            <span class="offre__price-value">74,50 €</span>
+            <span class="offre__price-label">/ intervention</span>
+          </span>
         </p>
+
         <div class="offre__promo">
-          <img
-            src={serviceInfoBg.src}
-            alt=""
-            class="offre__promo-bg"
-            aria-hidden="true"
-          />
+          <img src={serviceInfoBg.src} alt="" class="offre__promo-bg" aria-hidden="true" />
           <p class="offre__promo-text">
             Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
           </p>
         </div>
+
         <a href="/formules/" class="offre__cta">Je découvre les formules !</a>
       </div>
     </div>
@@ -98,59 +83,8 @@ const colonneDroite = [
       src={photoMain}
       alt="Plats préparés par Le Cuistologue, prêts à emporter"
       class="offre__photo offre__photo--main"
+      widths={[560, 840, 1120, 1400]}
+      sizes="(max-width: 833px) 0px, (max-width: 1210px) 66vw, 56vw"
     />
-  </div>
-
-  <!-- ===== Mobile / tablette (≤1210px) ===== -->
-  <div class="offre-m">
-    <div class="offre-m__title-row">
-      <h2 class="offre-m__title">
-        Des solutions culinaires pensées pour vous et <span class="offre-m__titleAccent">avec vous.</span>
-      </h2>
-    </div>
-    <p class="offre-m__description">
-      <b>Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine.</b><br /><br />
-      Choisissez votre formule selon votre appétit, vos habitudes et la quantité
-      de repas que vous souhaitez déléguer.<br><br>
-      Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
-    </p>
-
-    <div class="offre-m__divider-label">
-      <span>Chaque intervention est composée de :</span>
-    </div>
-
-    <div class="offre-m__checklist-wrap">
-      <ul class="offre-m__checklist">
-        {
-          [...colonneGauche, ...colonneDroite].map((item) => (
-            <li class="offre-m__checklist-item">{item}</li>
-          ))
-        }
-      </ul>
-    </div>
-
-    <p class="offre-m__price">
-      <span class="offre-m__price-label">À partir de</span>
-      <span class="offre-m__price-line">
-        <span class="offre-m__price-value">74,50 €</span>
-        <span class="offre-m__price-label">/ intervention</span>
-      </span>
-    </p>
-
-    <div class="offre-m__promo">
-      <img
-        src={serviceInfoBg.src}
-        alt=""
-        class="offre-m__promo-bg"
-        aria-hidden="true"
-      />
-      <p class="offre-m__promo-text">
-        Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
-      </p>
-    </div>
-
-    <a href="/formules/" class="offre-m__cta">
-      Je découvre les formules !
-    </a>
   </div>
 </section>
