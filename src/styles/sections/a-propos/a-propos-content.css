@@ -149,18 +149,34 @@
   z-index: 3;
 }
 
+/* Piste + puces : inertes en desktop (composition libre — les bulles
+   restent positionnées en absolu par rapport à .ap-stage, la piste
+   n'étant qu'un bloc de hauteur nulle sans influence). Deviennent
+   une pile flex sous 1200px, puis un carrousel à défilement sous
+   768px. */
+.ap-stage__track {
+  display: block;
+  min-width: 0;
+}
+
+.ap-stage__dots {
+  display: none;
+}
+
 /* Alignement vertical du bloc titre/sous-titre sur les autres pages
    (FAQ, Avance immédiate…) : exactement la même cascade de margin-top
    -> le titre tombe à la même hauteur à toutes les largeurs. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .a-propos-content {
     margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
+    max-width: 1148px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1210px) {
   .a-propos-content {
     margin-top: clamp(-9rem, calc(-3.525rem - 0.4525vw), -7rem);
+    max-width: 1148px;
   }
 }
 
@@ -199,6 +215,14 @@
     gap: 1.5rem;
   }
 
+  /* La piste porte l'empilement des bulles (la photo et les puces
+     restent enfants directs de .ap-stage). */
+  .ap-stage__track {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
   .ap-bubble {
     position: relative;
     left: auto !important;
@@ -232,6 +256,71 @@
     width: min(62%, 260px);
     margin: 0 auto 1rem;
     order: -1;
+  }
+}
+
+/* ===== < 768px : les 5 piliers en carrousel à défilement natif +
+   snap + puces — même mécanisme que .commentaires (Accueil) et le
+   mobile de .pricing (Formules). Une seule carte visible à la fois,
+   la pile verticale ne s'étire plus sur toute la hauteur d'écran.
+   ================================================================ */
+@media (max-width: 767px) {
+  .ap-stage {
+    max-width: 100%;
+    gap: 1rem;
+  }
+
+  /* Piste horizontale : le navigateur gère le geste (aucun drag JS).
+     margin-inline négatif = la piste saigne jusqu'aux bords de
+     l'écran (débord coupé par overflow-x: clip sur <main>).
+
+     Centrage : chaque carte occupe TOUTE la largeur utile
+     (flex-basis 100%), et le débord des voisines vient uniquement
+     du padding-inline symétrique de la piste. Résultat : à
+     scroll-left 0 la 1re carte a le même vide à gauche qu'à droite,
+     et scroll-snap-align: center (+ scroll-padding-inline identique)
+     recentre pareil chaque carte, y compris la dernière. */
+  .ap-stage__track {
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 3rem;
+    padding-inline: 3rem;
+    margin-inline: -1.5rem;
+    scrollbar-width: none;
+  }
+
+  .ap-stage__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ap-bubble {
+    flex: 0 0 100%;
+    width: auto !important;
+    scroll-snap-align: center;
+  }
+
+  .ap-stage__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .ap-stage__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(44, 44, 44, 0.2);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .ap-stage__dot--active {
+    background-color: #c26665;
   }
 }
 

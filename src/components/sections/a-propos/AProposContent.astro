@@ -85,19 +85,6 @@ const bulles = [
     <p class="a-propos-content__subtitle">" Le goût du lien "</p>
 
     <div class="ap-stage">
-      {bulles.map((b) => (
-        <div class={`ap-bubble ap-bubble--${b.slug}`}>
-          <img class="ap-bubble__bg" src={b.bg.src} alt="" aria-hidden="true" />
-          <div class="ap-bubble__txt">
-            <h3 class="ap-bubble__title">{b.titre}</h3>
-            {b.paras.map((p) => (
-              <p class="ap-bubble__p">{p}</p>
-            ))}
-            <p class="ap-bubble__p ap-bubble__p--accent">{b.accent}</p>
-          </div>
-        </div>
-      ))}
-
       <Image
         class="ap-stage__photo"
         src={photo}
@@ -106,6 +93,68 @@ const bulles = [
         sizes="(max-width: 767px) 60vw, 37vw"
         loading="eager"
       />
+
+      <div class="ap-stage__track" id="ap-stage-track">
+        {bulles.map((b) => (
+          <div class={`ap-bubble ap-bubble--${b.slug}`}>
+            <img class="ap-bubble__bg" src={b.bg.src} alt="" aria-hidden="true" />
+            <div class="ap-bubble__txt">
+              <h3 class="ap-bubble__title">{b.titre}</h3>
+              {b.paras.map((p) => (
+                <p class="ap-bubble__p">{p}</p>
+              ))}
+              <p class="ap-bubble__p ap-bubble__p--accent">{b.accent}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Puces : indicateur du carrousel mobile (< 768px) uniquement,
+          masquées ailleurs — même mécanisme que .commentaires (Accueil)
+          et .pricing (Formules). */}
+      <div class="ap-stage__dots" id="ap-stage-dots">
+        {bulles.map((b, i) => (
+          <button type="button" class="ap-stage__dot" aria-label={`Aller au pilier « ${b.titre} »`} />
+        ))}
+      </div>
     </div>
   </section>
 )}
+
+<script>
+  /* Carrousel « à propos » mobile : défilement natif + snap, les puces
+     ne font que suivre la carte centrée (aucune animation JS), calqué
+     sur .commentaires (temoignages.astro) et le mobile de .pricing. */
+  const track = document.getElementById("ap-stage-track");
+  const dotsWrap = document.getElementById("ap-stage-dots");
+
+  if (track && dotsWrap) {
+    const cards = Array.from(track.querySelectorAll<HTMLElement>(".ap-bubble"));
+    const dots = Array.from(dotsWrap.querySelectorAll<HTMLElement>(".ap-stage__dot"));
+
+    function setActive(i: number) {
+      dots.forEach((d, idx) => d.classList.toggle("ap-stage__dot--active", idx === i));
+    }
+
+    function scrollToIndex(i: number) {
+      cards[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+
+    dots.forEach((d, i) => d.addEventListener("click", () => scrollToIndex(i)));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+            const idx = cards.indexOf(entry.target as HTMLElement);
+            if (idx !== -1) setActive(idx);
+          }
+        });
+      },
+      { root: track, threshold: [0.6] }
+    );
+    cards.forEach((c) => observer.observe(c));
+
+    setActive(0);
+  }
+</script>
