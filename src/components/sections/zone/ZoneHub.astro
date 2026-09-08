@@ -24,15 +24,15 @@ import { site } from "../../../lib/site-data";
       Chaque intervention est pensée sur-mesure : échange préalable sur vos habitudes et vos envies,
       courses réalisées pour vous si vous le souhaitez, préparation directement dans votre cuisine,
       puis organisation d'une routine culinaire qui vous simplifie la vie.<br /><br />
-      Le détail des <a href="/formules">formules et tarifs</a> est sur la page dédiée, et chaque
-      prestation éligible ouvre droit au <a href="/avanceimmediate">crédit d'impôt services à la personne</a>.
+      Le détail des <a href="/formules/">formules et tarifs</a> est sur la page dédiée, et chaque
+      prestation éligible ouvre droit au <a href="/avanceimmediate/">crédit d'impôt services à la personne</a>.
     </p>
 
     <h2 class="zone__subtitle">Choisissez votre département</h2>
     <ul class="zone__links">
       {site.areas.map((a) => (
         <li>
-          <a href={`/cuisinier-a-domicile-${a.slug}`}>
+          <a href={`/cuisinier-a-domicile-${a.slug}/`}>
             {a.name} ({a.code})
             <span>Cuisinier à domicile dans {a.prep}</span>
           </a>
@@ -43,10 +43,10 @@ import { site } from "../../../lib/site-data";
     <p class="zone__note">
       Certaines communes ou situations particulières se règlent au cas par cas, entre vous et
       Le Cuistologue. Et même en dehors de cette zone habituelle, une intervention reste possible
-      après échange. <a href="/contact">Contactez-moi</a> ou appelez le
+      après échange. <a href="/contact/">Contactez-moi</a> ou appelez le
       <a href={site.phone.href}>{site.phone.display}</a>.
     </p>
 
-    <a href="/contact" class="zone__cta">Demander un devis</a>
+    <a href="/contact/" class="zone__cta">Demander un devis</a>
   </div>
 </section>

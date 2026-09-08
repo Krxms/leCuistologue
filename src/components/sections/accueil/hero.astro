@@ -11,7 +11,14 @@ import { Image } from "astro:assets";
 
 <section class="hero">
   <div class="hero__bg-wrapper">
-  <Image src={heroBackground} alt="" class="hero__background" aria-hidden="true" />
+  <Image
+    src={heroBackground}
+    alt=""
+    class="hero__background"
+    aria-hidden="true"
+    loading="eager"
+    fetchpriority="high"
+  />
 </div>
 
   <img src={brocoli.src} alt="" class="hero__decor hero__decor--brocoli" aria-hidden="true" />
@@ -27,13 +34,13 @@ import { Image } from "astro:assets";
     </h1>
 
     <p class="hero__description">
-      Des repas préparés directement chez vous, par un professionnel, pour retrouver le plaisir de bien manger sans passer vos soirées en cuisine.
+      Des repas préparés directement chez vous, par un cuisinier à domicile, pour retrouver le plaisir de bien manger sans passer vos soirées en cuisine.
     </p>
 
     <div class="hero__actions-group">
       <div class="hero__actions">
-        <a href="/formules" class="btn btn--primary">Découvrir les formules</a>
-        <a href="/contact" class="btn btn--secondary">Demander un devis</a>
+        <a href="/formules/" class="btn btn--primary">Découvrir les formules</a>
+        <a href="/contact/" class="btn btn--secondary">Demander un devis</a>
       </div>
 
       <p class="hero__zone">

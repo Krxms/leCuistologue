@@ -34,7 +34,7 @@ const dateFmt = new Intl.DateTimeFormat("fr-FR", {
         <ul class="journal__list">
           {posts.map((post) => (
             <li class="journal__item">
-              <a href={`/journal/${post.id}`} class="journal__link">
+              <a href={`/journal/${post.id}/`} class="journal__link">
                 <h2 class="journal__item-title">{post.data.title}</h2>
                 <p class="journal__item-desc">{post.data.description}</p>
                 <time class="journal__item-date" datetime={post.data.date.toISOString()}>

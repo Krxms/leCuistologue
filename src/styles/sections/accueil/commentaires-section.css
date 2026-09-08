@@ -54,6 +54,20 @@
   position: relative;
 }
 
+/* État « pas encore d'avis » : message centré à la place du carrousel
+   (voir temoignages.astro — s'affiche tant que fetchGoogleReviews()
+   renvoie une liste vide). */
+.commentaires__soon {
+  max-width: 34rem;
+  margin: 3.5rem auto 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}
+
 .commentaires__grid {
   margin-top: 4rem;
   display: grid;
@@ -180,6 +194,12 @@
 
   .commentaires__header {
     padding-inline: 2rem;
+  }
+
+  .commentaires__soon {
+    margin-top: 2rem;
+    padding-inline: 2rem;
+    font-size: 1rem;
   }
 
   /* Carrousel à une carte visible à la fois : scroll natif + snap

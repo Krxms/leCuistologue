@@ -4,11 +4,11 @@ import logo from "../assets/navbar/logo.svg";
 const navLinks = [
   { label: "Accueil", href: "/" },
   { label: "Comment ça marche ?", href: "/#comment-ca-marche" },
-  { label: "Formules", href: "/formules" },
-  { label: "À propos", href: "/a-propos" },
-  { label: "Crédit d'impôt", href: "/avanceimmediate" },
-  { label: "Journal", href: "/journal" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Formules", href: "/formules/" },
+  { label: "À propos", href: "/a-propos/" },
+  { label: "Crédit d'impôt", href: "/avanceimmediate/" },
+  { label: "Journal", href: "/journal/" },
+  { label: "FAQ", href: "/faq/" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -32,7 +32,7 @@ const currentPath = Astro.url.pathname;
     })}
   </nav>
 
-  <a href="/contact" class="navbar__cta navbar__cta--bar">Prendre contact</a>
+  <a href="/contact/" class="navbar__cta navbar__cta--bar">Prendre contact</a>
 
   <button class="navbar__burger" id="navbar-burger" aria-expanded="false" aria-controls="navbar-mobile-menu" aria-label="Ouvrir le menu">
     <span></span>
@@ -48,6 +48,6 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
     </nav>
-    <a href="/contact" class="navbar__cta navbar__cta--menu">Prendre contact</a>
+    <a href="/contact/" class="navbar__cta navbar__cta--menu">Prendre contact</a>
   </div>
 </header>

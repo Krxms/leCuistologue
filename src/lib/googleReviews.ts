@@ -5,33 +5,15 @@ export interface Avis {
   role: string;
 }
 
-// Données de secours — utilisées si la clé API ou le Place ID ne sont pas
-// encore configurés, pour ne jamais casser le build en attendant.
-const avisSecours: Avis[] = [
-  {
-    note: 5,
-    texte: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    nom: "Sophie L.",
-    role: "Mère de famille, Sagy",
-  },
-  {
-    note: 5,
-    texte: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    nom: "Thomas D.",
-    role: "Chef d'entreprise, Vigny",
-  },
-  {
-    note: 5,
-    texte: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    nom: "Thomas D.",
-    role: "Chef d'entreprise, Vigny",
-  },
-  {
-    note: 5,
-    texte: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    nom: "Thomas D.",
-    role: "Chef d'entreprise, Vigny",
-  },
+/**
+ * Gabarit d'avis — NON utilisé pour l'affichage. Tant qu'il n'y a pas de
+ * vrais avis (API Google configurée, ou tableau ci-dessous rempli avec de
+ * vrais témoignages), fetchGoogleReviews() renvoie [] et la section
+ * « témoignages » ne s'affiche pas du tout (voir temoignages.astro).
+ * Ne JAMAIS remettre de faux texte ici : ça repart en production.
+ */
+const avisModele: Avis[] = [
+  // { note: 5, texte: "…", nom: "Prénom N.", role: "… , Ville" },
 ];
 
 export async function fetchGoogleReviews(): Promise<Avis[]> {
@@ -40,9 +22,9 @@ export async function fetchGoogleReviews(): Promise<Avis[]> {
 
   if (!apiKey || !placeId) {
     console.warn(
-      "[googleReviews] GOOGLE_PLACES_API_KEY ou GOOGLE_PLACE_ID absent — affichage des avis de secours."
+      "[googleReviews] GOOGLE_PLACES_API_KEY ou GOOGLE_PLACE_ID absent — section témoignages masquée."
     );
-    return avisSecours;
+    return avisModele;
   }
 
   try {
@@ -51,8 +33,8 @@ export async function fetchGoogleReviews(): Promise<Avis[]> {
     const data = await response.json();
 
     if (!data.result?.reviews?.length) {
-      console.warn("[googleReviews] Aucun avis retourné par l'API — affichage des avis de secours.");
-      return avisSecours;
+      console.warn("[googleReviews] Aucun avis retourné par l'API — section témoignages masquée.");
+      return avisModele;
     }
 
     return data.result.reviews.map((r: any) => ({
@@ -63,6 +45,6 @@ export async function fetchGoogleReviews(): Promise<Avis[]> {
     }));
   } catch (error) {
     console.error("[googleReviews] Erreur lors de la récupération des avis :", error);
-    return avisSecours;
+    return avisModele;
   }
 }

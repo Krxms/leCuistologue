@@ -1,4 +1,4 @@
 # Redirections 301 — servies par Cloudflare (assets statiques).
 # Anciennes URL de la page zone -> nouvelle structure.
-/cuisinier-a-domicile-vexin     /zone-intervention   301
-/cuisinier-a-domicile-vexin/    /zone-intervention   301
+/cuisinier-a-domicile-vexin     /zone-intervention/   301
+/cuisinier-a-domicile-vexin/    /zone-intervention/   301

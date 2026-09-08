@@ -21,7 +21,7 @@ const servicesJsonLd = formules.map((f) => ({
     "@type": "Offer",
     price: f.ponctuelle.prixPlein.replace(/[^\d]/g, ""),
     priceCurrency: "EUR",
-    url: `${site.url}/reserver?formule=${f.slug}`,
+    url: `${site.url}/reserver/?formule=${f.slug}`,
   },
 }));
 ---

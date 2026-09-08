@@ -21,34 +21,40 @@ const avis = await fetchGoogleReviews();
     </h2>
   </div>
 
-  <div class="commentaires__carousel">
-    <div class="commentaires__grid" id="commentaires-grid">
-      {
-        avis.map((item) => (
-          <div class="commentaires__card">
-            <div class="commentaires__stars">
-              {[...Array(item.note)].map(() => (
-                <img src={star.src} alt="" aria-hidden="true" />
-              ))}
+  {avis.length > 0 ? (
+    <div class="commentaires__carousel">
+      <div class="commentaires__grid" id="commentaires-grid">
+        {
+          avis.map((item) => (
+            <div class="commentaires__card">
+              <div class="commentaires__stars">
+                {[...Array(item.note)].map(() => (
+                  <img src={star.src} alt="" aria-hidden="true" />
+                ))}
+              </div>
+              <p class="commentaires__text">{item.texte}</p>
+              <div class="commentaires__meta">
+                <p class="commentaires__name">{item.nom}</p>
+                {item.role && <p class="commentaires__role">{item.role}</p>}
+              </div>
             </div>
-            <p class="commentaires__text">{item.texte}</p>
-            <div class="commentaires__meta">
-              <p class="commentaires__name">{item.nom}</p>
-              {item.role && <p class="commentaires__role">{item.role}</p>}
-            </div>
-          </div>
-        ))
-      }
-    </div>
+          ))
+        }
+      </div>
 
-    <div class="commentaires__dots" id="commentaires-dots">
-      {
-        avis.map((_, i) => (
-          <button type="button" class="commentaires__dot" aria-label={`Aller à l'avis ${i + 1}`} />
-        ))
-      }
+      <div class="commentaires__dots" id="commentaires-dots">
+        {
+          avis.map((_, i) => (
+            <button type="button" class="commentaires__dot" aria-label={`Aller à l'avis ${i + 1}`} />
+          ))
+        }
+      </div>
     </div>
-  </div>
+  ) : (
+    <p class="commentaires__soon">
+      Les premiers avis arrivent bientôt — le temps de recueillir les retours des premiers clients.
+    </p>
+  )}
 </section>
 
 <script>
