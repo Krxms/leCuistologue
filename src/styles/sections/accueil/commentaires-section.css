@@ -185,16 +185,23 @@
   /* Carrousel à une carte visible à la fois : scroll natif + snap
      (pas de logique de drag maison, le navigateur gère le geste),
      comme pricing-stage sur Formules mais en plus simple, une seule
-     carte n'ayant pas besoin de l'empilement 3D des formules. */
+     carte n'ayant pas besoin de l'empilement 3D des formules.
+
+     Centrage : la carte occupe TOUTE la largeur utile de la piste
+     (flex-basis 100%) et l'aperçu des cartes voisines vient
+     uniquement du padding-inline symétrique. Ainsi, à scroll-left 0,
+     la 1re carte a le même vide à gauche qu'à droite, et
+     scroll-snap-align: center (+ scroll-padding-inline identique)
+     recentre pareil chaque carte, y compris la dernière. */
   .commentaires__grid {
     margin-top: 2.5rem;
     display: flex;
     grid-template-columns: none;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 2rem;
+    scroll-padding-inline: 4rem;
     gap: 1rem;
-    padding-inline: 2rem;
+    padding-inline: 4rem;
     max-width: 100%;
     /* Masque la barre de défilement (Firefox/Chrome/Safari) : le
        défilement reste utilisable, juste pas affiché comme une
@@ -208,7 +215,7 @@
   }
 
   .commentaires__card {
-    flex: 0 0 calc(100% - 4rem);
+    flex: 0 0 100%;
     scroll-snap-align: center;
     padding: 1.5rem;
   }
