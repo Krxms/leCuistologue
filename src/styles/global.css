@@ -29,7 +29,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  scroll-padding-top: 100px;
   overflow-x: clip;
   /* iOS Safari affiche le fond de <html> (pas celui de body) dans la
      zone de rebond au-delà du bas de page : sans couleur ici, ce

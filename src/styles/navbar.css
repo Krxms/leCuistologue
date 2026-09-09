@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 500;
-  height: 70px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,7 +31,7 @@
 }
 
 .navbar__logo {
-  height: 63px;
+  height: 76px;
   width: auto;
   transition: height 0.45s ease;
 }
@@ -91,11 +91,11 @@
 }
 
 .navbar--scrolling {
-  height: 55px;
+  height: 64px;
 }
 
 .navbar--scrolling .navbar__logo {
-  height: 45px;
+  height: 52px;
 }
 
 /* Pas de rétrécissement au scroll sur tablette/mobile : la navbar
@@ -103,11 +103,11 @@
    ajouté par le script. */
 @media (max-width: 1210px) {
   .navbar--scrolling {
-    height: 70px;
+    height: 90px;
   }
 
   .navbar--scrolling .navbar__logo {
-    height: 48px;
+    height: 76px;
   }
 }
 
