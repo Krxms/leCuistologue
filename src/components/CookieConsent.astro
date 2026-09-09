@@ -52,6 +52,7 @@
 
 <script>
   const STORAGE_KEY = "cuistologue-cookie-consent";
+  const GA_MEASUREMENT_ID = "G-MKLXD82NT7";
 
   interface Consent {
     necessary: true;
@@ -81,27 +82,45 @@
   function appliquerConsentement(consent: Consent) {
     if (consent.analytics) {
       chargerGoogleAnalytics();
+    } else {
+      supprimerCookiesGA();
     }
   }
 
+  /* GA4 chargé UNIQUEMENT après consentement « Mesure d'audience ».
+     Rien n'est requêté vers Google tant que l'utilisateur n'a pas
+     accepté (pas de Consent Mode « denied » : ici c'est un blocage
+     total en amont). GA4 anonymise l'IP par défaut. */
   function chargerGoogleAnalytics() {
     if ((window as any).__gaCharge) return;
     (window as any).__gaCharge = true;
 
-    // TODO : remplacer G-XXXXXXX par le véritable identifiant de mesure
-    // une fois Google Analytics créé, puis décommenter les lignes ci-dessous.
-    //
-    // const script = document.createElement("script");
-    // script.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
-    // script.async = true;
-    // document.head.appendChild(script);
-    //
-    // (window as any).dataLayer = (window as any).dataLayer || [];
-    // function gtag(...args: any[]) { (window as any).dataLayer.push(args); }
-    // gtag("js", new Date());
-    // gtag("config", "G-XXXXXXX");
+    const script = document.createElement("script");
+    script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID;
+    script.async = true;
+    document.head.appendChild(script);
 
-    console.info("[cookies] Consentement Analytics accepté — prêt pour l'intégration de Google Analytics.");
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    function gtag() {
+      (window as any).dataLayer.push(arguments);
+    }
+    (window as any).gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", GA_MEASUREMENT_ID);
+  }
+
+  /* Retrait du consentement : on efface les cookies déposés par GA4
+     (_ga, _ga_<id>, _gid…) sur le domaine courant et le domaine parent. */
+  function supprimerCookiesGA() {
+    const base = location.hostname.replace(/^www\./, "");
+    for (const paire of document.cookie.split(";")) {
+      const nom = paire.split("=")[0].trim();
+      if (nom === "_ga" || nom.startsWith("_ga_") || nom === "_gid" || nom === "_gat") {
+        for (const domaine of ["", "; domain=" + location.hostname, "; domain=." + base]) {
+          document.cookie = nom + "=; Max-Age=0; path=/" + domaine;
+        }
+      }
+    }
   }
 
   const banner = document.getElementById("cookie-banner");
