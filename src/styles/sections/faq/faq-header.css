@@ -93,24 +93,31 @@
   pointer-events: none;
 }
 
+/* Mêmes éléments, mêmes positions que les autres headers de page
+   (Formules / À propos / Avance immédiate). */
 .faq-header__deco--broccoli {
-  width: 10.4%;
-  top: 26%;
-  left: 67.7%;
-  transform: rotate(72deg);
+  left: 46%;
+  top: -10%;
+  width: 8.5%;
 }
 
 .faq-header__deco--mushroom {
-  width: 5%;
-  top: 14%;
-  left: 58.2%;
-  transform: rotate(-73deg);
+  left: 65%;
+  top: 15%;
+  width: 5.9%;
+}
+
+.faq-header__deco--chicken {
+  left: 80%;
+  top: 0%;
+  width: 13%;
+  transform: rotate(-20deg);
 }
 
 .faq-header__deco--onion {
-  width: 12.6%;
-  top: -19%;
-  left: 37.2%;
+  left: 80%;
+  top: 40%;
+  width: 9%;
 }
 
 @media (max-width: 767px) {

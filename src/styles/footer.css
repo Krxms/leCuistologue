@@ -41,7 +41,11 @@
   grid-area: logo;
   justify-self: center;
   width: 100%;
-  max-width: 400px;
+  /* Nouveau logo (emblème + wordmark empilés, ratio ~1,75:1) : bien
+     plus haut à largeur égale que l'ancien lockup horizontal — on
+     réduit donc les max-width pour garder une hauteur de logo
+     comparable dans le pied de page. */
+  max-width: 190px;
   height: auto;
 }
 
@@ -198,7 +202,7 @@
    sans changer les valeurs exactes à 1023px et 834px. */
 @media (min-width: 835px) and (max-width: 1023px) {
   .footer__logo {
-    max-width: clamp(200px, calc(-682.5397px + 105.8201vw), 400px);
+    max-width: clamp(150px, 20vw, 190px);
   }
 }
 
@@ -219,7 +223,7 @@
   }
 
   .footer__logo {
-    max-width: 200px;
+    max-width: 150px;
   }
 
   .footer__tagline {
@@ -279,7 +283,7 @@
   }
 
   .footer__logo {
-    max-width: 220px;
+    max-width: 160px;
   }
 
   .footer__tagline {
