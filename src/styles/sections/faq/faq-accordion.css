@@ -16,6 +16,15 @@
 .faq-accordion__header {
   text-align: center;
   margin-bottom: 7rem;
+  /* La section remonte de -12rem sous le header : le <h1> du header
+     (position:relative; z-index:1, sans pointer-events:none) est un
+     bloc pleine largeur dont la boîte recouvre cette zone et capte la
+     souris -> titre/sous-titre non sélectionnables. On place ce bloc
+     dans la même couche : venant plus loin dans le DOM, il repasse
+     au-dessus. Aucun changement de mise en page (élément transparent,
+     même boîte). */
+  position: relative;
+  z-index: 1;
 }
 
 .faq-accordion__title {

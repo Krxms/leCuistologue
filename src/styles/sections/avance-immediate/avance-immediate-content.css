@@ -18,6 +18,14 @@
   line-height: 1.4;
   color: #2c2c2c;
   margin: 0;
+  /* La section remonte de -12rem sous le header : le <h1> du header
+     (position:relative; z-index:1, sans pointer-events:none) est un
+     bloc pleine largeur dont la boîte recouvre cette zone et capte la
+     souris -> titre/sous-titre non sélectionnables. On place ces deux
+     éléments dans la même couche : venant plus loin dans le DOM, ils
+     repassent au-dessus. Aucun changement de mise en page. */
+  position: relative;
+  z-index: 1;
 }
 
 .avance-content__intro-text {
@@ -27,6 +35,9 @@
   font-size: 1rem;
   font-weight: 400;
   color: var(--color-ink-soft);
+  /* Même raison que .avance-content__intro-title ci-dessus. */
+  position: relative;
+  z-index: 1;
 }
 
 .avance-content__grid {
