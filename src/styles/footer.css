@@ -267,19 +267,32 @@
     row-gap: 0;
   }
 
+  /* Respiration entre le bloc marque (slogan + description) et la
+     première rangée de colonnes. margin-bottom sur l'item de grille
+     "brand" : n'agrandit que cet écart-là, pas celui entre les
+     colonnes et Contact en dessous. */
+  .footer__brand {
+    margin-bottom: 2.25rem;
+  }
+
   /* Même logique qu'à 1023px : nav/conditions/contact démarrent
      chacune une nouvelle ligne, donc chacune porte son propre
      margin-top (remplace le row-gap uniforme, qui aurait aussi
-     élargi l'écart logo->slogan au-delà des 15px fixes). */
+     élargi l'écart logo->slogan au-delà des 15px fixes).
+     Chaque colonne occupe sa cellule et son contenu (titre, items,
+     icône) est ferré à gauche sur le bord gauche de la cellule :
+     Contact, qui passe seule à la ligne, s'aligne ainsi exactement
+     sous Navigation. */
   .footer__col {
     margin-top: 1.75rem;
-    /* Centré, y compris Contact qui passe seule sur la ligne du
-       dessous — même traitement pour les 3 colonnes. */
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .footer__col ul {
-    align-items: center;
+    align-items: flex-start;
   }
 
   .footer__logo {

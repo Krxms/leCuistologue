@@ -209,17 +209,18 @@
     display: flex;
   }
 
-  /* Navbar mobile : hauteur FIXE, un poil plus haute que sur desktop.
-     Ni le scroll ni l'ouverture / fermeture du menu ne la font varier
-     (le menu s'ouvre en dessous, en position absolue). */
+  /* Navbar burger (tablette portrait + mobile, <=1023px) : hauteur
+     FIXE, agrandie pour laisser respirer un logo plus grand. Ni le
+     scroll ni l'ouverture / fermeture du menu ne la font varier (le
+     menu s'ouvre en dessous, en position absolue). */
   .navbar,
   .navbar--scrolling {
-    height: 76px;
+    height: 88px;
   }
 
   .navbar__logo,
   .navbar--scrolling .navbar__logo {
-    height: 52px;
+    height: 66px;
   }
 }
 
