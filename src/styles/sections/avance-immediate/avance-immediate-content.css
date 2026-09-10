@@ -345,18 +345,29 @@
 }
 
 @media (max-width: 767px) {
-  /* Même valeur que .pricing-title sur Formules (référence) pour un
-     écart identique entre pages en mobile aussi — remplace l'ancien
-     -16.8% (un % vertical, variable sur toute la plage mobile elle-
-     même : -3.94rem à 375px de large contre -8.05rem à 767px). */
+  /* Alignement inter-pages : voir a-propos-content.css. Header mobile
+     ~254px ici (titre 3 lignes : "Credit d'impot & avance immediate")
+     -> c'est le header le plus haut des 3, donc le pull le plus fort
+     pour que le titre du contenu tombe a ~280px du haut, comme
+     a-propos et faq. (Remplace l'ancien -16.8% puis -5rem, qui ne
+     tenaient pas compte de la hauteur reelle du header mobile.) */
   .avance-content {
     max-width: 1200px;
     padding: 2.5rem 1.5rem 4rem;
+    /* +0.5rem par rapport à -5.5rem : descend le niveau commun des
+       titres de contenu (voir a-propos-content.css). */
     margin-top: -5rem;
   }
 
   .avance-content__intro-title {
     font-size: clamp(1.2rem, 2vw, 2.75rem);
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.4;
+    /* Ferré à gauche sur mobile (le sous-titre .avance-content__intro-text
+       est retiré du markup) pour s'aligner sur les paragraphes en
+       dessous, au lieu du centrage hérité de la règle de base. */
+    text-align: left;
   }
 
   .avance-content__intro-text {

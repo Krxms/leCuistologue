@@ -192,8 +192,19 @@
 }
 
 @media (max-width: 767px) {
+  /* Alignement inter-pages : le titre de contenu doit tomber au même
+     niveau vertical sur a-propos / faq / avance immediate quand on
+     arrive sur la page. Les headers mobile ont des hauteurs
+     differentes (longueur + nombre de lignes du titre) : ~212px ici,
+     ~233 sur la FAQ, ~254 sur l'avance immediate. On compense donc le
+     remontee par page pour que le 1er titre du contenu arrive a
+     ~280px du haut du document partout. Header le plus court -> pull
+     le plus faible. */
   .a-propos-content {
-    margin-top: -4rem;
+    /* -3rem alignait le titre à ~281px du haut ; +0.5rem partout
+       (a-propos/faq/avance/formules) pour descendre légèrement ce
+       niveau commun sans casser l'alignement entre pages. */
+    margin-top: -2.5rem;
   }
 }
 
@@ -276,6 +287,13 @@
    la pile verticale ne s'étire plus sur toute la hauteur d'écran.
    ================================================================ */
 @media (max-width: 767px) {
+  .a-propos-content__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.4vw, 2.75rem);
+  line-height: 1.4;
+}
+
   .ap-stage {
     max-width: 100%;
     gap: 1rem;
