@@ -334,6 +334,19 @@
     padding: 2.3rem 1.75rem;
     line-height: 1.4;
   }
+
+  /* Tablette portrait : on bascule aussi sur l'image « comment ça
+     marche » mobile (infographie verticale) plutôt que la capture
+     desktop + flèche, qui n'a plus la place ici. Le traitement
+     plein cadre (scale + grandes marges) reste réservé au mobile
+     (<=767px) ; ici l'image garde sa taille de base (max 500px). */
+  .avance-content__comment-visual {
+    display: none;
+  }
+
+  .avance-content__comment-image--mobile {
+    display: block;
+  }
 }
 
 /* Zone intermédiaire : lisse le passage tablette -> mobile
@@ -410,13 +423,11 @@
     transform: rotate(0deg);
   }
 
-  .avance-content__comment-visual {
-    display: none;
-  }
-
+  /* .avance-content__comment-visual masqué et --mobile affiché dès
+     834px (bloc tablette portrait ci-dessus) ; ici on ne fait plus
+     que le passage en plein cadre propre au mobile. */
   .avance-content__comment-image--mobile {
-    display: block;
-    margin: 16rem auto 14rem;
+    margin: 16rem auto 10rem;
     transform: scale(1.3);
   }
 }

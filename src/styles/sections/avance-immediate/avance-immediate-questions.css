@@ -124,6 +124,16 @@
   }
 }
 
+/* Tablette portrait (<=834px) : on affiche l'infographie « comment ça
+   marche » mobile (non agrandie) à la place de la capture desktop +
+   flèche mise à l'échelle. Le grand margin-top: 15rem calibré pour ce
+   visuel desktop mis à l'échelle n'a donc plus lieu d'être ici. */
+@media (max-width: 834px) {
+  .avance-questions {
+    margin-top: 2rem;
+  }
+}
+
 /* Zone intermédiaire : lisse le passage tablette -> mobile
    sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
@@ -138,8 +148,12 @@
 }
 
 @media (max-width: 767px) {
+  /* Remonte la section pour la coller au bas de l'infographie orange
+     (qui garde une large bande orange pleine en pied) : plus de bande
+     crème entre les deux, la section s'enchaîne directement, son bord
+     haut ondulé venant chevaucher légèrement l'orange. */
   .avance-questions {
-    margin-top: 1rem;
+    margin-top: -7rem;
     padding: 3rem 1.5rem;
   }
 
