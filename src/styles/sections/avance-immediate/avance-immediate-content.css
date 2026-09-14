@@ -190,7 +190,8 @@
 
 .avance-content__comment-arrow {
   position: absolute;
-  display: block;
+  /*display: block;*/
+  display: none;
   top: 52%;
   left: -8%;
   width: 44%;
