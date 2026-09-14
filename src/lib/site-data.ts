@@ -46,14 +46,21 @@ export const site = {
    * Zone d'intervention — 4 départements. Bruno couvre l'ensemble du
    * territoire de chacun (exceptions au cas par cas, et interventions
    * possibles au-delà après échange).
-   *   slug     : URL /cuisinier-a-domicile-<slug>
-   *   prep     : article contracté pour « dans … » (dans l'Oise, dans le Val-d'Oise…)
-   *   de       : forme génitive (les villes de l'Oise, du Val-d'Oise, des Yvelines…)
-   *   secteur  : micro-région réellement couverte (nom usuel, ex. Vexin-Thelle, Mantois)
-   *   communes : liste précise transmise par le client — ne pas compléter
-   *              ni remplacer par d'autres villes sans validation de sa part
-   *   intro    : phrase d'accroche PROPRE à chaque page département (visible)
-   *   metaDesc : meta description PROPRE à chaque page (< ~160 caractères)
+   *   slug      : URL /cuisinier-a-domicile-<slug>
+   *   prep      : article contracté pour « dans … » (dans l'Oise, dans le Val-d'Oise…)
+   *   de        : forme génitive (les villes de l'Oise, du Val-d'Oise, des Yvelines…)
+   *   secteur   : micro-région réellement couverte (nom usuel, ex. Vexin-Thelle, Mantois)
+   *   communes  : liste précise transmise par le client — ne pas compléter
+   *               ni remplacer par d'autres villes sans validation de sa part
+   *   intro     : phrase d'accroche PROPRE à chaque page département (visible)
+   *   pitch     : paragraphe PROPRE à chaque page (visible, sous l'intro) —
+   *               rédigé différemment sur le fond pour chaque département
+   *               (angle, structure de phrase), pas un gabarit où l'on ne
+   *               changerait que le nom : Google traite un texte trop
+   *               proche d'une page à l'autre comme du contenu dupliqué.
+   *   noteIntro : 1re phrase de la note "commune pas dans la liste" —
+   *               propre à chaque page pour la même raison
+   *   metaDesc  : meta description PROPRE à chaque page (< ~160 caractères)
    */
   areas: [
     {
@@ -66,6 +73,10 @@ export const site = {
       communes: ["Beauvais", "Chaumont-en-Vexin", "Méru", "Trie-Château", "Auneuil", "Noailles"],
       intro:
         "Le Cuistologue est installé dans l'Oise et intervient sur le secteur du Vexin-Thelle : Beauvais, Chaumont-en-Vexin, Méru, Trie-Château, Auneuil, Noailles et les communes voisines.",
+      pitch:
+        "C'est le département où Bruno vit et cuisine au quotidien : les disponibilités y sont généralement les plus larges, et les déplacements les plus courts. Le fonctionnement reste simple — une intervention chez vous pour préparer plusieurs repas de la semaine, à partir de vos habitudes et, si besoin, de courses faites pour vous, réfrigérateur rangé et cuisine remise en ordre à la fin.",
+      noteIntro:
+        "Votre commune de l'Oise n'apparaît pas dans la liste ?",
       metaDesc:
         "Cuisinier à domicile dans l'Oise, secteur Vexin-Thelle : Beauvais, Chaumont-en-Vexin, Méru, Trie-Château, Auneuil, Noailles. Repas préparés chez vous.",
     },
@@ -79,6 +90,10 @@ export const site = {
       communes: ["Cergy", "Pontoise", "Magny-en-Vexin", "Marines", "Vigny", "Chars", "L'Isle-Adam", "Persan", "Beaumont-sur-Oise"],
       intro:
         "Dans le Val-d'Oise, Le Cuistologue intervient sur le Vexin français et la vallée de l'Oise : Cergy, Pontoise, Magny-en-Vexin, Marines, Vigny, Chars, L'Isle-Adam, Persan, Beaumont-sur-Oise.",
+      pitch:
+        "Le Vexin français prolonge directement le secteur où Bruno est installé dans l'Oise, ce qui permet d'intervenir aussi bien du côté de Cergy et Pontoise que sur les communes plus rurales de la vallée de l'Oise. Le principe est identique partout : une seule intervention à domicile pour cuisiner plusieurs repas d'avance, avec la possibilité de confier les courses, et une cuisine laissée propre en repartant.",
+      noteIntro:
+        "Votre commune du Val-d'Oise n'est pas citée ici ?",
       metaDesc:
         "Cuisinier à domicile dans le Val-d'Oise : Cergy, Pontoise, Magny-en-Vexin, Marines, Vigny, Chars, L'Isle-Adam, Persan, Beaumont-sur-Oise.",
     },
@@ -92,6 +107,10 @@ export const site = {
       communes: ["Mantes-la-Jolie", "Mantes-la-Ville", "Limay", "Houdan", "Septeuil", "Bonnières-sur-Seine"],
       intro:
         "Dans les Yvelines, Le Cuistologue intervient sur le Mantois : Mantes-la-Jolie, Mantes-la-Ville, Limay, Houdan, Septeuil, Bonnières-sur-Seine.",
+      pitch:
+        "Le Mantois, en bordure de Seine, complète naturellement la zone couverte à l'ouest des Yvelines. Chaque intervention se déroule chez vous, en une seule fois : les menus sont définis ensemble, les courses peuvent être prises en charge, puis les repas de la semaine sont préparés et rangés dans un réfrigérateur organisé.",
+      noteIntro:
+        "Une commune des Yvelines proche du Mantois ne figure pas ici ?",
       metaDesc:
         "Cuisinier à domicile dans les Yvelines, secteur du Mantois : Mantes-la-Jolie, Mantes-la-Ville, Limay, Houdan, Septeuil, Bonnières-sur-Seine.",
     },
@@ -105,6 +124,10 @@ export const site = {
       communes: ["Vernon", "Gisors", "Étrépagny", "Les Andelys", "Écos", "Gasny"],
       intro:
         "Dans l'Eure, Le Cuistologue intervient sur le Vexin normand : Vernon, Gisors, Étrépagny, Les Andelys, Écos, Gasny.",
+      pitch:
+        "Le Vexin normand fait la jonction entre l'Oise et l'Eure, un territoire que Bruno couvre régulièrement. Le fonctionnement y est le même que partout ailleurs : une intervention à domicile pour cuisiner les repas de la semaine, courses possibles en amont, puis cuisine et réfrigérateur remis en ordre avant de repartir.",
+      noteIntro:
+        "Votre commune de l'Eure n'y figure pas ?",
       metaDesc:
         "Cuisinier à domicile dans l'Eure, secteur du Vexin normand : Vernon, Gisors, Étrépagny, Les Andelys, Écos, Gasny.",
     },

@@ -10,11 +10,11 @@ const navigation = [
   { label: "Accueil", href: "/" },
   { label: "Comment ça marche ?", href: "/#comment-ca-marche" },
   { label: "Formules", href: "/formules/" },
+  { label: "Crédit d'impôt", href: "/avanceimmediate/" },
   { label: "À propos", href: "/a-propos/" },
-  { label: "Avance immédiate", href: "/avanceimmediate/" },
+  { label: "FAQ", href: "/faq/" },
   { label: "Journal", href: "/journal/" },
   { label: "Zone d'intervention", href: "/zone-intervention/" },
-  { label: "FAQ", href: "/faq/" },
 ];
 
 const conditions = [
@@ -28,7 +28,7 @@ const annee = new Date().getFullYear();
 
 <footer class="footer">
   <div class="footer__top">
-    <img src={logo.src} alt="Le Cuistologue" class="footer__logo" />
+    <img src={logo.src} width={logo.width} height={logo.height} alt="Le Cuistologue" class="footer__logo" />
 
     <div class="footer__brand">
       <p class="footer__tagline">Le goût du lien</p>
@@ -78,9 +78,15 @@ const annee = new Date().getFullYear();
       </p>
       <p class="footer__zone">
         Zone d'intervention<br />
-        {site.areas.map((a) => a.name).join(" · ")}
+        {site.areas.map((a, i) => (
+          <>
+            {i > 0 && " · "}<a href={`/cuisinier-a-domicile-${a.slug}/`}>{a.name}</a>
+          </>
+        ))}
       </p>
-      <Image src={servicesIcon} alt="Services à la personne" class="footer__services-icon" />
+      <a href="https://www.servicesalapersonne.gouv.fr/" target="_blank" rel="noopener noreferrer">
+        <Image src={servicesIcon} alt="Services à la personne" class="footer__services-icon" />
+      </a>
     </div>
   </div>
 
