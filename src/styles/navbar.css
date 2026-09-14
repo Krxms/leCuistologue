@@ -39,7 +39,10 @@
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
+  /* Resserré juste au-dessus du seuil burger (1280px), où les 8 liens
+     n'ont pas la place de leur gap plein (1.1rem) sans chevaucher la
+     CTA : redevient 1.1rem dès ~1450px, sans rien changer au-delà. */
+  gap: clamp(0.7rem, 3.76vw - 2.31rem, 1.1rem);
   max-width: 80%;
 }
 
@@ -49,12 +52,14 @@
   --navbar-link-accent: #a0780a;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 1.1rem;
+  /* Même logique que le gap ci-dessus : légèrement réduit juste
+     au-dessus de 1280px, revenu à 1.1rem dès ~1450px. */
+  font-size: clamp(0.95rem, 1.41vw - 0.18rem, 1.1rem);
   color: var(--color-ink);
   white-space: nowrap;
   padding-bottom: 0.3rem;
   border-bottom: 1px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.3s ease;
 }
 
 .navbar__link:hover {
@@ -90,25 +95,24 @@
   background-color: #DAA35B;
 }
 
+/* Rétrécissement au scroll — effet volontairement très léger (desktop
+   uniquement : le mode burger fixe sa propre hauteur plus bas et ne
+   doit pas varier). */
 .navbar--scrolling {
-  height: 64px;
+  height: 82px;
 }
 
 .navbar--scrolling .navbar__logo {
-  height: 52px;
+  height: 70px;
 }
 
-/* Pas de rétrécissement au scroll sur tablette/mobile : la navbar
-   garde sa taille initiale quel que soit l'état "navbar--scrolling"
-   ajouté par le script. */
-@media (max-width: 1210px) {
-  .navbar--scrolling {
-    height: 90px;
-  }
-
-  .navbar--scrolling .navbar__logo {
-    height: 76px;
-  }
+/* Items de nav rétrécis ancrés sur leur propre centre (scale, dont le
+   transform-origin par défaut est 50% 50%), pas sur la gauche : une
+   réduction de font-size aurait gardé le bord gauche du mot fixe et
+   fait "fondre" le texte vers la gauche. Ici chaque lien se resserre
+   symétriquement autour de son centre, effet léger (5%). */
+.navbar--scrolling .navbar__link {
+  transform: scale(0.95);
 }
 
 .navbar__burger {
@@ -192,7 +196,12 @@
   font-size: 0.85rem;
 }
 
-@media (max-width: 1023px) {
+/* Seuil relevé de 1023 à 1279px : avec 8 liens ("Zone d'intervention"
+   ajouté), la nav horizontale déborde sous la CTA dès qu'on descend
+   sous ~1280px (mesuré : ~230px de chevauchement à 1024px). Le menu
+   burger prend donc le relais plus tôt, sur toute la tablette paysage
+   et les petits écrans d'ordinateur portable. */
+@media (max-width: 1279px) {
   .navbar__links {
     display: none;
   }
@@ -209,10 +218,10 @@
     display: flex;
   }
 
-  /* Navbar burger (tablette portrait + mobile, <=1023px) : hauteur
-     FIXE, agrandie pour laisser respirer un logo plus grand. Ni le
-     scroll ni l'ouverture / fermeture du menu ne la font varier (le
-     menu s'ouvre en dessous, en position absolue). */
+  /* Navbar burger (<=1279px) : hauteur FIXE, agrandie pour laisser
+     respirer un logo plus grand. Ni le scroll ni l'ouverture /
+     fermeture du menu ne la font varier (le menu s'ouvre en dessous,
+     en position absolue). */
   .navbar,
   .navbar--scrolling {
     height: 88px;
@@ -224,7 +233,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .navbar__mobile-menu {
     display: none !important;
   }
