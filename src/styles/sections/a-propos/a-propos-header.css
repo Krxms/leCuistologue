@@ -6,10 +6,7 @@
   align-items: center;
 }
 
-/* Grands écrans (21"+, 2K/4K...) : min-height (vw) continuait de
-   grandir avec la fenêtre sans plafond, gelée à sa valeur réelle à
-   1920px. La flèche (width:16rem; max-width:20vw) est déjà
-   auto-limitée à 256px à cette largeur, rien à figer côté flèche. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .a-propos-header {
     max-width: var(--content-cap);
@@ -61,12 +58,7 @@
   color: #c26665;
 }
 
-/* Ancrée sur le mot "Cuistologue" lui-même (position:relative
-   ci-dessus), pas sur .title-wrap : ce dernier s'étire sur toute la
-   largeur du titre (donc sur la largeur de la ligne la plus longue),
-   comme le corrigé sur Formules/Avance immédiate/FAQ — un span inline
-   comme l'accent se limite exactement à la largeur réelle du mot, donc
-   plus de dérive horizontale ni verticale au responsive. */
+/* Flèche ancrée sur le mot lui-même (span inline) et non sur le <h1> : left:100% tombe à la fin du mot à toute largeur. */
 .a-propos-header__arrow {
   position: absolute;
   left: 100%;
@@ -146,11 +138,7 @@
     padding-top: 1.4rem;
     text-align: center;
     transform: rotate(0deg);
-    /* Même hauteur réservée que sur Formules (référence) : "À propos
-       / du Cuistologue" tient sur 2 lignes courtes à cette largeur —
-       sans ce plancher, le header finirait plus court que les pages
-       dont le titre retombe sur 3 lignes (Formules, Avance
-       immédiate). */
+    /* Hauteur réservée (3 lignes) : les headers de page gardent la même hauteur quel que soit le retour à la ligne du titre. */
     min-height: 8rem;
   }
 

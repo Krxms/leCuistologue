@@ -1,11 +1,6 @@
 .avance-content {
   max-width: 1200px;
   margin-inline: auto;
-  /* padding-top:2.5rem (au lieu de 4rem) + margin-top:-12rem, comme
-     .pricing-title sur Formules (page de référence) — remplace
-     l'ancien -12.8% (un % vertical, calculé sur la largeur du
-     conteneur, ne correspondait à aucune des autres pages), et
-     réduit le padding-top qui ajoutait 1.5rem d'écart en trop. */
   padding: 2.5rem 3.3% 5rem;
   margin-top: -12rem;
 }
@@ -18,12 +13,7 @@
   line-height: 1.4;
   color: #2c2c2c;
   margin: 0;
-  /* La section remonte de -12rem sous le header : le <h1> du header
-     (position:relative; z-index:1, sans pointer-events:none) est un
-     bloc pleine largeur dont la boîte recouvre cette zone et capte la
-     souris -> titre/sous-titre non sélectionnables. On place ces deux
-     éléments dans la même couche : venant plus loin dans le DOM, ils
-     repassent au-dessus. Aucun changement de mise en page. */
+  /* La section remonte sous le header (margin-top négatif) : le <h1> du header capterait la souris et rendrait le titre non sélectionnable, on repasse donc le titre au-dessus. */
   position: relative;
   z-index: 1;
 }
@@ -35,7 +25,6 @@
   font-size: 1rem;
   font-weight: 400;
   color: var(--color-ink-soft);
-  /* Même raison que .avance-content__intro-title ci-dessus. */
   position: relative;
   z-index: 1;
 }
@@ -102,20 +91,8 @@
   position: relative;
 }
 
-/* Fond en CSS pur (aplat pastel), plutôt qu'une image : les exports
-   SVG "à main levée" depuis Figma pour cet effet ne sortent pas avec
-   de vraies propriétés SVG exploitables (le filtre ne s'exporte pas
-   correctement), les PNG basse résolution utilisés avant pixellisaient
-   au-delà de leur résolution source, et les PNG haute résolution
-   testés ensuite n'ont pas donné un rendu satisfaisant. Ce fond CSS ne
-   pixellise jamais, à aucune taille d'écran.
-
-   Traitement calqué sur les cartes de la page À propos en pile
-   (.ap-bubble, format mobile/tablette) : aplat plein, pas de bordure,
-   grand border-radius uniforme (26px). */
+/* Fond en CSS pur (aplat pastel, radius 26px comme .ap-bubble) : jamais pixellisé, contrairement aux exports image. */
 .avance-content__card--small {
-  /* Ratio exact du fichier d'origine, conservé pour que le
-     dimensionnement de la carte ne change pas. */
   aspect-ratio: 1998 / 543;
   background-color: #D9E5E4;
   border-radius: 26px;
@@ -164,21 +141,8 @@
   transform: rotate(-4deg);
 }
 
-/* Flèche + image regroupées dans un même conteneur transformé
-   (.avance-content__comment-visual) : la flèche est positionnée en %
-   PAR RAPPORT À CE CONTENEUR, dont la taille/l'échelle est portée par
-   le wrapper et non plus par l'image seule. Comme transform:scale
-   s'applique à tout le sous-arbre d'un coup, flèche et image
-   grandissent/rétrécissent toujours ensemble, en gardant exactement
-   la même position relative l'une par rapport à l'autre — plus de
-   recalage séparé à chaque palier. */
-/* z-index posé ICI (et pas seulement sur la flèche) : transform crée
-   son propre contexte d'empilement, donc le z-index de la flèche à
-   l'intérieur restait piégé dedans et ne comptait que par rapport à
-   ses propres frères — jamais face à .avance-questions (qui a son
-   z-index:0 à elle) plus bas dans la page. En posant le z-index sur
-   le conteneur transformé lui-même, tout le bloc (flèche comprise)
-   se compare directement à .avance-questions et passe devant. */
+/* Flèche + image dans un même conteneur transformé : elles se mettent à l'échelle ensemble, position relative constante. */
+/* z-index sur le conteneur transformé (transform crée un contexte d'empilement) pour passer devant .avance-questions. */
 .avance-content__comment-visual {
   position: relative;
   z-index: 2;
@@ -197,8 +161,6 @@
   width: 44%;
 }
 
-/* ===== Image desktop : visible par défaut ===== */
-
 .avance-content__comment-image--desktop {
   display: block;
   width: 100%;
@@ -206,8 +168,6 @@
   border-radius: 16px;
   /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);*/
 }
-
-/* ===== Image mobile : masquée par défaut, prend le relais sous 767px ===== */
 
 .avance-content__comment-image--mobile {
   display: none;
@@ -219,17 +179,7 @@
   /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);*/
 }
 
-/* ============================================================
-   TABLETTE — jusqu'à 1210px (paysage et portrait partagent la
-   même mise en page : texte à gauche, cartes empilées à droite,
-   comme sur desktop, avec des proportions adaptées à la largeur
-   plus réduite pour que les cartes gardent une hauteur raisonnable
-   par rapport à leur texte)
-   ============================================================ */
-
-/* Même courbe que la page Formules (référence pour l'alignement du
-   titre entre pages) : desktop -12rem, lissée jusqu'à -9rem à
-   1211-1280px, puis -9rem à -7rem en continu sur toute la tablette. */
+/* Même courbe de margin-top que les autres pages : -12rem desktop, lissé jusqu'à -9rem, puis -9 → -7rem sur la tablette. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .avance-content {
     margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
@@ -255,10 +205,6 @@
     flex: 1 1 45%;
   }
 
-  /* La position fixe en rem de l'ampoule était calibrée pour la
-     largeur desktop de la carte ; ancrée à droite, elle reste
-     correcte quelle que soit la largeur de la carte à cette
-     proportion réduite. */
   .avance-content__card-bulb {
     top: -1.5rem;
     left: auto;
@@ -267,10 +213,6 @@
   }
 }
 
-/* ============================================================
-   TABLETTE PORTRAIT — jusqu'à 834px
-   ============================================================ */
-
 @media (max-width: 834px) {
   .avance-content {
     max-width: 760px;
@@ -278,11 +220,7 @@
     padding: 2.5rem 3.3% 5rem;
   }
 
-  /* En dessous de 834px, le texte et sa carte associée sont
-     empilés en une seule colonne plutôt que côte à côte : chaque
-     carte retrouve alors (presque) toute la largeur du conteneur,
-     largement suffisante pour que le texte tienne sans forcer le
-     ratio du fond à rogner ses bords. */
+  /* ≤ 834px : texte et carte associée empilés en une colonne. */
   .avance-content__grid {
     margin-top: 2.5rem;
     display: grid;
@@ -313,11 +251,7 @@
 
   .avance-content__card--small {
     grid-area: small;
-    /* Annule le ratio fixe hérité de la base (1998/543) : la
-       hauteur doit suivre le texte, pas ce ratio. */
     aspect-ratio: auto;
-    /* Largeur forcée explicitement plutôt que de compter sur
-       l'étirement automatique de la grille sur cette carte. */
     width: 100%;
   }
 
@@ -336,11 +270,7 @@
     line-height: 1.4;
   }
 
-  /* Tablette portrait : on bascule aussi sur l'image « comment ça
-     marche » mobile (infographie verticale) plutôt que la capture
-     desktop + flèche, qui n'a plus la place ici. Le traitement
-     plein cadre (scale + grandes marges) reste réservé au mobile
-     (<=767px) ; ici l'image garde sa taille de base (max 500px). */
+  /* Tablette portrait : infographie « comment ça marche » mobile (taille de base) à la place de la capture desktop + flèche ; le plein cadre reste réservé au mobile. */
   .avance-content__comment-visual {
     display: none;
   }
@@ -350,8 +280,6 @@
   }
 }
 
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .avance-content {
     padding-bottom: clamp(4rem, calc(-7.4478rem + 1.4925vw), 5rem);
@@ -359,17 +287,10 @@
 }
 
 @media (max-width: 767px) {
-  /* Alignement inter-pages : voir a-propos-content.css. Header mobile
-     ~254px ici (titre 3 lignes : "Credit d'impot & avance immediate")
-     -> c'est le header le plus haut des 3, donc le pull le plus fort
-     pour que le titre du contenu tombe a ~280px du haut, comme
-     a-propos et faq. (Remplace l'ancien -16.8% puis -5rem, qui ne
-     tenaient pas compte de la hauteur reelle du header mobile.) */
+  /* Alignement inter-pages : voir a-propos-content.css. */
   .avance-content {
     max-width: 1200px;
     padding: 2.5rem 1.5rem 4rem;
-    /* +0.5rem par rapport à -5.5rem : descend le niveau commun des
-       titres de contenu (voir a-propos-content.css). */
     margin-top: -5rem;
   }
 
@@ -378,9 +299,6 @@
     font-family: var(--font-display);
     font-weight: 600;
     line-height: 1.4;
-    /* Ferré à gauche sur mobile (le sous-titre .avance-content__intro-text
-       est retiré du markup) pour s'aligner sur les paragraphes en
-       dessous, au lieu du centrage hérité de la règle de base. */
     text-align: left;
   }
 
@@ -389,12 +307,6 @@
     font-size: 0.9rem;
   }
 
-  /* Le palier tablette portrait (≤834px) empile déjà chaque
-     paragraphe avec sa carte associée (grid-template-areas,
-     display: contents sur __left/__cards) : le mobile hérite
-     directement de cette mise en page plutôt que d'y substituer
-     un empilement "tout le texte puis toutes les cartes". Seuls
-     les réglages propres à la largeur mobile sont ajustés ici. */
   .avance-content__grid {
     margin-top: 1rem;
   }
@@ -424,9 +336,6 @@
     transform: rotate(0deg);
   }
 
-  /* .avance-content__comment-visual masqué et --mobile affiché dès
-     834px (bloc tablette portrait ci-dessus) ; ici on ne fait plus
-     que le passage en plein cadre propre au mobile. */
   .avance-content__comment-image--mobile {
     margin: 16rem auto 10rem;
     transform: scale(1.3);

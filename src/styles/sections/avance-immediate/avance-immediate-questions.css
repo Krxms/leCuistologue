@@ -1,19 +1,9 @@
 .avance-questions {
   position: relative;
-  /* z-index:0 crée un contexte d'empilement propre à cette section :
-     le fond en z-index:-1 juste en dessous reste alors garanti
-     derrière TOUT le contenu (y compris les éléments non positionnés
-     comme le titre), sans dépendre de l'ordre du DOM ni de ce qui se
-     passe hors de la section (fond de body/html, sections voisines). */
+  /* Contexte d'empilement propre : le fond en z-index:-1 reste derrière le contenu de la section. */
   z-index: 0;
   /*overflow: hidden;*/
   padding: 5rem 3.3% 6rem;
-  /* Référence desktop figée sur toute la plage non-mobile (comme
-     .avance-content__comment-visual juste au-dessus) : l'image ne
-     change plus de taille en dessous de 1210px, donc l'écart avant
-     cette section n'a plus de raison de rétrécir non plus — sinon la
-     flèche (dont la position est désormais fixe par rapport à
-     l'image) finit par déborder sur le texte de cette section. */
   margin-top: 15rem;
 }
 
@@ -25,12 +15,7 @@
   z-index: -1;
 }
 
-/* top en rem (fixe) plutôt qu'en % : un % vertical se calcule sur la
-   hauteur de .avance-questions, qui varie avec le contenu (titre,
-   cartes qui s'empilent...) — la bulle dérivait donc jusqu'à chevaucher
-   le titre quand la section devenait plus courte. En rem, l'écart
-   avec le haut de la section reste identique quel que soit le format,
-   hors mobile (right:% reste correct : il suit la largeur, stable). */
+/* top en rem plutôt qu'en % : un % vertical suit la hauteur de la section, qui varie avec le contenu. */
 .avance-questions__bubble {
   position: absolute;
   right: 6%;
@@ -110,8 +95,6 @@
   color: var(--color-gold);
 }
 
-/* Zone intermédiaire : lisse le passage desktop -> tablette
-   sans changer les valeurs exactes à 1280px et 1210px. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .avance-questions__cards {
     gap: clamp(2rem, calc(-49.8571rem + 4.2857vw), 5rem);
@@ -124,18 +107,13 @@
   }
 }
 
-/* Tablette portrait (<=834px) : on affiche l'infographie « comment ça
-   marche » mobile (non agrandie) à la place de la capture desktop +
-   flèche mise à l'échelle. Le grand margin-top: 15rem calibré pour ce
-   visuel desktop mis à l'échelle n'a donc plus lieu d'être ici. */
+/* ≤ 834px : infographie mobile non agrandie ; le margin-top: 15rem calibré pour le visuel desktop n'a plus lieu d'être. */
 @media (max-width: 834px) {
   .avance-questions {
     margin-top: 2rem;
   }
 }
 
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .avance-questions {
     padding-top: clamp(3rem, calc(-19.8955rem + 2.9851vw), 5rem);
@@ -148,10 +126,7 @@
 }
 
 @media (max-width: 767px) {
-  /* Remonte la section pour la coller au bas de l'infographie orange
-     (qui garde une large bande orange pleine en pied) : plus de bande
-     crème entre les deux, la section s'enchaîne directement, son bord
-     haut ondulé venant chevaucher légèrement l'orange. */
+  /* Remonte la section sur la bande orange pleine de l'infographie (bord haut ondulé). */
   .avance-questions {
     margin-top: -7rem;
     padding: 3rem 1.5rem;

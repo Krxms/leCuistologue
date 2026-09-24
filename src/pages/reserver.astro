@@ -3,8 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/reserver.css";
 import { formules, optionsPetitsPlus } from "../lib/formules-data";
 
-// `corps` peut contenir <br>/<b>/<i> (utile sur la carte "petits plus") :
-// dans l'infobulle on le veut en texte simple.
+// `corps` peut contenir du HTML : réduit en texte simple dans l'infobulle.
 const texteBrut = (html: string) =>
   html
     .replace(/<br\s*\/?>/gi, " ")
@@ -20,9 +19,7 @@ const texteBrut = (html: string) =>
   <section class="reserver">
     <div class="reserver__grid">
 
-      <!-- Les 3 récapitulatifs existent tous, un seul est affiché selon
-           le choix fait sur la page Formules (lu côté navigateur, voir
-           script plus bas — nécessaire car le site est statique). -->
+      <!-- Les 3 récapitulatifs existent ; un seul est affiché selon la formule choisie (lue côté navigateur : site statique). -->
       <aside class="reserver__recap-wrap">
         {formules.map((formule) => (
           <div class="reserver__recap" data-recap-formule={formule.slug} hidden>
@@ -59,17 +56,13 @@ const texteBrut = (html: string) =>
         ))}
       </aside>
 
-      <!-- Colonne droite : formulaire -->
       <div class="reserver__form-wrap">
         <h2 class="reserver__form-title">Vos informations</h2>
         <p class="reserver__form-text">
           Une fois votre demande envoyée, vous recevez un e-mail de confirmation, et Le Cuistologue vous recontacte personnellement sous 24h (jours ouvrés) pour affiner votre besoin.
         </p>
 
-        <!--
-          ⚠️ Formulaire visuellement complet et fonctionnel côté affichage,
-          mais SANS traitement d'envoi réel pour l'instant.
-        -->
+        <!-- Formulaire sans traitement d'envoi pour l'instant (affichage + validation seulement). -->
         <form class="reserver-form" id="reserver-form">
           <input type="hidden" name="formule" id="input-formule-slug" value="belle-tablee" />
 
@@ -179,9 +172,7 @@ const texteBrut = (html: string) =>
 </BaseLayout>
 
 <script>
-  // Infobulles des options : au survol/focus, le CSS suffit (:hover/:focus-visible).
-  // Au tap tactile, il n'y a ni survol ni fermeture naturelle : on bascule donc
-  // l'affichage au clic, et on referme au clic ailleurs sur la page.
+  // Infobulles : :hover/:focus-visible en CSS ; au tap tactile on bascule au clic et on referme au clic ailleurs.
   const boutonsInfo = document.querySelectorAll<HTMLButtonElement>(".reserver-form__info");
 
   function fermerToutesLesInfobulles(sauf?: HTMLButtonElement) {

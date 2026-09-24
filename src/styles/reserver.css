@@ -11,8 +11,6 @@
   align-items: start;
 }
 
-/* ===== Colonne récap ===== */
-
 .reserver__recap {
   position: sticky;
   top: 100px;
@@ -162,8 +160,6 @@
   text-decoration: underline;
 }
 
-/* ===== Colonne formulaire ===== */
-
 .reserver__form-title {
   font-family: var(--font-display);
   font-weight: 800;
@@ -244,8 +240,6 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  /* Même écart que label -> champ (.reserver-form__field) : légende
-     -> groupe de choix, pour un rythme vertical cohérent partout. */
   gap: 0.4rem;
 }
 
@@ -307,8 +301,7 @@
   height: 17px;
 }
 
-/* Infobulle : icône "i" au survol/focus (souris/clavier) ou au tap
-   (tactile, basculé en JS — voir le script en bas de page). */
+/* Infobulle : au survol/focus, ou au tap (basculé en JS). */
 .reserver-form__info {
   flex-shrink: 0;
   width: 18px;

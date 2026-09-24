@@ -1,10 +1,4 @@
-/* ===== Identité du site — SOURCE UNIQUE ============================
-   NAP (Name / Address / Phone) + zones + réseaux.
-   Consommé par : BaseLayout (schema JSON-LD, OpenGraph), Footer,
-   pages légales, page zone d'intervention. Ne jamais redéfinir ces
-   valeurs ailleurs — tout doit pointer ici pour rester cohérent
-   (cohérence NAP = signal clé du référencement local).
-   ================================================================== */
+/* Identité du site : source unique NAP + zones + réseaux (cohérence NAP = signal SEO local). Ne pas redéfinir ces valeurs ailleurs. */
 
 export const site = {
   name: "Le Cuistologue",
@@ -25,13 +19,7 @@ export const site = {
     e164: "+33612776264",
   },
 
-  /**
-   * Localisation AFFICHÉE PUBLIQUEMENT (footer, schema).
-   * Service à domicile = le client ne vient jamais ici : on expose la
-   * ville et la zone, PAS l'adresse précise (qui est le domicile privé
-   * de Bruno). L'adresse complète reste uniquement sur les pages
-   * légales, où elle est obligatoire (entreprise individuelle).
-   */
+  /** Localisation publique : ville et zone seulement, jamais l'adresse précise (domicile privé) ; l'adresse complète figure sur les pages légales. */
   location: {
     city: "Serans",
     region: "Oise",
@@ -43,24 +31,10 @@ export const site = {
   siren: "101 630 028",
 
   /**
-   * Zone d'intervention — 4 départements. Bruno couvre l'ensemble du
-   * territoire de chacun (exceptions au cas par cas, et interventions
-   * possibles au-delà après échange).
-   *   slug      : URL /cuisinier-a-domicile-<slug>
-   *   prep      : article contracté pour « dans … » (dans l'Oise, dans le Val-d'Oise…)
-   *   de        : forme génitive (les villes de l'Oise, du Val-d'Oise, des Yvelines…)
-   *   secteur   : micro-région réellement couverte (nom usuel, ex. Vexin-Thelle, Mantois)
-   *   communes  : liste précise transmise par le client — ne pas compléter
-   *               ni remplacer par d'autres villes sans validation de sa part
-   *   intro     : phrase d'accroche PROPRE à chaque page département (visible)
-   *   pitch     : paragraphe PROPRE à chaque page (visible, sous l'intro) —
-   *               rédigé différemment sur le fond pour chaque département
-   *               (angle, structure de phrase), pas un gabarit où l'on ne
-   *               changerait que le nom : Google traite un texte trop
-   *               proche d'une page à l'autre comme du contenu dupliqué.
-   *   noteIntro : 1re phrase de la note "commune pas dans la liste" —
-   *               propre à chaque page pour la même raison
-   *   metaDesc  : meta description PROPRE à chaque page (< ~160 caractères)
+   * Zones desservies. `communes` : liste validée par le client, ne pas la compléter sans son accord.
+   * slug / prep / de : URL /cuisinier-a-domicile-<slug>, « dans l'Oise », « de l'Oise ».
+   * intro / pitch / noteIntro / metaDesc : textes propres à chaque page, à rédiger réellement
+   * différemment (pas un gabarit où seul le nom change : contenu dupliqué).
    */
   areas: [
     {
@@ -136,25 +110,13 @@ export const site = {
   /** Fourchette de prix (formules 149 € – 259 €). */
   priceRange: "€€",
 
-  /**
-   * Profils officiels — alimente `sameAs` du schema et les liens du footer.
-   * Laisser vide tant que les vraies URL ne sont pas connues (ne PAS
-   * pointer vers instagram.com / facebook.com génériques).
-   */
+  /** Profils officiels (`sameAs`, footer). Vide tant que les URL ne sont pas connues. */
   social: [] as { label: string; url: string }[],
 
-  /**
-   * Image de partage OpenGraph (dans /public). og-image.png fait
-   * 1200×1158 (le logo). Un vrai 1200×630 (ratio paysage) serait mieux
-   * cadré sur Facebook / X / LinkedIn, qui recadrent au centre.
-   */
+  /** Image OpenGraph (dans /public), 1200×630. */
   ogImage: "/og-image.png",
 
-  /**
-   * Codes de vérification des outils pour webmasters. Coller ici la
-   * valeur `content` de la balise fournie par chaque service (voir la
-   * marche à suivre transmise séparément). Vide = balise non rendue.
-   */
+  /** Codes de vérification webmasters (valeur `content` de la balise) ; vide = balise non rendue. */
   verification: {
     google: "", // Google Search Console — <meta name="google-site-verification" content="…">
     bing: "", // Bing Webmaster Tools — <meta name="msvalidate.01" content="…">

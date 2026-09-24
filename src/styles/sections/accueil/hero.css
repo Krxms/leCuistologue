@@ -4,16 +4,10 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: 20px;
-  /* Padding gauche réduit (64 -> 48px) : décale légèrement tout le
-     bloc titre/sous-titre/CTA vers la gauche. */
   padding-left: 48px;
   padding-right: 64px;
   z-index: 20;
-  /* aspect-ratio a été tenté ici pour matcher la forme de l'image,
-     mais sur une fenêtre large et peu haute (grand écran, navigateur
-     pas maximisé en hauteur), la hauteur calculée devenait
-     imprévisible et poussait le titre hors-écran. Retour à un
-     plancher simple, fiable à toutes les proportions de fenêtre. */
+  /* Pas d'aspect-ratio (hauteur imprévisible selon la fenêtre) : simple plancher. */
   min-height: 30rem;
 }
 
@@ -29,21 +23,11 @@
 
 @media (min-width: 1280px) {
   .hero {
-    /* 107 -> 118dvh : le haut de la hero reste au même endroit (juste
-       sous la navbar, fixé par le flux normal), seule la hauteur
-       augmente donc seul le bas descend — plus d'air entre les CTA
-       et le bas du fond. */
     height: calc(118dvh - var(--header-height));
   }
 }
 
-/* Grands écrans (21"+, 2K/4K...) : .hero__content occupe 8 des 12
-   colonnes de la grille, une largeur en fr qui continue de grandir
-   avec la fenêtre — au-delà d'une largeur desktop normale, le bloc
-   titre/texte/CTA devenait démesurément large (lignes de texte trop
-   longues). Plafonné à sa largeur réelle à 1920px (8 colonnes + leurs
-   7 espacements internes), sans toucher au fond (qui, lui, doit
-   continuer à couvrir toute la largeur de l'écran). */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .hero__content {
     max-width: 1200px;
@@ -63,27 +47,14 @@
   display: block;
   width: 100%;
   height: 100%;
-  /* "cover" plutôt que "fill" : sans que le conteneur ait exactement
-     le ratio de l'image (aspect-ratio a été tenté puis abandonné car
-     imprévisible selon la forme de la fenêtre), étirer l'image la
-     déforme visiblement. Recadrer proprement les bords reste le
-     compromis le plus fiable.
-     object-position en bas (pas centre) : le brocoli dessiné en bas
-     de l'image doit toujours rester dans le cadre — si le recadrage
-     rognait en haut ET en bas, il pouvait disparaître selon la forme
-     du conteneur. Ancré en bas, seul le haut de l'image est rogné. */
+  /* cover + object-position en bas : le brocoli dessiné en bas de l'image doit rester dans le cadre (seul le haut est rogné). */
   object-fit: cover;
   object-position: center bottom;
   z-index: 0;
   pointer-events: none;
 }
 
-/* Décors repris de la section Présentation : positionnés ici pour
-   apparaître avec la hero au chargement plutôt qu'avec un léger
-   décalage propre à la section suivante. Positions exprimées par
-   rapport au bas de la hero (bottom), car elles chevauchaient à
-   l'origine le haut de Présentation avec des valeurs négatives —
-   les deux se rejoignent au même endroit visuellement. */
+/* Décors positionnés par rapport au bas de la hero, pour apparaître avec elle au chargement. */
 .hero__decor {
   position: absolute;
   z-index: 4;
@@ -128,8 +99,6 @@
 .hero__content {
   position: relative;
   z-index: 2;
-  /* 7 -> 8 colonnes : plus de largeur disponible pour que le titre
-     s'étende davantage. */
   grid-column: 1 / span 8;
   max-width: 100%;
   align-self: center;
@@ -139,18 +108,12 @@
   font-family: var(--font-display);
   font-weight: 900;
   text-transform: uppercase;
-  /* Base = mobile (< 768px), inchangée. Desktop et tablette
-     redéfinissent la taille plus bas, calées pour que la ligne la plus
-     longue (« UNE FAÇON SIMPLE ») ne dépasse jamais la colonne de
-     contenu (8/12) — donc jamais sur l'image à droite. */
   font-size: clamp(2.9rem, 5vw, 5rem);
   line-height: 1.2;
   color: var(--color-ink);
 }
 
-/* Uniquement les deux spans de premier niveau (les lignes du titre) —
-   pas le .hero__title_colorspan imbriqué, dont l'affichage est géré
-   séparément juste en dessous. */
+/* Seulement les lignes de premier niveau, pas le .hero__title_colorspan imbriqué. */
 .hero__title > span {
   display: block;
   white-space: nowrap;
@@ -158,22 +121,11 @@
 
 .hero__title_colorspan {
   color: #DAA35B;
-  /* Mobile (< 768px) : « simple » sur sa propre ligne, plus gros —
-     inchangé. */
   display: block;
   font-size: clamp(4.9rem, 5vw, 5rem);
 }
 
-/* Desktop + tablette : le <br> de « de bien / manger » est neutralisé
-   (« de bien manger » sur une seule ligne) et « simple » prend sa
-   taille relative (1.06em) pour suivre le clamp du titre. « simple »
-   garde sa propre ligne (display: block) sur toute la plage >= 768px :
-   le titre est donc TOUJOURS sur trois lignes (« Une façon » /
-   « simple » / « de bien manger »), sans bascule 2 <-> 3 lignes en
-   cours de redimensionnement (elle se produisait auparavant à ~1510px).
-   La ligne la plus longue (« DE BIEN MANGER ») est identique à la
-   version deux lignes, donc aucun risque de débordement sur l'image
-   à droite. */
+/* ≥ 768px : <br> neutralisé et « simple » sur sa propre ligne : titre toujours sur 3 lignes, sans bascule 2↔3 au redimensionnement. */
 @media (min-width: 768px) {
   .hero__title_colorspan {
     display: block;
@@ -208,9 +160,7 @@
   color: var(--color-ink-soft);
 }
 
-/* Le wrapper épouse la largeur naturelle des deux CTA (width:
-   fit-content) : la ligne de réassurance juste en dessous peut
-   alors s'étirer à width:100% pour aller bord à bord avec elles. */
+/* Le wrapper épouse la largeur des deux CTA ; la ligne de réassurance s'étire à 100%. */
 .hero__actions-group {
   margin-top: 2.5rem;
   width: fit-content;
@@ -223,9 +173,6 @@
   gap: 1rem;
 }
 
-/* Simple ligne de réassurance ("il vient chez moi ?"), pas un bloc
-   de mots-clés : le contenu SEO local vit dans la section dédiée
-   plus bas sur la page et sur la page /cuisinier-a-domicile-oise/. */
 .hero__zone {
   display: none;
   margin-top: 1.25rem;
@@ -268,8 +215,6 @@
 .btn--secondary {
   position: relative;
   background-color: transparent;
-  /* Bordure réelle : filet de secours toujours visible, et c'est
-     elle qu'on voit tant que l'anneau doré ne l'a pas recouverte. */
   border: 2px solid var(--color-ink-soft);
   color: var(--color-ink-soft);
   transition: border-color 800ms ease;
@@ -279,10 +224,7 @@
   border-color: var(--color-gold);
 }
 
-/* L'anneau animé : un conic-gradient masqué pour ne garder que
-   l'épaisseur de la bordure (technique padding-box / mask-composite),
-   qui balaie du bleu vers l'or en partant de la droite. Posé bien
-   au-dessus de la bordure réelle (inset: -2px = son épaisseur). */
+/* Anneau animé : conic-gradient masqué sur l'épaisseur de la bordure (padding-box / mask-composite) ; la bordure réelle sert de filet de secours dessous. */
 .btn--secondary::after {
   content: "";
   position: absolute;
@@ -311,21 +253,7 @@
   }
 }
 
-/* Ancrée au bloc de contenu (.hero__content, position: relative), pas
-   à la section : la hauteur de .hero varie avec la fenêtre
-   (calc(118dvh - header) au-delà de 1280px), donc toute position
-   calée sur .hero — un `top` fixe comme sur un `bottom` — faisait
-   dériver la flèche (jusque sur la section Présentation sur les
-   fenêtres basses, très haut vers le titre sur les fenêtres hautes).
-   Calée sur .hero__content, elle garde le même écart sous les CTA
-   quelle que soit la taille d'écran. Masquée en tablette et mobile
-   par les media queries plus bas (visible seulement >= 1280px).
-
-   left: 76.5% (et non 50%) : .hero__content ne fait que 8 colonnes
-   sur 12, donc son centre est nettement à gauche du centre de la
-   hero. 76,5% de la boîte de contenu retombe sur l'axe central de la
-   hero à ~+/-5px près sur toute la plage desktop (1280px -> ultra-
-   large) — la flèche est donc centrée à l'écran. */
+/* Ancrée sur .hero__content et non sur .hero, dont la hauteur varie avec la fenêtre (la flèche dérivait). Visible seulement ≥ 1280px. */
 .hero__arrow {
   position: absolute;
   z-index: 2;
@@ -358,15 +286,7 @@
   }
 }
 
-/* ============================================================
-   TABLETTE — 768px à 1279px, EN CONTINU
-   Une seule zone (au lieu de deux paliers avec une rupture nette à
-   834px, et un trou entre 1210 et 1280 où aucune règle ne
-   s'appliquait) : la hauteur de la hero et la taille du titre
-   suivent une formule continue sur toute la plage, donc l'image et
-   le bloc texte/CTA se réduisent de façon linéaire au lieu de sauter
-   d'une valeur à l'autre à chaque palier.
-   ============================================================ */
+/* Tablette 768–1279px : hauteur de la hero et taille du titre en formule continue (pas de paliers). */
 
 @media (min-width: 768px) and (max-width: 1279px) {
   .hero {
@@ -378,9 +298,7 @@
     align-self: start;
   }
 
-  /* Suit la largeur de la colonne de contenu (8/12) : « UNE FAÇON
-     SIMPLE » reste dans la boîte de 768px à 1279px, donc jamais sur
-     l'image. ~2,3rem à 768px → ~4,2rem à 1279px, en continu. */
+  /* Suit la largeur de la colonne de contenu (8/12) pour que le titre ne passe jamais sur l'image. */
   .hero__title {
     font-size: clamp(2.3rem, calc(6.2vw - 0.75rem), 4.4rem);
     letter-spacing: -0.008em;
@@ -406,33 +324,12 @@
   }
 }
 
-/* Zone intermédiaire : lisse le passage tablette -> desktop pour la
-   hauteur de la hero. Sans ça, la hauteur passait brutalement du
-   plancher tablette (~30rem, atteint dès ~1210px) à
-   calc(118dvh - header) (~50rem sur une hauteur d'écran courante)
-   entre 1279px et 1280px — un bond net pile à la dernière largeur
-   tablette, qui rendait l'écart avec la Présentation visiblement
-   différent juste avant le passage en desktop alors qu'il doit
-   rester le même sur tout le format tablette. Formule calée sur une
-   hauteur d'écran de référence de 768px (résolution laptop courante)
-   pour rejoindre en douceur la valeur desktop, sans changer les
-   valeurs exactes à 1211px (déjà au plancher tablette) et 1280px.
-   min-height (pas height) : une hauteur fixe ne grandit jamais si le
-   contenu (titre + description + CTA + le padding-bottom de
-   .hero__content) dépasse la valeur du bas de la formule (30rem tout
-   juste à 1211px) — avec overflow:visible sur .hero, le surplus
-   débordait alors visiblement sous la hero, à cheval sur la photo de
-   Présentation entre 1210 et ~1265px. En plancher, la boîte grandit
-   au besoin comme partout ailleurs dans cette zone tablette. */
+/* Lissage tablette → desktop de la hauteur de la hero (évite un saut entre 1279 et 1280px) ; calé sur un écran de référence de 768px de haut. */
 @media (min-width: 1211px) and (max-width: 1279px) {
   .hero {
     min-height: clamp(30rem, calc(-320.13rem + 462.667vw), 50rem);
   }
 }
-
-/* ============================================================
-   MOBILE — jusqu'à 767px
-   ============================================================ */
 
 @media (max-width: 767px) {
   .hero {
@@ -441,9 +338,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* Réduit (40.5rem -> 34rem) : la hero laissait beaucoup de vide
-       sous les CTA, notamment à cause du padding-bottom hérité de
-       .hero__content (voir ci-dessous, annulé ici). */
     min-height: 34rem;
     padding: 5rem 1.5rem;
     background-color: #F8E0CF;
@@ -455,9 +349,6 @@
 
   .hero__description {
     width: 34ch;
-    /* Une largeur fixe (ch) n'est pas centrée par défaut dans son
-       conteneur : elle ne l'était pas ici (collée à gauche), d'où le
-       sous-titre qui semblait décalé par rapport au titre et aux CTA. */
     margin-inline: auto;
     line-height: 1.1;
   }
@@ -469,13 +360,7 @@
 
   .hero__content {
     max-width: 28rem;
-    /* padding-left:2rem (hérité de la base, pensé pour la grille 12
-       colonnes du desktop) décalait tout le texte vers la droite à
-       l'intérieur du bloc pourtant centré (align-items:center sur
-       .hero) — annulé ici. padding-bottom:6.8rem (pensé pour dégager
-       les CTA du bas de l'image de fond, absente en mobile via
-       .hero__bg-wrapper{display:none}) laissait un vide inutile sous
-       les CTA — annulé aussi. */
+    /* padding hérités de la base (grille 12 colonnes, dégagement de l'image de fond) annulés en mobile. */
     padding-left: 0;
     padding-bottom: 0;
   }
@@ -493,14 +378,6 @@
     width: 85%;
   }
 
-  /* bottom:483px (fixe) et max-width:78px pénalisaient la potato/le
-     brocoli : sur la quasi-totalité des téléphones réels, 23vw
-     dépasse déjà 78px, donc le plafond s'appliquait presque toujours
-     et le brocoli restait à une taille fixe quelle que soit la
-     largeur d'écran — pas de croissance proportionnelle. Position en
-     % (comme la potato, qui elle scalait déjà correctement en
-     largeur) plutôt qu'en px fixe, pour rester ancré au même endroit
-     relatif au titre à mesure que l'écran s'élargit. */
    .hero__decor--brocoli {
     display: flex;
     left: 3%;

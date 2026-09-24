@@ -63,16 +63,7 @@ export function getFormule(slug: string): Formule | undefined {
   return formules.find((f) => f.slug === slug);
 }
 
-/* ===== Options « Les petits plus » ==================================
-   Source unique pour les 3 options :
-     - la section "petits plus" de la page Formules (composant
-       PetitsPlus.astro) : titre, prix, `corps` rendu tel quel (HTML) ;
-     - les infobulles du formulaire /reserver (où l'on coche les
-       options) : `labelFormulaire`, prix, `corps` en texte brut.
-   `slug`  = valeur de la case à cocher côté formulaire.
-   `carte` = suffixe des classes CSS (.petits-plus-card--<carte>) et
-             clé du fond SVG dans PetitsPlus.astro.
-   ================================================================== */
+/* Options « petits plus » : source unique de PetitsPlus.astro et des infobulles de /reserver. `slug` = valeur de la case à cocher ; `carte` = suffixe CSS et clé du fond SVG. */
 
 export interface OptionPetitPlus {
   slug: string;

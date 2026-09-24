@@ -1,7 +1,5 @@
 .a-propos-content {
-  /* Distance sous-titre -> scène de bulles (desktop). Négatif = la
-     scène remonte vers le sous-titre. Réglé pour retrouver ~7rem
-     d'écart visible (comme .faq-accordion__header sur la FAQ). */
+  /* Écart sous-titre → scène de bulles (négatif : la scène remonte). */
   --stage-gap: -9.75rem;
 
   max-width: 1600px;
@@ -11,8 +9,6 @@
   text-align: center;
 }
 
-/* Titre : même style que les titres de section des autres pages
-   (.une-question__title, .faq-cta__title…), sans emphase colorée. */
 .a-propos-content__title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -20,31 +16,22 @@
   line-height: 1.3;
   color: var(--color-ink);
   margin: 0;
-  /* La section remonte de -12rem sous le header : le <h1> du header
-     (position:relative; z-index:1, sans pointer-events:none) est un
-     bloc pleine largeur dont la boîte recouvre cette zone et capte la
-     souris -> titre/sous-titre non sélectionnables. On place ces deux
-     éléments dans la même couche : venant plus loin dans le DOM, ils
-     repassent au-dessus. Aucun changement de mise en page. */
+  /* La section remonte sous le header (margin-top négatif) : le <h1> du header capterait la souris et rendrait le titre non sélectionnable, on repasse donc le titre au-dessus. */
   position: relative;
   z-index: 1;
 }
 
-/* Sous-titre : même logique que .howto__subtitle sur l'Accueil
-   (titre en gras + sous-titre plus léger juste en dessous). */
 .a-propos-content__subtitle {
   margin: 0.6rem 0 6rem;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(1.2rem, 1.8vw, 1.875rem);
   color: #c26665;
-  /* Même raison que .a-propos-content__title ci-dessus. */
   position: relative;
   z-index: 1;
 }
 
-/* ===== Placeholder « chantier en cours » (temporaire, le temps de
-   finaliser la composition en local — voir EN_CHANTIER dans le .astro). */
+/* Placeholder « chantier » (voir EN_CHANTIER dans le .astro). */
 .a-propos-content--chantier {
   margin-top: 0;
   padding-block: 3.5rem 4.5rem;
@@ -63,14 +50,7 @@
   color: #9a978f;
 }
 
-/* ===== Scène : 5 bulles + photo au ratio de la maquette
-   (Group 714 : 1866 x 1781). container-type -> tailles de texte en
-   cqi (% de la largeur de la scène) : toute la composition se met à
-   l'échelle d'un bloc, du desktop à la tablette.
-   Chaque bulle : on fixe left/top/width sur la maquette ; le SVG du
-   blob se cale en fond (object-fit: fill) et la hauteur est donnée
-   par le texte -> le blob contient toujours son texte proprement.
-   ================================================================ */
+/* Scène : 5 bulles + photo au ratio de la maquette (1866×1781). Tailles de texte en cqi (% de la largeur de la scène) : la composition se met à l'échelle d'un bloc. */
 .ap-stage {
   position: relative;
   width: min(1520px, 100%);
@@ -104,8 +84,6 @@
   padding: 2% 6% 3.5% 9%;
 }
 
-/* Tailles calées sur la maquette : cqi = % de la largeur de la scène,
-   donc tout le bloc de texte garde ses proportions. */
 .ap-bubble__title {
   margin: 0 0 0.6em;
   font-family: var(--font-display);
@@ -132,9 +110,6 @@
   font-weight: 700;
 }
 
-/* --- Position de chaque bulle : left = bord gauche du blob dans la
-   maquette, top calé pour que le texte tombe à la bonne hauteur,
-   width = largeur du blob. La hauteur suit le texte. --- */
 .ap-bubble--metier { left: 3%; top: 18.5%; width: 34%; }
 .ap-bubble--metier .ap-bubble__p--accent { color: #546d48; }
 
@@ -150,7 +125,6 @@
 .ap-bubble--transmission { left: 40%; top: 77.8%; width: 40%; }
 .ap-bubble--transmission .ap-bubble__p--accent { color: #755973; }
 
-/* Photo centrale : au-dessus des blobs, sous le texte. */
 .ap-stage__photo {
   position: absolute;
   left: 36.5%;
@@ -160,11 +134,7 @@
   z-index: 3;
 }
 
-/* Piste + puces : inertes en desktop (composition libre — les bulles
-   restent positionnées en absolu par rapport à .ap-stage, la piste
-   n'étant qu'un bloc de hauteur nulle sans influence). Deviennent
-   une pile flex sous 1200px, puis un carrousel à défilement sous
-   768px. */
+/* Piste et puces inertes en desktop ; pile flex sous 1200px, carrousel sous 768px. */
 .ap-stage__track {
   display: block;
   min-width: 0;
@@ -174,9 +144,7 @@
   display: none;
 }
 
-/* Alignement vertical du bloc titre/sous-titre sur les autres pages
-   (FAQ, Avance immédiate…) : exactement la même cascade de margin-top
-   -> le titre tombe à la même hauteur à toutes les largeurs. */
+/* Alignement vertical du titre sur les autres pages (même cascade de margin-top). */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .a-propos-content {
     margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
@@ -192,35 +160,18 @@
 }
 
 @media (max-width: 767px) {
-  /* Alignement inter-pages : le titre de contenu doit tomber au même
-     niveau vertical sur a-propos / faq / avance immediate quand on
-     arrive sur la page. Les headers mobile ont des hauteurs
-     differentes (longueur + nombre de lignes du titre) : ~212px ici,
-     ~233 sur la FAQ, ~254 sur l'avance immediate. On compense donc le
-     remontee par page pour que le 1er titre du contenu arrive a
-     ~280px du haut du document partout. Header le plus court -> pull
-     le plus faible. */
+  /* Les headers mobile ont des hauteurs différentes (~212px ici, ~233 FAQ, ~254 avance immédiate) : le margin-top compense pour que le 1er titre de contenu tombe à la même hauteur sur les trois pages. */
   .a-propos-content {
-    /* -3rem alignait le titre à ~281px du haut ; +0.5rem partout
-       (a-propos/faq/avance/formules) pour descendre légèrement ce
-       niveau commun sans casser l'alignement entre pages. */
     margin-top: -2.5rem;
   }
 }
 
-/* ===== < 1200 px (tablette + mobile) : la composition libre de la
-   maquette est un format large ; en dessous son texte deviendrait
-   illisible et les bulles se chevaucheraient. On empile donc les
-   bulles en cartes, chacune reprenant l'aplat pastel de son blob.
-   ================================================================ */
+/* < 1200px : bulles empilées en cartes (la composition libre devient illisible). */
 @media (max-width: 1199.98px) {
   .a-propos-content {
     padding: 2.5rem 1.5rem 4rem;
   }
 
-  /* En pile : l'écart desktop sous le sous-titre n'a plus lieu d'être ;
-     l'air au-dessus de la photo vient de la marge de .ap-stage, et on
-     l'équilibre avec l'espace photo -> première carte en dessous. */
   .a-propos-content__subtitle {
     margin-bottom: 0;
   }
@@ -237,8 +188,6 @@
     gap: 1.5rem;
   }
 
-  /* La piste porte l'empilement des bulles (la photo et les puces
-     restent enfants directs de .ap-stage). */
   .ap-stage__track {
     display: flex;
     flex-direction: column;
@@ -281,11 +230,7 @@
   }
 }
 
-/* ===== < 768px : les 5 piliers en carrousel à défilement natif +
-   snap + puces — même mécanisme que .commentaires (Accueil) et le
-   mobile de .pricing (Formules). Une seule carte visible à la fois,
-   la pile verticale ne s'étire plus sur toute la hauteur d'écran.
-   ================================================================ */
+/* < 768px : carrousel à scroll natif + snap + puces. */
 @media (max-width: 767px) {
   .a-propos-content__title {
   font-family: var(--font-display);
@@ -299,16 +244,7 @@
     gap: 1rem;
   }
 
-  /* Piste horizontale : le navigateur gère le geste (aucun drag JS).
-     margin-inline négatif = la piste saigne jusqu'aux bords de
-     l'écran (débord coupé par overflow-x: clip sur <main>).
-
-     Centrage : chaque carte occupe TOUTE la largeur utile
-     (flex-basis 100%), et le débord des voisines vient uniquement
-     du padding-inline symétrique de la piste. Résultat : à
-     scroll-left 0 la 1re carte a le même vide à gauche qu'à droite,
-     et scroll-snap-align: center (+ scroll-padding-inline identique)
-     recentre pareil chaque carte, y compris la dernière. */
+  /* Piste bord à bord ; chaque carte prend 100% de la largeur et l'aperçu des voisines vient du padding-inline symétrique (avec scroll-padding identique) : chaque carte, première et dernière comprises, est centrée. */
   .ap-stage__track {
     flex-direction: row;
     gap: 1rem;

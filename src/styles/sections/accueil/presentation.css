@@ -1,39 +1,20 @@
 .presentation {
   position: relative;
-  /* La photo se cale sur le milieu réel du texte via align-items, au
-     lieu d'un top en % à réajuster à la main à chaque palier — se
-     recalcule tout seul quelle que soit la hauteur du texte. */
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--color-cream);
   overflow: visible;
   z-index: 1;
-  /* Écart fixe avec la hero : UNE seule formule, valable de 768px à
-     l'infini (mobile excepté, qui repart sur un modèle empilé sans
-     chevauchement). Avant, cet écart venait indirectement d'un
-     min-height (900px en large, auto en dessous de 1210px) qui
-     centrait le contenu dans une boîte plus grande que lui — un
-     mécanisme à bascule qui cassait net à chaque changement de
-     min-height. Ici, padding-top annule le margin-top négatif et
-     ajoute l'écart visible voulu : le résultat ne dépend ni de la
-     hauteur du contenu ni de la largeur d'écran, donc plus aucune
-     cassure possible à une frontière de breakpoint. */
+  /* Écart fixe avec la hero : une seule formule pour toute la plage ≥ 768px. */
   min-height: 40rem;
   margin-top: -5rem;
   padding-top: 12.5rem;
   padding-bottom: 6rem;
-  /* space-between colle le dernier item (la photo) pile au bord
-     droit de la section — l'ancien "left: 62.55%" gardait toujours
-     une marge implicite avant 100%. On la rétablit explicitement. */
   padding-right: 4.5%;
 }
 
-/* Grands écrans (21"+, 2K/4K...) : sans plafond, le texte (58%) et
-   la photo (39%) continuaient de s'écarter indéfiniment l'un de
-   l'autre au-delà d'une largeur desktop normale. Le fond (une
-   couleur unie, identique à celui de la page) reste invisible même
-   plafonné — pas de bande blanche sur les côtés. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .presentation {
     max-width: var(--content-cap);
@@ -93,9 +74,7 @@
   margin: 0 0 1.5rem;
 }
 
-/* Phrase d'accroche en gras via CSS plutôt qu'un <strong> englobant
-   toute la phrase (le <strong> est réservé à l'emphase de courts
-   segments — cf. rapport SEO « bold tags too long »). */
+/* Gras via CSS plutôt qu'un <strong> sur toute la phrase (<strong> réservé aux courts segments). */
 .presentation__text-lead {
   font-weight: 700;
 }
@@ -118,8 +97,7 @@
   justify-content: center;
   height: 46px;
   padding-inline: 55px;
-  /* Bordure réelle : filet de secours toujours visible, et c'est
-     elle qu'on voit tant que l'anneau bleu ne l'a pas recouverte. */
+  /* Anneau animé : conic-gradient masqué sur l'épaisseur de la bordure (padding-box / mask-composite) ; la bordure réelle sert de filet de secours dessous. */
   border: 2px solid #edb368;
   border-radius: 6px;
   background-color: rgba(237, 179, 104, 0.062);
@@ -135,9 +113,6 @@
   border-color: var(--color-ink-soft);
 }
 
-/* L'anneau animé : même technique que le CTA secondaire de la hero,
-   mais inversée : part de l'or (couleur de base ici) et balaie vers
-   le bleu en partant de la droite. */
 .presentation__cta::after {
   content: "";
   position: absolute;
@@ -167,10 +142,6 @@
 }
 
 .presentation__photo-wrap {
-  /* "relative" (plus "absolute") : la photo devient un item flex de
-     .presentation, centré automatiquement par align-items:center —
-     reste le contexte de position pour ses décors internes, qui
-     continuent de se positionner par rapport à elle comme avant. */
   position: relative;
   flex: 0 0 39%;
   width: 30%;
@@ -237,14 +208,7 @@
   transform: rotate(-80deg);
 }
 
-/* Image à gauche, texte à droite sur toute la plage non-mobile
-   (desktop + tablette) : simple inversion de l'ordre des deux blocs
-   flex, rien d'autre ne bouge. Le mobile (< 768px) repasse en
-   display:block empilé (voir tout en bas) et n'est donc pas concerné.
-   Gouttières de bord permutées pour rester identiques à avant : la
-   photo prend les 4.5% que le texte avait à droite, le texte prend
-   les 7.19% que la photo avait à gauche. Placé après les règles de
-   base de .presentation__content pour bien les surcharger. */
+/* Image à gauche / texte à droite dès 768px (ordre des blocs inversé, gouttières permutées). */
 @media (min-width: 768px) {
   .presentation {
     flex-direction: row-reverse;
@@ -257,10 +221,6 @@
     padding-right: 7.19%;
   }
 }
-
-/* ============================================================
-   TABLETTE PAYSAGE — 1023px à 1210px
-   ============================================================ */
 
 @media (min-width: 1023px) and (max-width: 1210px) {
   .presentation__title-icon {
@@ -318,10 +278,6 @@
     transform: rotate(-150deg);
   }
 }
-
-/* ============================================================
-   TABLETTE PORTRAIT — jusqu'à 834px
-   ============================================================ */
 
 @media (max-width: 834px) {
   .presentation__title-icon {
@@ -382,11 +338,6 @@
 
 }
 
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px.
-   padding-top/padding-bottom ne sont plus redéfinis ici : ils sont
-   désormais fixes sur .presentation (voir plus haut), valables sur
-   toute la plage non-mobile sans exception ni bascule. */
 @media (min-width: 768px) and (max-width: 834px) {
   .presentation {
     padding-inline: clamp(0rem, calc(18.6716rem + -2.2388vw), 1.5rem);
@@ -396,9 +347,7 @@
 @media (max-width: 767px) {
   .presentation {
     position: relative;
-    /* Empilé, PHOTO en haut puis le bloc texte (titre, phonétique,
-       paragraphes, CTA). Ordre imposé explicitement (flex colonne +
-       order) puisque le DOM a le texte avant la photo. */
+    /* Empilé : photo puis texte (order explicite, le DOM a le texte avant la photo). */
     display: flex;
     flex-direction: column;
     min-height: auto;
@@ -413,10 +362,6 @@
     flex-basis: auto;
     padding-left: 0;
     padding-top: 0;
-    /* Texte ferré à gauche (titre, phonétique, paragraphes) : un bloc
-       de texte courant centré a un bord gauche irrégulier qui gêne la
-       lecture et l'accessibilité. Le CTA en dessous reste centré via
-       son propre margin-inline:auto. */
     text-align: left;
   }
 
@@ -437,10 +382,6 @@
   .presentation__cta {
     display: flex;
     width: 100%;
-    /* padding-inline:55px (hérité de la base) laissait trop peu de
-       place au texte sur une largeur mobile réduite, le forçant sur
-       deux lignes malgré le nowrap. Réduit pour que "Découvrir sa
-       démarche" tienne confortablement sur une seule ligne. */
     padding-inline: 1.5rem;
     white-space: nowrap;
     margin-inline: auto;
@@ -457,11 +398,6 @@
     margin-inline: auto;
   }
 
-  /* inset:0 + width:80% sans marge auto revient à left:0 (ancré à
-     gauche, ~20% de vide à droite au lieu d'être centré) — d'où le
-     margin-left:2rem qui rattrapait ça approximativement. Avec
-     margin-inline:auto, l'espace restant se répartit vraiment à
-     parts égales des deux côtés. */
   .presentation__photo {
     margin-inline: auto;
     margin-top: 2rem;

@@ -1,16 +1,11 @@
 .zone-intervention {
   position: relative;
-  /* Isole l'empilement de cette section : le fond en z-index:-1
-     reste garanti derrière tout son contenu, quoi qu'il se passe
-     hors de la section. */
+  /* Contexte d'empilement propre : le fond en z-index:-1 reste derrière le contenu de la section. */
   z-index: 0;
   padding: 6rem 2rem;
   text-align: center;
 }
 
-/* Même forme/dégradé que les CTA de bas de page des autres pages
-   (À propos, FAQ) : léger galbe sur le bord haut plutôt qu'une
-   ligne droite. */
 .zone-intervention__shape {
   position: absolute;
   inset: 0;

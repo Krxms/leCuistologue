@@ -36,8 +36,7 @@ const pageTitle = seoTitle ?? `${title} — ${site.name}`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(image, site.url).href;
 
-/* Schema principal, présent sur toutes les pages : établit l'entité
-   locale (nom, adresse, téléphone, zone desservie) auprès de Google. */
+/* Schema LocalBusiness présent sur toutes les pages. */
 const localBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -51,8 +50,7 @@ const localBusiness = {
   priceRange: site.priceRange,
   description:
     "Cuisinier à domicile spécialiste de la cuisine du quotidien. Le Cuistologue prépare vos repas de la semaine directement chez vous, dans le Vexin — Oise, Val-d'Oise, Yvelines et Eure.",
-  // Service à domicile : pas d'adresse précise publique — ville + zone
-  // desservie suffisent (et évitent d'exposer le domicile privé).
+  // Pas d'adresse précise publique (domicile privé) : ville + zone suffisent.
   address: {
     "@type": "PostalAddress",
     addressLocality: site.location.city,

@@ -28,8 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         expand();
         lastScrollY = currentScrollY;
       }
-      // Si le déplacement est inférieur au seuil, ou si le scroll s'arrête :
-      // on ne fait rien, la navbar garde son état actuel.
+      // Sous le seuil ou à l'arrêt du scroll : état inchangé.
     },
     { passive: true }
   );

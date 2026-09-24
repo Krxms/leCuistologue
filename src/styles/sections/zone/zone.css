@@ -1,7 +1,3 @@
-/* ===== Pages « Zone d'intervention » ===============================
-   Hub (/zone-intervention) + 4 pages département
-   (/cuisinier-a-domicile-<slug>). Même gabarit typographique.
-   ================================================================== */
 
 .zone {
   padding: 8rem 2rem 6rem;
@@ -74,7 +70,6 @@
   color: var(--color-ink);
 }
 
-/* Puces de communes / départements (texte simple) */
 .zone__chips {
   margin: 1.5rem 0 0;
   padding: 0;
@@ -95,7 +90,6 @@
   padding: 0.55rem 1.4rem;
 }
 
-/* Cartes-liens vers les pages département (hub) ou entre départements */
 .zone__links {
   margin: 1.5rem 0 0;
   padding: 0;

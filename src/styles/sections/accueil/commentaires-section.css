@@ -54,9 +54,7 @@
   position: relative;
 }
 
-/* État « pas encore d'avis » : message centré à la place du carrousel
-   (voir temoignages.astro — s'affiche tant que fetchGoogleReviews()
-   renvoie une liste vide). */
+/* Message « pas encore d'avis » (voir temoignages.astro). */
 .commentaires__soon {
   max-width: 34rem;
   margin: 3.5rem auto 0;
@@ -77,9 +75,6 @@
   margin-inline: auto;
 }
 
-/* Puces : uniquement pour le carrousel mobile (voir
-   @media max-width:767px), masquées partout ailleurs où
-   .commentaires__grid reste une grille classique. */
 .commentaires__dots {
   display: none;
 }
@@ -136,19 +131,11 @@
   color: #5e7058;
 }
 
-/* ============================================================
-   TABLETTE — jusqu'à 1210px (portrait et paysage confondus)
-   ============================================================ */
-
 @media (max-width: 1210px) {
   .commentaires__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-/* ============================================================
-   TABLETTE PAYSAGE — 835px à 1210px
-   ============================================================ */
 
 @media (min-width: 835px) and (max-width: 1210px) {
     .commentaires__arrow {
@@ -159,8 +146,6 @@
 }
 
 
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
 
 .commentaires__header {
@@ -202,17 +187,8 @@
     font-size: 1rem;
   }
 
-  /* Carrousel à une carte visible à la fois : scroll natif + snap
-     (pas de logique de drag maison, le navigateur gère le geste),
-     comme pricing-stage sur Formules mais en plus simple, une seule
-     carte n'ayant pas besoin de l'empilement 3D des formules.
-
-     Centrage : la carte occupe TOUTE la largeur utile de la piste
-     (flex-basis 100%) et l'aperçu des cartes voisines vient
-     uniquement du padding-inline symétrique. Ainsi, à scroll-left 0,
-     la 1re carte a le même vide à gauche qu'à droite, et
-     scroll-snap-align: center (+ scroll-padding-inline identique)
-     recentre pareil chaque carte, y compris la dernière. */
+  /* Carrousel à scroll natif + snap, une carte visible à la fois. */
+  /* Piste bord à bord ; chaque carte prend 100% de la largeur et l'aperçu des voisines vient du padding-inline symétrique (avec scroll-padding identique) : chaque carte, première et dernière comprises, est centrée. */
   .commentaires__grid {
     margin-top: 2.5rem;
     display: flex;
@@ -223,10 +199,6 @@
     gap: 1rem;
     padding-inline: 4rem;
     max-width: 100%;
-    /* Masque la barre de défilement (Firefox/Chrome/Safari) : le
-       défilement reste utilisable, juste pas affiché comme une
-       scrollbar classique — cohérent avec les puces en dessous qui
-       jouent déjà ce rôle d'indicateur. */
     scrollbar-width: none;
   }
 

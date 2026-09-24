@@ -1,8 +1,6 @@
 .a-propos-cta {
   position: relative;
-  /* Isole l'empilement de cette section : le fond en z-index:-1
-     reste garanti derrière tout son contenu, quoi qu'il se passe
-     hors de la section. */
+  /* Contexte d'empilement propre : le fond en z-index:-1 reste derrière le contenu de la section. */
   z-index: 0;
   overflow: hidden;
   min-height: 37vw;
@@ -107,8 +105,6 @@
 .a-propos-cta__btn--secondary {
   position: relative;
   background-color: transparent;
-  /* Bordure réelle : filet de secours toujours visible, et c'est
-     elle qu'on voit tant que l'anneau doré ne l'a pas recouverte. */
   border: 2px solid var(--color-ink-soft);
   color: var(--color-ink-soft);
   transition: border-color 800ms ease;
@@ -118,10 +114,7 @@
   border-color: var(--color-gold);
 }
 
-/* L'anneau animé : un conic-gradient masqué pour ne garder que
-   l'épaisseur de la bordure (technique padding-box / mask-composite),
-   qui balaie du bleu vers l'or en partant de la droite. Posé bien
-   au-dessus de la bordure réelle (inset: -2px = son épaisseur). */
+/* Anneau animé : conic-gradient masqué sur l'épaisseur de la bordure (padding-box / mask-composite) ; la bordure réelle sert de filet de secours dessous. */
 .a-propos-cta__btn--secondary::after {
   content: "";
   position: absolute;
@@ -164,8 +157,6 @@
   }
 }
 
-/* Zone intermédiaire : lisse l'apparition du padding mobile
-   sans changer les valeurs exactes à 1023px et 834px. */
 @media (min-width: 835px) and (max-width: 1023px) {
   .a-propos-cta {
     padding-top: clamp(0rem, calc(27.0635rem + -2.6455vw), 5rem);

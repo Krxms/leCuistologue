@@ -9,12 +9,7 @@ import bgSocial from "../../../assets/a-propos/a-propos-content/bulle-4-social.s
 import bgTransmission from "../../../assets/a-propos/a-propos-content/bulle-5-transmission.svg";
 import photo from "../../../assets/a-propos/a-propos-content/Bruno.webp";
 
-/* ⚠️ CHANTIER EN COURS — la composition « Voie C » (5 blobs SVG + photo,
-   calée sur Group 714.png) est encore en cours d'ajustement en local.
-   En attendant, on affiche un placeholder discret sur le site.
-   POUR RÉACTIVER : passer EN_CHANTIER à false (ou supprimer le flag et
-   le bloc placeholder). Tout le reste — data + composition + CSS — est
-   déjà en place. */
+/* EN_CHANTIER = true affiche un placeholder à la place de la composition (blobs + photo). */
 const EN_CHANTIER = false;
 
 const bulles = [
@@ -108,10 +103,6 @@ const bulles = [
           </div>
         ))}
       </div>
-
-      {/* Puces : indicateur du carrousel mobile (< 768px) uniquement,
-          masquées ailleurs — même mécanisme que .commentaires (Accueil)
-          et .pricing (Formules). */}
       <div class="ap-stage__dots" id="ap-stage-dots">
         {bulles.map((b, i) => (
           <button type="button" class="ap-stage__dot" aria-label={`Aller au pilier « ${b.titre} »`} />
@@ -122,9 +113,6 @@ const bulles = [
 )}
 
 <script>
-  /* Carrousel « à propos » mobile : défilement natif + snap, les puces
-     ne font que suivre la carte centrée (aucune animation JS), calqué
-     sur .commentaires (temoignages.astro) et le mobile de .pricing. */
   const track = document.getElementById("ap-stage-track");
   const dotsWrap = document.getElementById("ap-stage-dots");
 

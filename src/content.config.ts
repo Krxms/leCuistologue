@@ -1,12 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-/* ===== Journal (blog) =============================================
-   Articles en Markdown dans src/content/journal/. Un fichier = un
-   article. `draft: true` le garde hors du site (utile pour préparer
-   un brouillon). L'`id` d'une entrée = le nom du fichier sans .md,
-   qui devient l'URL /journal/<id>.
-   ================================================================= */
+/* Journal : un fichier .md dans src/content/journal/ = un article (URL /journal/<id>). `draft: true` le garde hors du site. */
 
 const journal = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/journal" }),

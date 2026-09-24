@@ -1,18 +1,12 @@
 .faq-header {
   position: relative;
-  /* Alignée sur les autres headers de page (Formules, À propos,
-     Avance immédiate) : même min-height partout. L'ancien
-     height:55% était incohérent avec min-height et ne servait à
-     rien de plus qu'un plancher plus bas que les autres pages. */
   min-height: 35.4vw;
   overflow: hidden;
   display: flex;
   align-items: center;
 }
 
-/* Grands écrans (21"+, 2K/4K...) : min-height et la flèche (vw)
-   continuaient de grandir avec la fenêtre sans plafond, gelés à leur
-   valeur réelle à 1920px. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .faq-header {
     max-width: var(--content-cap);
@@ -25,9 +19,6 @@
   }
 }
 
-/* Image (comme les autres headers de page) au lieu d'un simple aplat
-   de couleur : le fichier a un bord bas légèrement ondulé (même forme
-   que Formules/À propos/Avance immédiate), qui manquait ici. */
 .faq-header__bg {
   position: absolute;
   inset: 0;
@@ -45,11 +36,6 @@
   text-align: start;
   font-family: var(--font-display);
   line-height: 1.1;
-  /* padding-left (comme les autres headers de page), plus
-     justify-content:center + margin-left:-63% : ça centrait puis
-     décalait le titre d'un montant arbitraire, sans jamais retomber
-     au même point de départ que le padding-left:7.3% des 3 autres
-     pages. */
   padding-left: 7.3%;
   padding-bottom: 17%;
   transform: rotate(-2deg);
@@ -69,13 +55,7 @@
   color: #617854;
 }
 
-/* Ancrée sur le mot "Question ?" lui-même (position:relative
-   ci-dessus), pas sur tout le <h1> : le titre entier peut être plus
-   large que ce seul mot (ex. "Vous avez" sur l'autre ligne), alors
-   qu'un span inline comme l'accent se limite exactement à la largeur
-   réelle du texte. left:100% tombe donc pile à la fin du mot, quel
-   que soit le format — plus de dérive horizontale ni verticale au
-   responsive. */
+/* Flèche ancrée sur le mot lui-même (span inline) et non sur le <h1> : left:100% tombe à la fin du mot à toute largeur. */
 .faq-header__arrow {
   position: absolute;
   left: 105%;
@@ -93,8 +73,6 @@
   pointer-events: none;
 }
 
-/* Mêmes éléments, mêmes positions que les autres headers de page
-   (Formules / À propos / Avance immédiate). */
 .faq-header__deco--broccoli {
   left: 46%;
   top: -10%;
@@ -121,13 +99,6 @@
 }
 
 @media (max-width: 767px) {
-  /* display:flex + align-items:center (hérités de la base) restaient
-     en flex-direction:row : align-items ne centrait donc que
-     verticalement, pas horizontalement — le titre (item flex à
-     largeur "shrink-to-fit") restait collé à gauche malgré son
-     propre text-align:center. flex-direction:column (comme les 3
-     autres headers de page) corrige ça : align-items agit alors sur
-     l'axe horizontal. */
   .faq-header {
     display: flex;
     flex-direction: column;
@@ -149,10 +120,7 @@
     padding-left: 0;
     text-align: center;
     transform: rotate(0deg);
-    /* Même hauteur réservée que sur Formules (référence) : "Vous avez
-       / Une Question ?" ne tient que sur 2 lignes à cette largeur
-       (contre 3 sur Formules/Avance immédiate) — sans ce plancher, le
-       header finirait plus court que les autres pages. */
+    /* Hauteur réservée (3 lignes) : les headers de page gardent la même hauteur quel que soit le retour à la ligne du titre. */
     min-height: 8rem;
   }
 }

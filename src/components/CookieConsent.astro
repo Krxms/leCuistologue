@@ -87,10 +87,7 @@
     }
   }
 
-  /* GA4 chargé UNIQUEMENT après consentement « Mesure d'audience ».
-     Rien n'est requêté vers Google tant que l'utilisateur n'a pas
-     accepté (pas de Consent Mode « denied » : ici c'est un blocage
-     total en amont). GA4 anonymise l'IP par défaut. */
+  /* GA4 chargé uniquement après consentement « Mesure d'audience » : aucune requête vers Google avant. */
   function chargerGoogleAnalytics() {
     if ((window as any).__gaCharge) return;
     (window as any).__gaCharge = true;
@@ -109,8 +106,7 @@
     gtag("config", GA_MEASUREMENT_ID);
   }
 
-  /* Retrait du consentement : on efface les cookies déposés par GA4
-     (_ga, _ga_<id>, _gid…) sur le domaine courant et le domaine parent. */
+  /* Retrait du consentement : supprime les cookies GA4 (_ga, _ga_<id>, _gid) sur le domaine et son parent. */
   function supprimerCookiesGA() {
     const base = location.hostname.replace(/^www\./, "");
     for (const paire of document.cookie.split(";")) {

@@ -1,23 +1,14 @@
 .pricing {
   display: flex;
   justify-content: center;
-  /* flex-start plutôt que stretch : sans ça, ouvrir la liste d'une
-     carte étire les 3 cartes à la même hauteur (comportement par
-     défaut de stretch) et décale les encarts de prix des autres. */
+  /* flex-start plutôt que stretch : ouvrir la liste d'une carte n'étire pas les deux autres. */
   align-items: flex-start;
   gap: 2rem;
-  /* padding-top réduit (4rem -> 2.5rem) : resserre l'écart avec
-     l'encart « Ce qui est toujours inclus » au-dessus. */
   padding: 2.5rem 3.3% 4rem;
   flex-wrap: wrap;
 }
 
-/* Grand écran (21"+, 2K/4K...) : .pricing-card (width:30%, sans
-   plafond) devenait démesurément grande sur un écran large. Plutôt
-   que deviner sa taille exacte compte tenu du padding %, on plafonne
-   directement le conteneur (comme .offre__desktop, .presentation...)
-   — 30% d'une largeur désormais gelée reste automatiquement gelé
-   aussi, sans calcul à refaire ici. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .pricing {
     max-width: var(--content-cap);
@@ -130,15 +121,8 @@
   background-color: #ffffff;
 }
 
-/* ===== Zone tarifs : deux options par formule, la Routine du
-   Cuistologue mise en avant "subtilement" par rapport à la session
-   ponctuelle (fond teinté + prix plus grand et en couleur d'accent,
-   plutôt qu'un gros badge). Le tarif plein reste toujours affiché,
-   jamais barré : tout le monde n'est pas éligible au crédit d'impôt. */
+/* Zone tarifs : la Routine mise en avant avec subtilité (fond teinté, prix plus grand) ; le tarif plein reste toujours affiché, jamais barré (tout le monde n'est pas éligible au crédit d'impôt). */
 .pricing-card__pricing {
-  /* Un peu plus que l'écart entre les deux options de prix (gap
-     ci-dessous), pour bien séparer visuellement la liste des
-     prestations de la zone tarifs. */
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   display: flex;
@@ -246,11 +230,6 @@
   transform: scale(1.01) translateY(-1.5px);
 }
 
-/* ============================================================
-   Contrôles du carrousel — masqués par défaut (desktop),
-   révélés uniquement en dessous de 1211px
-   ============================================================ */
-
 .pricing-stage {
   position: relative;
 }
@@ -309,19 +288,7 @@
   transform: scale(1.4);
 }
 
-/* ============================================================
-   Encart crédit d'impôt — sous les cartes (plus au-dessus) :
-   icône + titre à gauche, description à droite, séparés par un
-   filet vertical, dans une carte bordée cohérente avec
-   .pricing-card / .formules-intro__box.
-   ============================================================ */
-
-/* Toujours plus étroit que la rangée des 3 cartes au-dessus (et non
-   calé sur la largeur de contenu comme .pricing) : 80% de la largeur
-   dispo, centré, plafonné à 0.78 × --content-cap pour rester en retrait
-   même sur très grand écran (là où .pricing est figé à --content-cap).
-   Ce retrait est conservé à tous les paliers SAUF mobile (< 768px), où
-   l'encart repasse pleine largeur et en colonne. */
+/* Encart plus étroit que la rangée de cartes (80%, plafonné à 0.78 × --content-cap), sauf en mobile. */
 .pricing-credit {
   position: relative;
   margin: 0rem auto 4rem;
@@ -362,9 +329,6 @@
   color: var(--color-ink);
 }
 
-/* Colonne de droite : le filet vertical séparateur et son retrait
-   sont portés ici (et non plus directement sur le <p>) depuis l'ajout
-   du lien « En savoir plus » sous la description. */
 .pricing-credit__body {
   padding-left: 2.5rem;
   border-left: 1px solid rgba(37, 61, 74, 0.12);
@@ -378,9 +342,6 @@
   color: var(--color-ink-soft);
 }
 
-/* Lien de renvoi vers la page Crédit d'impôt (/avanceimmediate, même
-   cible que l'entrée de nav « Crédit d'impôt ») : le sujet est
-   seulement résumé ici, la page dédiée le détaille. */
 .pricing-credit__more {
   display: inline-block;
   margin-top: 0.9rem;
@@ -401,18 +362,10 @@
   color: #9a6a2f;
 }
 
-/* ============================================================
-   TABLETTE — 768px à 1210px (paysage et portrait partagent le
-   même carrousel de cartes)
-   ============================================================ */
-
 @media (min-width: 768px) and (max-width: 1210px) {
   .pricing {
     position: relative;
-    /* Assez haut pour la carte dépliée (liste complète + tarifs +
-       CTA) sans rien couper — la scène clippe (overflow:hidden) tout
-       ce qui dépasse, donc mieux vaut prévoir large ici plutôt que
-       de plafonner la carte elle-même. */
+    /* Hauteur prévue pour la carte dépliée : la scène clippe (overflow:hidden) ce qui dépasse. */
     height: 645px;
     overflow: hidden;
     flex-wrap: nowrap;
@@ -429,8 +382,6 @@
     margin-top: 0 !important;
     transition: transform 0.45s ease-out;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 20px 44px rgba(0, 0, 0, 0.08);
-    /* Pas de max-height : la carte doit toujours englober tout son
-       contenu (y compris le CTA), fermée comme dépliée. */
     height: auto;
     gap: 10rem;
   }
@@ -490,8 +441,6 @@
     padding-block: 0.7rem;
   }
 
-  /* Carrousel : les cartes se déploient en éventail quasi pleine
-     largeur — l'encart reste nettement en retrait, centré. */
   .pricing-credit {
     width: min(90%, 680px);
     margin: 2rem auto 3rem;
@@ -512,12 +461,6 @@
   }
 }
 
-/* ============================================================
-   TABLETTE PORTRAIT — 768px à 1023px (même seuil que le JS pour
-   l'écartement du carrousel) : les 3 cartes ne sont pas toutes
-   pleinement visibles, flèches + dots restent utiles ici.
-   ============================================================ */
-
 @media (min-width: 768px) and (max-width: 1023px) {
   .pricing-nav {
     display: flex;
@@ -529,18 +472,9 @@
   }
 }
 
-/* Tablette paysage (1024px à 1210px) : aucune navigation affichée —
-   les 3 cartes sont déjà toutes visibles, comme sur desktop. Rien à
-   écrire ici, .pricing-nav et .pricing-dots restent sur le
-   display:none hérité de la règle de base. */
-
 @media (max-width: 767px) {
   .pricing-stage {
-    /* padding-inline 0 : le conteneur scrollable va bord à bord, ses
-       propres padding-inline / scroll-padding créent les gouttières et
-       le léger débord de la carte voisine (même montage que
-       .commentaires en bas de l'accueil). padding-top réduit pour
-       resserrer l'écart avec l'encart au-dessus. */
+    /* Le conteneur scrollable va bord à bord ; ses padding-inline / scroll-padding créent les gouttières et l'aperçu des cartes voisines. */
     padding: 1.25rem 0 0;
   }
 
@@ -548,32 +482,21 @@
     display: none;
   }
 
-  /* Carrousel à défilement natif + snap, une carte visible à la fois —
-     calqué sur .commentaires__grid (avis, bas de l'accueil). Divise le
-     scroll vertical par ~3 : au lieu des 3 cartes empilées, une seule
-     est visible et on passe d'une formule à l'autre en glissant
-     horizontalement ; les puces en dessous indiquent la position. */
+  /* Carrousel à scroll natif + snap, une carte visible à la fois (même montage que .commentaires). */
   .pricing {
     position: static;
     height: auto;
     flex-direction: row;
     flex-wrap: nowrap;
-    /* flex-start impératif : justify-content:center (règle de base) sur
-       un conteneur scrollable rend tout le débord GAUCHE inatteignable
-       (scrollLeft ne peut pas être négatif) — la 1re carte reste
-       coupée et le scroll est bloqué. */
+    /* flex-start impératif : justify-content:center sur un conteneur scrollable rend le débord gauche inatteignable. */
     justify-content: flex-start;
     align-items: stretch;
     gap: 1rem;
-    /* padding-block 0 en haut : l'écart avec l'encart est déjà donné
-       par .pricing-stage ; un peu de marge en bas avant les puces. */
     padding: 0 1.5rem 2rem;
     overflow-x: auto;
     overflow-y: visible;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 1.5rem;
-    /* Barre de défilement masquée : le geste reste dispo, les puces
-       jouent le rôle d'indicateur. */
     scrollbar-width: none;
   }
 
@@ -584,8 +507,6 @@
   .pricing-card {
     position: static;
     flex: 0 0 calc(100% - 1.75rem);
-    /* min-width: 320px de la règle de base collerait la carte bord à
-       bord (aucun débord de la voisine) et déborderait sous ~344px. */
     min-width: 0;
     max-width: none;
     margin: 0 !important;
@@ -598,9 +519,6 @@
     padding: 1.25rem 1.5rem 1.75rem;
   }
 
-  /* Une carte à la fois : les min-height qui alignaient les 3 cartes
-     côte à côte ne servent plus et ne font qu'allonger la carte.
-     Espacements resserrés dans le même but — réduire le scroll. */
   .pricing-card__title {
     min-height: 0;
     margin-bottom: 0.8rem;
@@ -611,10 +529,6 @@
     margin-bottom: 0.9rem;
   }
 
-  /* Les deux tags (mangeurs / durée) tiennent toujours sur une seule
-     ligne : nowrap + police et padding resserrés pour que la paire la
-     plus longue (« Jusqu'à 4 mangeurs » + « Environ 3 heures ») entre
-     dans la largeur de la carte. */
   .pricing-card__tags {
     flex-wrap: nowrap;
     gap: 0.35rem;
@@ -645,8 +559,6 @@
     margin-top: 1.5rem;
   }
 
-  /* Mobile : exception — l'encart repasse pleine largeur (dans les
-     marges de page) et en colonne. */
   .pricing-credit {
     width: auto;
     flex-direction: column;

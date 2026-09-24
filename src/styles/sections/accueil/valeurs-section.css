@@ -20,25 +20,14 @@
   opacity: 0.8;
 }
 
-/* Grands écrans (21"+, 2K/4K...) : 110vw continuait de grandir avec
-   la fenêtre sans plafond — l'image (déjà recadrée via object-fit)
-   finissait démesurément large. Gelée à sa taille réelle à 1920px ;
-   .valeurs__grid, elle, est déjà auto-limitée (cartes plafonnées à
-   360px, justify-content:center), pas besoin d'y toucher. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .valeurs__bg {
     width: calc(1.1 * var(--content-cap));
   }
 }
 
-/* Le poivron/la passoire (dessinés en haut/bas de l'image) sont
-   rognés par object-fit:cover à partir de 1780px de large (constaté,
-   pas de rapport avec le plafond ci-dessus qui ne démarre qu'à
-   1921px) : le ratio de la boîte à cette largeur découvre moins
-   d'image en haut/bas que ce que top/bottom/height prévoyaient.
-   Rallongé (2rem/5rem -> 4rem/10rem) à partir de ce seuil précis —
-   purement visuel (position:absolute), sans effet sur la hauteur ni
-   la position de la section dans la page. */
+/* À partir de 1780px, object-fit:cover rogne le poivron / la passoire : top/bottom/height rallongés. */
 @media (min-width: 1780px) {
   .valeurs__bg {
     top: -4rem;
@@ -52,9 +41,6 @@
   z-index: 1;
 }
 
-/* Poivron déplacé depuis Presentation. Placement de premier jet
-   (coin haut-gauche, léger chevauchement du bord) — à ajuster une
-   fois vu à l'écran. */
 .valeurs__decor {
   position: absolute;
   z-index: 3;
@@ -133,8 +119,6 @@
   transform: scaleX(-1);
 }
 
-/* Zone intermédiaire : lisse le passage desktop -> tablette paysage
-   sans changer les valeurs exactes à 1280px et 1210px. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .valeurs {
     margin-top: clamp(-3rem, calc(33.5714rem + -2.8571vw), -1rem);
@@ -163,8 +147,6 @@
   }
 }
 
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .valeurs {
     /*margin-top: clamp(-1rem, calc(86.1343rem + -10.4478vw), 6rem);
@@ -177,11 +159,7 @@
     transform: translateX(-55%) scale(1.1);
   }
 
-  /* 4 cartes sur une seule ligne à cette largeur (768-834px) ne
-     laissent que ~190px par carte une fois les paddings retirés,
-     largement sous leur largeur prévue (290-320px) : le fond et le
-     texte de chaque carte s'en trouvent écrasés. Deux colonnes
-     redonnent à chaque carte sa largeur normale. */
+  /* 768–834px : 2 colonnes (4 cartes en ligne seraient écrasées, ~190px chacune). */
   .valeurs__grid {
     flex-wrap: wrap;
     row-gap: 0.5rem;
@@ -195,23 +173,13 @@
 
 @media (max-width: 767px) {
   .valeurs {
-    /* Un peu d'air rendu au-dessus du titre et sous la dernière
-       carte (3rem/2rem -> 4rem/3rem), après le remontage précédent
-       qui avait un peu trop serré. */
     margin-block: 4rem;
-    /* padding-block (0 -> 2.5rem) : allonge la zone colorée elle-même
-       (contrairement au margin-block ci-dessus, qui n'est que l'écart
-       avant/après, hors de l'aplat). */
     padding: 5.5rem 1.5rem;
     margin-top: 3rem;
-    /* Remplace l'image (voir échange) : un aplat de couleur s'adapte
-       à n'importe quelle hauteur de contenu sans jamais risquer de
-       couper une carte, contrairement à une image à ratio fixe. */
+    /* Aplat de couleur en mobile : s'adapte à toute hauteur de contenu (contrairement à l'image à ratio fixe). */
     background-color: #D9E5E4;
   }
 
-  /* L'image ne convient plus au mobile (ratio ~3:1 pensé pour le
-     desktop) — remplacée par un aplat de couleur ci-dessus. */
   .valeurs__bg {
     display: none;
   }

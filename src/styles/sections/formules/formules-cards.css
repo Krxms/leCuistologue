@@ -12,7 +12,7 @@
   min-width: 320px;
   border-radius: 14px;
   overflow: hidden;
-  background-color: var(--color-sage-light, #d9e0ce); /* teinte de repli tant que le fond PNG n'est pas branché */
+  background-color: var(--color-sage-light, #d9e0ce);
 }
 
 .formule-card__bg {

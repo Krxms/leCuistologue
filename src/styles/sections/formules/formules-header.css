@@ -6,10 +6,7 @@
   align-items: center;
 }
 
-/* Grands écrans (21"+, 2K/4K...) : min-height (vw) et la flèche
-   (vw) continuaient de grandir avec la fenêtre sans plafond, gelés
-   à leur valeur réelle à 1920px. .formules-header__bg est déjà en %,
-   donc automatiquement gelé par le plafond posé sur le conteneur. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .formules-header {
     max-width: var(--content-cap);
@@ -52,12 +49,6 @@
   color: var(--color-ink);
 }
 
-/* Ciblait auparavant .title-line:first-child/:last-child — cassé
-   depuis que la flèche est devenue le dernier enfant du <h1> (elle
-   n'est plus dans un .title-line, donc plus aucune ligne n'était
-   "last-child"). "besoin" perdait la grande taille de "formules".
-   On cible directement l'accent, qui doit de toute façon toujours
-   avoir cette taille sur les deux lignes. */
 .formules-header__title-accent {
   position: relative;
   font-weight: 900;
@@ -65,13 +56,7 @@
   color: #bc843c;
 }
 
-/* Ancrée sur le mot "besoin" lui-même (position:relative ci-dessus),
-   pas sur toute la ligne ni sur le <h1> : ces deux-là s'étirent en
-   display:block sur toute la largeur du titre (donc sur la largeur de
-   la ligne la plus longue), alors qu'un span inline comme l'accent se
-   limite exactement à la largeur réelle du mot. left:100% tombe donc
-   pile à la fin du mot, quel que soit le format — plus de dérive
-   horizontale ni verticale au responsive. */
+/* Flèche ancrée sur le mot lui-même (span inline) et non sur le <h1> : left:100% tombe à la fin du mot à toute largeur. */
 .formules-header__arrow {
   position: absolute;
   left: 102%;
@@ -133,11 +118,7 @@
     margin-top: -6%;
     text-align: center;
     transform: rotate(-0deg);
-    /* Réserve la hauteur du pire cas (3 lignes, quand "adaptées à
-       chaque besoin" retombe à la ligne) : sans ça, chaque page
-       finit à une hauteur de header différente selon que son titre
-       tienne sur 2 ou 3 lignes à cette largeur, donc le contenu qui
-       suit ne démarre plus au même niveau d'une page à l'autre. */
+    /* Hauteur réservée (3 lignes) : les headers de page gardent la même hauteur quel que soit le retour à la ligne du titre. */
     min-height: 8rem;
   }
 

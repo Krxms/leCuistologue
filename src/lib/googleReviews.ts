@@ -5,13 +5,7 @@ export interface Avis {
   role: string;
 }
 
-/**
- * Gabarit d'avis — NON utilisé pour l'affichage. Tant qu'il n'y a pas de
- * vrais avis (API Google configurée, ou tableau ci-dessous rempli avec de
- * vrais témoignages), fetchGoogleReviews() renvoie [] et la section
- * « témoignages » ne s'affiche pas du tout (voir temoignages.astro).
- * Ne JAMAIS remettre de faux texte ici : ça repart en production.
- */
+/** Gabarit, jamais affiché : ne pas y mettre de faux avis. */
 const avisModele: Avis[] = [
   // { note: 5, texte: "…", nom: "Prénom N.", role: "… , Ville" },
 ];

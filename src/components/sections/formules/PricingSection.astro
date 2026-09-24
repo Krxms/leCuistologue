@@ -68,9 +68,6 @@ import { formules } from "../../../lib/formules-data";
 
 <script>
   const mq = window.matchMedia("(min-width: 768px) and (max-width: 1210px)");
-  // Mobile : carrousel à défilement natif + snap (cf. .commentaires),
-  // aucun transform JS — le navigateur gère le geste, on ne fait que
-  // suivre la carte centrée pour la puce active.
   const mobileMq = window.matchMedia("(max-width: 767px)");
   const stage = document.getElementById("pricing-stage") as HTMLElement | null;
   const deck = document.getElementById("pricing-deck") as HTMLElement | null;
@@ -85,12 +82,7 @@ import { formules } from "../../../lib/formules-data";
     let index = cards.findIndex((c) => c.classList.contains("pricing-card--mise-en-avant"));
     if (index === -1) index = Math.floor(N / 2);
 
-    // Position de chaque carte, en continu (pas recalculée "à zéro" à
-    // chaque navigation) : taper/glisser vers la droite fait tourner
-    // TOUTES les cartes d'un même cran vers la gauche (et inversement),
-    // comme si elles étaient posées sur un cylindre — la carte visée
-    // vient bien du côté où elle se trouvait, et aucune carte non
-    // concernée ne traverse l'écran pour "raccourcir" un trajet.
+    // Positions continues : chaque navigation décale toutes les cartes du même cran (effet cylindre).
     let offsets = cards.map((_, i) => i - index);
 
     let dragging = false;
@@ -116,8 +108,7 @@ import { formules } from "../../../lib/formules-data";
     });
 
     function render(dragShift = 0) {
-      // Écartement différent selon la largeur réelle de l'écran :
-      // 60 sur l'iPad portrait (< 1024px), 100 au-delà (iPad paysage)
+      // Écartement : 60 sur iPad portrait (< 1024px), 100 au-delà.
       const largeurEcartement = window.innerWidth < 1024 ? 60 : 100;
 
       cards.forEach((carte, i) => {
@@ -134,17 +125,13 @@ import { formules } from "../../../lib/formules-data";
       dots.forEach((d, i) => d.classList.toggle("pricing-dot--active", i === index));
     }
 
-    // Décale TOUTES les cartes du même cran (delta), plutôt que de
-    // recalculer leur position individuellement — c'est ce qui
-    // garantit que la rotation reste cohérente pour l'ensemble.
     function tourner(delta: number) {
       offsets = offsets.map((o) => o - delta);
       render();
     }
 
     function go(i: number) {
-      // Plus court chemin pour amener LA CARTE VISÉE au centre ;
-      // les autres suivent avec ce même delta dans tourner().
+      // Plus court chemin vers la carte visée ; les autres suivent avec le même delta.
       let delta = i - index;
       delta -= Math.round(delta / N) * N;
       index = ((i % N) + N) % N;
@@ -181,13 +168,7 @@ import { formules } from "../../../lib/formules-data";
       if (!dragging) return;
       dragDX = e.clientX - startX;
       if (Math.abs(dragDX) > 6) moved = true;
-      // Le signe doit matcher celui du calcul de "shift" dans onUp
-      // (Math.round(-dragDX / largeurCarte())) pour que le rendu en
-      // direct pendant le glissement se raccorde sans saut à la carte
-      // sur laquelle on relâche. Avant : signe inversé ici, donc un
-      // swipe droite -> gauche faisait apparaître l'aperçu de la carte
-      // de GAUCHE pendant le geste, avant de se corriger d'un coup sur
-      // celle de droite au relâchement.
+      // Signe aligné sur le calcul de « shift » dans onUp, pour que l'aperçu pendant le drag se raccorde à la carte finale.
       render(dragDX / largeurCarte());
     }
     function onUp() {
@@ -223,11 +204,7 @@ import { formules } from "../../../lib/formules-data";
       if (actif) render();
     });
 
-    // ---- Carrousel mobile (< 768px) : défilement natif + snap, une
-    // carte à la fois, mêmes mécanismes que .commentaires (accueil) :
-    // le navigateur gère le geste, un IntersectionObserver suit la
-    // carte centrée pour activer la bonne puce, les puces défilent
-    // vers la carte via scrollIntoView.
+    // Carrousel mobile (< 768px) : scroll natif + snap ; un IntersectionObserver active la puce de la carte centrée.
     const obsMobile = new IntersectionObserver(
       (entries) => {
         if (!mobileMq.matches) return;
@@ -243,10 +220,7 @@ import { formules } from "../../../lib/formules-data";
       { root: deck, threshold: [0.6] }
     );
 
-    // La 1re carte présentée est la formule mise en avant : on centre
-    // le conteneur dessus (scroll du carrousel seul, jamais de la
-    // page). Tant que l'utilisateur n'a pas touché le carrousel — et
-    // seulement en mobile.
+    // Centre le carrousel (pas la page) sur la formule mise en avant, tant que l'utilisateur n'a pas interagi ; mobile seulement.
     let carrouselTouche = false;
     deck.addEventListener("pointerdown", () => (carrouselTouche = true));
 
@@ -270,8 +244,7 @@ import { formules } from "../../../lib/formules-data";
 
     syncMobile();
     mobileMq.addEventListener("change", syncMobile);
-    // Rejoué après le reflow des polices web (les cartes changent de
-    // largeur à l'arrivée de Poppins/Inter) et après load.
+    // Rejoué après le chargement des polices web (la largeur des cartes change) et au load.
     document.fonts?.ready.then(centrerSurEmphase);
     window.addEventListener("load", centrerSurEmphase);
   }

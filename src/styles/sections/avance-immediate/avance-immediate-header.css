@@ -6,9 +6,7 @@
   align-items: center;
 }
 
-/* Grands écrans (21"+, 2K/4K...) : min-height et la flèche (vw)
-   continuaient de grandir avec la fenêtre sans plafond, gelés à leur
-   valeur réelle à 1920px. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .avance-header {
     max-width: var(--content-cap);
@@ -61,13 +59,7 @@
   color: var(--color-ink-soft);
 }
 
-/* Ancrée sur le mot "Crédit d'impôt" lui-même (position:relative
-   ci-dessus), pas sur toute la ligne ni sur le <h1> : ces deux-là
-   s'étirent en display:block sur toute la largeur du titre (donc sur
-   la largeur de la ligne la plus longue), alors qu'un span inline
-   comme l'accent se limite exactement à la largeur réelle du texte.
-   left:100% tombe donc pile à la fin du mot, quel que soit le format
-   — plus de dérive horizontale ni verticale au responsive. */
+/* Flèche ancrée sur le mot lui-même (span inline) et non sur le <h1> : left:100% tombe à la fin du mot à toute largeur. */
 .avance-header__arrow {
   position: absolute;
   left: 102%;
@@ -129,11 +121,7 @@
     margin-top: -6%;
     text-align: center;
     transform: rotate(0deg);
-    /* Même hauteur réservée que sur Formules (référence) : "L'avance
-       immédiate" retombe sur 2 lignes à lui seul à cette largeur,
-       donnant 3 lignes au total — sans ce plancher, le header finit
-       plus haut ou plus bas que les autres pages selon le nombre de
-       lignes réel. */
+    /* Hauteur réservée (3 lignes) : les headers de page gardent la même hauteur quel que soit le retour à la ligne du titre. */
     min-height: 8rem;
   }
 

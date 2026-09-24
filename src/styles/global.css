@@ -2,13 +2,7 @@
 
 @theme {
   --header-height: 107px;
-  /* Largeur de référence du "desktop actuel" : au-delà (grands
-     écrans, 21"+, 2K/4K), les sections qui n'avaient aucun plafond
-     (vw/% non bornés) continuaient de s'étirer indéfiniment au lieu
-     de garder les proportions travaillées sur desktop — d'où des
-     éléments qui se décalaient. Utilisée uniquement dans des zones
-     @media(min-width:1921px), donc rien ne change à 1920px et
-     en dessous. */
+  /* Largeur de référence desktop : plafond appliqué dans les @media (min-width: 1921px). */
   --content-cap: 1920px;
   --color-cream: #FBF8F7;
   --color-peach: #F4D8B8;
@@ -31,10 +25,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
   overflow-x: clip;
-  /* iOS Safari affiche le fond de <html> (pas celui de body) dans la
-     zone de rebond au-delà du bas de page : sans couleur ici, ce
-     rebond montre le blanc par défaut du navigateur. On reprend la
-     couleur du footer, dernier élément visible en bas de page. */
+  /* iOS Safari affiche le fond de <html> dans la zone de rebond : on reprend la couleur du footer. */
   background-color: #f8e0cf;
 }
 
@@ -55,17 +46,7 @@ body {
   overflow-x: clip;
 }
 
-/* overflow-x sur html/body seul ne suffit pas partout (Safari/iPadOS
-   ne supporte pas toujours "clip" de façon fiable), mais le mettre à
-   "hidden" sur le html/body eux-mêmes casse le position:sticky de la
-   navbar (elle perd sa référence de défilement). En le posant sur
-   <main> à la place — un enfant, pas la racine — le débordement
-   horizontal des sections est bien coupé sans toucher au sticky.
-   "clip" plutôt que "hidden" ici : "hidden" fait de <main> un vrai
-   conteneur de défilement isolé, ce qui empêche Safari de calculer
-   le backdrop-filter (flou) du menu burger — qui doit flouter le
-   contenu de la hero, située dans <main> — car ce contenu se
-   retrouve alors dans un contexte de rendu séparé. */
+/* overflow-x sur <main> et non sur html/body : « hidden » sur la racine casse le sticky de la navbar. « clip » plutôt que « hidden » : <main> ne devient pas un conteneur de scroll, ce qui laisse Safari flouter le menu burger (backdrop-filter). */
 main {
   overflow-x: clip;
 }
@@ -74,7 +55,6 @@ main {
   font-family: var(--font-display);
 }
 
-/* Révélation douce au scroll */
 .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -85,7 +65,6 @@ main {
   transform: translateY(0);
 }
 
-/* Zone "photo" en attente des vrais visuels du client */
 .photo-placeholder {
   background: linear-gradient(135deg, var(--color-peach-light), var(--color-sage-light));
   display: flex;

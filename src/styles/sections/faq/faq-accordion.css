@@ -1,13 +1,8 @@
 .faq-accordion {
-  /* Autorise la transition de block-size vers `auto` sur
-     ::details-content (ouverture / fermeture douce des questions). */
+  /* Permet la transition de block-size vers `auto` sur ::details-content. */
   interpolate-size: allow-keywords;
   max-width: 760px;
   margin-inline: auto;
-  /* padding-top:2.5rem (au lieu de 4rem) + margin-top:-12rem, comme
-     .pricing-title sur Formules : le margin-top seul ne suffit pas à
-     aligner le contenu entre pages, il faut aussi la même
-     compensation de padding (1.5rem d'écart en trop avec 4rem). */
   padding: 2.5rem 1.5rem 5rem;
   margin-top: -12rem;
   margin-bottom: 8rem;
@@ -16,13 +11,7 @@
 .faq-accordion__header {
   text-align: center;
   margin-bottom: 7rem;
-  /* La section remonte de -12rem sous le header : le <h1> du header
-     (position:relative; z-index:1, sans pointer-events:none) est un
-     bloc pleine largeur dont la boîte recouvre cette zone et capte la
-     souris -> titre/sous-titre non sélectionnables. On place ce bloc
-     dans la même couche : venant plus loin dans le DOM, il repasse
-     au-dessus. Aucun changement de mise en page (élément transparent,
-     même boîte). */
+  /* La section remonte sous le header (margin-top négatif) : le <h1> du header capterait la souris et rendrait le titre non sélectionnable, on repasse donc le titre au-dessus. */
   position: relative;
   z-index: 1;
 }
@@ -49,8 +38,6 @@
   text-decoration: underline;
 }
 
-/* .faq-accordion__hint / .faq-accordion__intro : classes définies mais
-   pas rendues actuellement — conservées pour un usage éventuel. */
 .faq-accordion__hint {
   margin-top: 0.6rem;
   margin-bottom: 4rem;
@@ -73,7 +60,6 @@
   font-weight: 600;
 }
 
-/* Colonne unique de cartes, style épuré. */
 .faq-accordion__grid {
   display: flex;
   flex-direction: column;
@@ -91,9 +77,7 @@
   background-color: #ece7df;
 }
 
-/* Ouverture / fermeture douce : block-size 0 -> auto animé sur
-   ::details-content (technique standard, avec interpolate-size sur
-   .faq-accordion). Repli propre en accordéon natif si non supporté. */
+/* Ouverture douce : block-size 0 → auto sur ::details-content (nécessite interpolate-size) ; accordéon natif en repli. */
 .faq-accordion__item::details-content {
   block-size: 0;
   overflow: hidden;
@@ -169,9 +153,6 @@
   color: var(--color-gold);
 }
 
-/* Alignement vertical du titre entre pages (même courbe que
-   .pricing-title sur Formules) : desktop -12rem, lissée jusqu'à -9rem
-   entre 1211 et 1280px, puis -9rem -> -7rem sur toute la tablette. */
 @media (min-width: 1211px) and (max-width: 1280px) {
   .faq-accordion {
     margin-top: clamp(-12rem, calc(42.8571rem + -4.2857vw), -9rem);
@@ -192,7 +173,6 @@
   }
 }
 
-/* Lisse la transition de margin-bottom tablette -> mobile. */
 @media (min-width: 768px) and (max-width: 834px) {
   .faq-accordion {
     margin-bottom: clamp(0rem, calc(-22.8955rem + 2.9851vw), 2rem);
@@ -200,13 +180,8 @@
 }
 
 @media (max-width: 767px) {
-  /* Alignement inter-pages : voir a-propos-content.css. Header mobile
-     ~233px ici (titre 2 lignes) -> pull intermediaire pour que le
-     titre du contenu tombe a ~280px du haut, comme a-propos et
-     avance immediate. */
+  /* Alignement inter-pages : voir a-propos-content.css. */
   .faq-accordion {
-    /* +0.5rem par rapport à -4.25rem : descend le niveau commun des
-       titres de contenu (voir a-propos-content.css). */
     margin-top: -3.75rem;
     margin-bottom: 0;
   }

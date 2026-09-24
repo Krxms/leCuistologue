@@ -7,9 +7,6 @@ import arrow from "../../../assets/accueil/service/arrow.svg";
 import serviceInfoBg from "../../../assets/accueil/service/serviceInfoBG.svg";
 import { Image } from "astro:assets";
 
-/* Une seule liste : rendue en 2 colonnes (grille) sur desktop/tablette,
-   en 1 colonne sur mobile. Plus de dédoublement desktop/mobile du
-   contenu — cf. rapport SEO (headings/texte/CTA dupliqués). */
 const prestations = [
   "Échange préalable sur vos habitudes et vos envies",
   "Menus personnalisés",
@@ -26,8 +23,6 @@ const prestations = [
 
 <section class="offre">
   <div class="offre__inner">
-    {/* Fond rose + courbe du bord haut : .offre__inner::before (desktop /
-        tablette). Sous 834px, .offre__inner devient un simple aplat. */}
     <div class="offre__header">
       <div class="offre__title-row">
         <h2 class="offre__title">

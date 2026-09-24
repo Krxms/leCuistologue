@@ -1,12 +1,4 @@
-/* ===== FAQ — SOURCE UNIQUE =========================================
-   Consommé par le composant FaqAccordion (affichage) ET par la page
-   /faq (données structurées FAQPage). Une seule liste : l'accordéon
-   et le schema ne peuvent pas diverger.
-
-   Les réponses acceptent une mini-syntaxe de lien interne
-   `[texte](/chemin)` : rendue en <a> à l'affichage, réduite au seul
-   `texte` dans le schema FAQPage.
-   ================================================================== */
+/* Source unique de la FAQ : accordéon et schema FAQPage. Les réponses acceptent `[texte](/chemin)` (lien interne), réduit à `texte` dans le schema. */
 
 export interface FaqEntry {
   q: string;
@@ -182,7 +174,7 @@ Nous verrons ensemble ce qui peut vous correspondre le mieux. Et si aucune formu
     q: "Qui a construit ce site ?",
     r: `Ce site a été imaginé et construit par Antoine Bruneau, qui a su traduire l'esprit du Cuistologue en mots, en images et en lignes de code.
 
-Vous avez un projet de site, une envie de refaire le vôtre ou simplement une question ? Vous pouvez contacter Antoine Bruneau à l'adresse suivante : antoine.bruneau@protonmail.com`,
+Vous avez un projet de site, une envie de refaire le vôtre ou simplement une question ? Vous pouvez contacter Antoine Bruneau à l'adresse suivante : contact@antoinebruneau.com`,
   },
   {
     q: "Une dernière question ?",

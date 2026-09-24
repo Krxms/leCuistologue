@@ -12,11 +12,7 @@
   transition: height 0.45s ease;
 }
 
-/* Grand écran (21"+, 2K/4K...) : sans plafond, le logo et les liens
-   s'écartaient toujours plus l'un de l'autre (justify-content:
-   space-between sur toute la largeur de l'écran). Le fond (couleur
-   unie, identique à celui de la page) reste invisible même
-   plafonné. */
+/* Grands écrans : dimensions figées à leur valeur à 1920px. */
 @media (min-width: 1921px) {
   .navbar {
     max-width: var(--content-cap);
@@ -39,21 +35,16 @@
 .navbar__links {
   display: flex;
   align-items: center;
-  /* Resserré juste au-dessus du seuil burger (1280px), où les 8 liens
-     n'ont pas la place de leur gap plein (1.1rem) sans chevaucher la
-     CTA : redevient 1.1rem dès ~1450px, sans rien changer au-delà. */
+  /* Gap et taille fluides : resserrés juste au-dessus du seuil burger (1280px) pour que les 8 liens tiennent, pleins dès ~1450px. */
   gap: clamp(0.7rem, 3.76vw - 2.31rem, 1.1rem);
   max-width: 80%;
 }
 
 .navbar__link {
-  /* Accent partagé entre survol et page courante : une seule source,
-     les deux états ne peuvent pas diverger. */
+  /* Accent partagé par le survol et la page courante. */
   --navbar-link-accent: #a0780a;
   font-family: var(--font-display);
   font-weight: 500;
-  /* Même logique que le gap ci-dessus : légèrement réduit juste
-     au-dessus de 1280px, revenu à 1.1rem dès ~1450px. */
   font-size: clamp(0.95rem, 1.41vw - 0.18rem, 1.1rem);
   color: var(--color-ink);
   white-space: nowrap;
@@ -66,8 +57,6 @@
   color: var(--navbar-link-accent);
 }
 
-/* Page courante : même jaune que le survol, mais permanent, + graisse
-   +100 (500 → 600) pour bien détacher l'onglet actif du reste. */
 .navbar__link[aria-current="page"],
 .navbar__link.is-active {
   color: var(--navbar-link-accent);
@@ -95,9 +84,7 @@
   background-color: #DAA35B;
 }
 
-/* Rétrécissement au scroll — effet volontairement très léger (desktop
-   uniquement : le mode burger fixe sa propre hauteur plus bas et ne
-   doit pas varier). */
+/* Rétrécissement au scroll, léger (desktop seulement : le mode burger garde une hauteur fixe). */
 .navbar--scrolling {
   height: 82px;
 }
@@ -106,11 +93,7 @@
   height: 70px;
 }
 
-/* Items de nav rétrécis ancrés sur leur propre centre (scale, dont le
-   transform-origin par défaut est 50% 50%), pas sur la gauche : une
-   réduction de font-size aurait gardé le bord gauche du mot fixe et
-   fait "fondre" le texte vers la gauche. Ici chaque lien se resserre
-   symétriquement autour de son centre, effet léger (5%). */
+/* scale (origine au centre) plutôt que font-size : le lien rétrécit autour de son centre, pas vers la gauche. */
 .navbar--scrolling .navbar__link {
   transform: scale(0.95);
 }
@@ -196,11 +179,7 @@
   font-size: 0.85rem;
 }
 
-/* Seuil relevé de 1023 à 1279px : avec 8 liens ("Zone d'intervention"
-   ajouté), la nav horizontale déborde sous la CTA dès qu'on descend
-   sous ~1280px (mesuré : ~230px de chevauchement à 1024px). Le menu
-   burger prend donc le relais plus tôt, sur toute la tablette paysage
-   et les petits écrans d'ordinateur portable. */
+/* Seuil burger à 1279px : avec 8 liens la nav horizontale déborde sous la CTA en dessous. */
 @media (max-width: 1279px) {
   .navbar__links {
     display: none;
@@ -218,10 +197,7 @@
     display: flex;
   }
 
-  /* Navbar burger (<=1279px) : hauteur FIXE, agrandie pour laisser
-     respirer un logo plus grand. Ni le scroll ni l'ouverture /
-     fermeture du menu ne la font varier (le menu s'ouvre en dessous,
-     en position absolue). */
+  /* Hauteur fixe en mode burger (ni le scroll ni l'ouverture du menu ne la font varier). */
   .navbar,
   .navbar--scrolling {
     height: 88px;

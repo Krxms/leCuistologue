@@ -20,7 +20,7 @@
   margin-top: 2rem;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.75rem, 3vw, 3.4375rem); /* 55px au max, comme les titres de section */
+  font-size: clamp(1.75rem, 3vw, 3.4375rem);
   color: var(--color-ink);
   max-width: 20ch;
   line-height: 1.2;
@@ -33,8 +33,6 @@
   color: var(--color-ink-soft);
 }
 
-/* Zone intermédiaire : lisse le passage tablette -> mobile
-   sans changer les valeurs exactes à 834px et 767px. */
 @media (min-width: 768px) and (max-width: 834px) {
   .erreur404__visuel {
     width: clamp(60%, calc(-397.9104% + 59.7015vw), 100%);

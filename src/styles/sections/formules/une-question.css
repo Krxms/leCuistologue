@@ -1,8 +1,6 @@
 .une-question {
   position: relative;
-  /* Isole l'empilement de cette section : le fond en z-index:-1
-     reste garanti derrière tout son contenu, quoi qu'il se passe
-     hors de la section. */
+  /* Contexte d'empilement propre : le fond en z-index:-1 reste derrière le contenu de la section. */
   z-index: 0;
   overflow: hidden;
   min-height: 37vw;
@@ -99,8 +97,6 @@
   z-index: 0;
 }
 
-/* Zone intermédiaire : lisse l'apparition du padding mobile
-   sans changer les valeurs exactes à 1023px et 834px. */
 @media (min-width: 835px) and (max-width: 1023px) {
   .une-question {
     padding-top: clamp(0rem, calc(16.2381rem + -1.5873vw), 3rem);
