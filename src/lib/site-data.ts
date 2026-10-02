@@ -113,7 +113,7 @@ export const site = {
   /** Profils officiels (`sameAs`, footer). Vide tant que les URL ne sont pas connues. */
   social: [] as { label: string; url: string }[],
 
-  /** Image OpenGraph (dans /public), 1200×630. */
+  /** Image OpenGraph (dans /public), 1200×699. */
   ogImage: "/og-image.png",
 
   /** Codes de vérification webmasters (valeur `content` de la balise) ; vide = balise non rendue. */

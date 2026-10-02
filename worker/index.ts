@@ -90,7 +90,7 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
     return new Response(JSON.stringify({ ok: false, erreur: "Corps de requête invalide." }), { status: 400 });
   }
 
-  const { type, nom, email, telephone, preference, message } = data;
+  const { type, nom, email, telephone, message } = data;
 
   if (!nom || !email || !type) {
     return new Response(JSON.stringify({ ok: false, erreur: "Champs obligatoires manquants." }), { status: 400 });
@@ -104,8 +104,7 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
   let detailsHtml = `
     <p><strong>Nom :</strong> ${echapper(nom)}</p>
     <p><strong>E-mail :</strong> ${echapper(email)}</p>
-    <p><strong>Préférence de contact :</strong> ${preference === "telephone" ? "Téléphone" : "E-mail"}</p>
-    ${telephone ? `<p><strong>Téléphone :</strong> ${echapper(telephone)}</p>` : ""}
+    <p><strong>Téléphone :</strong> ${echapper(telephone || "")}</p>
   `;
 
   if (estReservation) {

@@ -8,7 +8,6 @@ export interface Formule {
   titre: string;
   portions: string;
   fonctionnalites: string[];
-  ideal: string;
   duree: string;
   ponctuelle: FormuleTarif;
   routine: FormuleTarif;
@@ -29,9 +28,8 @@ export const formules: Formule[] = [
   {
     slug: "petit-panier",
     titre: "Le Petit Panier",
-    portions: "10 à 15 portions de plats, selon les recettes choisies et les habitudes du foyer.",
+    portions: "2 à 3 plats, selon les recettes choisies.",
     fonctionnalites: fonctionnalitesCommunes,
-    ideal: "Pour 1 à 2 mangeurs",
     duree: "Environ 2 heures",
     ponctuelle: { prixPlein: "159 €", prixReduit: "79,50 €" },
     routine: { prixPlein: "149 €", prixReduit: "74,50 €" },
@@ -40,9 +38,8 @@ export const formules: Formule[] = [
     slug: "belle-tablee",
     titre: "La Belle Tablée",
     misEnAvant: true,
-    portions: "20 à 25 portions de plats, selon les recettes choisies et les habitudes du foyer.",
+    portions: "4 à 5 plats, selon les recettes choisies.",
     fonctionnalites: fonctionnalitesCommunes,
-    ideal: "Jusqu'à 4 mangeurs",
     duree: "Environ 3 heures",
     ponctuelle: { prixPlein: "209 €", prixReduit: "104,50 €" },
     routine: { prixPlein: "189 €", prixReduit: "94,50 €" },
@@ -50,9 +47,8 @@ export const formules: Formule[] = [
   {
     slug: "grande-recolte",
     titre: "La Grande Récolte",
-    portions: "30 à 35 portions de plats, selon les recettes choisies et les habitudes du foyer.",
+    portions: "6 à 7 plats, selon les recettes choisies.",
     fonctionnalites: fonctionnalitesCommunes,
-    ideal: "Jusqu'à 6 mangeurs",
     duree: "Environ 4 heures",
     ponctuelle: { prixPlein: "259 €", prixReduit: "129,50 €" },
     routine: { prixPlein: "229 €", prixReduit: "114,50 €" },
@@ -103,10 +99,11 @@ export const optionsPetitsPlus: OptionPetitPlus[] = [
     carte: "popote",
     titre: "Popotes à emporter",
     labelFormulaire: "Popotes à emporter",
-    prix: "4 €",
+    prix: "4 € *",
     prixReduit: "2 €",
     corps:
-      "Des repas maison prêts à être emportés au travail, à l’école ou ailleurs…",
+      "Une envie de déjeuner maison même lorsque vous n’êtes pas chez vous ?<br><br>Des repas maison prêts à être emportés au travail, à l’école ou ailleurs…",
+    precision: "*Tarif par  portion.",
   },
   {
     slug: "reserve-gourmande",

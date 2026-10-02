@@ -1,9 +1,15 @@
 .une-question {
+  /* Réglage propre à ce bandeau de la position de la photo (sans effet sur les autres) :
+     --photo-dx : décalage horizontal (négatif = vers la gauche), --photo-dy : vertical (négatif = vers le haut),
+     --photo-scale : zoom (1 = taille de base). */
+  --photo-dx: -25px;
+  --photo-dy: 0px;
+  --photo-scale: 1;
   position: relative;
   /* Contexte d'empilement propre : le fond en z-index:-1 reste derrière le contenu de la section. */
   z-index: 0;
   overflow: hidden;
-  min-height: 37vw;
+  min-height: var(--bandeau-h);
   display: flex;
   align-items: center;
 }
@@ -88,12 +94,14 @@
   background-color: #1a2b35;
 }
 
+/* Photo : 70% de la largeur, bornée par la hauteur du bandeau (plancher pour couvrir le bandeau, plafond sur grand écran). Débord à droite : 20%, limité à 0,535 × la hauteur du bandeau. Ajustements propres au bandeau : voir --photo-dx / --photo-dy / --photo-scale en haut du fichier. */
 .une-question__photo {
   position: absolute;
-  right: -20%;
+  right: max(-20%, calc(var(--bandeau-h) * -0.535));
   top: -6%;
-  width: 70%;
+  width: min(max(70%, calc(var(--bandeau-h) * 1.11)), calc(var(--bandeau-h) * 1.875));
   height: auto;
+  transform: translate(var(--photo-dx), var(--photo-dy)) scale(var(--photo-scale));
   z-index: 0;
 }
 

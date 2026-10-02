@@ -16,9 +16,15 @@
   --color-ink: #2c2c2C;
   --color-ink-soft: #253d4a;
   --color-gold: #C9963D;
+  --color-error: #C0392B;
 
   --font-display: "Poppins", sans-serif;
   --font-body: "Inter", ui-sans-serif, sans-serif;
+}
+
+/* Hauteur des bandeaux CTA de bas de page (Formules, À propos), alignée sur celle du bandeau « Crédit d'impôt » : ≈ 579px à 1024px, ≈ 528px dès ~1210px, sans croître avec la largeur d'écran. */
+:root {
+  --bandeau-h: clamp(33rem, calc(831px - 24.6vw), 36.2rem);
 }
 
 html {
