@@ -260,11 +260,23 @@
   color: var(--color-error);
 }
 
-.reserver-form__field.champ--erreur::after {
-  content: "Merci de compléter ce champ correctement.";
+.reserver-form__choix.champ--erreur legend {
+  color: var(--color-error);
+}
+
+.reserver-form__choix.champ--erreur::after {
+  content: "Merci de sélectionner une réponse.";
+}
+
+.reserver-form__field.champ--erreur::after,
+.reserver-form__choix.champ--erreur::after {
   font-family: var(--font-body);
   font-size: 0.78rem;
   color: var(--color-error);
+}
+
+.reserver-form__field.champ--erreur::after {
+  content: "Merci de compléter ce champ correctement.";
 }
 
 .reserver-form__preference {

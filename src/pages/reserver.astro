@@ -109,15 +109,15 @@ const texteBrut = (html: string) =>
             </div>
           </div>
 
-          <fieldset class="reserver-form__preference">
-            <legend>Allergies ou intolérances alimentaires ?</legend>
+          <fieldset class="reserver-form__preference reserver-form__choix">
+            <legend>Allergies ou intolérances alimentaires ? <span class="requis">*</span></legend>
             <div class="reserver-form__radio-group">
               <label class="reserver-form__radio">
-                <input type="radio" name="allergies" value="non" checked />
+                <input type="radio" name="allergies" value="non" required />
                 Non
               </label>
               <label class="reserver-form__radio">
-                <input type="radio" name="allergies" value="oui" />
+                <input type="radio" name="allergies" value="oui" required />
                 Oui
               </label>
             </div>
@@ -239,7 +239,7 @@ const texteBrut = (html: string) =>
   const form = document.getElementById("reserver-form") as HTMLFormElement;
   const statusEl = document.getElementById("reserver-form-status");
 
-  if (form) activerValidationFormulaire(form, ".reserver-form__field", statusEl);
+  if (form) activerValidationFormulaire(form, ".reserver-form__field, .reserver-form__choix", statusEl);
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();

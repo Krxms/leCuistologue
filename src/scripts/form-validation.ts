@@ -20,6 +20,7 @@ export function activerValidationFormulaire(
     });
     const effacerErreur = () => {
       if (champ.validity.valid) conteneurDe(champ)?.classList.remove("champ--erreur");
+      if (statusEl && form.checkValidity()) statusEl.textContent = "";
     };
     champ.addEventListener("input", effacerErreur);
     champ.addEventListener("change", effacerErreur);
