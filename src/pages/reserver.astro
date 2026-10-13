@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/reserver.css";
-import { formules, optionsPetitsPlus } from "../lib/formules-data";
+import { formules, optionsPetitsPlus, routineAbonnement, routineTotal } from "../lib/formules-data";
 
 // `corps` peut contenir du HTML : réduit en texte simple dans l'infobulle.
 const texteBrut = (html: string) =>
@@ -47,7 +47,7 @@ const texteBrut = (html: string) =>
                 <p class="reserver__recap-price-option-reduced">
                   {formule.routine.prixReduit} <span>après crédit d'impôt</span>
                 </p>
-                <p class="reserver__recap-price-option-note">Abonnement 4 semaines renouvelable, sans engagement.</p>
+                <p class="reserver__recap-price-option-note">{routineTotal(formule)}</p>                <p class="reserver__recap-price-option-note">1 session par semaine pendant {routineAbonnement.semaines} semaines. Engagement de {routineAbonnement.semaines} semaines, puis sans engagement.</p>
               </div>
             </div>
 

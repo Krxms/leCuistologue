@@ -1,10 +1,19 @@
 ---
 import "../../../styles/sections/formules/pricing-section.css";
 import creditIcon from "../../../assets/formules/cards/checkmark-circle.svg";
-import { formules } from "../../../lib/formules-data";
+import { formules, routineAbonnement, routineTotal } from "../../../lib/formules-data";
 ---
 
-<div class="pricing-stage" id="pricing-stage">
+<div class="pricing-toggle" data-mode="routine" role="group" aria-label="Type de formule">
+  <button type="button" class="pricing-toggle__btn" data-mode="ponctuel" aria-pressed="false">Session unique</button>
+  <button type="button" class="pricing-toggle__btn is-active" data-mode="routine" aria-pressed="true">Routine {routineAbonnement.semaines} semaines</button>
+</div>
+<p class="pricing-toggle__hint" id="pricing-hint">
+  <span data-hint="routine">1 session par semaine pendant {routineAbonnement.semaines} semaines, à prix réduit. Engagement de {routineAbonnement.semaines} semaines.</span>
+  <span data-hint="ponctuel" hidden>Une seule intervention, sans engagement.</span>
+</p>
+
+<div class="pricing-stage" id="pricing-stage" data-mode="routine">
   <button type="button" class="pricing-nav pricing-nav--prev" id="pricing-prev" aria-label="Formule précédente">‹</button>
 
   <section class="pricing" id="pricing-deck">
@@ -13,9 +22,8 @@ import { formules } from "../../../lib/formules-data";
         <div class="pricing-card__content">
           <h3 class="pricing-card__title">{formule.titre}</h3>
 
-          <p class="pricing-card__portions">{formule.portions}</p>
-
           <div class="pricing-card__tags">
+            {formule.portions.split(" · ").map((info) => <span class="pricing-card__tag">{info}</span>)}
             <span class="pricing-card__tag">{formule.duree}</span>
           </div>
 
@@ -26,6 +34,7 @@ import { formules } from "../../../lib/formules-data";
               <p class="pricing-card__price-option-reduced">
                 {formule.ponctuelle.prixReduit} <span>après crédit d'impôt</span>
               </p>
+              <p class="pricing-card__price-option-note">1 session, sans engagement.</p>
             </div>
 
             <div class="pricing-card__price-option pricing-card__price-option--routine">
@@ -34,8 +43,7 @@ import { formules } from "../../../lib/formules-data";
               <p class="pricing-card__price-option-reduced">
                 {formule.routine.prixReduit} <span>après crédit d'impôt</span>
               </p>
-              <p class="pricing-card__price-option-note">Abonnement 4 semaines renouvelable et sans engagement.</p>
-            </div>
+              <p class="pricing-card__price-option-note pricing-card__price-option-total">{routineTotal(formule)}</p>            </div>
           </div>
 
           <a href={`/reserver/?formule=${formule.slug}`} class="pricing-card__cta">Je me lance</a>
@@ -247,4 +255,24 @@ import { formules } from "../../../lib/formules-data";
     document.fonts?.ready.then(centrerSurEmphase);
     window.addEventListener("load", centrerSurEmphase);
   }
+</script>
+
+<script>
+  const stageToggle = document.getElementById("pricing-stage");
+  const hint = document.getElementById("pricing-hint");
+  const toggleBtns = document.querySelectorAll<HTMLButtonElement>(".pricing-toggle__btn");
+
+  function setMode(mode: string) {
+    stageToggle?.setAttribute("data-mode", mode);
+    document.querySelector(".pricing-toggle")?.setAttribute("data-mode", mode);
+    toggleBtns.forEach((b) => {
+      const actif = b.dataset.mode === mode;
+      b.classList.toggle("is-active", actif);
+      b.setAttribute("aria-pressed", String(actif));
+    });
+    hint?.querySelectorAll<HTMLElement>("[data-hint]").forEach((el) => {
+      el.hidden = el.dataset.hint !== mode;
+    });
+  }
+  toggleBtns.forEach((b) => b.addEventListener("click", () => setMode(b.dataset.mode || "routine")));
 </script>

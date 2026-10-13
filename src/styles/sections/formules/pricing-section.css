@@ -138,7 +138,12 @@
 }
 
 .pricing-card--mise-en-avant .pricing-card__price-option {
-  background-color: #ffffff;
+  background-color: var(--color-cream);
+}
+
+.pricing-card__price-option-total {
+  font-weight: 600;
+  color: var(--color-ink-soft);
 }
 
 .pricing-card__price-option-label {
@@ -182,7 +187,7 @@
 }
 
 .pricing-card--mise-en-avant .pricing-card__price-option--routine {
-  background-color: rgba(188, 132, 60, 0.08);
+  background-color: var(--color-cream);
 }
 
 .pricing-card__price-option--routine .pricing-card__price-option-label {
@@ -530,7 +535,6 @@
   }
 
   .pricing-card__tags {
-    flex-wrap: nowrap;
     gap: 0.35rem;
   }
 
@@ -584,5 +588,92 @@
 
   .pricing-credit__desc {
     font-size: 0.92rem;
+  }
+}
+
+/* Interrupteur Ponctuel / Routine : un seul encart de prix affiché par carte, selon le mode. */
+.pricing-toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background-color: #f8f4ef;
+  border: 1px solid rgba(37, 61, 74, 0.08);
+}
+
+/* Pastille coulissante : glisse sous le bouton actif (gauche = Session unique, droite = Routine). */
+.pricing-toggle::before {
+  content: "";
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  width: calc(50% - 0.25rem);
+  border-radius: 999px;
+  background-color: var(--color-ink-soft);
+  box-shadow: 0 2px 6px rgba(37, 61, 74, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pricing-toggle[data-mode="routine"]::before {
+  transform: translateX(100%);
+}
+
+.pricing-toggle__btn {
+  position: relative;
+  z-index: 1;
+  padding: 0.6rem 1.6rem;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.pricing-toggle__btn.is-active {
+  color: #fdfbfa;
+}
+
+.pricing-toggle__btn:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Mobile : toggle compact, jamais pleine largeur. */
+@media (max-width: 767px) {
+  .pricing-toggle__btn {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.74rem;
+  }
+}
+
+.pricing-toggle__hint {
+  margin: 0.9rem auto 2.5rem;
+  padding-inline: 1.5rem;
+  max-width: 40rem;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #7a756c;
+}
+
+.pricing-stage[data-mode="routine"] .pricing-card__price-option:not(.pricing-card__price-option--routine),
+.pricing-stage[data-mode="ponctuel"] .pricing-card__price-option--routine {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-toggle::before,
+  .pricing-toggle__btn {
+    transition: none;
   }
 }

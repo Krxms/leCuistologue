@@ -14,6 +14,19 @@ export interface Formule {
   misEnAvant?: boolean;
 }
 
+/** La Routine : une session par semaine, sur 4 semaines. */
+export const routineAbonnement = { sessions: 4, semaines: 4 };
+
+const enEuros = (n: number) =>
+  `${n.toLocaleString("fr-FR", { minimumFractionDigits: Number.isInteger(n) ? 0 : 2 })} €`;
+
+/** Total de la Routine (sessions × prix par session) avant et après crédit d'impôt, ex. « 149 € × 4 = 596 € (298 € après crédit d'impôt) ». */
+export function routineTotal(f: Formule): string {
+  const unitaire = parseFloat(f.routine.prixPlein.replace(/[^\d,]/g, "").replace(",", "."));
+  const total = unitaire * routineAbonnement.sessions;
+  return `${f.routine.prixPlein} × ${routineAbonnement.sessions} = ${enEuros(total)} (${enEuros(total / 2)} après crédit d'impôt)`;
+}
+
 export const fonctionnalitesCommunes = [
   "Échange préalable sur vos habitudes",
   "Élaboration du menu de la semaine",
@@ -28,7 +41,7 @@ export const formules: Formule[] = [
   {
     slug: "petit-panier",
     titre: "Le Petit Panier",
-    portions: "2 à 3 plats, selon les recettes choisies.",
+    portions: "3 à 4 plats · 2 à 3 personnes",
     fonctionnalites: fonctionnalitesCommunes,
     duree: "Environ 2 heures",
     ponctuelle: { prixPlein: "159 €", prixReduit: "79,50 €" },
@@ -38,20 +51,20 @@ export const formules: Formule[] = [
     slug: "belle-tablee",
     titre: "La Belle Tablée",
     misEnAvant: true,
-    portions: "4 à 5 plats, selon les recettes choisies.",
+    portions: "4 à 5 plats · 3 à 4 personnes",
     fonctionnalites: fonctionnalitesCommunes,
     duree: "Environ 3 heures",
-    ponctuelle: { prixPlein: "209 €", prixReduit: "104,50 €" },
-    routine: { prixPlein: "189 €", prixReduit: "94,50 €" },
+    ponctuelle: { prixPlein: "179 €", prixReduit: "89,50 €" },
+    routine: { prixPlein: "169 €", prixReduit: "84,50 €" },
   },
   {
     slug: "grande-recolte",
     titre: "La Grande Récolte",
-    portions: "6 à 7 plats, selon les recettes choisies.",
+    portions: "5 à 6 plats · 4 à 5 personnes",
     fonctionnalites: fonctionnalitesCommunes,
     duree: "Environ 4 heures",
-    ponctuelle: { prixPlein: "259 €", prixReduit: "129,50 €" },
-    routine: { prixPlein: "229 €", prixReduit: "114,50 €" },
+    ponctuelle: { prixPlein: "199 €", prixReduit: "99,50 €" },
+    routine: { prixPlein: "189 €", prixReduit: "94,50 €" },
   },
 ];
 
