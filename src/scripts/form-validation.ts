@@ -7,7 +7,8 @@ export function activerValidationFormulaire(
   selecteurChamp: string,
   statusEl?: HTMLElement | null
 ) {
-  const champs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("[required]");
+  // `data-requis-conditionnel` : champ qui ne devient [required] qu'à certaines conditions (ex. détail des allergies).
+  const champs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("[required], [data-requis-conditionnel]");
 
   function conteneurDe(champ: Element): HTMLElement | null {
     return champ.closest(selecteurChamp);

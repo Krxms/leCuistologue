@@ -5,7 +5,8 @@ import TurnstileWidget from "../../TurnstileWidget.astro";
 
 <section class="contact-form-section">
   <!-- Envoi via /api/send (Worker + Resend, voir worker/index.ts) : un mail au Cuistologue, un mail de confirmation au client. -->
-  <form class="contact-form" id="contact-form">
+  <!-- action/method explicites : sans JavaScript, le formulaire ne doit jamais partir en GET (données personnelles dans l'URL). -->
+  <form class="contact-form" id="contact-form" action="/api/send" method="post">
 
     <p class="contact-form__requis">Les champs marqués d'un <span class="requis">*</span> sont obligatoires.</p>
 

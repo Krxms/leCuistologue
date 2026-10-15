@@ -64,7 +64,8 @@ const texteBrut = (html: string) =>
         </p>
 
         <!-- Formulaire sans traitement d'envoi pour l'instant (affichage + validation seulement). -->
-        <form class="reserver-form" id="reserver-form">
+        <!-- action/method explicites : sans JavaScript, le formulaire ne doit jamais partir en GET (données personnelles dans l'URL). -->
+        <form class="reserver-form" id="reserver-form" action="/api/send" method="post">
           <input type="hidden" name="formule" id="input-formule-slug" value="belle-tablee" />
 
           <p class="reserver-form__requis">Les champs marqués d'un <span class="requis">*</span> sont obligatoires.</p>
@@ -125,8 +126,8 @@ const texteBrut = (html: string) =>
           </fieldset>
 
           <div class="reserver-form__field reserver-form__field--allergies" id="champ-allergies" hidden>
-            <label for="allergies-details">Précisez lesquelles</label>
-            <textarea id="allergies-details" name="allergies-details" rows="2"></textarea>
+            <label for="allergies-details">Précisez lesquelles <span class="requis">*</span></label>
+            <textarea id="allergies-details" name="allergies-details" rows="2" data-requis-conditionnel></textarea>
           </div>
 
           <fieldset class="reserver-form__preference">
@@ -235,6 +236,12 @@ const texteBrut = (html: string) =>
       'input[name="allergies"]:checked'
     )?.value === "oui";
     champAllergies?.toggleAttribute("hidden", !aDesAllergies);
+    // Obligatoire seulement si « Oui » (un champ requis mais caché bloquerait l'envoi).
+    const details = document.getElementById("allergies-details") as HTMLTextAreaElement | null;
+    if (details) {
+      details.required = aDesAllergies;
+      if (!aDesAllergies) champAllergies?.classList.remove("champ--erreur");
+    }
   }
   radiosAllergies.forEach((r) => r.addEventListener("change", majAllergies));
   majAllergies();
@@ -286,6 +293,7 @@ const texteBrut = (html: string) =>
       if (resultat.ok) {
         if (statusEl) statusEl.textContent = "Votre demande a bien été envoyée. Vous recevrez une confirmation par e-mail.";
         form.reset();
+        majAllergies();
       } else {
         if (statusEl) statusEl.textContent = "Une erreur est survenue. Réessayez ou contactez-nous directement par téléphone.";
         boutonEnvoyer.disabled = false;

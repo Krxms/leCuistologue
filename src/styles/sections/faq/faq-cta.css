@@ -3,7 +3,7 @@
   /* Contexte d'empilement propre : le fond en z-index:-1 reste derrière le contenu de la section. */
   z-index: 0;
   overflow: hidden;
-  min-height: 37vw;
+  min-height: var(--bandeau-h);
   display: flex;
   align-items: center;
 }

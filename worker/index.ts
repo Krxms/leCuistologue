@@ -163,6 +163,9 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
   }
 
   const estReservation = type === "reservation";
+  if (estReservation && data.allergies === "oui" && !texteBorne(data.allergiesDetails, 500, true)) {
+    return reponseJson({ ok: false, erreur: "Merci de préciser les allergies." }, 400);
+  }
   const objet = estReservation
     ? `Demande de prestation — ${formuleTitre || formule}`
     : "Demande libre — formulaire de contact";
