@@ -1,0 +1,13 @@
+---
+// Anti-spam Cloudflare Turnstile des formulaires. Le jeton produit (champ caché « cf-turnstile-response ») est vérifié côté Worker (worker/index.ts). Clé de site publique : variable de build PUBLIC_TURNSTILE_SITE_KEY.
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+{
+  siteKey && (
+    <>
+      <div class="cf-turnstile" data-sitekey={siteKey} data-language="fr" data-appearance="interaction-only" />
+      <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+    </>
+  )
+}

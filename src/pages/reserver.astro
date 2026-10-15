@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TurnstileWidget from "../components/TurnstileWidget.astro";
 import "../styles/reserver.css";
 import { formules, optionsPetitsPlus, routineAbonnement, routineTotal } from "../lib/formules-data";
 
@@ -155,6 +156,8 @@ const texteBrut = (html: string) =>
             <textarea id="message" name="message" rows="4"></textarea>
           </div>
 
+          <TurnstileWidget />
+
           <button type="submit" class="reserver-form__submit">Envoyer ma demande</button>
 
           <p class="reserver-form__status" id="reserver-form-status" role="status" aria-live="polite"></p>
@@ -244,14 +247,20 @@ const texteBrut = (html: string) =>
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const boutonEnvoyer = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const formData = new FormData(form);
+    const turnstileToken = formData.get("cf-turnstile-response");
+    if (!turnstileToken) {
+      if (statusEl) statusEl.textContent = "Vérification anti-spam en cours, réessayez dans un instant.";
+      return;
+    }
     boutonEnvoyer.disabled = true;
     if (statusEl) statusEl.textContent = "Envoi en cours...";
 
-    const formData = new FormData(form);
     const formuleActuelle = document.querySelector<HTMLElement>("[data-recap-formule]:not([hidden])");
 
     const data = {
       type: "reservation",
+      turnstileToken,
       formule: formData.get("formule"),
       formuleTitre: formuleActuelle?.querySelector(".reserver__recap-title")?.textContent || "",
       nom: formData.get("nom"),
@@ -285,5 +294,7 @@ const texteBrut = (html: string) =>
       if (statusEl) statusEl.textContent = "Une erreur réseau est survenue. Réessayez.";
       boutonEnvoyer.disabled = false;
     }
+    // Un jeton Turnstile ne sert qu'une fois : on en redemande un pour un éventuel nouvel essai.
+    (window as any).turnstile?.reset();
   });
 </script>

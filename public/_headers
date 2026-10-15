@@ -1,0 +1,7 @@
+# En-têtes de sécurité — servis par Cloudflare sur toutes les pages et ressources statiques.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000

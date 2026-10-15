@@ -1,5 +1,6 @@
 ---
 import "../../../styles/sections/contact/contact-form.css";
+import TurnstileWidget from "../../TurnstileWidget.astro";
 ---
 
 <section class="contact-form-section">
@@ -35,6 +36,8 @@ import "../../../styles/sections/contact/contact-form.css";
       <textarea id="message" name="message" rows="6" required></textarea>
     </div>
 
+    <TurnstileWidget />
+
     <button type="submit" class="contact-form__submit">Envoyer le message</button>
 
     <p class="contact-form__status" id="contact-form-status" role="status" aria-live="polite"></p>
@@ -52,12 +55,18 @@ import "../../../styles/sections/contact/contact-form.css";
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const boutonEnvoyer = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const formData = new FormData(form);
+    const turnstileToken = formData.get("cf-turnstile-response");
+    if (!turnstileToken) {
+      if (statusEl) statusEl.textContent = "Vérification anti-spam en cours, réessayez dans un instant.";
+      return;
+    }
     boutonEnvoyer.disabled = true;
     if (statusEl) statusEl.textContent = "Envoi en cours...";
 
-    const formData = new FormData(form);
     const data = {
       type: "contact",
+      turnstileToken,
       nom: formData.get("nom"),
       email: formData.get("email"),
       telephone: formData.get("telephone"),
@@ -84,5 +93,7 @@ import "../../../styles/sections/contact/contact-form.css";
       if (statusEl) statusEl.textContent = "Une erreur réseau est survenue. Réessayez.";
       boutonEnvoyer.disabled = false;
     }
+    // Un jeton Turnstile ne sert qu'une fois : on en redemande un pour un éventuel nouvel essai.
+    (window as any).turnstile?.reset();
   });
 </script>

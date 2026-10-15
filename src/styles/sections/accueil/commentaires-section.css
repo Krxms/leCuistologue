@@ -68,8 +68,9 @@
 
 .commentaires__grid {
   margin-top: 4rem;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
   max-width: 90rem;
   margin-inline: auto;
@@ -88,6 +89,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  /* 4 cartes par rangée ; les rangées incomplètes (peu d'avis) restent centrées. */
+  flex: 0 1 calc((100% - 3 * 1.5rem) / 4);
 }
 
 .commentaires__stars {
@@ -132,8 +135,8 @@
 }
 
 @media (max-width: 1210px) {
-  .commentaires__grid {
-    grid-template-columns: repeat(2, 1fr);
+  .commentaires__card {
+    flex-basis: calc((100% - 1.5rem) / 2);
   }
 }
 
@@ -192,7 +195,8 @@
   .commentaires__grid {
     margin-top: 2.5rem;
     display: flex;
-    grid-template-columns: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 4rem;
