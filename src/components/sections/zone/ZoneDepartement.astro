@@ -23,6 +23,8 @@ const autres = site.areas.filter((a) => a.slug !== area.slug);
 
     <p class="zone__text">{area.intro}</p>
 
+    <p class="zone__text">{area.contexte}</p>
+
     <p class="zone__text">
       {area.pitch}<br /><br />
       Le détail des <a href="/formules/">formules et tarifs</a> est sur la page dédiée, et chaque
@@ -34,17 +36,25 @@ const autres = site.areas.filter((a) => a.slug !== area.slug);
       {area.communes.map((c) => (
         <li>{c}</li>
       ))}
-      <li>… et les communes voisines</li>
     </ul>
 
     <p class="zone__note">
-      {area.noteIntro} Elle est très probablement couverte quand même —
-      certaines zones se règlent au cas par cas, et une intervention reste possible au-delà après
-      échange. <a href="/contact/">Contactez-moi</a> ou appelez le
+      {area.noteIntro} Indiquez-moi son nom en demandant un devis : je vous dirai si je peux
+      intervenir chez vous, avant tout engagement. Vous pouvez aussi m'appeler au{" "}
       <a href={site.phone.href}>{site.phone.display}</a>.
     </p>
 
     <a href="/contact/" class="zone__cta">Demander un devis</a>
+
+    <h2 class="zone__subtitle">Questions fréquentes dans {area.prep}</h2>
+    <div class="zone__faq">
+      {area.faq.map((item) => (
+        <div class="zone__faq-item">
+          <h3 class="zone__faq-question">{item.q}</h3>
+          <p class="zone__text">{item.a}</p>
+        </div>
+      ))}
+    </div>
 
     <h2 class="zone__subtitle">Les autres départements</h2>
     <ul class="zone__links">

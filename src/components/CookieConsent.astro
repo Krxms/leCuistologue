@@ -104,6 +104,23 @@
     (window as any).gtag = gtag;
     gtag("js", new Date());
     gtag("config", GA_MEASUREMENT_ID);
+    suivreContacts();
+  }
+
+  /* Événements de contact (conversions GA4 à déclarer dans l'interface : Admin › Événements clés).
+     N'envoie que des libellés de type de lien, jamais de numéro ni d'adresse. */
+  function suivreContacts() {
+    document.addEventListener("click", (event) => {
+      const lien = (event.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!lien) return;
+      const href = lien.getAttribute("href") ?? "";
+      let type: string | null = null;
+      if (href.startsWith("tel:")) type = "telephone";
+      else if (href.startsWith("mailto:")) type = "email";
+      else if (href.startsWith("/reserver")) type = "reservation";
+      else if (href.startsWith("/contact") || lien.classList.contains("zone__cta")) type = "devis";
+      if (type) (window as any).gtag?.("event", "contact_click", { type_contact: type });
+    });
   }
 
   /* Retrait du consentement : supprime les cookies GA4 (_ga, _ga_<id>, _gid) sur le domaine et son parent. */

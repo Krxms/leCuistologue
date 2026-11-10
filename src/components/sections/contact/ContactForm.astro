@@ -85,6 +85,7 @@ import TurnstileWidget from "../../TurnstileWidget.astro";
 
       if (resultat.ok) {
         if (statusEl) statusEl.textContent = "Votre message a bien été envoyé. Vous recevrez une confirmation par e-mail.";
+        (window as any).gtag?.("event", "generate_lead", { form_name: "contact" });
         form.reset();
       } else {
         if (statusEl) statusEl.textContent = "Une erreur est survenue. Réessayez ou contactez-nous directement par téléphone.";

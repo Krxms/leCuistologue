@@ -179,3 +179,18 @@
     width: 100%;
   }
 }
+
+/* FAQ locale (voir ZoneDepartement.astro). */
+.zone__faq {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.zone__faq-question {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}

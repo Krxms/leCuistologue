@@ -292,6 +292,7 @@ const texteBrut = (html: string) =>
 
       if (resultat.ok) {
         if (statusEl) statusEl.textContent = "Votre demande a bien été envoyée. Vous recevrez une confirmation par e-mail.";
+        (window as any).gtag?.("event", "generate_lead", { form_name: "reservation" });
         form.reset();
         majAllergies();
       } else {
