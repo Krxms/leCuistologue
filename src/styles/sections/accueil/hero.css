@@ -400,6 +400,29 @@
     line-height: 1.1;
   }
 
+  /* Chapeau centré, de la largeur de « UNE FAÇON » (titre fixé à 2.9rem en mobile, soit ≈ 17.1rem), sans filet or. */
+  .hero__eyebrow {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 17.1rem;
+    max-width: 100%;
+    margin-inline: auto;
+    padding-top: 0;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .hero__eyebrow::before {
+    display: none;
+  }
+
+  .hero__eyebrow-star {
+    width: 14px;
+    height: 14px;
+  }
+
   .hero__bg-wrapper,
   .hero__arrow {
     display: none;
@@ -428,7 +451,7 @@
    .hero__decor--brocoli {
     display: flex;
     left: 3%;
-    top: 33.5%;
+    top: 38%;
     width: 19%;
     max-width: 130px;
   }
