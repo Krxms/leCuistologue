@@ -5,10 +5,17 @@ export interface Avis {
   role: string;
 }
 
+export interface ResumeAvis {
+  /** Note moyenne Google (0 si inconnue). */
+  note: number;
+  /** Nombre total d'avis Google sur la fiche (0 si inconnu). */
+  total: number;
+  /** Avis affichés (Places API : 5 maximum, triés par pertinence). */
+  avis: Avis[];
+}
+
 /** Gabarit, jamais affiché : ne pas y mettre de faux avis. */
-const avisModele: Avis[] = [
-  // { note: 5, texte: "…", nom: "Prénom N.", role: "… , Ville" },
-];
+const resumeModele: ResumeAvis = { note: 0, total: 0, avis: [] };
 
 interface AvisPlacesApi {
   rating?: number;
@@ -18,7 +25,7 @@ interface AvisPlacesApi {
 }
 
 /** Avis Google via Places API (New), lus au build (site statique) : un appel par déploiement. */
-export async function fetchGoogleReviews(): Promise<Avis[]> {
+export async function fetchGoogleReviews(): Promise<ResumeAvis> {
   const apiKey = import.meta.env.GOOGLE_PLACES_API_KEY;
   const placeId = import.meta.env.GOOGLE_PLACE_ID;
 
@@ -26,21 +33,21 @@ export async function fetchGoogleReviews(): Promise<Avis[]> {
     console.warn(
       "[googleReviews] GOOGLE_PLACES_API_KEY ou GOOGLE_PLACE_ID absent — section témoignages masquée."
     );
-    return avisModele;
+    return resumeModele;
   }
 
   try {
     const response = await fetch(`https://places.googleapis.com/v1/places/${placeId}?languageCode=fr`, {
       headers: {
         "X-Goog-Api-Key": apiKey,
-        "X-Goog-FieldMask": "reviews",
+        "X-Goog-FieldMask": "rating,userRatingCount,reviews",
       },
     });
     const data = await response.json();
 
     if (!response.ok) {
       console.error("[googleReviews] Erreur Places API :", data?.error?.message ?? response.status);
-      return avisModele;
+      return resumeModele;
     }
 
     const avis: Avis[] = ((data.reviews ?? []) as AvisPlacesApi[])
@@ -53,11 +60,16 @@ export async function fetchGoogleReviews(): Promise<Avis[]> {
       .filter((a) => a.texte && a.nom && a.note > 0);
 
     if (!avis.length) {
-      console.warn("[googleReviews] Aucun avis retourné par l'API — section témoignages masquée.");
+      console.warn("[googleReviews] Aucun avis retourné par l'API — liste d'avis vide.");
     }
-    return avis.length ? avis : avisModele;
+
+    return {
+      note: typeof data.rating === "number" ? data.rating : 0,
+      total: typeof data.userRatingCount === "number" ? data.userRatingCount : 0,
+      avis,
+    };
   } catch (error) {
     console.error("[googleReviews] Erreur lors de la récupération des avis :", error);
-    return avisModele;
+    return resumeModele;
   }
 }

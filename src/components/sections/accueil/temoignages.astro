@@ -6,7 +6,9 @@ import arrow from "../../../assets/accueil/commentaires/arrow.svg";
 import underline from "../../../assets/accueil/commentaires/underline.svg";
 import star from "../../../assets/accueil/commentaires/star.svg";
 
-const avis = await fetchGoogleReviews();
+const { note, total, avis } = await fetchGoogleReviews();
+const noteAffichee = note.toFixed(1).replace(".", ",");
+const etoilesPleines = Math.round(note);
 ---
 
 <section class="commentaires">
@@ -20,6 +22,25 @@ const avis = await fetchGoogleReviews();
       </span>
     </h2>
   </div>
+
+  {total > 0 && (
+    <div class="commentaires__summary" aria-label={`Note Google : ${noteAffichee} sur 5, ${total} avis`}>
+      <div class="commentaires__summary-stars" aria-hidden="true">
+        {[...Array(5)].map((_, i) => (
+          <img
+            src={star.src}
+            alt=""
+            class:list={["commentaires__summary-star", i >= etoilesPleines && "commentaires__summary-star--vide"]}
+          />
+        ))}
+      </div>
+      <p class="commentaires__summary-text">
+        <span class="commentaires__summary-note">{noteAffichee} sur 5</span>
+        <span class="commentaires__summary-sep" aria-hidden="true"> · </span>
+        <span>{total} avis Google</span>
+      </p>
+    </div>
+  )}
 
   {avis.length > 0 ? (
     <div class="commentaires__carousel">

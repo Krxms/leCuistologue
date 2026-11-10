@@ -5,7 +5,52 @@ import { site } from "../src/lib/site-data";
 interface Env {
   RESEND_API_KEY: string;
   TURNSTILE_SECRET_KEY: string;
+  GOOGLE_PLACES_API_KEY: string;
+  GOOGLE_PLACE_ID: string;
+  /** URL du Deploy Hook Workers Builds (branche main) : déclenche un build sans commit. */
+  DEPLOY_HOOK_URL: string;
+  /** Dernier nombre d'avis connu, pour ne reconstruire que si ce nombre change. */
+  AVIS_ETAT: KVNamespace;
   ASSETS: Fetcher;
+}
+
+/** Compte les avis Google (un seul appel Places, champ minimal). Null si l'appel échoue. */
+async function nombreAvisGoogle(env: Env): Promise<number | null> {
+  if (!env.GOOGLE_PLACES_API_KEY || !env.GOOGLE_PLACE_ID) return null;
+  const res = await fetch(`https://places.googleapis.com/v1/places/${env.GOOGLE_PLACE_ID}?languageCode=fr`, {
+    headers: {
+      "X-Goog-Api-Key": env.GOOGLE_PLACES_API_KEY,
+      "X-Goog-FieldMask": "userRatingCount",
+    },
+  });
+  if (!res.ok) {
+    console.error("[avis-cron] Places API :", res.status);
+    return null;
+  }
+  const data = (await res.json()) as { userRatingCount?: number };
+  return typeof data.userRatingCount === "number" ? data.userRatingCount : null;
+}
+
+/** Cron quotidien : relance un build seulement si le nombre d'avis a changé depuis le dernier contrôle. */
+async function verifierNouveauxAvis(env: Env): Promise<void> {
+  const actuel = await nombreAvisGoogle(env);
+  if (actuel === null) return;
+
+  const precedent = await env.AVIS_ETAT.get("total");
+  if (precedent === null) {
+    // Premier passage : on mémorise sans reconstruire (le site vient d'être construit).
+    await env.AVIS_ETAT.put("total", String(actuel));
+    return;
+  }
+  if (Number(precedent) === actuel) return;
+
+  const res = await fetch(env.DEPLOY_HOOK_URL, { method: "POST" });
+  if (!res.ok) {
+    console.error("[avis-cron] Deploy hook refusé :", res.status);
+    return;
+  }
+  await env.AVIS_ETAT.put("total", String(actuel));
+  console.log(`[avis-cron] ${precedent} → ${actuel} avis : build déclenché.`);
 }
 
 const EMAIL_CUISTOLOGUE = "contact@lecuistologue.fr";
@@ -242,5 +287,9 @@ export default {
     }
 
     return env.ASSETS.fetch(request);
+  },
+
+  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
+    await verifierNouveauxAvis(env);
   },
 };

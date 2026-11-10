@@ -258,3 +258,42 @@
     background-color: #bc843c;
   }
 }
+/* Chapeau : note Google, étoiles et nombre d'avis (voir temoignages.astro). */
+.commentaires__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.commentaires__summary-stars {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.commentaires__summary-star {
+  width: 26px;
+  height: 26px;
+}
+
+.commentaires__summary-star--vide {
+  opacity: 0.25;
+}
+
+.commentaires__summary-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+}
+
+.commentaires__summary-note {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.commentaires__summary-sep {
+  color: #bc843c;
+}
