@@ -137,9 +137,10 @@
   }
 }
 
-@media (min-width: 1280px) {
+/* Titre ≥ 768px : une seule formule continue (tablette comme desktop). Le bord de la photo de fond suit ≈ 50,5vw ; le titre (≈ 8,5em de large, démarrant à 80px) garde ≈ 25px d'air avant la photo. */
+@media (min-width: 768px) {
   .hero__title {
-    font-size: clamp(4.2rem, 5.2vw, 4.55rem);
+    font-size: clamp(2.1rem, calc(5.9vw - 0.8rem), 4.55rem);
   }
 }
 
@@ -345,14 +346,14 @@
     align-self: start;
   }
 
-  /* Suit la largeur de la colonne de contenu (8/12) pour que le titre ne passe jamais sur l'image. */
+  /* Taille du titre : voir la formule ≥ 768px plus haut. */
   .hero__title {
-    font-size: clamp(2.3rem, calc(6.2vw - 0.75rem), 4.4rem);
     letter-spacing: -0.008em;
   }
 
-   .hero__description {
-    width: 35ch;
+  /* Le bord de la photo est à ≈ 50vw : le paragraphe (qui démarre à 80px) s'arrête 30px avant. */
+  .hero__description {
+    width: min(35ch, calc(50vw - 110px));
   }
 
   .hero__arrow {
