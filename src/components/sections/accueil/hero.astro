@@ -8,6 +8,15 @@ import brocoli from "../../../assets/accueil/hero/brocoli.webp";
 import potato from "../../../assets/accueil/presentation/PdT.webp";
 
 import { Image } from "astro:assets";
+import star from "../../../assets/accueil/commentaires/star.svg";
+import type { ResumeAvis } from "../../../lib/googleReviews";
+
+interface Props {
+  resume: ResumeAvis;
+}
+const { resume } = Astro.props;
+const noteAffichee = resume.note.toFixed(1).replace(".", ",");
+const etoilesPleines = Math.round(resume.note);
 ---
 
 <section class="hero">
@@ -28,6 +37,23 @@ import { Image } from "astro:assets";
   <img src={potato.src} alt="" class="hero__decor hero__decor--potato" aria-hidden="true" />
 
   <div class="hero__content">
+    {resume.total > 0 && (
+      <p class="hero__eyebrow" aria-label={`Note Google : ${noteAffichee} sur 5, ${resume.total} avis`}>
+        <span class="hero__eyebrow-stars" aria-hidden="true">
+          {[...Array(5)].map((_, i) => (
+            <img
+              src={star.src}
+              alt=""
+              class:list={["hero__eyebrow-star", i >= etoilesPleines && "hero__eyebrow-star--vide"]}
+            />
+          ))}
+        </span>
+        <span class="hero__eyebrow-text">
+          <strong>{noteAffichee} sur 5</strong> · {resume.total} avis Google
+        </span>
+      </p>
+    )}
+
     <h1 class="hero__title">
       <span>Une façon <span class="hero__title_colorspan">simple</span></span>{" "}
       <span>de bien<br> manger</span>

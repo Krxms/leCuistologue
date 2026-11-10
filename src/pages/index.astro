@@ -7,6 +7,10 @@ import CommentCaMarche from "../components/sections/accueil/commentcamarche.astr
 import OffreSection from "../components/sections/accueil/offresection.astro";
 import Temoignages from "../components/sections/accueil/temoignages.astro";
 import ZoneIntervention from "../components/sections/accueil/zoneintervention.astro";
+import { fetchGoogleReviews } from "../lib/googleReviews";
+
+// Un seul appel Places par build, partagé par le hero et la section témoignages.
+const resumeAvis = await fetchGoogleReviews();
 ---
 
 <BaseLayout
@@ -14,11 +18,11 @@ import ZoneIntervention from "../components/sections/accueil/zoneintervention.as
   seoTitle="Cuisinier à domicile dans l'Oise et le Vexin | Le Cuistologue"
   description="Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine. Cuisinier à domicile dans l'Oise, le Val-d'Oise, les Yvelines et l'Eure."
 >
-  <Hero />
+  <Hero resume={resumeAvis} />
   <Presentation />
   <ValeursSection />
   <CommentCaMarche />
   <OffreSection />
-  <Temoignages />
+  <Temoignages resume={resumeAvis} />
   <ZoneIntervention />
 </BaseLayout>

@@ -1,12 +1,16 @@
 ---
 import "../../../styles/sections/accueil/commentaires-section.css";
-import { fetchGoogleReviews } from "../../../lib/googleReviews";
+import type { ResumeAvis } from "../../../lib/googleReviews";
 
 import arrow from "../../../assets/accueil/commentaires/arrow.svg";
 import underline from "../../../assets/accueil/commentaires/underline.svg";
 import star from "../../../assets/accueil/commentaires/star.svg";
 
-const { note, total, avis } = await fetchGoogleReviews();
+interface Props {
+  resume: ResumeAvis;
+}
+const { resume } = Astro.props;
+const { note, total, avis } = resume;
 const noteAffichee = note.toFixed(1).replace(".", ",");
 const etoilesPleines = Math.round(note);
 ---
