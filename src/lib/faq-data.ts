@@ -1,4 +1,4 @@
-/* Source unique de la FAQ : accordéon et schema FAQPage. Les réponses acceptent `[texte](/chemin)` (lien interne), réduit à `texte` dans le schema. */
+/* FAQ PAR DÉFAUT : affichée tant que la FAQ WordPress (type « question ») est vide ou injoignable. L'affichage passe par getFaq() (contenu.ts). Les réponses acceptent `[texte](/chemin)` (lien interne) et `[texte](https://…)` (lien externe). */
 
 export interface FaqEntry {
   q: string;
@@ -19,14 +19,6 @@ export function answerToHtml(paragraphe: string): string {
         ? `<a href="${lien}" target="_blank" rel="noopener noreferrer">${texte}</a>`
         : `<a href="${lien}">${texte}</a>`,
     );
-}
-
-/** Même texte, sans balisage — pour `acceptedAnswer.text` du schema. */
-function answerToPlain(r: string): string {
-  return r
-    .replace(/\[([^\]]+)\]\((?:\/|https:\/\/)[^\s)]+\)/g, "$1")
-    .replace(/\s*\n+\s*/g, " ")
-    .trim();
 }
 
 export const questions: FaqEntry[] = [
@@ -189,19 +181,3 @@ Son site : [antoinebruneau.fr](https://antoinebruneau.fr)`,
 Si vous ne savez pas quelle formule choisir ou si votre besoin ne correspond pas exactement à ce qui est présenté sur le site, contactez-moi. Nous verrons ensemble ce qui peut vous convenir.`,
   },
 ];
-
-/** Schema.org FAQPage à partir de la liste ci-dessus (texte aplati, sans balisage). */
-export function faqJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: questions.map(({ q, r }) => ({
-      "@type": "Question",
-      name: q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: answerToPlain(r),
-      },
-    })),
-  };
-}

@@ -10,6 +10,7 @@ import potato from "../../../assets/accueil/presentation/PdT.webp";
 import { Image } from "astro:assets";
 import star from "../../../assets/accueil/commentaires/star.svg";
 import type { ResumeAvis } from "../../../lib/googleReviews";
+import { getAccueil } from "../../../lib/contenu";
 
 interface Props {
   resume: ResumeAvis;
@@ -17,6 +18,11 @@ interface Props {
 const { resume } = Astro.props;
 const noteAffichee = resume.note.toFixed(1).replace(".", ",");
 const etoilesPleines = Math.round(resume.note);
+
+// Titre, chapô, boutons et phrase de zone : éditables dans WordPress (page Accueil, voir lib/contenu.ts).
+const { hero } = await getAccueil();
+// « | » dans la fin du titre = retour à la ligne sur téléphone uniquement.
+const titreFin = hero.titreFin.split("|").map((ligne) => ligne.trim());
 ---
 
 <section class="hero">
@@ -55,24 +61,20 @@ const etoilesPleines = Math.round(resume.note);
     )}
 
     <h1 class="hero__title">
-      <span>Une façon <span class="hero__title_colorspan">simple</span></span>{" "}
-      <span>de bien<br> manger</span>
+      <span>{hero.titreDebut} <span class="hero__title_colorspan">{hero.titreAccent}</span></span>{" "}
+      <span>{titreFin.map((ligne, i) => (<>{i > 0 && <br />}{i > 0 && " "}{ligne}</>))}</span>
       {/* Le <br> n'agit qu'en mobile (masqué dès 768px, voir hero.css). */}
     </h1>
 
-    <p class="hero__description">
-      Des repas préparés directement chez vous, par un cuisinier à domicile, pour retrouver le plaisir de bien manger sans passer vos soirées en cuisine.
-    </p>
+    <p class="hero__description">{hero.description}</p>
 
     <div class="hero__actions-group">
       <div class="hero__actions">
-        <a href="/formules/" class="btn btn--primary">Découvrir les formules</a>
-        <a href="/contact/" class="btn btn--secondary">Demander un devis</a>
+        <a href="/formules/" class="btn btn--primary">{hero.boutonPrincipal}</a>
+        <a href="/contact/" class="btn btn--secondary">{hero.boutonSecondaire}</a>
       </div>
 
-      <p class="hero__zone">
-        Cuisinier à domicile dans l'Oise, le Val-d'Oise, les Yvelines et l'Eure
-      </p>
+      <p class="hero__zone">{hero.zone}</p>
     </div>
 
     <img src={heroArrow.src} alt="" class="hero__arrow" aria-hidden="true" />

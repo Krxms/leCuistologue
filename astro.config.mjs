@@ -61,7 +61,7 @@ export default defineConfig({
     csp: {
       directives: [
         "default-src 'self'",
-        "img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com",
+        "img-src 'self' data: https://cms.lecuistologue.fr https://*.wp.com https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com",
         "font-src 'self'",
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://challenges.cloudflare.com",
         "frame-src https://challenges.cloudflare.com",

@@ -7,18 +7,11 @@ import arrow from "../../../assets/accueil/service/arrow.svg";
 import serviceInfoBg from "../../../assets/accueil/service/serviceInfoBG.svg";
 import { Image } from "astro:assets";
 
-const prestations = [
-  "Échange préalable sur vos habitudes et vos envies",
-  "Menus personnalisés",
-  "Courses réalisées pour vous",
-  "Cuisine à domicile",
-  "Organisation du réfrigérateur",
-  "Remise au propre de la cuisine",
-  "Conseils de conservation",
-  "Organisation d’une routine culinaire",
-  "Réserve gourmande",
-  "Popotes à emporter",
-];
+import { getAccueil } from "../../../lib/contenu";
+
+// Titre, chapeau, liste, prix et offre de lancement : éditables dans WordPress (voir lib/contenu.ts).
+const { offre } = await getAccueil();
+const prestations = offre.prestations;
 ---
 
 <section class="offre">
@@ -26,19 +19,22 @@ const prestations = [
     <div class="offre__header">
       <div class="offre__title-row">
         <h2 class="offre__title">
-          Des solutions culinaires pensées pour vous et <br class="offre__title-br" /><span class="offre__titleAccent">avec vous.</span>
+          {offre.titre} <br class="offre__title-br" /><span class="offre__titleAccent">{offre.titreAccent}</span>
         </h2>
         <img src={titleIcon.src} alt="" class="offre__title-icon" aria-hidden="true" />
       </div>
 
       <p class="offre__description">
-        <b>Le Cuistologue prépare chez vous, en une seule session, vos repas de la semaine.</b><br /><br />
-        Choisissez votre formule selon votre appétit, vos habitudes et la quantité
-        de repas que vous souhaitez déléguer.<br /><br />
-        Et offrez-vous la possibilité d’ajouter certains services pour aller plus loin dans l’organisation de votre quotidien.
+        <b>{offre.accroche}</b>
+        {offre.chapeau.map((paragraphe) => (
+          <>
+            <br /><br />
+            {paragraphe}
+          </>
+        ))}
       </p>
 
-      <p class="offre__include-label">Chaque intervention est composée de :</p>
+      <p class="offre__include-label">{offre.listeTitre}</p>
 
       <div class="offre__checklist-wrap">
         <ul class="offre__checklist">
@@ -54,19 +50,19 @@ const prestations = [
 
       <div class="offre__price-block">
         <p class="offre__price">
-          <span class="offre__price-label">À partir de</span>
+          <span class="offre__price-label">{offre.prixLabel}</span>
           <span class="offre__price-line">
-            <span class="offre__price-value">74,50 €</span>
-            <span class="offre__price-label">/ intervention</span>
+            <span class="offre__price-value">{offre.prixValeur}</span>
+            <span class="offre__price-label">{offre.prixUnite}</span>
           </span>
         </p>
 
-        <div class="offre__promo">
-          <img src={serviceInfoBg.src} alt="" class="offre__promo-bg" aria-hidden="true" />
-          <p class="offre__promo-text">
-            Offre de lancement : <strong>-20%</strong> sur votre 1ère intervention
-          </p>
-        </div>
+        {offre.promoAfficher && (
+          <div class="offre__promo">
+            <img src={serviceInfoBg.src} alt="" class="offre__promo-bg" aria-hidden="true" />
+            <p class="offre__promo-text" set:html={offre.promoHtml} />
+          </div>
+        )}
 
         <a href="/formules/" class="offre__cta">Je découvre les formules !</a>
       </div>

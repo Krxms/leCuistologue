@@ -1,11 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getJournal } from "../../lib/contenu";
 import "../../styles/sections/journal/journal.css";
 
-const posts = (await getCollection("journal", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-);
+// Articles : créés et modifiés dans WordPress (Articles), plus ceux restés en Markdown dans le dépôt. Voir lib/contenu.ts.
+const posts = await getJournal();
 
 const dateFmt = new Intl.DateTimeFormat("fr-FR", {
   day: "numeric",
@@ -35,10 +34,10 @@ const dateFmt = new Intl.DateTimeFormat("fr-FR", {
           {posts.map((post) => (
             <li class="journal__item">
               <a href={`/journal/${post.id}/`} class="journal__link">
-                <h2 class="journal__item-title">{post.data.title}</h2>
-                <p class="journal__item-desc">{post.data.description}</p>
-                <time class="journal__item-date" datetime={post.data.date.toISOString()}>
-                  {dateFmt.format(post.data.date)}
+                <h2 class="journal__item-title">{post.title}</h2>
+                <p class="journal__item-desc">{post.description}</p>
+                <time class="journal__item-date" datetime={post.date.toISOString()}>
+                  {dateFmt.format(post.date)}
                 </time>
               </a>
             </li>

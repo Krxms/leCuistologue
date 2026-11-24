@@ -10,12 +10,17 @@ import card4 from "../../../assets/accueil/valeurs/card-4.svg";
 // import poivrons from "../../../assets/accueil/valeurs/poivrons.svg";  // SVG conservé — perf images, repasser ici si besoin
 import poivrons from "../../../assets/accueil/valeurs/poivrons.webp";
 
-const valeurs = [
-  { titre: "L'exigence du métier", texte: "Le savoir-faire d'un professionnel, directement dans votre cuisine.", bg: card1.src, ratio: "384 / 232", flip: false },
-  { titre: "Une approche sur-mesure", texte: "Chaque intervention s'adapte à vos habitudes, vos envies et à l'organisation de votre foyer.", bg: card2.src, ratio: "382 / 232", flip: true },
-  { titre: "L'agriculture paysanne", texte: "Des produits de saison, choisis autant que possible auprès des producteurs engagés du territoire.", bg: card3.src, ratio: "391 / 232", flip: false },
-  { titre: "Le goût du lien", texte: "Le plaisir de cuisiner des repas qui nourrissent aussi les échanges.", bg: card4.src, ratio: "415 / 232", flip: true },
+import { getAccueil } from "../../../lib/contenu";
+
+// Titres et textes : éditables dans WordPress (page Accueil, voir lib/contenu.ts). Fonds et cadrages : mise en page, fixes.
+const { valeurs: contenu } = (await getAccueil());
+const cadres = [
+  { bg: card1.src, ratio: "384 / 232", flip: false },
+  { bg: card2.src, ratio: "382 / 232", flip: true },
+  { bg: card3.src, ratio: "391 / 232", flip: false },
+  { bg: card4.src, ratio: "415 / 232", flip: true },
 ];
+const valeurs = contenu.bulles.map((bulle, i) => ({ ...bulle, ...cadres[i] }));
 ---
 
 <section class="valeurs">
@@ -24,7 +29,7 @@ const valeurs = [
 
   <div class="valeurs__content">
     <h2 class="valeurs__title">
-      Une cuisine <span class="valeurs__title-accent">qui a du sens</span>
+      {contenu.titre} <span class="valeurs__title-accent">{contenu.titreAccent}</span>
     </h2>
 
     <div class="valeurs__grid">

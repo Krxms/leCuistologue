@@ -1,6 +1,9 @@
 ---
 import "../../../styles/sections/faq/faq-accordion.css";
-import { questions, answerToHtml } from "../../../lib/faq-data";
+import { getFaq } from "../../../lib/contenu";
+
+// Questions : éditables dans WordPress (type « Questions » ; brouillon = masquée). Voir lib/contenu.ts.
+const questions = await getFaq();
 ---
 
 <section class="faq-accordion">
@@ -16,11 +19,7 @@ import { questions, answerToHtml } from "../../../lib/faq-data";
           <span class="faq-accordion__question-text">{item.q}</span>
           <span class="faq-accordion__icon" aria-hidden="true"></span>
         </summary>
-        <div class="faq-accordion__answer">
-          {item.r.split("\n\n").map((paragraphe) => (
-            <p set:html={answerToHtml(paragraphe)} />
-          ))}
-        </div>
+        <div class="faq-accordion__answer" set:html={item.html} />
       </details>
     ))}
   </div>

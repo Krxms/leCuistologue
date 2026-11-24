@@ -53,6 +53,69 @@ async function verifierNouveauxAvis(env: Env): Promise<void> {
   console.log(`[avis-cron] ${precedent} → ${actuel} avis : build déclenché.`);
 }
 
+/* ── Contenu WordPress : relance un build quand le propriétaire publie, modifie ou retire un contenu ── */
+
+const WORDPRESS_GRAPHQL = "https://cms.lecuistologue.fr/graphql";
+/** Doit correspondre à l'entrée de triggers.crons dans wrangler.json. */
+const CRON_CONTENU = "*/15 * * * *";
+
+/** Un segment par type de contenu ; une liste (id + date de modification) suffit à détecter ajout, édition, passage en brouillon et suppression. */
+const SEGMENTS_WORDPRESS: Record<string, string> = {
+  pages: `{ pages(first: 50) { nodes { id modified } } }`,
+  formules: `{ formules(first: 50) { nodes { id modified } } }`,
+  options: `{ options(first: 50) { nodes { id modified } } }`,
+  prestations: `{ prestations(first: 100) { nodes { id modified } } }`,
+  questions: `{ questions(first: 200) { nodes { id modified } } }`,
+  articles: `{ posts(first: 200) { nodes { id modified } } }`,
+};
+
+/** Empreinte du contenu publié. Null si WordPress est injoignable (on ne déclenche rien dans ce cas). */
+async function empreinteWordPress(): Promise<string | null> {
+  const morceaux: string[] = [];
+  for (const [nom, requete] of Object.entries(SEGMENTS_WORDPRESS)) {
+    let res: Response;
+    try {
+      res = await fetch(WORDPRESS_GRAPHQL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: requete }),
+        signal: AbortSignal.timeout(10_000),
+      });
+    } catch {
+      return null;
+    }
+    if (!res.ok) return null;
+    const json = (await res.json()) as { data?: unknown; errors?: unknown[] };
+    // Type de contenu pas encore créé dans WordPress : segment constant, sans effet.
+    morceaux.push(`${nom}:${json.errors?.length ? "absent" : JSON.stringify(json.data)}`);
+  }
+  const octets = new TextEncoder().encode(morceaux.join("|"));
+  const hash = await crypto.subtle.digest("SHA-256", octets);
+  return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/** Cron fréquent (gratuit : une requête GraphQL par segment) : un build n'est lancé que si le contenu a réellement changé. */
+async function verifierContenuWordPress(env: Env): Promise<void> {
+  const actuel = await empreinteWordPress();
+  if (actuel === null) return;
+
+  const precedent = await env.AVIS_ETAT.get("wordpress");
+  if (precedent === null) {
+    // Premier passage : on mémorise sans reconstruire.
+    await env.AVIS_ETAT.put("wordpress", actuel);
+    return;
+  }
+  if (precedent === actuel) return;
+
+  const res = await fetch(env.DEPLOY_HOOK_URL, { method: "POST" });
+  if (!res.ok) {
+    console.error("[wp-cron] Deploy hook refusé :", res.status);
+    return;
+  }
+  await env.AVIS_ETAT.put("wordpress", actuel);
+  console.log("[wp-cron] contenu WordPress modifié : build déclenché.");
+}
+
 const EMAIL_CUISTOLOGUE = "contact@lecuistologue.fr";
 const EMAIL_EXPEDITEUR = "Le Cuistologue <contact@lecuistologue.fr>";
 const ORIGINES_AUTORISEES = ["https://lecuistologue.fr", "https://www.lecuistologue.fr"];
@@ -289,7 +352,12 @@ export default {
     return env.ASSETS.fetch(request);
   },
 
-  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
-    await verifierNouveauxAvis(env);
+  async scheduled(controller: ScheduledController, env: Env): Promise<void> {
+    // Deux crons (wrangler.json) : quotidien = avis Google (API payante), fréquent = contenu WordPress.
+    if (controller.cron === CRON_CONTENU) {
+      await verifierContenuWordPress(env);
+    } else {
+      await verifierNouveauxAvis(env);
+    }
   },
 };

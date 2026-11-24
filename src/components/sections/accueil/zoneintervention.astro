@@ -1,6 +1,10 @@
 ---
 import "../../../styles/sections/accueil/zone-intervention.css";
 import { areaNames } from "../../../lib/site-data";
+import { getAccueil } from "../../../lib/contenu";
+
+// Titre, texte, note et bouton : éditables dans WordPress (page Accueil, voir lib/contenu.ts). La liste des départements vient de site-data.
+const { zone } = await getAccueil();
 
 const zones = areaNames;
 ---
@@ -20,11 +24,8 @@ const zones = areaNames;
   </svg>
 
   <div class="zone-intervention__content">
-    <h2 class="zone-intervention__title">Une cuisine à domicile, près de chez vous</h2>
-    <p class="zone-intervention__text">
-      Le Cuistologue se déplace directement chez vous pour préparer vos repas, sur l'Oise, le
-      Val-d'Oise, les Yvelines et l'Eure.
-    </p>
+    <h2 class="zone-intervention__title">{zone.titre}</h2>
+    <p class="zone-intervention__text">{zone.texte}</p>
 
     <ul class="zone-intervention__list">
       {zones.map((zone) => (
@@ -33,9 +34,9 @@ const zones = areaNames;
     </ul>
 
     <p class="zone-intervention__note">
-      Vous êtes en dehors de cette zone ? <a href="/contact/">Contactez-moi</a>
+      {zone.note} <a href="/contact/">{zone.noteLien}</a>
     </p>
 
-    <a href="/zone-intervention/" class="zone-intervention__link">Voir la zone d'intervention</a>
+    <a href="/zone-intervention/" class="zone-intervention__link">{zone.bouton}</a>
   </div>
 </section>

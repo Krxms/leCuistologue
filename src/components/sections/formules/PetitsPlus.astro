@@ -1,6 +1,6 @@
 ---
 import "../../../styles/sections/formules/petits-plus.css";
-import { optionsPetitsPlus } from "../../../lib/formules-data";
+import { getOptions } from "../../../lib/contenu";
 // import bgCourse from "../../../assets/formules/petits-plus/optionCourse.svg";  // SVG conservé — perf images, repasser ici si besoin
 import bgCourse from "../../../assets/formules/petits-plus/optionCourse.webp";
 // import bgPopote from "../../../assets/formules/petits-plus/optionPopote.svg";  // SVG conservé — perf images, repasser ici si besoin
@@ -9,6 +9,9 @@ import bgPopote from "../../../assets/formules/petits-plus/optionPopote.webp";
 import bgGourmande from "../../../assets/formules/petits-plus/optionGourmande.webp";
 
 const fonds = { course: bgCourse, popote: bgPopote, gourmande: bgGourmande };
+
+// Titres, prix et descriptions des options : éditables dans WordPress (type « Options »). Voir lib/contenu.ts.
+const optionsPetitsPlus = await getOptions();
 ---
 
 <section class="petits-plus">

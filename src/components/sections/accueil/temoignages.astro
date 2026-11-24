@@ -5,6 +5,7 @@ import type { ResumeAvis } from "../../../lib/googleReviews";
 import arrow from "../../../assets/accueil/commentaires/arrow.svg";
 import underline from "../../../assets/accueil/commentaires/underline.svg";
 import star from "../../../assets/accueil/commentaires/star.svg";
+import { getAccueil } from "../../../lib/contenu";
 
 interface Props {
   resume: ResumeAvis;
@@ -13,15 +14,18 @@ const { resume } = Astro.props;
 const { note, total, avis } = resume;
 const noteAffichee = note.toFixed(1).replace(".", ",");
 const etoilesPleines = Math.round(note);
+
+// Titre et message « sans avis » : éditables dans WordPress (page Accueil). Les avis viennent de Google.
+const { temoignages } = await getAccueil();
 ---
 
 <section class="commentaires">
   <div class="commentaires__header">
     <img src={arrow.src} alt="" class="commentaires__arrow" aria-hidden="true" />
     <h2 class="commentaires__title">
-      C'est encore eux qui en parlent le
+      {temoignages.titre}
       <span class="commentaires__title-accent">
-        mieux
+        {temoignages.titreAccent}
         <img src={underline.src} alt="" class="commentaires__underline" aria-hidden="true" />
       </span>
     </h2>
@@ -76,9 +80,7 @@ const etoilesPleines = Math.round(note);
       </div>
     </div>
   ) : (
-    <p class="commentaires__soon">
-      Les premiers avis arrivent bientôt — le temps de recueillir les retours des premiers clients.
-    </p>
+    <p class="commentaires__soon">{temoignages.messageVide}</p>
   )}
 </section>
 

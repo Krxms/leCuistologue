@@ -1,16 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection, render } from "astro:content";
+import { getJournal } from "../../lib/contenu";
 import { site } from "../../lib/site-data";
 import "../../styles/sections/journal/journal-post.css";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("journal", ({ data }) => !data.draft);
+  const posts = await getJournal();
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
 
 const url = `${site.url}/journal/${post.id}/`;
 const dateFmt = new Intl.DateTimeFormat("fr-FR", {
@@ -22,10 +21,10 @@ const dateFmt = new Intl.DateTimeFormat("fr-FR", {
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  headline: post.data.title,
-  description: post.data.description,
-  datePublished: post.data.date.toISOString(),
-  ...(post.data.updated ? { dateModified: post.data.updated.toISOString() } : {}),
+  headline: post.title,
+  description: post.description,
+  datePublished: post.date.toISOString(),
+  ...(post.updated ? { dateModified: post.updated.toISOString() } : {}),
   author: { "@type": "Person", name: site.founder },
   publisher: { "@id": `${site.url}/#business` },
   mainEntityOfPage: url,
@@ -38,15 +37,15 @@ const breadcrumbJsonLd = {
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Accueil", item: `${site.url}/` },
     { "@type": "ListItem", position: 2, name: "Journal", item: `${site.url}/journal/` },
-    { "@type": "ListItem", position: 3, name: post.data.title, item: url },
+    { "@type": "ListItem", position: 3, name: post.title, item: url },
   ],
 };
 ---
 
 <BaseLayout
-  title={post.data.title}
-  seoTitle={post.data.seoTitle ?? `${post.data.title} | Le Cuistologue`}
-  description={post.data.seoDescription ?? post.data.description}
+  title={post.title}
+  seoTitle={post.seoTitle ?? `${post.title} | Le Cuistologue`}
+  description={post.seoDescription ?? post.description}
   jsonLd={[articleJsonLd, breadcrumbJsonLd]}
 >
   <article class="journal-post">
@@ -56,17 +55,15 @@ const breadcrumbJsonLd = {
         <span aria-hidden="true">›</span>
         <a href="/journal/">Journal</a>
         <span aria-hidden="true">›</span>
-        <span aria-current="page">{post.data.title}</span>
+        <span aria-current="page">{post.title}</span>
       </nav>
 
-      <h1 class="journal-post__title">{post.data.title}</h1>
-      <time class="journal-post__date" datetime={post.data.date.toISOString()}>
-        {dateFmt.format(post.data.date)}
+      <h1 class="journal-post__title">{post.title}</h1>
+      <time class="journal-post__date" datetime={post.date.toISOString()}>
+        {dateFmt.format(post.date)}
       </time>
 
-      <div class="journal-post__body">
-        <Content />
-      </div>
+      <div class="journal-post__body" set:html={post.html} />
 
       <a href="/journal/" class="journal-post__back">← Tous les articles</a>
     </div>

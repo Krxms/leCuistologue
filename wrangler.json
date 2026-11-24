@@ -9,7 +9,7 @@
     "run_worker_first": ["/api/*"]
   },
   "triggers": {
-    "crons": ["0 6 * * *"]
+    "crons": ["0 6 * * *", "*/15 * * * *"]
   },
   "kv_namespaces": [
     {

@@ -5,8 +5,10 @@ import FormulesIntro from "../components/sections/formules/FormulesIntro.astro";
 import PricingSection from "../components/sections/formules/PricingSection.astro";
 import PetitsPlus from "../components/sections/formules/PetitsPlus.astro";
 import UneQuestion from "../components/sections/formules/UneQuestion.astro";
-import { formules } from "../lib/formules-data";
+import { getFormules } from "../lib/contenu";
 import { site } from "../lib/site-data";
+
+const formules = await getFormules();
 
 // Un schema Service par formule, rattaché à l'entité LocalBusiness.
 const servicesJsonLd = formules.map((f) => ({

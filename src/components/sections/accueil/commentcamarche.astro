@@ -9,28 +9,32 @@ import step2 from "../../../assets/accueil/howto/howto2.webp";
 import step3 from "../../../assets/accueil/howto/howto3.webp";
 import connect1 from "../../../assets/accueil/howto/howto-connect1.svg";
 import connect2 from "../../../assets/accueil/howto/howto-connect2.svg";
+import { getAccueil } from "../../../lib/contenu";
+
+// Titre, sous-titre et textes des 3 étapes : éditables dans WordPress (page Accueil, voir lib/contenu.ts). Illustrations et cadrages : fixes.
+const { commentCaMarche } = await getAccueil();
 
 const etapes = [
   {
     numero: "1.",
-    titre: ["On échange"],
-    texte: "Vos habitudes guident chaque intervention.",
+    titre: [commentCaMarche.etapes[0].titre],
+    texte: commentCaMarche.etapes[0].texte,
     image: step1,
     alt: "Échange autour de vos habitudes et de vos envies",
     ratio: "380 / 322",
   },
   {
     numero: "2.",
-    titre: ["Je cuisine chez vous"],
-    texte: "Des repas maison préparés directement dans votre cuisine.",
+    titre: [commentCaMarche.etapes[1].titre],
+    texte: commentCaMarche.etapes[1].texte,
     image: step2,
     alt: "Le Cuistologue prépare des plats maison dans votre cuisine",
     ratio: "357 / 302",
   },
   {
     numero: "3.",
-    titre: ["Vous profitez"],
-    texte: "Des plats prêts, un frigo organisé et une cuisine impeccable.",
+    titre: [commentCaMarche.etapes[2].titre],
+    texte: commentCaMarche.etapes[2].texte,
     image: step3,
     alt: "Des plats prêts rangés dans un réfrigérateur organisé",
     ratio: "375 / 277",
@@ -41,10 +45,10 @@ const etapes = [
 <section id="comment-ca-marche" class="howto">
   <div class="howto__title-block">
     <h2 class="howto__title">
-      <span class="howto__title-line">Comment</span>
-      <span class="howto__title-line howto__title-line--accent">ça marche ?</span>
+      <span class="howto__title-line">{commentCaMarche.titre}</span>
+      <span class="howto__title-line howto__title-line--accent">{commentCaMarche.titreAccent}</span>
     </h2>
-    <p class="howto__subtitle">Une semaine qui se prépare en trois étapes</p>
+    <p class="howto__subtitle">{commentCaMarche.sousTitre}</p>
   </div>
 
   <div class="howto__steps">

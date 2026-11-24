@@ -12,61 +12,18 @@ import photo from "../../../assets/a-propos/a-propos-content/Bruno.webp";
 /* EN_CHANTIER = true affiche un placeholder à la place de la composition (blobs + photo). */
 const EN_CHANTIER = false;
 
-const bulles = [
-  {
-    slug: "metier",
-    titre: "Le métier",
-    bg: bgMetier,
-    paras: [
-      "Le fait maison est pour moi une manière de pratiquer sérieusement le métier de cuisinier.",
-      "Cela passe par la connaissance des produits, la maîtrise des gestes, le respect des cuissons et, surtout, le temps que l'on accepte de consacrer au travail bien fait.",
-    ],
-    accent:
-      "Je défends une cuisine artisanale, simple mais exigeante, où le savoir-faire retrouve toute sa place face à la standardisation.",
-  },
-  {
-    slug: "terre",
-    titre: "La terre",
-    bg: bgTerre,
-    paras: [
-      "Mes choix commencent bien avant la cuisine, auprès de celles et ceux qui produisent notre alimentation.",
-      "Je privilégie donc les producteurs locaux et porte une attention particulière à l'agriculture paysanne.",
-    ],
-    accent:
-      "C'est une manière pour moi de valoriser les territoires mais aussi de défendre un modèle alimentaire qui donne une place centrale à celles et ceux qui nous nourrissent.",
-  },
-  {
-    slug: "creativite",
-    titre: "La créativité",
-    bg: bgCreativite,
-    paras: [
-      "Chaque alimentation est singulière, avec ses goûts, ses habitudes, ses convictions, ses allergies ou ses intolérances.",
-      "Ma cuisine s'adapte à chacun sans renoncer au plaisir ni à l'exigence.",
-    ],
-    accent:
-      "Mon rôle n'est pas de vous dire ce que vous devriez manger, mais de mettre mon savoir-faire et ma créativité au service de vos choix.",
-  },
-  {
-    slug: "social",
-    titre: "Le lien social",
-    bg: bgSocial,
-    paras: [
-      "Bien manger ne se limite pas à ce qu'il y a dans l'assiette. Cela tient aussi au temps que l'on prend, aux échanges que l'on partage et aux liens que l'on tisse. Cuisiner chez vous est donc un engagement social autant que culinaire.",
-    ],
-    accent:
-      "À l'heure où nos relations se dématérialisent, chaque intervention est aussi l'occasion d'une présence, d'une conversation et d'un moment de convivialité.",
-  },
-  {
-    slug: "transmission",
-    titre: "La transmission",
-    bg: bgTransmission,
-    paras: [
-      "Cuisiner, c'est aussi apprendre et transmettre. J'aime partager des gestes, des recettes et des connaissances sur les produits et les saisons, pour éveiller la curiosité et enrichir le rapport de chacun à son alimentation.",
-    ],
-    accent:
-      "À travers mes interventions et mes ateliers, je souhaite ainsi faire vivre et circuler une véritable culture du bien-manger.",
-  },
-];
+import { getAPropos } from "../../../lib/contenu";
+
+// Titre, sous-titre et texte des 5 pétales : éditables dans WordPress (voir lib/contenu.ts). Les fonds (bulles) sont fixes.
+const contenu = await getAPropos();
+const fonds = {
+  metier: bgMetier,
+  terre: bgTerre,
+  creativite: bgCreativite,
+  social: bgSocial,
+  transmission: bgTransmission,
+};
+const bulles = contenu.petales.map((p) => ({ ...p, bg: fonds[p.slug] }));
 ---
 
 {EN_CHANTIER ? (
@@ -76,8 +33,8 @@ const bulles = [
   </section>
 ) : (
   <section class="a-propos-content">
-    <h2 class="a-propos-content__title">Bruno Pereira Vaz</h2>
-    <p class="a-propos-content__subtitle">" Le goût du lien "</p>
+    <h2 class="a-propos-content__title">{contenu.titre}</h2>
+    <p class="a-propos-content__subtitle">" {contenu.sousTitre} "</p>
 
     <div class="ap-stage">
       <Image

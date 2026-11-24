@@ -1,7 +1,11 @@
 ---
 import "../../../styles/sections/formules/pricing-section.css";
 import creditIcon from "../../../assets/formules/cards/checkmark-circle.svg";
-import { formules, routineAbonnement, routineTotal } from "../../../lib/formules-data";
+import { routineAbonnement, routineTotal } from "../../../lib/formules-data";
+import { getFormules } from "../../../lib/contenu";
+
+// Noms, contenus et prix des formules : éditables dans WordPress (type « Formules »). Voir lib/contenu.ts.
+const formules = await getFormules();
 ---
 
 <div class="pricing-toggle" data-mode="routine" role="group" aria-label="Type de formule">

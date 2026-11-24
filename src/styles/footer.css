@@ -63,9 +63,27 @@
   gap: 0.75rem;
 }
 
-.footer__social img {
-  width: 46px;
-  height: 46px;
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* zone tactile ≥ 44px */
+  width: 44px;
+  height: 44px;
+  color: var(--color-ink-soft);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer__social-link:hover,
+.footer__social-link:focus-visible {
+  color: var(--color-ink);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__social-link {
+    transition: none;
+  }
 }
 
 .footer__col--nav {

@@ -159,8 +159,8 @@ export const site = {
   /** Fourchette de prix (formules 149 € – 259 €). */
   priceRange: "€€",
 
-  /** Profils officiels (`sameAs`, footer). Vide tant que les URL ne sont pas connues. */
-  social: [] as { label: string; url: string }[],
+  /** Profils officiels (`sameAs` du JSON-LD, icônes du footer). */
+  social: [{ label: "Instagram", url: "https://www.instagram.com/lecuistologue/" }] as { label: string; url: string }[],
 
   /** Image OpenGraph (dans /public), 1200×699. */
   ogImage: "/og-image.png",

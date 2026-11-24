@@ -2,7 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TurnstileWidget from "../components/TurnstileWidget.astro";
 import "../styles/reserver.css";
-import { formules, optionsPetitsPlus, routineAbonnement, routineTotal } from "../lib/formules-data";
+import { routineAbonnement, routineTotal } from "../lib/formules-data";
+import { getFormules, getOptions } from "../lib/contenu";
+
+// Formules et options : éditables dans WordPress (voir lib/contenu.ts).
+const formules = await getFormules();
+const optionsPetitsPlus = await getOptions();
 
 // `corps` peut contenir du HTML : réduit en texte simple dans l'infobulle.
 const texteBrut = (html: string) =>
@@ -68,7 +73,7 @@ const texteBrut = (html: string) =>
         <!-- Formulaire sans traitement d'envoi pour l'instant (affichage + validation seulement). -->
         <!-- action/method explicites : sans JavaScript, le formulaire ne doit jamais partir en GET (données personnelles dans l'URL). -->
         <form class="reserver-form" id="reserver-form" action="/api/send" method="post">
-          <input type="hidden" name="formule" id="input-formule-slug" value="belle-tablee" />
+          <input type="hidden" name="formule" id="input-formule-slug" value={(formules.find((f) => f.misEnAvant) ?? formules[0]).slug} />
 
           <p class="reserver-form__requis">Les champs marqués d'un <span class="requis">*</span> sont obligatoires.</p>
 
@@ -205,11 +210,13 @@ const texteBrut = (html: string) =>
     inputDate.min = new Date().toISOString().split("T")[0];
   }
 
+  // Formule par défaut = celle « mise en avant » dans WordPress (valeur du champ caché, posée au build).
+  const slugParDefaut = (document.getElementById("input-formule-slug") as HTMLInputElement | null)?.value || "";
   const params = new URLSearchParams(window.location.search);
-  const slugChoisi = params.get("formule") || "belle-tablee";
+  const slugChoisi = params.get("formule") || slugParDefaut;
 
   const recaps = document.querySelectorAll<HTMLElement>("[data-recap-formule]");
-  let slugValide = "belle-tablee";
+  let slugValide = slugParDefaut;
 
   recaps.forEach((recap) => {
     const estLeBon = recap.dataset.recapFormule === slugChoisi;
@@ -221,7 +228,7 @@ const texteBrut = (html: string) =>
     const premier = recaps[0];
     if (premier) {
       premier.hidden = false;
-      slugValide = premier.dataset.recapFormule || "belle-tablee";
+      slugValide = premier.dataset.recapFormule || slugParDefaut;
     }
   }
 

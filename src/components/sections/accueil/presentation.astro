@@ -12,6 +12,10 @@ import oignon from "../../../assets/accueil/presentation/oignon.webp";
 import aubergine from "../../../assets/accueil/presentation/aubergine.webp";
 // import champignons from "../../../assets/accueil/presentation/champignons.svg";  // SVG conservé — perf images, repasser ici si besoin
 import champignons from "../../../assets/accueil/presentation/champignons.webp";
+import { getAccueil } from "../../../lib/contenu";
+
+// Titre, accroche, paragraphes et bouton : éditables dans WordPress (page Accueil, voir lib/contenu.ts).
+const { presentation } = await getAccueil();
 ---
 
 <section class="presentation">
@@ -19,16 +23,16 @@ import champignons from "../../../assets/accueil/presentation/champignons.webp";
 
   <div class="presentation__content">
     <img src={titleIcon.src} alt="" class="presentation__title-icon" aria-hidden="true" />
-    <h2 class="presentation__title">Le Cuistologue</h2>
+    <h2 class="presentation__title">{presentation.titre}</h2>
     <p class="presentation__phonetic"><em>[lə kɥis.tɔ.lɔɡ] n. m.</em> :</p>
 
     <div class="presentation__text">
-      <p class="presentation__text-lead">Cuisinier professionnel à domicile spécialiste de la cuisine du quotidien.</p>
-      <p>Il prépare chez vous une cuisine sur-mesure, ajustée à vos goûts, vos contraintes et votre rythme de vie.</p>
-      <p><em>Au-delà de la cuisine, il installe une routine alimentaire durable, pensée pour bien manger, même pendant les journées chargées.</em></p>
+      <p class="presentation__text-lead">{presentation.accroche}</p>
+      <p>{presentation.texte}</p>
+      <p><em>{presentation.italique}</em></p>
     </div>
 
-    <a href="/a-propos/" class="presentation__cta">Découvrir sa démarche</a>
+    <a href="/a-propos/" class="presentation__cta">{presentation.bouton}</a>
   </div>
 
   <div class="presentation__photo-wrap">
