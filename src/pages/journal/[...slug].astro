@@ -45,8 +45,8 @@ const breadcrumbJsonLd = {
 
 <BaseLayout
   title={post.data.title}
-  seoTitle={`${post.data.title} | Le Cuistologue`}
-  description={post.data.description}
+  seoTitle={post.data.seoTitle ?? `${post.data.title} | Le Cuistologue`}
+  description={post.data.seoDescription ?? post.data.description}
   jsonLd={[articleJsonLd, breadcrumbJsonLd]}
 >
   <article class="journal-post">

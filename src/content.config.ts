@@ -8,6 +8,10 @@ const journal = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      /* titre de la balise <title> (50 à 60 caractères avec « | Le Cuistologue ») ; à défaut, le titre de l'article */
+      seoTitle: z.string().optional(),
+      /* meta description pour Google (≤ 160 caractères) ; à défaut, `description`, qui est aussi le texte affiché dans la liste du Journal */
+      seoDescription: z.string().optional(),
       description: z.string(),
       date: z.coerce.date(),
       updated: z.coerce.date().optional(),

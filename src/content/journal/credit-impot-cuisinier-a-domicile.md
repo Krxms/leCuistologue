@@ -1,6 +1,8 @@
 ---
 title: "Crédit d'impôt et cuisinier à domicile : comment ça marche"
+seoTitle: "Crédit d'impôt cuisinier à domicile | Le Cuistologue"
 description: "Le Cuistologue est déclaré organisme de services à la personne : 50 % de crédit d'impôt sur vos interventions de cuisine à domicile, avec l'avance immédiate de l'URSSAF."
+seoDescription: "Déclaré organisme de services à la personne, Le Cuistologue vous fait bénéficier de 50 % de crédit d'impôt, avec l'avance immédiate de l'URSSAF."
 date: 2026-09-04
 draft: false
 ---
