@@ -14,13 +14,17 @@ export function answerToHtml(paragraphe: string): string {
     .replace(/>/g, "&gt;");
   return escaped
     .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, (email) => `<a href="mailto:${email}">${email}</a>`)
-    .replace(/\[([^\]]+)\]\((\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
+    .replace(/\[([^\]]+)\]\(((?:\/|https:\/\/)[^\s)]+)\)/g, (_m, texte, lien) =>
+      lien.startsWith("https://")
+        ? `<a href="${lien}" target="_blank" rel="noopener noreferrer">${texte}</a>`
+        : `<a href="${lien}">${texte}</a>`,
+    );
 }
 
 /** Même texte, sans balisage — pour `acceptedAnswer.text` du schema. */
 function answerToPlain(r: string): string {
   return r
-    .replace(/\[([^\]]+)\]\(\/[^\s)]+\)/g, "$1")
+    .replace(/\[([^\]]+)\]\((?:\/|https:\/\/)[^\s)]+\)/g, "$1")
     .replace(/\s*\n+\s*/g, " ")
     .trim();
 }
@@ -174,7 +178,9 @@ Nous verrons ensemble ce qui peut vous correspondre le mieux. Et si aucune formu
     q: "Qui a construit ce site ?",
     r: `Ce site a été imaginé et construit par Antoine Bruneau, qui a su traduire l'esprit du Cuistologue en mots, en images et en lignes de code.
 
-Vous avez un projet de site, une envie de refaire le vôtre ou simplement une question ? Vous pouvez contacter Antoine Bruneau à l'adresse suivante : contact@antoinebruneau.com`,
+Vous avez un projet de site, une envie de refaire le vôtre ou simplement une question ? Vous pouvez contacter Antoine Bruneau à l'adresse suivante : contact@antoinebruneau.fr
+
+Son site : [antoinebruneau.fr](https://antoinebruneau.fr)`,
   },
   {
     q: "Une dernière question ?",
