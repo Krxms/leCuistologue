@@ -19,8 +19,20 @@ function fichiersSourcesPourRoute(pathname) {
       'src/lib/site-data.ts',
     ];
   }
-  if (p.startsWith('/journal/')) return ['src/pages/journal', 'src/content'];
-  return [`src/pages${p}.astro`, 'src/components'];
+  if (p === '/journal' || p.startsWith('/journal/')) return ['src/pages/journal', 'src/content'];
+  // Pages simples : le fichier de la page et, quand il existe, le dossier de ses sections (un changement d'en-tête ou de pied de page ne compte pas).
+  const sections = {
+    '/a-propos': 'a-propos',
+    '/faq': 'faq',
+    '/contact': 'contact',
+    '/formules': 'formules',
+    '/avanceimmediate': 'avance-immediate',
+    '/zone-intervention': 'zone',
+    '/cgv': 'legal',
+    '/mentions-legales': 'legal',
+    '/politique-de-confidentialite': 'legal',
+  };
+  return [`src/pages${p}.astro`, ...(sections[p] ? [`src/components/sections/${sections[p]}`] : [])];
 }
 
 function dateModificationGit(pathname, dateBuild) {

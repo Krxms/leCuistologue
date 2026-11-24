@@ -18,6 +18,8 @@ const texteBrut = (html: string) =>
   description="Réservez votre intervention de cuisine à domicile : formule, date, options et informations pour que Le Cuistologue vous recontacte sous 24 h ouvrées."
 >
   <section class="reserver">
+    <!-- Titre de la page (une seule balise h1) : invisible, la formule choisie est annoncée par le récapitulatif ci-dessous. -->
+    <h1 class="sr-only">Réserver une formule</h1>
     <div class="reserver__grid">
 
       <!-- Les 3 récapitulatifs existent ; un seul est affiché selon la formule choisie (lue côté navigateur : site statique). -->
@@ -25,7 +27,7 @@ const texteBrut = (html: string) =>
         {formules.map((formule) => (
           <div class="reserver__recap" data-recap-formule={formule.slug} hidden>
             <p class="reserver__recap-label">Formule sélectionnée</p>
-            <h1 class="reserver__recap-title">{formule.titre}</h1>
+            <h2 class="reserver__recap-title">{formule.titre}</h2>
             <p class="reserver__recap-portions">{formule.portions}</p>
 
             <p class="reserver__recap-comprend">Comprend</p>
